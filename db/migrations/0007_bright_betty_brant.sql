@@ -1,0 +1,2 @@
+ALTER TABLE "lead_activity" ADD COLUMN "is_visible_to_student" boolean DEFAULT false NOT NULL;--> statement-breakpoint
+CREATE INDEX "lead_activity_lead_id_visible_idx" ON "lead_activity" USING btree ("lead_id","is_visible_to_student");

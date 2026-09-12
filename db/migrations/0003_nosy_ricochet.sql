@@ -1,0 +1,1 @@
+ALTER TABLE "leads" ADD COLUMN "quiz_answers" jsonb;

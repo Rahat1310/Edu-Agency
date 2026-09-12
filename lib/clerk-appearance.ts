@@ -1,0 +1,30 @@
+export const clerkAppearance = {
+  cssLayerName: "clerk",
+  variables: {
+    colorPrimary: "var(--primary)",
+    colorPrimaryForeground: "var(--primary-foreground)",
+    colorBackground: "var(--background)",
+    colorForeground: "var(--foreground)",
+    colorMuted: "var(--muted)",
+    colorMutedForeground: "var(--muted-foreground)",
+    colorDanger: "var(--destructive)",
+    colorInput: "var(--input)",
+    colorInputForeground: "var(--foreground)",
+    colorNeutral: "var(--foreground)",
+    colorBorder: "var(--border)",
+    colorRing: "var(--ring)",
+    borderRadius: "var(--radius)",
+    fontFamily: "var(--font-sans)",
+  },
+  elements: {
+    rootBox: "w-full",
+    card: "bg-card text-card-foreground border-border shadow-sm",
+    headerTitle: "text-foreground",
+    headerSubtitle: "text-muted-foreground",
+    socialButtonsBlockButton:
+      "border-border bg-background text-foreground hover:bg-muted",
+    formFieldInput: "border-input bg-background text-foreground",
+    formButtonPrimary: "bg-primary text-primary-foreground hover:bg-primary/80",
+    footerActionLink: "text-primary",
+  },
+};

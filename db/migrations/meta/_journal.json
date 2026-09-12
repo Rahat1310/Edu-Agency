@@ -1,0 +1,146 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1786831648157,
+      "tag": "0000_lonely_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1786834940002,
+      "tag": "0001_graceful_rachel_grey",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786835715233,
+      "tag": "0002_clear_leo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1786836191219,
+      "tag": "0003_nosy_ricochet",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1786880660278,
+      "tag": "0004_worried_charles_xavier",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1786880877475,
+      "tag": "0005_useful_taskmaster",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1786883734031,
+      "tag": "0006_condemned_bill_hollister",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1786884285433,
+      "tag": "0007_bright_betty_brant",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1786884595776,
+      "tag": "0008_bright_morbius",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1786887557758,
+      "tag": "0009_amazing_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1786888406086,
+      "tag": "0010_wide_expediter",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1786888854861,
+      "tag": "0011_sleepy_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1786889268219,
+      "tag": "0012_smiling_jack_flag",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1786890087459,
+      "tag": "0013_magical_stephen_strange",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1786894479946,
+      "tag": "0014_nasty_meteorite",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1786895105248,
+      "tag": "0015_aromatic_orphan",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1786900532729,
+      "tag": "0016_neat_invaders",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1786912263872,
+      "tag": "0017_foamy_imperial_guard",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1786916023223,
+      "tag": "0018_woozy_selene",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1786916438841,
+      "tag": "0019_deep_union_jack",
+      "breakpoints": true
+    }
+  ]
+}
