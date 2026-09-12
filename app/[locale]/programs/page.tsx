@@ -7,11 +7,10 @@ import { pageMetadata } from "@/lib/seo/page-metadata";
 import {
   getPublishedProgramPage,
   parsePublicProgramFilters,
-  PROGRAMS_REVALIDATE_SECONDS,
 } from "@/lib/programs-public";
 import { parseCompareIds } from "@/lib/programs-compare";
 
-export const revalidate = PROGRAMS_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 
 type PageProps = {
   params: Promise<{ locale: string }>;

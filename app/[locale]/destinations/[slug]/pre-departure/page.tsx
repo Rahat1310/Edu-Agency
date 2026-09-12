@@ -5,10 +5,9 @@ import { PreDeparturePage } from "@/components/marketing/pre-departure-page";
 import { DESTINATION_SLUGS, isDestinationSlug } from "@/lib/destinations";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
-import { INTAKE_DEADLINES_REVALIDATE_SECONDS } from "@/lib/intakes/constants";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 
-export const revalidate = INTAKE_DEADLINES_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 export const dynamicParams = false;
 
 type PageProps = {

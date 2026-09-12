@@ -5,13 +5,10 @@ import { getBdtRates } from "@/lib/fx/rates";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import { parseCompareIds } from "@/lib/programs-compare";
-import {
-  getPublishedProgramsByIds,
-  PROGRAMS_REVALIDATE_SECONDS,
-} from "@/lib/programs-public";
+import { getPublishedProgramsByIds } from "@/lib/programs-public";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 
-export const revalidate = PROGRAMS_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 
 type PageProps = {
   params: Promise<{ locale: string }>;

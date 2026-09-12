@@ -9,13 +9,12 @@ import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import {
   getPublishedProgramDetail,
   listPublishedProgramIds,
-  PROGRAMS_REVALIDATE_SECONDS,
 } from "@/lib/programs-public";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 import { programCourseJsonLd, programSeoCopy } from "@/lib/seo/program-copy";
 import { absoluteUrl } from "@/lib/site-url";
 
-export const revalidate = PROGRAMS_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 export const dynamicParams = true;
 
 type PageProps = {

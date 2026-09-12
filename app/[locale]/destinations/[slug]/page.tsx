@@ -5,11 +5,10 @@ import { DestinationPage } from "@/components/marketing/destination-page";
 import { DESTINATION_SLUGS, isDestinationSlug } from "@/lib/destinations";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
-import { INTAKE_DEADLINES_REVALIDATE_SECONDS } from "@/lib/intakes/constants";
 import { loadUpcomingCountdownForSlug } from "@/lib/intakes/load";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 
-export const revalidate = INTAKE_DEADLINES_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 export const dynamicParams = false;
 
 type PageProps = {

@@ -7,12 +7,11 @@ import { localizedHref } from "@/lib/i18n/paths";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
-import { SUCCESS_STORIES_REVALIDATE_SECONDS } from "@/lib/success-stories/constants";
 import { parseStoryDestination } from "@/lib/success-stories/featured";
 import { successStoriesItemListJsonLd } from "@/lib/success-stories/json-ld";
 import { loadPublishedSuccessStories } from "@/lib/success-stories/load";
 
-export const revalidate = SUCCESS_STORIES_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 
 type PageProps = {
   params: Promise<{ locale: string }>;

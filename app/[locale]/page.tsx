@@ -5,7 +5,6 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { localizedHref } from "@/lib/i18n/paths";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
-import { INTAKE_DEADLINES_REVALIDATE_SECONDS } from "@/lib/intakes/constants";
 import { loadUpcomingCountdownsBySlug } from "@/lib/intakes/load";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
@@ -17,7 +16,7 @@ import {
 import { successStoriesItemListJsonLd } from "@/lib/success-stories/json-ld";
 import { loadPublishedSuccessStories } from "@/lib/success-stories/load";
 
-export const revalidate = INTAKE_DEADLINES_REVALIDATE_SECONDS;
+export const revalidate = 3600;
 
 type PageProps = {
   params: Promise<{ locale: string }>;
