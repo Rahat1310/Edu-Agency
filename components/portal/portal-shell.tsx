@@ -3,6 +3,7 @@
 import { SignOutButton } from "@clerk/nextjs";
 import { AnimatePresence, motion } from "framer-motion";
 import { Compass, FileText, LayoutDashboard, Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -193,9 +194,16 @@ function PortalBrand() {
   return (
     <Link
       href="/portal"
-      className="desk-focus font-display rounded-[var(--desk-radius)] text-base font-bold tracking-[-0.03em] text-[var(--desk-accent)]"
+      className="desk-focus group flex items-center rounded-[var(--desk-radius)]"
+      aria-label="Study Abroad Consultancy"
     >
-      Study Abroad Consultancy
+      <Image
+        src="/logo.png"
+        alt="Study Abroad Consultancy"
+        width={100}
+        height={65}
+        className="h-8 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
+      />
     </Link>
   );
 }

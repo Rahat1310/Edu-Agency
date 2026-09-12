@@ -77,7 +77,7 @@ function programSeoCopyEn(
         title: `${program.field} in China — ${program.universityName}`,
         description: `A ${level} ${program.field} listing at ${program.universityName} for students applying from Bangladesh. Tuition is posted as ${tuition}. The usual visa file is X1 or X2, built on the admission letter and JW201/JW202.`,
         ogTitle: `${program.universityName} teaches ${program.field} in China`,
-        ogDescription: `China route from a Dhaka desk: ${program.field} at ${program.universityName}, ${tuition}. X1/X2 — not a generic invitation letter.`,
+        ogDescription: `China route: ${program.field} at ${program.universityName}, ${tuition}. X1/X2 — not a generic invitation letter.`,
         courseName,
         courseDescription: `${courseName} offered by ${program.universityName} in China. Listed for Bangladeshi applicants. Published tuition ${tuition}. The admission letter and JW201 or JW202 come before the X1 or X2 visa interview.`,
         countryCode: code,

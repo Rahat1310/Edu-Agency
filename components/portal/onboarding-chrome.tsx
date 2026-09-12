@@ -1,6 +1,7 @@
 "use client";
 
 import { SignOutButton } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -16,9 +17,16 @@ export function OnboardingChrome({ children }: { children: ReactNode }) {
       <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-[var(--desk-line)] bg-[var(--desk-surface)] px-4">
         <Link
           href="/"
-          className="desk-focus font-display rounded-[var(--desk-radius)] text-base font-bold tracking-[-0.03em] text-[var(--desk-accent)]"
+          className="desk-focus group flex items-center rounded-[var(--desk-radius)]"
+          aria-label="Study Abroad Consultancy"
         >
-          Study Abroad Consultancy
+          <Image
+            src="/logo.png"
+            alt="Study Abroad Consultancy"
+            width={100}
+            height={65}
+            className="h-8 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
+          />
         </Link>
         <SignOutButton redirectUrl="/">
           <button

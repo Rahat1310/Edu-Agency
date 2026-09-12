@@ -76,8 +76,8 @@ export function HomePage({
               <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
               <span>
                 {locale === "bn"
-                  ? "ঢাকা ডেস্ক · স্প্রিং ২০২৭ সেশন"
-                  : "Dhaka Desk · Spring 2027 Admissions"}
+                  ? "স্প্রিং ২০২৭ সেশন অ্যাডমিশন"
+                  : "Spring 2027 Admissions Open"}
               </span>
             </motion.div>
 

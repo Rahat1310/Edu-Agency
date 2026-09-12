@@ -1,7 +1,8 @@
 export const en = {
   meta: {
     siteName: "Study Abroad Consultancy",
-    defaultTitle: "Study Abroad Consultancy — Specialized Study Routes from Bangladesh",
+    defaultTitle:
+      "Study Abroad Consultancy — Specialized Study Routes from Bangladesh",
     defaultDescription:
       "Dhaka-based guidance for Bangladeshi students applying to China, India, Malaysia, and South Korea.",
   },
@@ -113,15 +114,14 @@ export const en = {
     ogTitle:
       "Direct Admissions & Student Visa Guidance for Asian Study Destinations",
     ogDescription:
-      "Dhaka desk providing complete application, visa, and Bangladesh Bank student file guidance for China, India, Malaysia, and South Korea.",
-    eyebrow: "Dhaka's Admissions & Visa Consultancy",
-    title:
-      "Bangladesh's Trusted Bridge to World's Top Universities",
+      "Providing complete application, visa, and Bangladesh Bank student file guidance for China, India, Malaysia, and South Korea.",
+    eyebrow: "Admissions & Visa Consultancy",
+    title: "Bangladesh's Trusted Bridge to World's Top Universities",
     lede: "Full-service support — from application to visa — for Malaysia, China, South Korea & India.",
     primaryCta: "Book a Free Consultation",
     secondaryCta: "Explore Study Destinations",
     routeListAria: "The four study routes we counsel",
-    valueEyebrow: "Why Families Trust Our Desk",
+    valueEyebrow: "Why Families Trust Us",
     valueTitle:
       "Built for Bangladeshi Families: Transparent Paperwork, Zero Guesswork",
     valueLede:
@@ -233,27 +233,29 @@ export const en = {
     leadEyebrow: "Start Your Application",
     leadTitle: "Get a Free Profile Assessment & Visa Roadmap Today",
     leadBody:
-      "Share your academic background and preferred destination. Our senior counselors in Dhaka will evaluate your eligibility and send a customized roadmap directly to your WhatsApp.",
-    leadCta: "Contact Our Dhaka Desk",
+      "Share your academic background and preferred destination. Our senior counselors will evaluate your eligibility and send a customized roadmap directly to your WhatsApp.",
+    leadCta: "Contact Our Counselors",
     leadWhatsapp: "Message on WhatsApp",
     leadQuiz: "Check Eligibility Now",
     eventsEyebrow: "Webinars & Briefings",
     eventsTitle: "Upcoming Student & Family Information Sessions",
     events: [
       {
-        title: "Mastering the Malaysia EMGS Student Pass: Step-by-Step Document Workshop",
+        title:
+          "Mastering the Malaysia EMGS Student Pass: Step-by-Step Document Workshop",
         date: "Saturday, 8:00 PM (BST)",
         mode: "Online Webinar · Bangla & English",
       },
       {
-        title: "Navigating India's Study in India (SII) Portal & Scholarship Seats",
+        title:
+          "Navigating India's Study in India (SII) Portal & Scholarship Seats",
         date: "Next Friday, 4:00 PM (BST)",
-        mode: "Dhaka Desk & Virtual · Family Briefing",
+        mode: "In-Person & Virtual · Family Briefing",
       },
     ],
   },
   about: {
-    metaTitle: "About Study Abroad Consultancy — Specialized Admissions Desk in Dhaka",
+    metaTitle: "About Study Abroad Consultancy — Specialized Study Guidance",
     metaDescription:
       "A dedicated consultancy helping Bangladeshi students navigate admissions and visas for China, India, Malaysia, and South Korea.",
     ogTitle: "Counselor-Led Guidance for Asian Study Destinations",
@@ -294,16 +296,16 @@ export const en = {
     ],
   },
   contact: {
-    metaTitle: "Contact Study Abroad Consultancy — Dhaka Desk",
+    metaTitle: "Contact Study Abroad Consultancy",
     metaDescription:
-      "Speak directly with our senior education counselors in Dhaka about studying in China, India, Malaysia, or South Korea.",
-    ogTitle: "Contact Our Admissions Desk in Dhaka",
+      "Speak directly with our senior education counselors about studying in China, India, Malaysia, or South Korea.",
+    ogTitle: "Contact Our Admissions Team",
     ogDescription:
-      "Visit our Dhaka office or connect with a counselor on WhatsApp for personalized admission and visa advice.",
+      "Visit our office or connect with a counselor on WhatsApp for personalized admission and visa advice.",
     eyebrow: "Get in Touch",
     title: "Speak with a Senior Counselor",
     lede: "Every student's academic profile and financial budget is unique. Tell us your study goals and academic background, and we will outline a realistic, step-by-step admissions and visa roadmap.",
-    detailsTitle: "Dhaka Desk Location",
+    detailsTitle: "Office Location",
     addressLabel: "Office Address",
     addressLines: [
       "Level 4, Gulshan Centre Point",
@@ -312,7 +314,7 @@ export const en = {
     phoneLabel: "Telephone",
     phoneValue: "+880 9612-000000",
     whatsappLabel: "WhatsApp Direct",
-    whatsappValue: "+880 1700-000000 (Desk Line)",
+    whatsappValue: "+880 1700-000000",
     emailLabel: "Official Email",
     emailValue: "admissions@eduagency.com",
     hoursLabel: "Office Hours",
@@ -408,10 +410,11 @@ export const en = {
         "China for Bangladeshi students: X1 for long stays, X2 for short ones. The embassy file is the admission letter plus JW201 or JW202 — not a generic invitation.",
       ogTitle: "China: direct admissions and structured visa documentation",
       ogDescription:
-        "MBBS, engineering, and HSK pathways from a Dhaka desk. JW201/JW202 before the X1 or X2 interview.",
-      tagline: "Direct degree and medical pathways with clear document sequencing.",
+        "MBBS, engineering, and HSK pathways. JW201/JW202 before the X1 or X2 interview.",
+      tagline:
+        "Direct degree and medical pathways with clear document sequencing.",
       overview:
-        "China offers world-class infrastructure, globally accredited medical (MBBS) and engineering degrees, and generous Chinese Government (CSC) and provincial scholarships. Our desk ensures your admission notice and JW201/JW202 documentation are in perfect order before embassy submission.",
+        "China offers world-class infrastructure, globally accredited medical (MBBS) and engineering degrees, and generous Chinese Government (CSC) and provincial scholarships. Our team ensures your admission notice and JW201/JW202 documentation are in perfect order before embassy submission.",
       why: [
         "Generous CSC and university scholarship opportunities that significantly reduce tuition and accommodation expenses.",
         "WHO/BMDC-recognized MBBS programs and cutting-edge engineering faculties taught in English.",
@@ -502,8 +505,14 @@ export const en = {
           name: "Engineering & technology",
           note: "AICTE-approved computer science, IT, and core engineering tracks.",
         },
-        { name: "Information technology", note: "BCA, MCA, and data science certifications." },
-        { name: "Management & commerce", note: "BBA, MBA, and corporate-aligned finance degrees." },
+        {
+          name: "Information technology",
+          note: "BCA, MCA, and data science certifications.",
+        },
+        {
+          name: "Management & commerce",
+          note: "BBA, MBA, and corporate-aligned finance degrees.",
+        },
       ],
       preDeparture: {
         metaTitle: "Pre-departure for India — from Bangladesh",
@@ -533,7 +542,8 @@ export const en = {
       ogTitle: "Malaysia: EMGS first. Apply from outside.",
       ogDescription:
         "Two gates — EMGS approval, then the Single Entry Visa. English-medium degrees, explained as a sequence, not a sticker at the airport.",
-      tagline: "Globally ranked English-medium degrees in a student-friendly hub.",
+      tagline:
+        "Globally ranked English-medium degrees in a student-friendly hub.",
       overview:
         "Malaysia is a leading global education hub offering British and Australian branch campuses, high-standard private universities, and an entirely English-taught environment. The Student Pass is governed by EMGS, requiring official pre-approval before your Single Entry Visa (eVISA) is issued.",
       why: [
@@ -553,10 +563,22 @@ export const en = {
         "Enter Malaysia and complete passport endorsement / Student Pass issuance as instructed.",
       ],
       fields: [
-        { name: "Business, accounting & finance", note: "Dual-degree options with ACCA and international accreditation." },
-        { name: "Information technology & AI", note: "Modern labs, cybersecurity, and software engineering tracks." },
-        { name: "Engineering", note: "Washington Accord accredited mechanical, civil, and electrical programs." },
-        { name: "Hospitality & tourism management", note: "World-class training with paid internships in 5-star hotels." },
+        {
+          name: "Business, accounting & finance",
+          note: "Dual-degree options with ACCA and international accreditation.",
+        },
+        {
+          name: "Information technology & AI",
+          note: "Modern labs, cybersecurity, and software engineering tracks.",
+        },
+        {
+          name: "Engineering",
+          note: "Washington Accord accredited mechanical, civil, and electrical programs.",
+        },
+        {
+          name: "Hospitality & tourism management",
+          note: "World-class training with paid internships in 5-star hotels.",
+        },
       ],
       preDeparture: {
         metaTitle: "Pre-departure for Malaysia — from Bangladesh",
@@ -586,7 +608,8 @@ export const en = {
       ogTitle: "South Korea: D-2 for a degree. D-4 for language first.",
       ogDescription:
         "World-leading technology, creative innovation, and structured language pathways.",
-      tagline: "World-leading technology, creative innovation, and structured language pathways.",
+      tagline:
+        "World-leading technology, creative innovation, and structured language pathways.",
       overview:
         "South Korea combines premier technological universities, high employment prospects in global industry leaders, and rich cultural opportunities. Visa categories are strictly segregated: degree programs require a D-2 visa, while Korean language preparation requires a D-4 visa.",
       why: [
@@ -606,13 +629,22 @@ export const en = {
         "After arrival, complete alien registration and any language-to-degree change as a separate step.",
       ],
       fields: [
-        { name: "Engineering & computer science", note: "Top-ranked global labs and high-tech research centers." },
+        {
+          name: "Engineering & computer science",
+          note: "Top-ranked global labs and high-tech research centers.",
+        },
         {
           name: "Korean language (TOPIK pathway)",
           note: "Intensive 6-12 month language training for university readiness.",
         },
-        { name: "Business & international studies", note: "Global business curricula with industry internships." },
-        { name: "Design & media", note: "Acclaimed creative programs combining technology and arts." },
+        {
+          name: "Business & international studies",
+          note: "Global business curricula with industry internships.",
+        },
+        {
+          name: "Design & media",
+          note: "Acclaimed creative programs combining technology and arts.",
+        },
       ],
       preDeparture: {
         metaTitle: "Pre-departure for South Korea — from Bangladesh",
@@ -987,7 +1019,8 @@ export const en = {
   },
   privacy: {
     metaTitle: "Privacy & Legal Notice",
-    metaDescription: "Data protection and privacy commitments for Study Abroad Consultancy students and families.",
+    metaDescription:
+      "Data protection and privacy commitments for Study Abroad Consultancy students and families.",
     title: "Privacy Policy",
     body: "Study Abroad Consultancy is committed to safeguarding your personal and academic information. Data collected through our contact forms, eligibility assessments, and counseling sessions is processed solely for evaluating university admissions and student visa feasibility in compliance with applicable data privacy standards.",
   },

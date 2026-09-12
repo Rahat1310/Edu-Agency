@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, Send, X } from "lucide-react";
+import Image from "next/image";
 import {
   useEffect,
   useId,
@@ -259,20 +260,31 @@ export function ChatWidget({
               }
               transition={panel}
             >
-              <header className="flex shrink-0 items-start justify-between gap-3 border-b border-orange-500/20 bg-slate-900 px-5 py-4 text-white">
-                <div>
-                  <h2
-                    id={titleId}
-                    className="font-display text-base font-bold tracking-[-0.03em]"
-                  >
-                    {copy.title}
-                  </h2>
-                  <p
-                    id={subtitleId}
-                    className="mt-1 text-xs leading-5 text-slate-300"
-                  >
-                    {copy.subtitle}
-                  </p>
+              <header className="flex shrink-0 items-center justify-between gap-3 border-b border-orange-500/20 bg-slate-900 px-5 py-3.5 text-white">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm">
+                    <Image
+                      src="/logo.png"
+                      alt="Study Abroad Consultancy"
+                      width={36}
+                      height={24}
+                      className="size-7 object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h2
+                      id={titleId}
+                      className="font-display text-base font-bold tracking-[-0.03em]"
+                    >
+                      {copy.title}
+                    </h2>
+                    <p
+                      id={subtitleId}
+                      className="mt-0.5 text-xs leading-4 text-slate-300"
+                    >
+                      {copy.subtitle}
+                    </p>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -394,7 +406,7 @@ export function ChatWidget({
       </AnimatePresence>
 
       {/* AI Assistant Chat Trigger */}
-      <div className="relative group pointer-events-auto">
+      <div className="group pointer-events-auto relative">
         <button
           ref={launcherRef}
           type="button"
@@ -420,8 +432,8 @@ export function ChatWidget({
 
         {/* Tooltip on hover (when not open) */}
         {!open ? (
-          <span className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-3 hidden whitespace-nowrap rounded-full border border-stone-200/90 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-slate-800 shadow-lg backdrop-blur-md group-hover:inline-flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-orange-500 animate-pulse" />
+          <span className="pointer-events-none absolute top-1/2 right-full mr-3 hidden -translate-y-1/2 items-center gap-1.5 rounded-full border border-stone-200/90 bg-white/95 px-3.5 py-1.5 text-xs font-bold whitespace-nowrap text-slate-800 shadow-lg backdrop-blur-md group-hover:inline-flex">
+            <span className="size-2 animate-pulse rounded-full bg-orange-500" />
             {locale === "bn" ? "এআই সহকারী" : "AI Assistant"}
           </span>
         ) : null}
@@ -433,7 +445,9 @@ export function ChatWidget({
         target="_blank"
         rel="noreferrer"
         className="group focus-ring pointer-events-auto relative inline-flex size-13 items-center justify-center rounded-full bg-gradient-to-tr from-[#128C7E] to-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.4)] ring-4 ring-emerald-400/20 transition-all duration-300 hover:scale-105 active:scale-95"
-        aria-label={locale === "bn" ? "হোয়াটসঅ্যাপে সরাসরি কথা বলুন" : "Chat on WhatsApp"}
+        aria-label={
+          locale === "bn" ? "হোয়াটসঅ্যাপে সরাসরি কথা বলুন" : "Chat on WhatsApp"
+        }
       >
         {/* Subtle Online Status Dot */}
         <span className="absolute top-0.5 right-0.5 flex size-3 items-center justify-center">
@@ -445,7 +459,7 @@ export function ChatWidget({
         <WhatsAppIcon className="size-6 fill-white transition-transform duration-300 group-hover:scale-110" />
 
         {/* Slide-out tooltip on hover */}
-        <span className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-3 hidden whitespace-nowrap rounded-full border border-emerald-200/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-slate-800 shadow-lg backdrop-blur-md transition-all group-hover:inline-flex items-center gap-1.5">
+        <span className="pointer-events-none absolute top-1/2 right-full mr-3 hidden -translate-y-1/2 items-center gap-1.5 rounded-full border border-emerald-200/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold whitespace-nowrap text-slate-800 shadow-lg backdrop-blur-md transition-all group-hover:inline-flex">
           <span className="size-2 rounded-full bg-emerald-500" />
           {locale === "bn" ? "হোয়াটসঅ্যাপে পরামর্শ নিন" : "Chat on WhatsApp"}
         </span>

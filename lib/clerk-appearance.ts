@@ -1,4 +1,7 @@
 export const clerkAppearance = {
+  layout: {
+    logoImageUrl: "/logo.png",
+  },
   cssLayerName: "clerk",
   variables: {
     colorPrimary: "var(--primary)",

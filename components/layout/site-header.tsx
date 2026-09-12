@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -17,35 +18,14 @@ function Brand({ label, locale }: { label: string; locale: Locale }) {
       className="focus-ring group inline-flex shrink-0 items-center rounded-xl whitespace-nowrap transition-all"
       aria-label={label}
     >
-      {locale === "bn" ? (
-        <div className="flex shrink-0 flex-col leading-tight select-none">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <span className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-500 text-xs font-black text-white shadow-xs">
-              স্টা
-            </span>
-            <span className="font-display text-base font-black tracking-tight text-slate-900 sm:text-lg">
-              স্টাডি অ্যাব্রড{" "}
-              <span className="bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 bg-clip-text text-transparent">
-                কনসালটেন্সি
-              </span>
-            </span>
-          </div>
-        </div>
-      ) : (
-        <div className="flex shrink-0 flex-col leading-tight select-none">
-          <div className="flex items-center gap-2 whitespace-nowrap">
-            <span className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-500 text-[0.68rem] font-black tracking-tighter text-white shadow-xs">
-              SAC
-            </span>
-            <span className="font-display text-base font-black tracking-tight text-slate-900 sm:text-lg">
-              Study Abroad{" "}
-              <span className="bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 bg-clip-text text-transparent">
-                Consultancy
-              </span>
-            </span>
-          </div>
-        </div>
-      )}
+      <Image
+        src="/logo.png"
+        alt="Study Abroad Consultancy"
+        width={140}
+        height={91}
+        className="h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105 sm:h-11"
+        priority
+      />
     </Link>
   );
 }

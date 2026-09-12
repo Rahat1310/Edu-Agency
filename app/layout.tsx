@@ -46,6 +46,26 @@ export const metadata: Metadata = {
   title: "Study Abroad Consultancy — four study routes from Bangladesh",
   description:
     "Dhaka-based guidance for Bangladeshi students applying to China, India, Malaysia, and South Korea.",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }, { url: "/favicon.ico" }],
+    apple: "/apple-icon.png",
+    shortcut: "/favicon.ico",
+  },
+  openGraph: {
+    siteName: "Study Abroad Consultancy",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1089,
+        height: 708,
+        alt: "Study Abroad Consultancy Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({

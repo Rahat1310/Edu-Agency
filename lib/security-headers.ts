@@ -6,15 +6,28 @@
  * @see https://clerk.com/docs/guides/secure/best-practices/csp-headers
  */
 function clerkFrontendApiSources(): string[] {
+  const sources = new Set<string>([
+    "https://*.clerk.accounts.dev",
+    "https://*.clerk.com",
+    "https://clerk.accounts.dev",
+    "https://clerk.com",
+  ]);
+
   const fromEnv =
     process.env.NEXT_PUBLIC_CLERK_FRONTEND_API ??
     process.env.CLERK_FRONTEND_API;
 
   if (fromEnv && fromEnv.trim().length > 0) {
-    return [fromEnv.startsWith("https://") ? fromEnv : `https://${fromEnv}`];
+    try {
+      const raw = fromEnv.trim();
+      const url = new URL(raw.startsWith("http") ? raw : `https://${raw}`);
+      sources.add(url.origin);
+    } catch {
+      // Ignore a malformed host
+    }
   }
 
-  return ["https://*.clerk.accounts.dev", "https://*.clerk.com"];
+  return Array.from(sources);
 }
 
 function extraImgSources(): string[] {

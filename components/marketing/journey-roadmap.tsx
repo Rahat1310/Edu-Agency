@@ -52,7 +52,8 @@ const STEP_CONFIGS = [
   },
   {
     icon: Send,
-    tintClass: "bg-emerald-50/80 border-emerald-200/80 hover:border-emerald-300",
+    tintClass:
+      "bg-emerald-50/80 border-emerald-200/80 hover:border-emerald-300",
     iconBoxClass: "bg-emerald-100/90 text-emerald-700 border-emerald-200",
     pillClass: "bg-emerald-100/70 text-emerald-900 border-emerald-200",
     dotColor: "#10b981",
@@ -106,7 +107,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute bottom-1/4 -right-48 size-96 rounded-full bg-sky-400/10 blur-[130px]"
+        className="pointer-events-none absolute -right-48 bottom-1/4 size-96 rounded-full bg-sky-400/10 blur-[130px]"
         aria-hidden="true"
       />
 
@@ -157,17 +158,15 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
           {/* Scrollable Track Container */}
           <div
             ref={scrollContainerRef}
-            className="no-scrollbar relative z-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth"
+            className="no-scrollbar relative z-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pt-2 pb-6"
           >
             {steps.map((item, idx) => {
-              const cfg = STEP_CONFIGS[idx % STEP_CONFIGS.length] ?? DEFAULT_STEP_CONFIG;
+              const cfg =
+                STEP_CONFIGS[idx % STEP_CONFIGS.length] ?? DEFAULT_STEP_CONFIG;
               const IconComponent = cfg.icon;
 
               return (
-                <div
-                  key={item.step}
-                  className="w-[305px] shrink-0 snap-start"
-                >
+                <div key={item.step} className="w-[305px] shrink-0 snap-start">
                   <article
                     className={cn(
                       "group relative flex h-full flex-col justify-between rounded-[2rem] border p-6.5 shadow-2xs backdrop-blur-md transition-all duration-300",
@@ -205,7 +204,10 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                           cfg.iconBoxClass,
                         )}
                       >
-                        <IconComponent className="size-6.5" aria-hidden="true" />
+                        <IconComponent
+                          className="size-6.5"
+                          aria-hidden="true"
+                        />
                       </div>
                       {idx < steps.length - 1 && (
                         <div className="flex items-center text-slate-300 opacity-60">
@@ -257,7 +259,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
 
                   <p className="mt-3 text-[0.92rem] leading-relaxed font-normal text-white/90">
                     {locale === "bn"
-                      ? "অভিভাবকসহ আমাদের ঢাকা ডেস্কে ফ্রি কাউন্সেলিং বুক করুন। সম্পূর্ণ রোডম্যাপ হাতে নিয়ে প্রস্তুতি শুরু করুন।"
+                      ? "অভিভাবকসহ আমাদের সাথে ফ্রি কাউন্সেলিং বুক করুন। সম্পূর্ণ রোডম্যাপ হাতে নিয়ে প্রস্তুতি শুরু করুন।"
                       : "Book a complimentary session with our senior counselor. Get a personalized roadmap tailored to your profile & budget."}
                   </p>
                 </div>
@@ -290,11 +292,15 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
 
           <ol className="relative z-10 space-y-6">
             {steps.map((item, idx) => {
-              const cfg = STEP_CONFIGS[idx % STEP_CONFIGS.length] ?? DEFAULT_STEP_CONFIG;
+              const cfg =
+                STEP_CONFIGS[idx % STEP_CONFIGS.length] ?? DEFAULT_STEP_CONFIG;
               const IconComponent = cfg.icon;
 
               return (
-                <li key={item.step} className="relative flex items-start gap-4 pl-2">
+                <li
+                  key={item.step}
+                  className="relative flex items-start gap-4 pl-2"
+                >
                   {/* Waypoint Icon on the Spine */}
                   <div
                     className={cn(
@@ -339,7 +345,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
             })}
 
             {/* Mobile Finale CTA Card */}
-            <li className="relative pl-2 pt-4">
+            <li className="relative pt-4 pl-2">
               <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500 p-6 text-white shadow-lg">
                 <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 font-mono text-[0.68rem] font-bold text-white">
                   <Sparkles className="size-3" />
@@ -352,7 +358,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-white/90">
                   {locale === "bn"
-                    ? "অভিভাবকসহ আমাদের ঢাকা ডেস্কে ফ্রি কাউন্সেলিং বুক করুন।"
+                    ? "অভিভাবকসহ আমাদের সাথে ফ্রি কাউন্সেলিং বুক করুন।"
                     : "Free 1-on-1 consultation with parents in the room."}
                 </p>
                 <div className="mt-5">

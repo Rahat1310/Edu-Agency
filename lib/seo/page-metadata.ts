@@ -46,11 +46,20 @@ export function pageMetadata({
       title: socialTitle,
       description: socialDescription,
       url: canonical,
+      images: [
+        {
+          url: "/logo.png",
+          width: 1089,
+          height: 708,
+          alt: "Study Abroad Consultancy",
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: socialTitle,
       description: socialDescription,
+      images: ["/logo.png"],
     },
   };
 }

@@ -1,4 +1,5 @@
 import { ArrowUpRight, MessageCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { JourneyLine } from "@/components/layout/journey-line";
@@ -37,6 +38,21 @@ export function SiteFooter({
 
       <PageShell className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr] lg:gap-16 lg:py-16">
         <div>
+          <Link
+            href={localizedHref("/", locale)}
+            className="group mb-6 inline-flex items-center rounded-2xl transition-all"
+            aria-label={dict.chrome.brandAria}
+          >
+            <div className="flex items-center justify-center rounded-2xl bg-white p-2.5 shadow-lg ring-1 shadow-black/20 ring-white/20 transition-transform duration-200 group-hover:scale-105">
+              <Image
+                src="/logo.png"
+                alt="Study Abroad Consultancy"
+                width={120}
+                height={78}
+                className="h-11 w-auto object-contain"
+              />
+            </div>
+          </Link>
           <p className="font-display text-2xl font-bold tracking-[-0.035em] text-white">
             {dict.chrome.footerTagline}
           </p>

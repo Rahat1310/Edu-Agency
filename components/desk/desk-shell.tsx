@@ -16,6 +16,7 @@ import {
   Users,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
@@ -203,9 +204,16 @@ function DeskBrand() {
   return (
     <Link
       href="/admin/leads"
-      className="desk-focus rounded-[var(--desk-radius)] text-sm font-semibold tracking-[-0.02em] text-[var(--desk-accent)]"
+      className="desk-focus group flex items-center rounded-[var(--desk-radius)]"
+      aria-label="Study Abroad Consultancy"
     >
-      Study Abroad Consultancy
+      <Image
+        src="/logo.png"
+        alt="Study Abroad Consultancy"
+        width={90}
+        height={58}
+        className="h-7 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
+      />
     </Link>
   );
 }
