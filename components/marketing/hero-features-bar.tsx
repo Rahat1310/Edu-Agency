@@ -2,9 +2,9 @@
 
 import {
   GraduationCap,
-  Landmark,
-  Award,
   ShieldCheck,
+  Award,
+  FileCheck2,
 } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
@@ -16,9 +16,9 @@ interface HeroFeaturesBarProps {
 
 const FEATURE_ICONS = [
   GraduationCap,
-  Landmark,
-  Award,
   ShieldCheck,
+  Award,
+  FileCheck2,
 ];
 
 export function HeroFeaturesBar({

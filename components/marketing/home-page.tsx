@@ -1,4 +1,11 @@
-import { MessageCircle, ShieldCheck, Star } from "lucide-react";
+import {
+  ArrowRight,
+  GraduationCap,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  Star,
+} from "lucide-react";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
 
@@ -192,8 +199,8 @@ export function HomePage({
               <span className="inline-flex items-center gap-1 font-bold text-emerald-700">
                 <ShieldCheck className="size-3.5 text-emerald-600" />
                 {locale === "bn"
-                  ? "বাংলাদেশ ব্যাংক ফাইল সাপোর্ট"
-                  : "Bank File Support"}
+                  ? "১০০% স্বচ্ছ গাইডেন্স"
+                  : "100% Transparent Process"}
               </span>
             </motion.div>
           </div>
@@ -302,67 +309,198 @@ export function HomePage({
       {/* High-Impact Lead Capture CTA */}
       <section
         id="lead"
-        className="relative overflow-hidden bg-gradient-to-br from-[#0B1E36] via-[#0E2849] to-[#071324] py-20 text-white sm:py-28"
+        className="relative overflow-hidden bg-[#070e1c] py-20 text-white sm:py-28"
       >
-        {/* Glow orb */}
+        {/* Glow auroras & micro-grid */}
         <div
-          className="pointer-events-none absolute top-0 -right-20 size-96 rounded-full bg-blue-500/15 blur-3xl"
+          className="pointer-events-none absolute -top-24 -right-24 size-[32rem] rounded-full bg-gradient-to-br from-orange-500/20 via-rose-500/10 to-transparent blur-[120px]"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute bottom-0 -left-20 size-96 rounded-full bg-teal-500/15 blur-3xl"
+          className="pointer-events-none absolute -bottom-24 -left-24 size-[32rem] rounded-full bg-gradient-to-tr from-cyan-500/15 via-teal-500/10 to-transparent blur-[120px]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:24px_24px] opacity-60"
           aria-hidden="true"
         />
 
         <PageShell>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center">
+            {/* Left Column: Compelling Value Proposition & Trust Proofs */}
             <div>
-              <div className="glass-pill inline-flex items-center gap-2 rounded-full border-white/20 bg-white/10 px-3.5 py-1 text-white backdrop-blur-md">
-                <span className="size-2 animate-pulse rounded-full bg-emerald-400" />
-                <span className="font-utility text-[0.66rem] font-bold tracking-[0.16em] uppercase">
+              {/* Live Intake Beacon */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-1.5 text-xs font-bold text-orange-300 shadow-2xs backdrop-blur-md">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-orange-500" />
+                </span>
+                <span className="font-utility tracking-wider uppercase">
                   {dict.home.leadEyebrow}
                 </span>
               </div>
 
-              <h2 className="font-display mt-5 max-w-2xl text-3xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl sm:leading-[1.1]">
-                {dict.home.leadTitle}
+              {/* Editorial Headline */}
+              <h2 className="font-display mt-5 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl lg:leading-[1.12]">
+                {locale === "bn" ? (
+                  <>
+                    আজই নিন বিনামূল্যে প্রোফাইল মূল্যায়ন ও{" "}
+                    <span className="bg-gradient-to-r from-orange-400 via-rose-400 to-amber-300 bg-clip-text text-transparent">
+                      ভিসা রোডম্যাপ
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Get a Free Profile Assessment &{" "}
+                    <span className="bg-gradient-to-r from-orange-400 via-rose-400 to-amber-300 bg-clip-text text-transparent">
+                      Visa Roadmap
+                    </span>{" "}
+                    Today
+                  </>
+                )}
               </h2>
 
-              <p className="mt-6 max-w-xl text-base leading-8 text-white/80">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
                 {dict.home.leadBody}
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={localizedHref("/contact", locale)}
-                  className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  {dict.home.leadCta}
-                </Link>
-                <Link
-                  href={localizedHref("/eligibility-quiz", locale)}
-                  className="btn-secondary-glass focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-bold text-slate-800 shadow-xs hover:border-orange-300 hover:bg-white hover:text-orange-600"
-                >
-                  {dict.home.leadQuiz}
-                </Link>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-secondary-glass focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold text-slate-800 shadow-xs hover:border-orange-300 hover:bg-white hover:text-orange-600"
-                >
-                  <MessageCircle
-                    className="size-4 text-emerald-600"
-                    aria-hidden="true"
-                  />
-                  {dict.home.leadWhatsapp}
-                  <span className="sr-only">{dict.chrome.footerNewTab}</span>
-                </a>
+              {/* 3 Core Benefit Cards */}
+              <div className="mt-8 max-w-xl space-y-3.5">
+                {/* 1. University Shortlist */}
+                <div className="flex items-start gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.07]">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-amber-500/30 bg-gradient-to-br from-amber-500/20 to-orange-500/20 text-amber-300">
+                    <GraduationCap className="size-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">
+                      {locale === "bn"
+                        ? "সরাসরি বিশ্ববিদ্যালয় শর্টলিস্ট"
+                        : "Tailored University Shortlist"}
+                    </h4>
+                    <p className="mt-0.5 text-xs leading-relaxed text-slate-400">
+                      {locale === "bn"
+                        ? "আপনার জিপিএ, পছন্দের বিষয় ও পারিবারিক বাজেটের সঠিক বিশ্লেষণ।"
+                        : "Accurate matching across China, India, Malaysia & South Korea based on your GPA and budget."}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 2. Scholarship Audit */}
+                <div className="flex items-start gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.07]">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-rose-500/30 bg-gradient-to-br from-rose-500/20 to-orange-500/20 text-rose-300">
+                    <Sparkles className="size-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">
+                      {locale === "bn"
+                        ? "স্কলারশিপ ও টিউশন ওয়েভার অডিট"
+                        : "Scholarship & Merit Waiver Audit"}
+                    </h4>
+                    <p className="mt-0.5 text-xs leading-relaxed text-slate-400">
+                      {locale === "bn"
+                        ? "সরকারি (CSC, GKS, SII) ও বিশ্ববিদ্যালয়ের নিজস্ব স্কলারশিপ সম্ভাবনা যাচাই।"
+                        : "Real evaluation for government grants (CSC, GKS, SII) and institutional fee waivers."}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3. Rapid WhatsApp Delivery */}
+                <div className="flex items-start gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.07]">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 text-emerald-300">
+                    <MessageCircle className="size-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">
+                      {locale === "bn"
+                        ? "হোয়াটসঅ্যাপে সরাসরি ডেলিভারি (< ২ ঘণ্টা)"
+                        : "Direct WhatsApp Delivery in < 2 Hours"}
+                    </h4>
+                    <p className="mt-0.5 text-xs leading-relaxed text-slate-400">
+                      {locale === "bn"
+                        ? "কোনো রোবট বা জেনেরিক পিডিএফ নয় — ঢাকার সিনিয়র কাউন্সেলর ব্যক্তিগতভাবে পর্যালোচনা করবেন।"
+                        : "No automated bots or generic brochures. A dedicated Dhaka counselor reviews every submission personally."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Proof & Alternative Action Strip */}
+              <div className="mt-8 max-w-xl border-t border-white/10 pt-6">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex -space-x-2 overflow-hidden">
+                      <span className="inline-flex size-8 items-center justify-center rounded-full bg-gradient-to-tr from-orange-400 to-rose-400 text-xs font-bold text-white ring-2 ring-[#070e1c]">
+                        AR
+                      </span>
+                      <span className="inline-flex size-8 items-center justify-center rounded-full bg-gradient-to-tr from-sky-400 to-blue-500 text-xs font-bold text-white ring-2 ring-[#070e1c]">
+                        TS
+                      </span>
+                      <span className="inline-flex size-8 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-400 to-teal-500 text-xs font-bold text-white ring-2 ring-[#070e1c]">
+                        MH
+                      </span>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-bold text-white">
+                          4.9/5 Rating
+                        </span>
+                        <span className="text-[0.7rem] text-slate-400">
+                          · 250+ Families
+                        </span>
+                      </div>
+                      <p className="text-[0.68rem] font-medium text-emerald-400">
+                        Senior Counseling Desk, Dhaka
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <Link
+                      href={localizedHref("/eligibility-quiz", locale)}
+                      className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-white/10 transition-colors"
+                    >
+                      <span>{dict.home.leadQuiz}</span>
+                    </Link>
+                    <a
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-bold text-emerald-300 transition-colors hover:bg-emerald-500/20"
+                    >
+                      <MessageCircle className="size-3.5 text-emerald-400" />
+                      <span>{dict.home.leadWhatsapp}</span>
+                      <ArrowRight className="size-3" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Lead Form Container with Frosted Glass */}
-            <div className="glass-panel rounded-3xl p-6 text-slate-900 shadow-2xl sm:p-8">
+            {/* Right Column: Masterclass Lead Form Card */}
+            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white p-6 text-slate-900 shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6),0_0_40px_rgba(255,255,255,0.05)] backdrop-blur-xl sm:p-9">
+              {/* Top sunset accent stripe */}
+              <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-orange-500 via-rose-500 to-amber-400" />
+
+              {/* Form Card Header */}
+              <div className="mb-6 flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <h3 className="font-display text-lg font-bold text-slate-900 sm:text-xl">
+                    {locale === "bn"
+                      ? "বিনামূল্যে মূল্যায়ন ফরম"
+                      : "Start Your Free Evaluation"}
+                  </h3>
+                  <p className="mt-0.5 text-xs text-slate-500">
+                    {locale === "bn"
+                      ? "১ মিনিটে পূরণ করুন · সম্পূর্ণ তথ্য গোপনীয়"
+                      : "Takes ~60 seconds · Confidential & 100% Free"}
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[0.68rem] font-bold text-emerald-700">
+                  <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  {locale === "bn" ? "কাউন্সেলর অনলাইন" : "Counselors Active"}
+                </span>
+              </div>
+
               <LeadForm copy={dict.leadForm} source="home-cta" />
             </div>
           </div>

@@ -183,7 +183,7 @@ export const en = {
         step: "06",
         tag: "Visa Filing",
         title: "Embassy Visa Processing",
-        body: "Complete visa dossier preparation, biometric appointment scheduling, and rigorous mock interview coaching ensuring our 98.4% visa success rate.",
+        body: "Complete visa dossier preparation, biometric appointment scheduling, and rigorous mock interview coaching with certified documentation standards.",
       },
       {
         step: "07",
@@ -198,16 +198,16 @@ export const en = {
         subtitle: "Official partner university offers",
       },
       {
-        title: "SECURE BANK FILE",
-        subtitle: "Bangladesh Bank tuition remittance",
+        title: "TRANSPARENT PROCESS",
+        subtitle: "Zero hidden charges & written agreements",
       },
       {
         title: "GOVT. SCHOLARSHIPS",
         subtitle: "CSC, GKS & merit waiver matching",
       },
       {
-        title: "98.4% VISA SUCCESS",
-        subtitle: "Zero-guesswork embassy approvals",
+        title: "EXPERT VISA DESK",
+        subtitle: "SOP audit & 1-on-1 embassy mock sessions",
       },
     ],
     destinationsEyebrow: "Specialized Destinations",
