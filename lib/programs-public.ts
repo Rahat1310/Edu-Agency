@@ -198,6 +198,48 @@ export function getPublishedProgramDetail(id: string) {
   )();
 }
 
+async function queryPublishedProgramsByUniversity(
+  universityName: string,
+  excludeId?: string,
+  limit: number = 8,
+): Promise<PublicProgramCard[]> {
+  const conditions = [
+    eq(programs.universityName, universityName),
+    eq(programs.isPublished, true),
+  ];
+
+  if (excludeId) {
+    conditions.push(sql`${programs.id} != ${excludeId}`);
+  }
+
+  return db
+    .select(cardColumns)
+    .from(programs)
+    .where(and(...conditions))
+    .orderBy(asc(programs.field))
+    .limit(limit);
+}
+
+export function getPublishedProgramsByUniversity(
+  universityName: string,
+  excludeId?: string,
+  limit: number = 8,
+) {
+  return unstable_cache(
+    () => queryPublishedProgramsByUniversity(universityName, excludeId, limit),
+    [
+      "published-programs-by-university",
+      universityName,
+      excludeId ?? "",
+      String(limit),
+    ],
+    {
+      tags: [PROGRAMS_CACHE_TAG],
+      revalidate: PROGRAMS_REVALIDATE_SECONDS,
+    },
+  )();
+}
+
 async function queryPublishedProgramsByIds(
   ids: string[],
 ): Promise<PublicProgramDetail[]> {

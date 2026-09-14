@@ -13,8 +13,10 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
+    "db:seed:programs": "npx tsx --env-file=.env.local scripts/seed-programs.ts",
     "reminders:run": "npx tsx scripts/run-intake-reminders.ts",
     "nurture:run": "npx tsx scripts/run-lead-nurture.ts",
+    "make-admin": "npx tsx --env-file=.env.local scripts/make-admin.ts",
     "prepare": "husky"
   },
   "lint-staged": {

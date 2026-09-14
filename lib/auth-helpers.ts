@@ -2,7 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
@@ -39,16 +39,84 @@ export type StudentApplication = {
   lead: StudentLead;
 };
 
+function isConfiguredAdmin(email: string): boolean {
+  const configured = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean);
+  return configured.includes(email.toLowerCase());
+}
+
 const loadSessionUser = cache(async () => {
   const { userId } = await auth();
 
-  const [user] = userId
-    ? await db
-        .select(userColumns)
-        .from(users)
-        .where(eq(users.clerkId, userId))
-        .limit(1)
-    : [];
+  if (!userId) {
+    return { userId: null, user: null };
+  }
+
+  let [user] = await db
+    .select(userColumns)
+    .from(users)
+    .where(eq(users.clerkId, userId))
+    .limit(1);
+
+  // Auto-provision user if webhook was delayed, missing, or not yet triggered
+  if (!user) {
+    try {
+      const clerkUser = await currentUser();
+      if (clerkUser) {
+        const email =
+          clerkUser.primaryEmailAddress?.emailAddress ??
+          clerkUser.emailAddresses[0]?.emailAddress ??
+          "";
+        const fullName =
+          [clerkUser.firstName, clerkUser.lastName]
+            .filter(Boolean)
+            .join(" ")
+            .trim() || null;
+
+        if (email) {
+          const role: UserRole = isConfiguredAdmin(email) ? "admin" : "student";
+          const [inserted] = await db
+            .insert(users)
+            .values({
+              clerkId: userId,
+              email,
+              fullName,
+              role,
+            })
+            .onConflictDoUpdate({
+              target: users.clerkId,
+              set: {
+                email,
+                fullName,
+                isActive: true,
+                updatedAt: new Date(),
+              },
+            })
+            .returning(userColumns);
+
+          user = inserted;
+        }
+      }
+    } catch (err) {
+      console.error("[auth] Failed to auto-provision user from Clerk:", err);
+    }
+  } else if (isConfiguredAdmin(user.email) && user.role !== "admin") {
+    // Elevate user to admin if their email is in ADMIN_EMAILS
+    try {
+      const [updated] = await db
+        .update(users)
+        .set({ role: "admin", updatedAt: new Date() })
+        .where(eq(users.id, user.id))
+        .returning(userColumns);
+      if (updated) {
+        user = updated;
+      }
+    } catch (err) {
+      console.error("[auth] Failed to elevate admin role:", err);
+    }
+  }
 
   return { userId, user };
 });

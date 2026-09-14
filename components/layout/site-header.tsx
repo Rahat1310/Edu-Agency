@@ -31,7 +31,7 @@ function Brand({ label, locale }: { label: string; locale: Locale }) {
   return (
     <Link
       href={localizedHref("/", locale)}
-      className="focus-ring group inline-flex shrink-0 items-center gap-2.5 rounded-xl whitespace-nowrap transition-all"
+      className="focus-ring group inline-flex shrink-0 items-center rounded-xl whitespace-nowrap transition-all"
       aria-label={label}
     >
       <Image
@@ -42,14 +42,6 @@ function Brand({ label, locale }: { label: string; locale: Locale }) {
         className="h-9.5 w-auto object-contain transition-transform duration-200 group-hover:scale-105 sm:h-11"
         priority
       />
-      <div className="hidden flex-col border-l border-stone-200/80 pl-2.5 sm:flex">
-        <span className="font-display text-[0.82rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-orange-600 leading-tight">
-          {locale === "bn" ? "স্টাডি অ্যাব্রড" : "Study Abroad"}
-        </span>
-        <span className="text-[0.62rem] font-medium tracking-wide text-slate-500 uppercase leading-none mt-0.5">
-          {locale === "bn" ? "বাংলাদেশ → গ্লোবাল ক্যাম্পাস" : "Dhaka • Global Admissions"}
-        </span>
-      </div>
     </Link>
   );
 }
@@ -191,63 +183,13 @@ export function SiteHeader({
   ];
 
   return (
-    <div className="relative z-50 w-full">
-      {/* 🌟 Top Micro-Trust Ribbon (Dhaka Counseling Desk & Fast Helpline) */}
-      <div
-        className={`w-full border-b border-stone-200/60 bg-stone-50/90 text-[0.72rem] text-slate-600 transition-all duration-300 ${
-          isScrolled
-            ? "max-h-0 -translate-y-full overflow-hidden opacity-0 border-none py-0"
-            : "max-h-11 py-1.5 opacity-100"
-        }`}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="relative flex size-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-            </span>
-            <span className="font-semibold text-emerald-700">
-              {locale === "bn"
-                ? "২০২৫/২০২৬ সেশন আবেদন উন্মুক্ত"
-                : "2025/2026 Admissions Open"}
-            </span>
-            <span className="hidden text-stone-300 sm:inline-block">|</span>
-            <span className="hidden text-slate-500 md:inline-block">
-              {locale === "bn"
-                ? "ঢাকা অফিস • ৫০+ আন্তর্জাতিক বিশ্ববিদ্যালয়ের অনুমোদিত প্রতিনিধি"
-                : "Dhaka Counseling Desk • Authorized Global Admissions Partner"}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 sm:gap-4">
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 font-semibold text-slate-700 transition-colors hover:text-emerald-700"
-            >
-              <MessageCircle className="size-3.5 text-emerald-600" />
-              <span>
-                {locale === "bn" ? "হোয়াটসঅ্যাপ সাপোর্ট" : "WhatsApp Desk"}
-              </span>
-            </a>
-            <span className="text-stone-300">|</span>
-            <Link
-              href={localizedHref("/contact", locale)}
-              className="font-semibold text-slate-700 transition-colors hover:text-orange-600"
-            >
-              {locale === "bn" ? "অফিস লোকেশন" : "Dhaka Office"}
-            </Link>
-          </div>
-        </div>
-      </div>
-
+    <>
       {/* 🌟 Main Floating Glassmorphic Navigation Bar */}
       <header
         lang={locale}
-        className={`w-full transition-all duration-300 ${
+        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? "sticky top-0 border-b border-stone-200/80 bg-white/95 py-2.5 shadow-[0_8px_32px_-4px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+            ? "border-b border-stone-200/80 bg-white/95 py-2.5 shadow-[0_8px_32px_-4px_rgba(15,23,42,0.08)] backdrop-blur-xl"
             : "border-b border-stone-200/60 bg-white/85 py-3 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.03)] backdrop-blur-lg"
         }`}
       >
@@ -858,6 +800,6 @@ export function SiteHeader({
           </aside>
         </div>
       )}
-    </div>
+    </>
   );
 }

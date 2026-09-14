@@ -28,9 +28,15 @@ import type {
 import { isVisaPipelineStage } from "@/lib/visa-applications/stage";
 import type { DeskVisaApplication } from "@/lib/visa-applications/types";
 
+const EMPTY_ACTIVITY: LeadActivityItem[] = [];
+const EMPTY_DOCUMENTS: StudentDocumentRow[] = [];
+const EMPTY_MESSAGES: DeskThreadMessage[] = [];
+const EMPTY_AUTOMATION: DeskAutomationEvent[] = [];
+const EMPTY_COUNSELORS: AssignableCounselor[] = [];
+
 type LeadDetailPanelProps = {
   lead: LeadDetail | null;
-  activity: LeadActivityItem[];
+  activity?: LeadActivityItem[];
   documents?: StudentDocumentRow[];
   messages?: DeskThreadMessage[];
   automationHistory?: DeskAutomationEvent[];
@@ -62,14 +68,14 @@ function whatsappHref(phone: string): string {
 
 export function LeadDetailPanel({
   lead,
-  activity,
-  documents = [],
-  messages = [],
-  automationHistory = [],
+  activity = EMPTY_ACTIVITY,
+  documents = EMPTY_DOCUMENTS,
+  messages = EMPTY_MESSAGES,
+  automationHistory = EMPTY_AUTOMATION,
   visaApplication = null,
   hasLinkedApplication = false,
   visaLoadError = false,
-  counselors = [],
+  counselors = EMPTY_COUNSELORS,
   actorLabel,
   loading = false,
   missing = false,
@@ -89,6 +95,7 @@ export function LeadDetailPanel({
   const [shareWithStudent, setShareWithStudent] = useState(false);
   const [saving, setSaving] = useState(false);
   const feedEndRef = useRef<HTMLLIElement>(null);
+  const lastLeadIdRef = useRef<string | null>(null);
 
   const leadId = lead?.id ?? "";
   const open = Boolean(lead) || loading || missing || loadError;
@@ -101,10 +108,18 @@ export function LeadDetailPanel({
   }
 
   useEffect(() => {
-    setItems(activity);
-    setFiles(documents);
-    setVisa(visaApplication);
-    setAssignedCounselorId(lead?.assignedCounselorId ?? null);
+    if (!leadId) {
+      lastLeadIdRef.current = null;
+      return;
+    }
+
+    if (lastLeadIdRef.current !== leadId) {
+      lastLeadIdRef.current = leadId;
+      setItems(activity);
+      setFiles(documents);
+      setVisa(visaApplication);
+      setAssignedCounselorId(lead?.assignedCounselorId ?? null);
+    }
   }, [leadId, activity, documents, visaApplication, lead?.assignedCounselorId]);
 
   useEffect(() => {

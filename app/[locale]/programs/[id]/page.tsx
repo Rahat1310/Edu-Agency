@@ -8,6 +8,7 @@ import { localizedHref } from "@/lib/i18n/paths";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import {
   getPublishedProgramDetail,
+  getPublishedProgramsByUniversity,
   listPublishedProgramIds,
 } from "@/lib/programs-public";
 import { pageMetadata } from "@/lib/seo/page-metadata";
@@ -68,6 +69,11 @@ export default async function ProgramDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const relatedPrograms = await getPublishedProgramsByUniversity(
+    program.universityName,
+    program.id,
+  );
+
   const copy = programSeoCopy(program, locale);
   const pageUrl = absoluteUrl(localizedHref(`/programs/${id}`, locale));
 
@@ -76,6 +82,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
       <JsonLd data={programCourseJsonLd(program, copy, pageUrl)} />
       <ProgramDetail
         program={program}
+        relatedPrograms={relatedPrograms}
         locale={locale}
         dict={getDictionary(locale)}
       />
