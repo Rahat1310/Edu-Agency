@@ -76,7 +76,7 @@ function contentSecurityPolicy(): string {
     `img-src 'self' https://img.clerk.com ${extraImgSources().join(" ")}`,
     "worker-src 'self' blob:",
     "style-src 'self' 'unsafe-inline'",
-    "frame-src 'self' https://challenges.cloudflare.com https://*.protect.clerk.com",
+    "frame-src 'self' https://challenges.cloudflare.com https://*.protect.clerk.com https://*.google.com https://*.google.com.bd https://maps.google.com https://www.google.com",
     "form-action 'self'",
     "base-uri 'self'",
     "object-src 'none'",
