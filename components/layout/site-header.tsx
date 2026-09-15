@@ -7,8 +7,6 @@ import {
   CalendarCheck,
   CheckCircle2,
   ChevronDown,
-  Globe,
-  GraduationCap,
   Layers,
   Menu,
   MessageCircle,
