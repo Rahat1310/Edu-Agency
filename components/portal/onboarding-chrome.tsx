@@ -23,9 +23,9 @@ export function OnboardingChrome({ children }: { children: ReactNode }) {
           <Image
             src="/logo.png"
             alt="Study Abroad Consultancy"
-            width={100}
-            height={65}
-            className="h-8 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
+            width={140}
+            height={91}
+            className="h-10 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
           />
         </Link>
         <SignOutButton redirectUrl="/">

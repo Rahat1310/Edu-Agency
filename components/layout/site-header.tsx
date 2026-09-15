@@ -35,9 +35,9 @@ function Brand({ label, locale }: { label: string; locale: Locale }) {
       <Image
         src="/logo.png"
         alt="Study Abroad Consultancy"
-        width={140}
-        height={91}
-        className="h-9.5 w-auto object-contain transition-transform duration-200 group-hover:scale-105 sm:h-11"
+        width={220}
+        height={143}
+        className="h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105 sm:h-13 md:h-15 lg:h-16"
         priority
       />
     </Link>
@@ -225,7 +225,7 @@ export function SiteHeader({
                 type="button"
                 onClick={() =>
                   setActiveFlyout(
-                    activeFlyout === "destinations" ? null : "destinations"
+                    activeFlyout === "destinations" ? null : "destinations",
                   )
                 }
                 aria-expanded={activeFlyout === "destinations"}
@@ -252,7 +252,7 @@ export function SiteHeader({
                 >
                   <div className="mb-3 flex items-center justify-between border-b border-stone-100 pb-2.5">
                     <div>
-                      <h3 className="font-display text-xs font-bold uppercase tracking-wider text-slate-900">
+                      <h3 className="font-display text-xs font-bold tracking-wider text-slate-900 uppercase">
                         {locale === "bn"
                           ? "আমাদের প্রধান স্টাডি রুট"
                           : "Featured Study Destinations"}
@@ -324,7 +324,7 @@ export function SiteHeader({
                 type="button"
                 onClick={() =>
                   setActiveFlyout(
-                    activeFlyout === "programs" ? null : "programs"
+                    activeFlyout === "programs" ? null : "programs",
                   )
                 }
                 aria-expanded={activeFlyout === "programs"}
@@ -354,17 +354,17 @@ export function SiteHeader({
                       href={localizedHref("/programs", locale)}
                       className="focus-ring group/prog flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-orange-200 hover:bg-orange-50/50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-600 group-hover/prog:bg-orange-600 group-hover/prog:text-white transition-colors">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-600 transition-colors group-hover/prog:bg-orange-600 group-hover/prog:text-white">
                         <BookOpen className="size-4.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-slate-900 group-hover/prog:text-orange-600 transition-colors">
+                          <span className="text-sm font-bold text-slate-900 transition-colors group-hover/prog:text-orange-600">
                             {locale === "bn"
                               ? "সকল প্রোগ্রাম ব্রাউজ করুন"
                               : "Browse All Programs"}
                           </span>
-                          <span className="rounded-full bg-stone-100 px-1.5 py-0.2 text-[0.62rem] font-semibold text-slate-600">
+                          <span className="py-0.2 rounded-full bg-stone-100 px-1.5 text-[0.62rem] font-semibold text-slate-600">
                             500+ Degrees
                           </span>
                         </div>
@@ -380,17 +380,17 @@ export function SiteHeader({
                       href={localizedHref("/programs/compare", locale)}
                       className="focus-ring group/comp flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-sky-200 hover:bg-sky-50/50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-600 group-hover/comp:bg-sky-600 group-hover/comp:text-white transition-colors">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-600 transition-colors group-hover/comp:bg-sky-600 group-hover/comp:text-white">
                         <Layers className="size-4.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-slate-900 group-hover/comp:text-sky-600 transition-colors">
+                          <span className="text-sm font-bold text-slate-900 transition-colors group-hover/comp:text-sky-600">
                             {locale === "bn"
                               ? "প্রোগ্রাম তুলনা করুন"
                               : "Compare Programs"}
                           </span>
-                          <span className="rounded-full bg-sky-100 px-1.5 py-0.2 text-[0.62rem] font-bold text-sky-700">
+                          <span className="py-0.2 rounded-full bg-sky-100 px-1.5 text-[0.62rem] font-bold text-sky-700">
                             Side-by-Side
                           </span>
                         </div>
@@ -405,7 +405,7 @@ export function SiteHeader({
 
                   {/* Popular Discipline Tags */}
                   <div className="mt-3 border-t border-stone-100 pt-2.5">
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold tracking-wider text-slate-400 uppercase">
                       {locale === "bn" ? "জনপ্রিয় বিষয়:" : "Popular Fields:"}
                     </span>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -470,11 +470,11 @@ export function SiteHeader({
                       href={localizedHref("/cost-calculator", locale)}
                       className="focus-ring group/calc flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-amber-200 hover:bg-amber-50/50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-600 group-hover/calc:bg-amber-600 group-hover/calc:text-white transition-colors">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-600 transition-colors group-hover/calc:bg-amber-600 group-hover/calc:text-white">
                         <Calculator className="size-4.5" />
                       </div>
                       <div>
-                        <span className="text-sm font-bold text-slate-900 group-hover/calc:text-amber-700 transition-colors">
+                        <span className="text-sm font-bold text-slate-900 transition-colors group-hover/calc:text-amber-700">
                           {dict.chrome.nav.costs}
                         </span>
                         <p className="text-[0.73rem] text-slate-500">
@@ -490,15 +490,15 @@ export function SiteHeader({
                       href={localizedHref("/eligibility-quiz", locale)}
                       className="focus-ring group/quiz flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-emerald-200 hover:bg-emerald-50/50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 group-hover/quiz:bg-emerald-600 group-hover/quiz:text-white transition-colors">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 transition-colors group-hover/quiz:bg-emerald-600 group-hover/quiz:text-white">
                         <CheckCircle2 className="size-4.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-slate-900 group-hover/quiz:text-emerald-700 transition-colors">
+                          <span className="text-sm font-bold text-slate-900 transition-colors group-hover/quiz:text-emerald-700">
                             {dict.chrome.nav.eligibility}
                           </span>
-                          <span className="rounded-full bg-emerald-100 px-1.5 py-0.2 text-[0.62rem] font-bold text-emerald-800">
+                          <span className="py-0.2 rounded-full bg-emerald-100 px-1.5 text-[0.62rem] font-bold text-emerald-800">
                             {locale === "bn" ? "৩ মিনিট" : "Instant Match"}
                           </span>
                         </div>
@@ -515,11 +515,11 @@ export function SiteHeader({
                       href={localizedHref("/success-stories", locale)}
                       className="focus-ring group/story flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-purple-200 hover:bg-purple-50/50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-purple-100 text-purple-600 group-hover/story:bg-purple-600 group-hover/story:text-white transition-colors">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-purple-100 text-purple-600 transition-colors group-hover/story:bg-purple-600 group-hover/story:text-white">
                         <Sparkles className="size-4.5" />
                       </div>
                       <div>
-                        <span className="text-sm font-bold text-slate-900 group-hover/story:text-purple-700 transition-colors">
+                        <span className="text-sm font-bold text-slate-900 transition-colors group-hover/story:text-purple-700">
                           {dict.chrome.nav.stories}
                         </span>
                         <p className="text-[0.73rem] text-slate-500">
@@ -601,7 +601,11 @@ export function SiteHeader({
 
       {/* 📱 Redesigned Mobile Navigation Drawer (App-like Sheet with Backdrop) */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
+        <div
+          className="fixed inset-0 z-50 lg:hidden"
+          role="dialog"
+          aria-modal="true"
+        >
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-slate-950/50 backdrop-blur-xs transition-opacity duration-300"
@@ -625,7 +629,7 @@ export function SiteHeader({
             </div>
 
             {/* Drawer Content */}
-            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+            <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4">
               {/* Primary Mobile CTA Button */}
               <Link
                 href={localizedHref("/contact", locale)}
@@ -644,7 +648,7 @@ export function SiteHeader({
               {/* Destinations Section */}
               <div>
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
                     {dict.chrome.nav.destinations}
                   </span>
                   <Link
@@ -665,7 +669,7 @@ export function SiteHeader({
                     >
                       <div className="flex items-center gap-1.5">
                         <span className="text-base">{dest.flag}</span>
-                        <span className="text-xs font-bold text-slate-800 line-clamp-1">
+                        <span className="line-clamp-1 text-xs font-bold text-slate-800">
                           {dest.name}
                         </span>
                       </div>
@@ -679,7 +683,7 @@ export function SiteHeader({
 
               {/* Programs & Comparison */}
               <div>
-                <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">
+                <span className="mb-2 block text-xs font-bold tracking-wider text-slate-400 uppercase">
                   {dict.chrome.nav.programs}
                 </span>
                 <div className="space-y-1.5">
@@ -712,7 +716,7 @@ export function SiteHeader({
 
               {/* Student Tools */}
               <div>
-                <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-400">
+                <span className="mb-2 block text-xs font-bold tracking-wider text-slate-400 uppercase">
                   {locale === "bn" ? "টুলস ও অ্যাসেসমেন্ট" : "Student Tools"}
                 </span>
                 <div className="space-y-1.5">
@@ -725,7 +729,9 @@ export function SiteHeader({
                       <Calculator className="size-4 text-amber-600" />
                       <span className="text-xs">{dict.chrome.nav.costs}</span>
                     </div>
-                    <span className="text-[0.65rem] text-slate-500">Calculator</span>
+                    <span className="text-[0.65rem] text-slate-500">
+                      Calculator
+                    </span>
                   </Link>
 
                   <Link
@@ -735,9 +741,11 @@ export function SiteHeader({
                   >
                     <div className="flex items-center gap-2.5">
                       <CheckCircle2 className="size-4 text-emerald-600" />
-                      <span className="text-xs">{dict.chrome.nav.eligibility}</span>
+                      <span className="text-xs">
+                        {dict.chrome.nav.eligibility}
+                      </span>
                     </div>
-                    <span className="rounded-full bg-emerald-100 px-1.5 py-0.2 text-[0.62rem] font-bold text-emerald-800">
+                    <span className="py-0.2 rounded-full bg-emerald-100 px-1.5 text-[0.62rem] font-bold text-emerald-800">
                       3 Min
                     </span>
                   </Link>
@@ -751,7 +759,9 @@ export function SiteHeader({
                       <Sparkles className="size-4 text-purple-600" />
                       <span className="text-xs">{dict.chrome.nav.stories}</span>
                     </div>
-                    <span className="text-[0.65rem] text-slate-500">Reviews</span>
+                    <span className="text-[0.65rem] text-slate-500">
+                      Reviews
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -778,7 +788,7 @@ export function SiteHeader({
             </div>
 
             {/* Drawer Footer with Quick WhatsApp & Auth */}
-            <div className="border-t border-stone-200/80 bg-stone-50/80 p-4 space-y-3">
+            <div className="space-y-3 border-t border-stone-200/80 bg-stone-50/80 p-4">
               <HeaderAuth mobile signInLabel={dict.chrome.signIn} />
 
               <a

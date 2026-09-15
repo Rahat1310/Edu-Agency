@@ -47,13 +47,15 @@ export const bn: Dictionary = {
     footerHoursLabel: "অফিস সময়",
     footerHoursValue: "শনিবার – বৃহস্পতিবার: সকাল ১০:০০ – সন্ধ্যা ৬:০০",
     footerCtaTitle: "বিদেশে উচ্চশিক্ষার যাত্রা শুরু করতে প্রস্তুত?",
-    footerCtaSubtitle: "সরাসরি অভিজ্ঞ সিনিয়র কাউন্সেলরের সাথে কথা বলে সঠিক রোডম্যাপ ও স্কলারশিপ নিশ্চিত করুন।",
+    footerCtaSubtitle:
+      "সরাসরি অভিজ্ঞ সিনিয়র কাউন্সেলরের সাথে কথা বলে সঠিক রোডম্যাপ ও স্কলারশিপ নিশ্চিত করুন।",
     footerCtaButton: "ফ্রি যোগ্যতা যাচাই",
     footerCallNow: "কল করুন",
     footerMapLink: "ম্যাপে দেখুন",
     footerQuickLinks: "শিক্ষার্থী রিসোর্স",
     footerTrustBadge: "সরকারি অনুমোদিত শিক্ষা পরামর্শক সংস্থা",
-    footerLiveStatus: "কাউন্সেলিং ডেস্ক সক্রিয় · ফল ২০২৬ ও স্প্রিং ২০২৭ সেশন উন্মুক্ত",
+    footerLiveStatus:
+      "কাউন্সেলিং ডেস্ক সক্রিয় · ফল ২০২৬ ও স্প্রিং ২০২৭ সেশন উন্মুক্ত",
     nav: {
       home: "হোম",
       destinations: "গন্তব্য",
@@ -161,7 +163,8 @@ export const bn: Dictionary = {
       },
     ],
     journeyEyebrow: "৭-ধাপের রোডম্যাপ",
-    journeyTitle: "ঢাকা থেকে ক্যাম্পাস — আপনার পূর্ণাঙ্গ স্টাডি রোডম্যাপ",
+    journeyTitle:
+      "বাংলাদেশ থেকে স্বপ্নের ক্যাম্পাসে — আপনার পূর্ণাঙ্গ রোডম্যাপ",
     journeyLede:
       "কাউন্সেলিং থেকে শুরু করে ক্যাম্পাসে পৌঁছানো পর্যন্ত প্রতিটি ধাপ সম্পূর্ণ স্বচ্ছ ও পূর্বপরিকল্পিত।",
     journeyCta: "Start Your Journey — Book Free Consultation",
@@ -231,6 +234,21 @@ export const bn: Dictionary = {
     destinationsTitle: "আপনার ডিগ্রি ও বাজেটের জন্য সঠিক দেশটি বেছে নিন",
     destinationsLede:
       "কোর্সের মেয়াদ, বিডিটিতে আনুমানিক টিউশন ফি এবং ভিসা প্রসেসিং ধাপসমূহ দেখে সিদ্ধান্ত নিন।",
+    universitiesEyebrow: "স্বীকৃত বৈশ্বিক বিশ্ববিদ্যালয়সমূহ",
+    universitiesTitle: "শীর্ষস্থানীয় বিশ্বমানের ক্যাম্পাসে সরাসরি ভর্তি",
+    universitiesLede:
+      "মালয়েশিয়া, চীন, দক্ষিণ কোরিয়া ও ভারতের সেরা পাবলিক ও প্রাইভেট বিশ্ববিদ্যালয়সমূহ — সরাসরি সরকারি বৃত্তি ও আন্তর্জাতিক স্বীকৃতির নিশ্চয়তা।",
+    universitiesFilterAll: "সকল ক্যাম্পাস",
+    universitiesFilterMalaysia: "মালয়েশিয়া",
+    universitiesFilterChina: "চীন",
+    universitiesFilterKorea: "দক্ষিণ কোরিয়া",
+    universitiesFilterIndia: "ভারত",
+    universitiesExplorePrograms: "প্রোগ্রামসমূহ দেখুন",
+    universitiesViewAllCta: "ডিরেক্টরিতে ১২০+ টি প্রোগ্রাম ব্রাউজ করুন",
+    universitiesQuizCta: "ভর্তির যোগ্যতা যাচাই করুন",
+    universitiesEstTuitionLabel: "আনুমানিক টিউশন:",
+    universitiesLoadMore: "আরও ক্যাম্পাস দেখুন",
+    universitiesShowLess: "কম দেখুন",
     testimonialsEyebrow: "শিক্ষার্থী ও পরিবারের প্রতিক্রিয়া",
     testimonialsTitle:
       "ঢাকা থেকে আন্তর্জাতিক ক্যাম্পাসে শিক্ষার্থীদের সফল যাত্রা",

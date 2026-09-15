@@ -45,13 +45,15 @@ export const en = {
     footerHoursLabel: "Office Hours",
     footerHoursValue: "Sat – Thu: 10:00 AM – 6:00 PM (BST)",
     footerCtaTitle: "Ready to Start Your Global Academic Journey?",
-    footerCtaSubtitle: "Get genuine counseling, scholarship assessments, and visa roadmaps with complete transparency.",
+    footerCtaSubtitle:
+      "Get genuine counseling, scholarship assessments, and visa roadmaps with complete transparency.",
     footerCtaButton: "Free Assessment",
     footerCallNow: "Call Hotline",
     footerMapLink: "Get Directions",
     footerQuickLinks: "Student Resources",
     footerTrustBadge: "Govt. Approved Educational Advisory",
-    footerLiveStatus: "Counseling Desk Active · Fall 2026 & Spring 2027 Admissions Open",
+    footerLiveStatus:
+      "Counseling Desk Active · Fall 2026 & Spring 2027 Admissions Open",
     nav: {
       home: "Home",
       destinations: "Destinations",
@@ -162,7 +164,7 @@ export const en = {
       },
     ],
     journeyEyebrow: "7-Step Roadmap",
-    journeyTitle: "Your Study Abroad Journey from Dhaka to Campus",
+    journeyTitle: "From Bangladesh to Your Dream Campus",
     journeyLede:
       "A transparent, predictable process designed to remove all guesswork from initial profile evaluation to university hostel arrival.",
     journeyCta: "Start Your Journey — Book Free Consultation",
@@ -232,6 +234,21 @@ export const en = {
     destinationsTitle: "Find the Right Destination for Your Degree and Budget",
     destinationsLede:
       "Explore university intakes, tuition costs in BDT, and complete visa requirements for our core destination countries.",
+    universitiesEyebrow: "Accredited Global Institutions",
+    universitiesTitle: "Direct Gateways to World-Class Campuses",
+    universitiesLede:
+      "Explore handpicked public flagships and premier private universities across Asia with verified degree recognition and direct scholarship pathways.",
+    universitiesFilterAll: "All Campuses",
+    universitiesFilterMalaysia: "Malaysia",
+    universitiesFilterChina: "China",
+    universitiesFilterKorea: "South Korea",
+    universitiesFilterIndia: "India",
+    universitiesExplorePrograms: "Explore Programs",
+    universitiesViewAllCta: "Explore All 120+ Programs in Directory",
+    universitiesQuizCta: "Check Your Admission Eligibility",
+    universitiesEstTuitionLabel: "Est. Tuition:",
+    universitiesLoadMore: "Load More Campuses",
+    universitiesShowLess: "Show Less",
     testimonialsEyebrow: "Student & Family Voices",
     testimonialsTitle: "Real Student Journeys from Dhaka to Campus",
     testimonials: [

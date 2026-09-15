@@ -210,9 +210,9 @@ function DeskBrand() {
       <Image
         src="/logo.png"
         alt="Study Abroad Consultancy"
-        width={90}
-        height={58}
-        className="h-7 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
+        width={140}
+        height={91}
+        className="h-9.5 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
       />
     </Link>
   );

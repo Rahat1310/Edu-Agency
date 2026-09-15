@@ -1,14 +1,11 @@
-import {
-  MessageCircle,
-  ShieldCheck,
-  Star,
-} from "lucide-react";
+import { MessageCircle, ShieldCheck, Star } from "lucide-react";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
 
 import { LeadForm } from "@/components/lead-form";
 import { DestinationCard } from "@/components/marketing/destination-card";
 import { FeaturedSuccessStories } from "@/components/marketing/featured-success-stories";
+import { FeaturedUniversities } from "@/components/marketing/featured-universities";
 import { HeroGlobe } from "@/components/marketing/hero-globe";
 import { HeroFeaturesBar } from "@/components/marketing/hero-features-bar";
 import { HeroFloatingArt } from "@/components/marketing/hero-floating-art";
@@ -257,6 +254,9 @@ export function HomePage({
         </PageShell>
       </section>
 
+      {/* Featured Partner Universities Section */}
+      <FeaturedUniversities locale={locale} dict={dict} />
+
       {/* Testimonials Section */}
       <section className="border-t border-[var(--border)] bg-white py-16 sm:py-24">
         <PageShell>
@@ -386,7 +386,6 @@ export function HomePage({
           </div>
         </PageShell>
       </section>
-
     </>
   );
 }

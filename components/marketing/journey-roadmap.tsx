@@ -117,7 +117,23 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
           <div className="max-w-2xl">
             <SectionHeading
               eyebrow={dict.home.journeyEyebrow}
-              title={dict.home.journeyTitle}
+              title={
+                locale === "bn" ? (
+                  <>
+                    বাংলাদেশ থেকে{" "}
+                    <span className="bg-gradient-to-r from-orange-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+                      স্বপ্নের ক্যাম্পাসে
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    From Bangladesh to{" "}
+                    <span className="bg-gradient-to-r from-orange-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+                      Your Dream Campus
+                    </span>
+                  </>
+                )
+              }
               lede={dict.home.journeyLede}
             />
           </div>

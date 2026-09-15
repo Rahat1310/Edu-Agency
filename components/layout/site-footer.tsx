@@ -48,15 +48,15 @@ export function SiteFooter({
           <div className="lg:col-span-3">
             <Link
               href={localizedHref("/", locale)}
-              className="group inline-flex items-center rounded-xl bg-white px-3.5 py-2 shadow-xs transition-opacity hover:opacity-95"
+              className="group inline-flex items-center rounded-2xl bg-white px-4 py-2.5 shadow-xs transition-opacity hover:opacity-95"
               aria-label={dict.chrome.brandAria}
             >
               <Image
                 src="/logo.png"
                 alt="Study Abroad Consultancy"
-                width={130}
-                height={80}
-                className="h-9 sm:h-10 w-auto object-contain"
+                width={200}
+                height={130}
+                className="h-12 w-auto object-contain sm:h-14 md:h-15"
                 priority
               />
             </Link>
@@ -78,7 +78,10 @@ export function SiteFooter({
               >
                 <MessageCircle className="size-3.5" aria-hidden="true" />
                 <span>{dict.chrome.footerWhatsapp}</span>
-                <ArrowUpRight className="size-3 opacity-60" aria-hidden="true" />
+                <ArrowUpRight
+                  className="size-3 opacity-60"
+                  aria-hidden="true"
+                />
                 <span className="sr-only">{dict.chrome.footerNewTab}</span>
               </a>
             </div>
@@ -167,7 +170,7 @@ export function SiteFooter({
             </h4>
 
             {/* Contact Details Grid */}
-            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 text-sm">
+            <div className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
               {/* Address */}
               <div className="flex items-start gap-2.5">
                 <MapPin
@@ -252,7 +255,7 @@ export function SiteFooter({
 
               {/* Floating Bottom Bar with Live Beacon & Direct Map Link */}
               <div className="flex items-center justify-between gap-3 border-t border-slate-800 bg-[#060D17]/95 px-3.5 py-2.5 backdrop-blur-md">
-                <div className="flex items-center gap-2 min-w-0">
+                <div className="flex min-w-0 items-center gap-2">
                   <span className="relative flex size-2 shrink-0">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
@@ -285,7 +288,8 @@ export function SiteFooter({
         {/* Sub-Footer */}
         <div className="mt-12 border-t border-slate-800/80 pt-6 sm:mt-16 sm:flex sm:items-center sm:justify-between sm:pt-8">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} {dict.meta.siteName}. {isBn ? "সর্বস্বত্ব সংরক্ষিত।" : "All rights reserved."}
+            © {new Date().getFullYear()} {dict.meta.siteName}.{" "}
+            {isBn ? "সর্বস্বত্ব সংরক্ষিত।" : "All rights reserved."}
           </p>
 
           <div className="mt-4 flex items-center gap-6 sm:mt-0">

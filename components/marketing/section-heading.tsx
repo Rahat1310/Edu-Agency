@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
   eyebrow: string;
-  title: string;
-  lede?: string;
+  title: React.ReactNode;
+  lede?: React.ReactNode;
   titleId?: string;
   className?: string;
 };
@@ -25,7 +25,7 @@ export function SectionHeading({
       </div>
       <h2
         id={titleId}
-        className="font-heading mt-6 text-3xl font-black tracking-tight text-slate-900 sm:text-[2.75rem] sm:leading-[1.15]"
+        className="font-heading mt-6 text-3xl font-black tracking-tight text-balance text-slate-900 sm:text-[2.75rem] sm:leading-[1.15]"
       >
         {title}
       </h2>
