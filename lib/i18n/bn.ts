@@ -38,7 +38,7 @@ export const bn: Dictionary = {
     footerCredit: "শিক্ষার্থীর জন্য পথ। পরিবারের জন্য আস্থা।",
     footerContactTitle: "প্রধান কার্যালয় ও যোগাযোগ",
     footerAddressLabel: "ঢাকা প্রধান অফিস",
-    footerAddressLine1: "২য় তলা, বাসা ১৬, রোড ১৪",
+    footerAddressLine1: "১ম তলা, বাসা ১৬, রোড ১৪",
     footerAddressLine2: "নিকুঞ্জ ২, খিলক্ষেত, ঢাকা, বাংলাদেশ",
     footerPhoneLabel: "হটলাইন ও সরাসরি হেল্পলাইন",
     footerPhoneValue: "+৮৮০ ১৩৫৪-৯৩৫৯৫৮",
@@ -344,7 +344,7 @@ export const bn: Dictionary = {
     detailsTitle: "অফিসের অবস্থান",
     addressLabel: "অফিসের ঠিকানা",
     addressLines: [
-      "২য় তলা, বাসা ১৬, রোড ১৪",
+      "১ম তলা, বাসা ১৬, রোড ১৪",
       "নিকুঞ্জ ২, খিলক্ষেত, ঢাকা, বাংলাদেশ",
     ],
     phoneLabel: "টেলিফোন / সরাসরি",

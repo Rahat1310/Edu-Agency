@@ -36,7 +36,7 @@ export const en = {
     footerCredit: "Guidance for students. Confidence for families.",
     footerContactTitle: "Headquarters & Contact",
     footerAddressLabel: "Dhaka Principal Office",
-    footerAddressLine1: "2nd Floor, House 16, Road 14",
+    footerAddressLine1: "1st Floor, House 16, Road 14",
     footerAddressLine2: "Nikunja 2, Khilkhet, Dhaka, Bangladesh",
     footerPhoneLabel: "Direct Hotline",
     footerPhoneValue: "+880 1354-935958",
@@ -343,7 +343,7 @@ export const en = {
     detailsTitle: "Office Location",
     addressLabel: "Office Address",
     addressLines: [
-      "2nd Floor, House 16, Road 14",
+      "1st Floor, House 16, Road 14",
       "Nikunja 2, Khilkhet, Dhaka, Bangladesh",
     ],
     phoneLabel: "Telephone / Direct",
