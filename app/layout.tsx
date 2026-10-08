@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import {
@@ -85,6 +87,8 @@ export default function RootLayout({
     >
       <body>
         <ClerkProvider appearance={clerkAppearance}>{children}</ClerkProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
