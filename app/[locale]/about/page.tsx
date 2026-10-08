@@ -31,5 +31,5 @@ export default async function About({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
 
-  return <AboutPage dict={dict} />;
+  return <AboutPage locale={locale} dict={dict} />;
 }

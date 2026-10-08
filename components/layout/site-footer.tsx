@@ -218,7 +218,7 @@ export function SiteFooter({
                   </p>
                   <a
                     href={`mailto:${dict.chrome.footerEmailValue}`}
-                    className="block truncate font-medium text-white transition-colors hover:text-orange-400"
+                    className="break-all font-medium text-white transition-colors hover:text-orange-400"
                     title={dict.chrome.footerEmailValue}
                   >
                     {dict.chrome.footerEmailValue}

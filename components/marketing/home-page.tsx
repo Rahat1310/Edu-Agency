@@ -9,6 +9,7 @@ import { FeaturedUniversities } from "@/components/marketing/featured-universiti
 import { HeroGlobe } from "@/components/marketing/hero-globe";
 import { HeroFeaturesBar } from "@/components/marketing/hero-features-bar";
 import { HeroFloatingArt } from "@/components/marketing/hero-floating-art";
+import { HomeAboutSection } from "@/components/marketing/home-about-section";
 import { JourneyRoadmap } from "@/components/marketing/journey-roadmap";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import { PageShell } from "@/components/layout/page-shell";
@@ -228,6 +229,9 @@ export function HomePage({
           </motion.div>
         </PageShell>
       </section>
+
+      {/* 🏛️ About Study Abroad Consultant Overview Section */}
+      <HomeAboutSection locale={locale} dict={dict} />
 
       {/* 7-Step Journey Roadmap Section */}
       <JourneyRoadmap locale={locale} dict={dict} />
