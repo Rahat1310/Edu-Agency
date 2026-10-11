@@ -20,7 +20,7 @@ export function DestinationsIndexPage({
           <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
           <span>{dict.destinationsIndex.eyebrow}</span>
         </div>
-        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
           {dict.destinationsIndex.title}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 font-normal text-slate-600">

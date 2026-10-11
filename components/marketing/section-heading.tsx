@@ -17,15 +17,14 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("max-w-3xl", className)}>
-      <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-1 shadow-2xs backdrop-blur-md">
-        <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
-        <span className="font-utility text-[0.68rem] font-bold tracking-[0.16em] text-orange-700 uppercase">
+      <div className="inline-flex items-center gap-2">
+        <span className="font-sans text-[0.7rem] font-semibold tracking-[0.18em] text-[var(--brand-blue)] uppercase">
           {eyebrow}
         </span>
       </div>
       <h2
         id={titleId}
-        className="font-heading mt-6 text-3xl font-black tracking-tight text-balance text-slate-900 sm:text-[2.75rem] sm:leading-[1.15]"
+        className="font-heading mt-4 text-3xl font-semibold tracking-tight text-balance text-slate-900 sm:text-[2.75rem] sm:leading-[1.15]"
       >
         {title}
       </h2>

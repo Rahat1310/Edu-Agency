@@ -75,17 +75,9 @@ export function FeaturedUniversities({
   return (
     <section
       aria-labelledby={headingId}
-      className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-slate-100/40 py-20 sm:py-28"
+      className="relative overflow-hidden bg-[#f8f9fa] py-20 sm:py-28"
     >
       {/* Ambient background glows */}
-      <div
-        className="pointer-events-none absolute top-12 -left-32 size-96 rounded-full bg-orange-400/8 blur-[120px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-0 bottom-12 size-96 rounded-full bg-blue-400/8 blur-[120px]"
-        aria-hidden="true"
-      />
 
       <PageShell className="relative z-10">
         {/* Section Header */}
@@ -97,7 +89,7 @@ export function FeaturedUniversities({
               locale === "bn" ? (
                 <>
                   শীর্ষস্থানীয়{" "}
-                  <span className="bg-gradient-to-r from-orange-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+                  <span className="text-[var(--brand-blue)]">
                     বিশ্বমানের ক্যাম্পাসে
                   </span>{" "}
                   সরাসরি ভর্তি
@@ -105,7 +97,7 @@ export function FeaturedUniversities({
               ) : (
                 <>
                   Direct Gateways to{" "}
-                  <span className="bg-gradient-to-r from-orange-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+                  <span className="text-[var(--brand-blue)]">
                     World-Class Campuses
                   </span>
                 </>
@@ -220,7 +212,7 @@ export function FeaturedUniversities({
         )}
 
         {/* Bottom Discovery Banner */}
-        <div className="mt-12 overflow-hidden rounded-3xl border border-orange-200/60 bg-gradient-to-r from-orange-50/80 via-white to-amber-50/80 p-6 shadow-sm sm:p-8">
+        <div className="mt-12 overflow-hidden rounded-3xl border-0 bg-[#f6f5f2] p-6 shadow-sm sm:p-8">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div className="max-w-xl">
               <div className="inline-flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-800">
@@ -231,7 +223,7 @@ export function FeaturedUniversities({
                     : "Comprehensive Catalog"}
                 </span>
               </div>
-              <h3 className="font-heading mt-2.5 text-xl font-black tracking-tight text-slate-900 sm:text-2xl">
+              <h3 className="font-heading mt-2.5 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
                 {locale === "bn"
                   ? "নির্দিষ্ট বিষয় বা ফুল-রাইড স্কলারশিপ খুঁজছেন?"
                   : "Looking for a Specific Degree or Full Scholarship?"}
@@ -246,7 +238,7 @@ export function FeaturedUniversities({
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href={localizedHref("/programs", locale)}
-                className="btn-sunset focus-ring inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                className="btn-sunset focus-ring inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold shadow-sm"
               >
                 <span>{dict.home.universitiesViewAllCta}</span>
                 <ArrowRight className="size-4" />
@@ -290,7 +282,7 @@ function UniversityCard({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.97 }}
       transition={{ duration: 0.22, ease: "easeOut" }}
-      className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-orange-300/80 hover:shadow-xl hover:shadow-slate-200/50"
+      className="marketing-glass-card group relative flex flex-col justify-between rounded-2xl bg-[#f6f7f8] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
     >
       <div>
         {/* Top Header: Flag + Country + City & Ranking Badge */}
@@ -307,15 +299,15 @@ function UniversityCard({
           </div>
 
           {/* Ranking Badge */}
-          <div className="inline-flex items-center gap-1 rounded-full border border-amber-200/90 bg-amber-50/80 px-2.5 py-0.5 text-[0.68rem] font-bold text-amber-900">
-            <Award className="size-3 shrink-0 text-amber-600" />
+          <div className="inline-flex items-center gap-1 rounded-full bg-stone-100 px-2.5 py-0.5 text-[0.68rem] font-bold text-slate-600">
+            <Award className="size-3 shrink-0 text-slate-600" />
             <span>{ranking}</span>
           </div>
         </div>
 
         {/* University Name */}
         <div className="mt-4">
-          <h3 className="font-heading text-lg font-black tracking-tight text-slate-900 transition-colors group-hover:text-orange-600 sm:text-xl">
+          <h3 className="font-heading text-lg font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-orange-600 sm:text-xl">
             {uni.name}
           </h3>
         </div>
@@ -324,14 +316,14 @@ function UniversityCard({
         <div
           className={`mt-4 rounded-2xl border p-3 transition-colors ${
             uni.has100PercentScholarship
-              ? "border-emerald-300/90 bg-emerald-50/90 shadow-2xs"
-              : "border-slate-200/90 bg-slate-50/80"
+              ? "border-transparent bg-white"
+              : "border-transparent bg-white"
           }`}
         >
           <div className="flex items-center gap-1.5">
             {uni.has100PercentScholarship ? (
               <>
-                <span className="inline-flex items-center gap-1 rounded-md bg-emerald-600 px-2 py-0.5 text-[0.68rem] font-black tracking-wide text-white uppercase shadow-2xs">
+                <span className="inline-flex items-center gap-1 rounded-md bg-[#16704f] px-2 py-0.5 text-[0.68rem] font-semibold tracking-wide text-white uppercase shadow-2xs">
                   <Sparkles className="size-2.5" />
                   {isBn ? "১০০% সম্পূর্ণ বৃত্তি" : "100% Scholarship Available"}
                 </span>

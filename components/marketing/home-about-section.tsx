@@ -20,16 +20,6 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
 
   return (
     <section className="relative overflow-hidden border-b border-stone-200/80 bg-white py-16 sm:py-24">
-      {/* Ambient background glow */}
-      <div
-        className="pointer-events-none absolute top-12 left-0 size-96 rounded-full bg-orange-500/5 blur-[120px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-0 bottom-12 size-96 rounded-full bg-amber-500/5 blur-[120px]"
-        aria-hidden="true"
-      />
-
       <PageShell>
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Left Column (5.5 cols): Custom Education 2D Vector Illustration */}
@@ -61,8 +51,7 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
             className="flex flex-col lg:col-span-7"
           >
             {/* Small Eyebrow Label */}
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-1 text-xs font-bold text-orange-700 shadow-2xs backdrop-blur-md">
-              <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
+            <div className="inline-flex w-fit items-center gap-2 text-[0.7rem] font-semibold tracking-[0.14em] text-[var(--brand-blue)] uppercase">
               <span>
                 {isBn
                   ? "স্টাডি অ্যাব্রড কনসালটেন্সি সম্পর্কে"
@@ -71,15 +60,14 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
             </div>
 
             {/* Main Heading */}
-            <h2 className="font-heading mt-4 text-3xl leading-[1.15] font-black tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            <h2 className="font-heading mt-4 text-3xl leading-[1.15] font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               {isBn
                 ? "বিদেশে উচ্চশিক্ষায় আপনার বিশ্বস্ত সহযোগী"
                 : "Your Trusted Partner for Studying Abroad"}
             </h2>
 
             {/* Experience Highlight Badge */}
-            <div className="mt-4 inline-flex w-fit items-center gap-2 rounded-xl border border-amber-300 bg-amber-50/90 px-3.5 py-1.5 text-xs font-bold text-amber-900 shadow-2xs">
-              <span className="size-2 rounded-full bg-amber-500" />
+            <div className="mt-4 inline-flex w-fit items-center gap-2 text-xs font-medium text-slate-600">
               <span>
                 {isBn
                   ? "৮+ বছরের চীন উচ্চশিক্ষা অভিজ্ঞতা"
@@ -113,8 +101,8 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
 
             {/* Three Compact Value Highlights */}
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-stone-200/90 bg-stone-50/60 p-3.5 transition-colors hover:border-orange-300 hover:bg-orange-50/30">
-                <div className="flex size-7 items-center justify-center rounded-lg bg-orange-100 text-orange-700">
+              <div className="marketing-glass-card rounded-xl p-4">
+                <div className="flex size-7 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
                   <Compass className="size-4" />
                 </div>
                 <h4 className="mt-2 text-xs font-bold text-slate-900">
@@ -127,8 +115,8 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-stone-200/90 bg-stone-50/60 p-3.5 transition-colors hover:border-emerald-300 hover:bg-emerald-50/30">
-                <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
+              <div className="marketing-glass-card rounded-xl p-4">
+                <div className="flex size-7 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
                   <ShieldCheck className="size-4" />
                 </div>
                 <h4 className="mt-2 text-xs font-bold text-slate-900">
@@ -141,12 +129,14 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-stone-200/90 bg-stone-50/60 p-3.5 transition-colors hover:border-sky-300 hover:bg-sky-50/30">
-                <div className="flex size-7 items-center justify-center rounded-lg bg-sky-100 text-sky-700">
+              <div className="marketing-glass-card rounded-xl p-4">
+                <div className="flex size-7 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
                   <Users className="size-4" />
                 </div>
                 <h4 className="mt-2 text-xs font-bold text-slate-900">
-                  {isBn ? "শুরু থেকে শেষ পর্যন্ত সহায়তা" : "End-to-End Support"}
+                  {isBn
+                    ? "শুরু থেকে শেষ পর্যন্ত সহায়তা"
+                    : "End-to-End Support"}
                 </h4>
                 <p className="mt-1 text-[0.72rem] leading-normal text-slate-500">
                   {isBn
@@ -160,7 +150,7 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
               <Link
                 href={localizedHref("/about", locale)}
-                className="btn-sunset inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold text-white shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                className="btn-sunset inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold text-white shadow-md"
               >
                 <span>{isBn ? "আমাদের গল্প জানুন" : "Discover Our Story"}</span>
                 <ArrowRight className="size-4" />
@@ -170,7 +160,9 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
                 href={localizedHref("/eligibility-quiz", locale)}
                 className="btn-secondary-glass focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-bold text-slate-800 shadow-xs transition-all hover:border-orange-300 hover:bg-white hover:text-orange-600"
               >
-                {isBn ? "বিনামূল্যে প্রোফাইল মূল্যায়ন" : "Free Profile Assessment"}
+                {isBn
+                  ? "বিনামূল্যে প্রোফাইল মূল্যায়ন"
+                  : "Free Profile Assessment"}
               </Link>
             </div>
           </motion.div>

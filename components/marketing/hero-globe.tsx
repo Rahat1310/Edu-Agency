@@ -38,8 +38,8 @@ export interface GlobeArc {
   startLng: number;
   endLat: number;
   endLng: number;
-  startColor: string; // Origin color: Electric Cyan (#00f2fe)
-  endColor: string; // Destination color: Neon Purple / Country accent
+  startColor: string; // Origin color: ocean blue (#1682b5)
+  endColor: string; // Destination color: violet / Country accent
   altitude: number; // Arc height factor
   speed: number; // Speed multiplier for traveling shooting star
   trailLength: number; // Number of trailing comet photon particles
@@ -55,7 +55,7 @@ export const ORIGIN_NODE: GlobeNode = {
   city: "Dhaka",
   lat: 23.8103,
   lng: 90.4125,
-  color: "#00f2fe", // Electric Cyan
+  color: "#1682b5", // Ocean blue
   glowColor: "rgba(0, 242, 254, 0.95)",
   tag: "BD",
   isOrigin: true,
@@ -78,7 +78,7 @@ export const DESTINATION_NODES: GlobeNode[] = [
     city: "Beijing",
     lat: 39.9042,
     lng: 116.4074,
-    color: "#ff2a55", // Neon Crimson
+    color: "#d14848", // Crimson
     glowColor: "rgba(255, 42, 85, 0.9)",
     tag: "CN",
     url: "/destinations/china",
@@ -99,7 +99,7 @@ export const DESTINATION_NODES: GlobeNode[] = [
     city: "Kuala Lumpur",
     lat: 3.139,
     lng: 101.6869,
-    color: "#00f2fe", // Electric Cyan
+    color: "#1682b5", // Ocean blue
     glowColor: "rgba(0, 242, 254, 0.9)",
     tag: "MY",
     url: "/destinations/malaysia",
@@ -120,7 +120,7 @@ export const DESTINATION_NODES: GlobeNode[] = [
     city: "Seoul",
     lat: 37.5665,
     lng: 126.978,
-    color: "#a855f7", // Neon Purple
+    color: "#7860bc", // Violet
     glowColor: "rgba(168, 85, 247, 0.9)",
     tag: "KR",
     url: "/destinations/south-korea",
@@ -141,7 +141,7 @@ export const DESTINATION_NODES: GlobeNode[] = [
     city: "New Delhi",
     lat: 28.6139,
     lng: 77.209,
-    color: "#fbbf24", // Amber Gold
+    color: "#d69a24", // Amber Gold
     glowColor: "rgba(251, 191, 36, 0.9)",
     tag: "IN",
     url: "/destinations/india",
@@ -158,7 +158,7 @@ export const DESTINATION_NODES: GlobeNode[] = [
     city: "Frankfurt",
     lat: 50.1109,
     lng: 8.6821,
-    color: "#38bdf8", // Sky Blue
+    color: "#1682b5", // Sky Blue
     glowColor: "rgba(56, 189, 248, 0.9)",
     tag: "EU",
     url: "/destinations",
@@ -188,8 +188,8 @@ export const ARCS_DATA: GlobeArc[] = DESTINATION_NODES.map((dest, idx) => ({
   startLng: ORIGIN_NODE.lng,
   endLat: dest.lat,
   endLng: dest.lng,
-  startColor: "#00f2fe", // Electric Cyan
-  endColor: dest.color || "#a855f7", // Destination color
+  startColor: "#1682b5", // Ocean blue
+  endColor: dest.color || "#7860bc", // Destination color
   altitude: 0.24 + idx * 0.03, // Parabolic 3D loop height
   speed: 0.0036 + idx * 0.0005, // Dynamic, visible cruising flight speed (4-5s flight duration)
   trailLength: 26, // Trailing student flight contrail particles
@@ -246,7 +246,7 @@ function createCountryBadgeTexture(
 
   // 1. Soft cyber glow behind the badge
   ctx.shadowColor = color;
-  ctx.shadowBlur = 28;
+  ctx.shadowBlur = 0;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
 
@@ -290,7 +290,7 @@ function createCountryBadgeTexture(
     const capY = y + h / 2;
 
     // Top Diamond Rhombus Mortarboard
-    ctx.fillStyle = "#fbbf24"; // Radiant Gold Cap
+    ctx.fillStyle = "#d69a24"; // Radiant Gold Cap
     ctx.beginPath();
     ctx.moveTo(capX, capY - 14);
     ctx.lineTo(capX + 22, capY - 4);
@@ -312,7 +312,7 @@ function createCountryBadgeTexture(
     ctx.fill();
 
     // Hanging Gold Tassel with Bead
-    ctx.strokeStyle = "#fbbf24";
+    ctx.strokeStyle = "#d69a24";
     ctx.lineWidth = 2.8;
     ctx.beginPath();
     ctx.moveTo(capX, capY - 4);
@@ -456,7 +456,7 @@ export function HeroGlobe() {
       clearcoatRoughness: 0.16,
       bumpScale: 1.1,
       emissive: new THREE.Color(0xffcf70),
-      emissiveIntensity: 1.35,
+      emissiveIntensity: 0.25,
     });
 
     // A. NASA Blue Marble True Satellite Map (Sharp, Full Resolution with 16x Anisotropy)
@@ -493,7 +493,7 @@ export function HeroGlobe() {
       tex.generateMipmaps = true;
       earthMaterial.emissive = new THREE.Color(0xffcf70);
       earthMaterial.emissiveMap = tex;
-      earthMaterial.emissiveIntensity = 1.35;
+      earthMaterial.emissiveIntensity = 0.25;
       earthMaterial.needsUpdate = true;
     });
 
@@ -543,7 +543,7 @@ export function HeroGlobe() {
       atmosphereMaterial,
     );
     atmosphereMesh.position.set(0, GLOBE_CENTER_Y, 0);
-    scene.add(atmosphereMesh);
+    // Keep the globe silhouette clean without a decorative halo.
 
     // --- 6. Solar, Ambient & Balanced Studio Daylight Lighting ---
     // Primary Daylight Sun: illuminates South Asia, Middle East & Europe
@@ -561,12 +561,12 @@ export function HeroGlobe() {
     scene.add(ambientLight);
 
     // Warm Sunset Rim Light (accents the golden horizon)
-    const sunsetRimLight = new THREE.DirectionalLight(0xff9944, 1.3);
+    const sunsetRimLight = new THREE.DirectionalLight(0xf0e8df, 0.4);
     sunsetRimLight.position.set(-140, 35, -25);
     scene.add(sunsetRimLight);
 
     // Soft Atmospheric Sky Rim Light
-    const skyRimLight = new THREE.DirectionalLight(0x38bdf8, 1.1);
+    const skyRimLight = new THREE.DirectionalLight(0xdbe5ee, 0.4);
     skyRimLight.position.set(130, 25, -30);
     scene.add(skyRimLight);
 
@@ -756,7 +756,7 @@ export function HeroGlobe() {
       const diamondMat = new THREE.MeshPhysicalMaterial({
         color: new THREE.Color(node.color),
         emissive: new THREE.Color(node.color),
-        emissiveIntensity: 1.4,
+        emissiveIntensity: 0.35,
         roughness: 0.15,
         metalness: 0.25,
         clearcoat: 0.9,
@@ -1231,7 +1231,7 @@ export function HeroGlobe() {
         const dMat = b.diamond.material as THREE.MeshPhysicalMaterial;
         dMat.emissiveIntensity = THREE.MathUtils.lerp(
           dMat.emissiveIntensity,
-          isHovered ? 2.5 : 1.4,
+          isHovered ? 0.65 : 0.35,
           0.15,
         );
 
@@ -1320,16 +1320,6 @@ export function HeroGlobe() {
 
   return (
     <div className="relative mx-auto flex w-full max-w-[1100px] flex-col items-center justify-center select-none">
-      {/* Soft Ambient Horizon Aura (Purely floating, no borders or bounding boxes) */}
-      <div
-        className="pointer-events-none absolute top-[44%] left-1/2 -z-10 h-[240px] w-[72%] max-w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 50%, rgba(255, 140, 40, 0.12) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 80%)",
-        }}
-        aria-hidden="true"
-      />
-
       {/* Three.js WebGL Canvas Container: Purely floating underneath texts and hero */}
       <div
         ref={containerRef}
@@ -1428,8 +1418,8 @@ export function HeroGlobe() {
             onMouseLeave={() => setActiveDest(null)}
             className={`group inline-flex cursor-pointer items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold backdrop-blur-md transition-all duration-300 ${
               activeDest === d.id
-                ? "scale-105 border-orange-400 bg-orange-50/90 text-orange-950 shadow-md ring-2 ring-orange-400/30"
-                : "border-slate-200/85 bg-white/90 text-slate-700 shadow-2xs hover:border-orange-300 hover:bg-orange-50/60 hover:text-orange-950 hover:shadow-xs"
+                ? "border-slate-700 bg-slate-700 text-white"
+                : "border-transparent bg-white/80 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
             }`}
           >
             <span
@@ -1439,9 +1429,7 @@ export function HeroGlobe() {
                 boxShadow: `0 0 8px ${d.color}66`,
               }}
             />
-            <span className="font-display tracking-wide">
-              🎓 {d.country}
-            </span>
+            <span className="font-display tracking-wide">🎓 {d.country}</span>
             <span className="font-mono text-[0.68rem] text-slate-400 transition-colors group-hover:text-orange-600">
               {d.tag}
             </span>

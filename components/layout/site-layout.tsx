@@ -15,7 +15,7 @@ type SiteLayoutProps = {
 
 export function SiteLayout({ children, locale, dict }: SiteLayoutProps) {
   return (
-    <div className="flex min-h-svh flex-col">
+    <div className="public-site flex min-h-svh flex-col">
       <JsonLd data={organizationJsonLd(dict)} />
       <a
         href="#main-content"

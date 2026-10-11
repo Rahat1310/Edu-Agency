@@ -31,53 +31,52 @@ interface JourneyRoadmapProps {
 const STEP_CONFIGS = [
   {
     icon: Compass,
-    tintClass: "bg-amber-50/80 border-amber-200/80 hover:border-amber-300",
-    iconBoxClass: "bg-amber-100/90 text-amber-700 border-amber-200",
-    pillClass: "bg-amber-100/70 text-amber-900 border-amber-200",
-    dotColor: "#f59e0b",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
   {
     icon: GraduationCap,
-    tintClass: "bg-rose-50/80 border-rose-200/80 hover:border-rose-300",
-    iconBoxClass: "bg-rose-100/90 text-rose-700 border-rose-200",
-    pillClass: "bg-rose-100/70 text-rose-900 border-rose-200",
-    dotColor: "#f43f5e",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
   {
     icon: FileText,
-    tintClass: "bg-sky-50/80 border-sky-200/80 hover:border-sky-300",
-    iconBoxClass: "bg-sky-100/90 text-sky-700 border-sky-200",
-    pillClass: "bg-sky-100/70 text-sky-900 border-sky-200",
-    dotColor: "#0284c7",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
   {
     icon: Send,
-    tintClass:
-      "bg-emerald-50/80 border-emerald-200/80 hover:border-emerald-300",
-    iconBoxClass: "bg-emerald-100/90 text-emerald-700 border-emerald-200",
-    pillClass: "bg-emerald-100/70 text-emerald-900 border-emerald-200",
-    dotColor: "#10b981",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
   {
     icon: Landmark,
-    tintClass: "bg-purple-50/80 border-purple-200/80 hover:border-purple-300",
-    iconBoxClass: "bg-purple-100/90 text-purple-700 border-purple-200",
-    pillClass: "bg-purple-100/70 text-purple-900 border-purple-200",
-    dotColor: "#9333ea",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
   {
     icon: ShieldCheck,
-    tintClass: "bg-orange-50/80 border-orange-200/80 hover:border-orange-300",
-    iconBoxClass: "bg-orange-100/90 text-orange-700 border-orange-200",
-    pillClass: "bg-orange-100/70 text-orange-900 border-orange-200",
-    dotColor: "#ea580c",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
   {
     icon: PlaneTakeoff,
-    tintClass: "bg-teal-50/80 border-teal-200/80 hover:border-teal-300",
-    iconBoxClass: "bg-teal-100/90 text-teal-700 border-teal-200",
-    pillClass: "bg-teal-100/70 text-teal-900 border-teal-200",
-    dotColor: "#0d9488",
+    tintClass: "marketing-glass-card",
+    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
+    pillClass: "bg-transparent text-slate-500 border-transparent",
+    dotColor: "#16704f",
   },
 ];
 
@@ -100,16 +99,8 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/60 to-white py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-[#f8f9fa] py-20 sm:py-28">
       {/* Soft Ambient Glows */}
-      <div
-        className="pointer-events-none absolute top-1/4 -left-48 size-96 rounded-full bg-orange-400/10 blur-[130px]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -right-48 bottom-1/4 size-96 rounded-full bg-sky-400/10 blur-[130px]"
-        aria-hidden="true"
-      />
 
       <PageShell className="relative z-10">
         {/* Section Header */}
@@ -121,14 +112,14 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                 locale === "bn" ? (
                   <>
                     বাংলাদেশ থেকে{" "}
-                    <span className="bg-gradient-to-r from-orange-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+                    <span className="text-[var(--brand-blue)]">
                       স্বপ্নের ক্যাম্পাসে
                     </span>
                   </>
                 ) : (
                   <>
                     From Bangladesh to{" "}
-                    <span className="bg-gradient-to-r from-orange-600 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+                    <span className="text-[var(--brand-blue)]">
                       Your Dream Campus
                     </span>
                   </>
@@ -167,7 +158,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
         <div className="relative mt-14 hidden lg:block">
           {/* Subtle Connecting Flight-Path Route Line behind cards */}
           <div
-            className="pointer-events-none absolute top-20 right-10 left-10 z-0 h-0.5 border-t-2 border-dashed border-orange-300/60"
+            className="pointer-events-none absolute top-20 right-10 left-10 z-0 h-0.5 border-t-2 border-dashed border-slate-300"
             aria-hidden="true"
           />
 
@@ -185,8 +176,8 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                 <div key={item.step} className="w-[305px] shrink-0 snap-start">
                   <article
                     className={cn(
-                      "group relative flex h-full flex-col justify-between rounded-[2rem] border p-6.5 shadow-2xs backdrop-blur-md transition-all duration-300",
-                      "hover:-translate-y-2 hover:shadow-xl",
+                      "group relative flex h-full flex-col justify-between rounded-2xl border p-6.5 shadow-2xs backdrop-blur-md transition-all duration-300",
+                      "hover:-translate-y-1 hover:shadow-md",
                       cfg.tintClass,
                     )}
                   >
@@ -195,7 +186,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                       {/* Step Number Badge */}
                       <span
                         className={cn(
-                          "font-utility inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-black tracking-widest uppercase shadow-2xs",
+                          "font-utility inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold tracking-widest uppercase shadow-2xs",
                           cfg.pillClass,
                         )}
                       >
@@ -254,7 +245,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
 
             {/* Finale Step: CTA Card to End the Strip */}
             <div className="w-[340px] shrink-0 snap-start">
-              <aside className="relative flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-orange-300/80 bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500 p-7 text-white shadow-xl">
+              <aside className="relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-orange-300/80 bg-[var(--brand-blue)] p-7 text-white shadow-xl">
                 {/* Background Ambient Star */}
                 <div
                   className="pointer-events-none absolute -top-8 -right-8 size-36 rounded-full bg-white/10 blur-xl"
@@ -267,7 +258,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                     <span>READY FOR TAKEOFF</span>
                   </div>
 
-                  <h3 className="font-heading mt-6 text-2xl leading-tight font-black tracking-tight text-white">
+                  <h3 className="font-heading mt-6 text-2xl leading-tight font-semibold tracking-tight text-white">
                     {locale === "bn"
                       ? "আপনার প্রথম পদক্ষেপটি আজই নিন"
                       : "Ready to Take Your First Step?"}
@@ -283,7 +274,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                 <div className="mt-8">
                   <Link
                     href={localizedHref("/contact", locale)}
-                    className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-center text-sm font-black text-orange-600 shadow-md transition-all hover:scale-[1.02] hover:bg-orange-50 active:scale-[0.98]"
+                    className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-center text-sm font-semibold text-orange-600 shadow-md transition-all hover:bg-orange-50"
                   >
                     <span>{dict.home.journeyCta}</span>
                     <ArrowRight className="size-4" />
@@ -302,7 +293,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
         <div className="relative mt-12 block lg:hidden">
           {/* Vertical Illuminated Flight-Path Spine */}
           <div
-            className="absolute top-4 bottom-24 left-6 z-0 w-0.5 bg-gradient-to-b from-orange-400 via-emerald-400 to-sky-400"
+            className="absolute top-4 bottom-24 left-6 z-0 w-0.5 bg-[#f8f9fa]"
             aria-hidden="true"
           />
 
@@ -362,12 +353,12 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
 
             {/* Mobile Finale CTA Card */}
             <li className="relative pt-4 pl-2">
-              <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 via-rose-500 to-amber-500 p-6 text-white shadow-lg">
+              <div className="overflow-hidden rounded-2xl bg-[var(--brand-blue)] p-6 text-white shadow-lg">
                 <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 font-mono text-[0.68rem] font-bold text-white">
                   <Sparkles className="size-3" />
                   <span>START TODAY</span>
                 </span>
-                <h3 className="font-heading mt-3 text-xl font-black text-white">
+                <h3 className="font-heading mt-3 text-xl font-semibold text-white">
                   {locale === "bn"
                     ? "আপনার প্রথম পদক্ষেপটি আজই নিন"
                     : "Ready to Start Your Journey?"}
@@ -380,7 +371,7 @@ export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
                 <div className="mt-5">
                   <Link
                     href={localizedHref("/contact", locale)}
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-center text-xs font-black text-orange-600 shadow-md transition-transform active:scale-98"
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-center text-xs font-semibold text-orange-600 shadow-md transition-transform active:scale-98"
                   >
                     <span>{dict.home.journeyCta}</span>
                     <ArrowRight className="size-3.5" />

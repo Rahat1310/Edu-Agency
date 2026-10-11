@@ -45,23 +45,6 @@ export function HomePage({
     <>
       {/* 🌟 Clean, Professional Centered Hero with Horizon Half-Globe */}
       <section className="relative flex flex-col items-center justify-between overflow-hidden border-b border-stone-200/80 bg-[#fafafa] pt-10 pb-0 sm:pt-16">
-        {/* Subtle Modern Dot-Matrix Grid */}
-        <div className="bg-grid-dots pointer-events-none absolute inset-0 opacity-40" />
-
-        {/* Ambient Warm Sunset & Cyan Glow Orbs */}
-        <div
-          className="pointer-events-none absolute -top-32 -left-32 size-[500px] rounded-full bg-amber-400/15 blur-[120px]"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute top-1/4 -right-32 size-[540px] rounded-full bg-orange-400/15 blur-[130px]"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute bottom-0 left-1/2 size-[680px] -translate-x-1/2 rounded-full bg-rose-400/10 blur-[150px]"
-          aria-hidden="true"
-        />
-
         {/* 🎨 Floating Vector Art Flanking Left and Right Wings */}
         <HeroFloatingArt locale={locale} />
 
@@ -73,9 +56,8 @@ export function HomePage({
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-1 text-xs font-bold text-orange-700 shadow-2xs backdrop-blur-md"
+              className="inline-flex items-center gap-2 text-[0.7rem] font-semibold tracking-[0.14em] text-[var(--brand-blue)] uppercase"
             >
-              <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
               <span>
                 {locale === "bn"
                   ? "স্প্রিং ২০২৭ সেশন অ্যাডমিশন"
@@ -92,19 +74,19 @@ export function HomePage({
                 delay: 0.2,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="font-heading mt-4 text-[2.5rem] leading-[1.1] font-black tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.08] lg:text-[3.8rem]"
+              className="font-heading mt-4 text-[2.5rem] leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.08] lg:text-[3.8rem]"
             >
               {locale === "bn" ? (
                 <>
                   বিশ্বের শীর্ষ বিশ্ববিদ্যালয়ে{" "}
-                  <span className="bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+                  <span className="text-[var(--brand-blue)]">
                     বাংলাদেশের নির্ভরযোগ্য সেতু
                   </span>
                 </>
               ) : (
                 <>
                   Bangladesh&apos;s Trusted Bridge to{" "}
-                  <span className="bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+                  <span className="text-[var(--brand-blue)]">
                     World&apos;s Top Universities
                   </span>
                 </>
@@ -140,7 +122,7 @@ export function HomePage({
             >
               <Link
                 href={localizedHref("/contact", locale)}
-                className="btn-sunset inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                className="btn-sunset inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
               >
                 {locale === "bn"
                   ? "ফ্রি কাউন্সিলিং বুক করুন →"
@@ -180,7 +162,7 @@ export function HomePage({
                     aria-hidden="true"
                   />
                 ))}
-                <span className="ml-1 font-black text-slate-900">
+                <span className="ml-1 font-semibold text-slate-900">
                   {locale === "bn" ? "৪.৯/৫" : "4.9/5"}
                 </span>
               </div>
@@ -310,41 +292,87 @@ export function HomePage({
       {/* High-Impact Lead Capture CTA */}
       <section
         id="lead"
-        className="relative overflow-hidden bg-gradient-to-br from-[#0B1E36] via-[#0E2849] to-[#071324] py-20 text-white sm:py-28"
+        className="consultation-section relative overflow-hidden bg-[var(--brand-navy)] py-16 text-white sm:py-24"
       >
-        {/* Ambient glow */}
-        <div
-          className="pointer-events-none absolute top-0 -right-20 size-96 rounded-full bg-blue-500/15 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute bottom-0 -left-20 size-96 rounded-full bg-teal-500/15 blur-3xl"
-          aria-hidden="true"
-        />
-
         <PageShell>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
-            {/* Left Column: Authentic Value Proposition */}
-            <div>
-              <div className="glass-pill inline-flex items-center gap-2 rounded-full border-white/20 bg-white/10 px-3.5 py-1 text-white backdrop-blur-md">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-start lg:gap-16">
+            {/* Consultation introduction and next steps. */}
+            <div className="lg:sticky lg:top-32 lg:pt-8">
+              <div className="inline-flex items-center gap-2 text-white/75">
                 <span className="size-2 rounded-full bg-emerald-400" />
                 <span className="font-utility text-[0.66rem] font-bold tracking-[0.16em] uppercase">
                   {dict.home.leadEyebrow}
                 </span>
               </div>
 
-              <h2 className="font-display mt-5 max-w-2xl text-3xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl sm:leading-[1.1]">
+              <h2 className="font-display mt-5 max-w-xl text-3xl leading-[1.15] font-semibold tracking-[-0.035em] text-white sm:text-[2.65rem]">
                 {dict.home.leadTitle}
               </h2>
 
-              <p className="mt-6 max-w-xl text-base leading-8 text-white/80">
+              <p className="mt-5 max-w-lg text-base leading-7 text-slate-200">
                 {dict.home.leadBody}
               </p>
+
+              <div className="mt-8 border-t border-white/15 pt-6">
+                <h3 className="text-xs font-semibold tracking-[0.14em] text-white/65 uppercase">
+                  {locale === "bn"
+                    ? "পরবর্তী ধাপে যা পাবেন"
+                    : "What happens next"}
+                </h3>
+                <ol className="mt-5 space-y-5">
+                  {[
+                    {
+                      title:
+                        locale === "bn"
+                          ? "আপনার প্রোফাইল নিয়ে আলোচনা"
+                          : "A conversation about your goals",
+                      body:
+                        locale === "bn"
+                          ? "আপনার যোগ্যতা, পছন্দ ও বাজেট বুঝব।"
+                          : "We review your academic background, preferences, and budget.",
+                    },
+                    {
+                      title:
+                        locale === "bn"
+                          ? "উপযুক্ত গন্তব্য ও প্রোগ্রাম"
+                          : "Options that fit your profile",
+                      body:
+                        locale === "bn"
+                          ? "বিশ্ববিদ্যালয় ও স্কলারশিপের সুযোগ নিয়ে পরামর্শ।"
+                          : "Discuss suitable destinations, programmes, and scholarship options.",
+                    },
+                    {
+                      title:
+                        locale === "bn"
+                          ? "আবেদনের স্পষ্ট পরিকল্পনা"
+                          : "A clear application plan",
+                      body:
+                        locale === "bn"
+                          ? "প্রয়োজনীয় কাগজপত্র এবং পরবর্তী ধাপ জানুন।"
+                          : "Understand the documents to prepare and your next steps.",
+                    },
+                  ].map((step, index) => (
+                    <li key={step.title} className="flex gap-4">
+                      <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-xs font-semibold text-white/80">
+                        0{index + 1}
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-white">
+                          {step.title}
+                        </p>
+                        <p className="mt-1 text-sm leading-6 text-slate-300">
+                          {step.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={localizedHref("/contact", locale)}
-                  className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                  className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
                 >
                   {dict.home.leadCta}
                 </Link>
@@ -371,21 +399,25 @@ export function HomePage({
             </div>
 
             {/* Right Column: Lead Form Card */}
-            <div className="glass-panel rounded-3xl p-6 text-slate-900 shadow-2xl sm:p-8">
-              <div className="mb-6 border-b border-slate-100 pb-4">
-                <h3 className="font-display text-lg font-bold text-slate-900 sm:text-xl">
+            <div className="consultation-form-card relative rounded-2xl p-6 text-slate-900 sm:p-8 lg:p-9">
+              <div className="mb-7 border-b border-slate-200 pb-6">
+                <h3 className="font-display text-2xl font-semibold tracking-tight text-slate-900">
                   {locale === "bn"
                     ? "বিনামূল্যে মূল্যায়ন ফরম"
                     : "Start Your Free Evaluation"}
                 </h3>
-                <p className="mt-0.5 text-xs text-slate-500">
+                <p className="mt-2 text-sm leading-6 text-slate-600">
                   {locale === "bn"
                     ? "১ মিনিটে পূরণ করুন · সম্পূর্ণ তথ্য গোপনীয়"
-                    : "Takes ~60 seconds · Confidential & 100% Free"}
+                    : "Tell us a little about yourself. Your first consultation is free."}
                 </p>
               </div>
 
-              <LeadForm copy={dict.leadForm} source="home-cta" />
+              <LeadForm
+                copy={dict.leadForm}
+                source="home-cta"
+                className="consultation-form"
+              />
             </div>
           </div>
         </PageShell>

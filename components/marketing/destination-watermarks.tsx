@@ -71,7 +71,14 @@ export function CountryFlagBadge({
           {/* Green Bottom Band */}
           <rect y="13.33" width="30" height="6.67" fill="#138808" />
           {/* Ashoka Chakra */}
-          <circle cx="15" cy="10" r="2.8" fill="none" stroke="#000080" strokeWidth="0.6" />
+          <circle
+            cx="15"
+            cy="10"
+            r="2.8"
+            fill="none"
+            stroke="#000080"
+            strokeWidth="0.6"
+          />
           <circle cx="15" cy="10" r="0.7" fill="#000080" />
           {/* 24 spokes */}
           {Array.from({ length: 12 }).map((_, i) => (
@@ -141,18 +148,32 @@ export function CountryFlagBadge({
           <rect width="30" height="20" fill="#FFFFFF" />
           {/* Taegeuk Yin-Yang Circle in Center */}
           <g transform="translate(15, 10) rotate(-34)">
-            <path d="M -4.5 0 A 4.5 4.5 0 0 1 4.5 0 A 2.25 2.25 0 0 1 0 0 A 2.25 2.25 0 0 0 -4.5 0 Z" fill="#C60C30" />
-            <path d="M 4.5 0 A 4.5 4.5 0 0 1 -4.5 0 A 2.25 2.25 0 0 1 0 0 A 2.25 2.25 0 0 0 4.5 0 Z" fill="#003478" />
+            <path
+              d="M -4.5 0 A 4.5 4.5 0 0 1 4.5 0 A 2.25 2.25 0 0 1 0 0 A 2.25 2.25 0 0 0 -4.5 0 Z"
+              fill="#C60C30"
+            />
+            <path
+              d="M 4.5 0 A 4.5 4.5 0 0 1 -4.5 0 A 2.25 2.25 0 0 1 0 0 A 2.25 2.25 0 0 0 4.5 0 Z"
+              fill="#003478"
+            />
           </g>
           {/* 4 Trigrams (Black) */}
           {/* Geon (Top-Left): 3 unbroken lines */}
-          <g transform="translate(7.5, 5) rotate(34) scale(0.4)" stroke="#000000" strokeWidth="1.2">
+          <g
+            transform="translate(7.5, 5) rotate(34) scale(0.4)"
+            stroke="#000000"
+            strokeWidth="1.2"
+          >
             <line x1="-5" y1="-3" x2="5" y2="-3" />
             <line x1="-5" y1="0" x2="5" y2="0" />
             <line x1="-5" y1="3" x2="5" y2="3" />
           </g>
           {/* Gon (Bottom-Right): 3 broken lines */}
-          <g transform="translate(22.5, 15) rotate(34) scale(0.4)" stroke="#000000" strokeWidth="1.2">
+          <g
+            transform="translate(22.5, 15) rotate(34) scale(0.4)"
+            stroke="#000000"
+            strokeWidth="1.2"
+          >
             <line x1="-5" y1="-3" x2="-1" y2="-3" />
             <line x1="1" y1="-3" x2="5" y2="-3" />
             <line x1="-5" y1="0" x2="-1" y2="0" />
@@ -161,7 +182,11 @@ export function CountryFlagBadge({
             <line x1="1" y1="3" x2="5" y2="3" />
           </g>
           {/* Gam (Top-Right): broken, unbroken, broken */}
-          <g transform="translate(22.5, 5) rotate(-34) scale(0.4)" stroke="#000000" strokeWidth="1.2">
+          <g
+            transform="translate(22.5, 5) rotate(-34) scale(0.4)"
+            stroke="#000000"
+            strokeWidth="1.2"
+          >
             <line x1="-5" y1="-3" x2="-1" y2="-3" />
             <line x1="1" y1="-3" x2="5" y2="-3" />
             <line x1="-5" y1="0" x2="5" y2="0" />
@@ -169,7 +194,11 @@ export function CountryFlagBadge({
             <line x1="1" y1="3" x2="5" y2="3" />
           </g>
           {/* Ri (Bottom-Left): unbroken, broken, unbroken */}
-          <g transform="translate(7.5, 15) rotate(-34) scale(0.4)" stroke="#000000" strokeWidth="1.2">
+          <g
+            transform="translate(7.5, 15) rotate(-34) scale(0.4)"
+            stroke="#000000"
+            strokeWidth="1.2"
+          >
             <line x1="-5" y1="-3" x2="5" y2="-3" />
             <line x1="-5" y1="0" x2="-1" y2="0" />
             <line x1="1" y1="0" x2="5" y2="0" />
@@ -188,20 +217,26 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
     case "china":
       return (
         <div
-          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 select-none transition-all duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 ${className || ""}`}
+          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 transition-all duration-700 ease-out select-none group-hover:-translate-y-1 group-hover:scale-105 ${className || ""}`}
           aria-hidden="true"
         >
           {/* Radial Ambient Color Wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(244,63,94,0.18)_0%,rgba(244,63,94,0.04)_50%,transparent_75%)]" />
 
           <svg
             viewBox="0 0 360 320"
-            className="h-full w-full mix-blend-multiply opacity-[0.16] transition-opacity duration-500 group-hover:opacity-[0.26]"
+            className="h-full w-full opacity-[0.16] mix-blend-multiply transition-opacity duration-500 group-hover:opacity-[0.26]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="cnMapGrad" x1="60" y1="40" x2="320" y2="280" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="cnMapGrad"
+                x1="60"
+                y1="40"
+                x2="320"
+                y2="280"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.85" />
                 <stop offset="50%" stopColor="#e11d48" stopOpacity="0.6" />
                 <stop offset="100%" stopColor="#be123c" stopOpacity="0.4" />
@@ -289,7 +324,7 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
               fill="#f43f5e"
               fillOpacity="0.25"
               textAnchor="middle"
-              className="select-none tracking-widest"
+              className="tracking-widest select-none"
             >
               中国
             </text>
@@ -300,20 +335,26 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
     case "india":
       return (
         <div
-          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 select-none transition-all duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 ${className || ""}`}
+          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 transition-all duration-700 ease-out select-none group-hover:-translate-y-1 group-hover:scale-105 ${className || ""}`}
           aria-hidden="true"
         >
           {/* Radial Ambient Saffron Wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(245,158,11,0.18)_0%,rgba(245,158,11,0.04)_50%,transparent_75%)]" />
 
           <svg
             viewBox="0 0 360 320"
-            className="h-full w-full mix-blend-multiply opacity-[0.17] transition-opacity duration-500 group-hover:opacity-[0.28]"
+            className="h-full w-full opacity-[0.17] mix-blend-multiply transition-opacity duration-500 group-hover:opacity-[0.28]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="inMapGrad" x1="120" y1="30" x2="280" y2="300" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="inMapGrad"
+                x1="120"
+                y1="30"
+                x2="280"
+                y2="300"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.8" />
                 <stop offset="60%" stopColor="#d97706" stopOpacity="0.55" />
                 <stop offset="100%" stopColor="#b45309" stopOpacity="0.35" />
@@ -360,10 +401,38 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
             {/* Ashoka Chakra 24-Spoke Wheel Watermark Motif */}
             <g transform="translate(240, 100)">
               {/* Radiating Sunburst Aura */}
-              <circle cx="0" cy="0" r="48" stroke="#f59e0b" strokeWidth="0.5" strokeDasharray="3 3" opacity="0.6" />
-              <circle cx="0" cy="0" r="40" stroke="#f59e0b" strokeWidth="0.7" opacity="0.5" />
-              <circle cx="0" cy="0" r="32" stroke="url(#inChakraGrad)" strokeWidth="1.6" />
-              <circle cx="0" cy="0" r="28" stroke="url(#inChakraGrad)" strokeWidth="0.6" strokeDasharray="2 2" />
+              <circle
+                cx="0"
+                cy="0"
+                r="48"
+                stroke="#f59e0b"
+                strokeWidth="0.5"
+                strokeDasharray="3 3"
+                opacity="0.6"
+              />
+              <circle
+                cx="0"
+                cy="0"
+                r="40"
+                stroke="#f59e0b"
+                strokeWidth="0.7"
+                opacity="0.5"
+              />
+              <circle
+                cx="0"
+                cy="0"
+                r="32"
+                stroke="url(#inChakraGrad)"
+                strokeWidth="1.6"
+              />
+              <circle
+                cx="0"
+                cy="0"
+                r="28"
+                stroke="url(#inChakraGrad)"
+                strokeWidth="0.6"
+                strokeDasharray="2 2"
+              />
               <circle cx="0" cy="0" r="7" fill="url(#inChakraGrad)" />
               {/* 24 Spokes */}
               {Array.from({ length: 12 }).map((_, i) => (
@@ -390,7 +459,7 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
               fill="#d97706"
               fillOpacity="0.25"
               textAnchor="middle"
-              className="select-none tracking-widest"
+              className="tracking-widest select-none"
             >
               भारत
             </text>
@@ -401,20 +470,26 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
     case "malaysia":
       return (
         <div
-          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 select-none transition-all duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 ${className || ""}`}
+          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 transition-all duration-700 ease-out select-none group-hover:-translate-y-1 group-hover:scale-105 ${className || ""}`}
           aria-hidden="true"
         >
           {/* Radial Ambient Cyan/Teal Wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(14,165,233,0.18)_0%,rgba(14,165,233,0.04)_50%,transparent_75%)]" />
 
           <svg
             viewBox="0 0 360 320"
-            className="h-full w-full mix-blend-multiply opacity-[0.17] transition-opacity duration-500 group-hover:opacity-[0.28]"
+            className="h-full w-full opacity-[0.17] mix-blend-multiply transition-opacity duration-500 group-hover:opacity-[0.28]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="myMapGrad" x1="40" y1="50" x2="340" y2="280" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="myMapGrad"
+                x1="40"
+                y1="50"
+                x2="340"
+                y2="280"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0%" stopColor="#0284c7" stopOpacity="0.8" />
                 <stop offset="50%" stopColor="#0284c7" stopOpacity="0.55" />
                 <stop offset="100%" stopColor="#0369a1" stopOpacity="0.35" />
@@ -466,8 +541,20 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
             {/* 14-Point Federal Star & Crescent Moon Emblem Watermark */}
             <g transform="translate(255, 80)">
               {/* Crescent Moon */}
-              <circle cx="-12" cy="0" r="34" fill="url(#myGoldGrad)" opacity="0.85" />
-              <circle cx="-3" cy="0" r="29" fill="#f0f9ff" className="transition-colors group-hover:fill-white" />
+              <circle
+                cx="-12"
+                cy="0"
+                r="34"
+                fill="url(#myGoldGrad)"
+                opacity="0.85"
+              />
+              <circle
+                cx="-3"
+                cy="0"
+                r="29"
+                fill="#f0f9ff"
+                className="transition-colors group-hover:fill-white"
+              />
 
               {/* 14-Pointed Federal Star */}
               <g transform="translate(16, 0) scale(1.1)">
@@ -497,7 +584,7 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
               fill="#0284c7"
               fillOpacity="0.22"
               textAnchor="middle"
-              className="select-none tracking-[0.22em]"
+              className="tracking-[0.22em] select-none"
             >
               MALAYSIA
             </text>
@@ -508,20 +595,26 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
     case "south-korea":
       return (
         <div
-          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 select-none transition-all duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 ${className || ""}`}
+          className={`pointer-events-none absolute -top-8 -right-8 h-80 w-80 transition-all duration-700 ease-out select-none group-hover:-translate-y-1 group-hover:scale-105 ${className || ""}`}
           aria-hidden="true"
         >
           {/* Radial Ambient Purple / Royal Blue Wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(168,85,247,0.18)_0%,rgba(168,85,247,0.04)_50%,transparent_75%)]" />
 
           <svg
             viewBox="0 0 360 320"
-            className="h-full w-full mix-blend-multiply opacity-[0.17] transition-opacity duration-500 group-hover:opacity-[0.28]"
+            className="h-full w-full opacity-[0.17] mix-blend-multiply transition-opacity duration-500 group-hover:opacity-[0.28]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="krMapGrad" x1="120" y1="30" x2="300" y2="280" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="krMapGrad"
+                x1="120"
+                y1="30"
+                x2="300"
+                y2="280"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0%" stopColor="#9333ea" stopOpacity="0.8" />
                 <stop offset="60%" stopColor="#7c3aed" stopOpacity="0.55" />
                 <stop offset="100%" stopColor="#6366f1" stopOpacity="0.35" />
@@ -566,7 +659,15 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
             {/* Taegeuk Yin-Yang & Trigrams Emblem Watermark */}
             <g transform="translate(245, 90)">
               {/* Ambient Outer Halo */}
-              <circle cx="0" cy="0" r="44" stroke="#9333ea" strokeWidth="0.6" strokeDasharray="3 3" opacity="0.6" />
+              <circle
+                cx="0"
+                cy="0"
+                r="44"
+                stroke="#9333ea"
+                strokeWidth="0.6"
+                strokeDasharray="3 3"
+                opacity="0.6"
+              />
 
               {/* Central Taegeuk Circle */}
               <g transform="rotate(-34)">
@@ -584,13 +685,23 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
 
               {/* 4 Trigrams (Taegukgi) */}
               {/* Geon (Top-Left: 3 unbroken) */}
-              <g transform="translate(-34, -28) rotate(34)" stroke="#1e293b" strokeWidth="2.2" opacity="0.75">
+              <g
+                transform="translate(-34, -28) rotate(34)"
+                stroke="#1e293b"
+                strokeWidth="2.2"
+                opacity="0.75"
+              >
                 <line x1="-10" y1="-5" x2="10" y2="-5" />
                 <line x1="-10" y1="0" x2="10" y2="0" />
                 <line x1="-10" y1="5" x2="10" y2="5" />
               </g>
               {/* Gon (Bottom-Right: 3 broken) */}
-              <g transform="translate(34, 28) rotate(34)" stroke="#1e293b" strokeWidth="2.2" opacity="0.75">
+              <g
+                transform="translate(34, 28) rotate(34)"
+                stroke="#1e293b"
+                strokeWidth="2.2"
+                opacity="0.75"
+              >
                 <line x1="-10" y1="-5" x2="-2" y2="-5" />
                 <line x1="2" y1="-5" x2="10" y2="-5" />
                 <line x1="-10" y1="0" x2="-2" y2="0" />
@@ -599,7 +710,12 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
                 <line x1="2" y1="5" x2="10" y2="5" />
               </g>
               {/* Gam (Top-Right: broken, unbroken, broken) */}
-              <g transform="translate(34, -28) rotate(-34)" stroke="#1e293b" strokeWidth="2.2" opacity="0.75">
+              <g
+                transform="translate(34, -28) rotate(-34)"
+                stroke="#1e293b"
+                strokeWidth="2.2"
+                opacity="0.75"
+              >
                 <line x1="-10" y1="-5" x2="-2" y2="-5" />
                 <line x1="2" y1="-5" x2="10" y2="-5" />
                 <line x1="-10" y1="0" x2="5" y2="0" />
@@ -607,7 +723,12 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
                 <line x1="2" y1="5" x2="10" y2="5" />
               </g>
               {/* Ri (Bottom-Left: unbroken, broken, unbroken) */}
-              <g transform="translate(-34, 28) rotate(-34)" stroke="#1e293b" strokeWidth="2.2" opacity="0.75">
+              <g
+                transform="translate(-34, 28) rotate(-34)"
+                stroke="#1e293b"
+                strokeWidth="2.2"
+                opacity="0.75"
+              >
                 <line x1="-10" y1="-5" x2="10" y2="-5" />
                 <line x1="-10" y1="0" x2="-2" y2="0" />
                 <line x1="2" y1="0" x2="10" y2="0" />
@@ -625,7 +746,7 @@ export function CountryWatermark({ slug, className }: WatermarkProps) {
               fill="#9333ea"
               fillOpacity="0.22"
               textAnchor="middle"
-              className="select-none tracking-widest"
+              className="tracking-widest select-none"
             >
               대한민국
             </text>

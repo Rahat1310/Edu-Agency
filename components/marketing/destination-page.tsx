@@ -52,7 +52,7 @@ export function DestinationPage({
             </span>
           </div>
 
-          <h1 className="font-heading mt-5 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+          <h1 className="font-heading mt-5 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
             {copy.tagline}
           </h1>
 
@@ -65,17 +65,17 @@ export function DestinationPage({
         </PageShell>
       </section>
 
-      <section className="border-t border-stone-200 bg-gradient-to-b from-white to-slate-50 py-16 sm:py-24">
+      <section className="border-t border-stone-200 bg-[#f8f9fa] py-16 sm:py-24">
         <PageShell className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
           <div>
-            <h2 className="font-heading text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+            <h2 className="font-heading text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
               {dict.destination.overview}
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 font-normal text-slate-600">
               {copy.overview}
             </p>
 
-            <h2 className="font-heading mt-14 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+            <h2 className="font-heading mt-14 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
               {dict.destination.whyTitle}
             </h2>
             <ul className="mt-6 max-w-2xl space-y-4 text-base leading-8 text-slate-600">
@@ -135,7 +135,7 @@ export function DestinationPage({
 
       <section className="bg-slate-50 py-16 sm:py-24">
         <PageShell>
-          <h2 className="font-heading text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
             {dict.destination.fieldsTitle}
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -159,7 +159,7 @@ export function DestinationPage({
       <section className="border-t border-stone-200 bg-white py-16 sm:py-24">
         <PageShell>
           <div className="glass-panel rounded-3xl p-8 shadow-md sm:p-12">
-            <h2 className="font-heading max-w-2xl text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+            <h2 className="font-heading max-w-2xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
               {dict.preDeparture.teaserTitle}
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600">
@@ -167,7 +167,7 @@ export function DestinationPage({
             </p>
             <Link
               href={arrivalHref}
-              className="btn-sunset focus-ring mt-8 inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-sunset focus-ring mt-8 inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
             >
               {dict.preDeparture.teaserCta}
               <span className="sr-only">: {copy.name}</span>
@@ -176,9 +176,9 @@ export function DestinationPage({
         </PageShell>
       </section>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0B1E36] via-[#102B4E] to-[#071324] py-20 text-white sm:py-24">
+      <section className="relative overflow-hidden bg-[var(--brand-navy)] py-20 text-white sm:py-24">
         <PageShell>
-          <h2 className="font-heading max-w-2xl text-3xl font-black tracking-tight text-white sm:text-4xl">
+          <h2 className="font-heading max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             {dict.destination.ctaTitle}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-8 text-white/80">
@@ -187,7 +187,7 @@ export function DestinationPage({
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href={programsHref}
-              className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
             >
               {dict.common.browsePrograms}
               <span className="sr-only">: {copy.name}</span>

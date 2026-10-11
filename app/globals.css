@@ -161,47 +161,31 @@
     @apply focus-visible:ring-2 focus-visible:ring-[var(--brand-amber)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-navy)] focus-visible:outline-none;
   }
 
-  /* 🌟 Royal Academic Glassmorphism & Soft-Neumorphism */
+  /* Clean surfaces and understated depth. */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.75);
-    box-shadow:
-      0 10px 30px -5px rgba(11, 30, 54, 0.05),
-      0 1px 3px 0 rgba(11, 30, 54, 0.02);
+    background: #ffffff;
+    border: 0;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.05);
   }
 
   .glass-panel-interactive {
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow:
-      0 10px 30px -5px rgba(11, 30, 54, 0.05),
-      0 1px 3px 0 rgba(11, 30, 54, 0.02);
+    background: #ffffff;
+    border: 0;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.05);
     transition:
-      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
-      background 240ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .glass-panel-interactive:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(255, 255, 255, 0.98);
-    box-shadow:
-      0 20px 40px -10px rgba(11, 30, 54, 0.1),
-      0 2px 6px 0 rgba(11, 30, 54, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
   }
 
   .glass-pill {
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    box-shadow: 0 4px 14px rgba(11, 30, 54, 0.04);
+    background: #f4f5f6;
+    border: 0;
+    box-shadow: none;
   }
 
   .glass-card-dark {
@@ -263,20 +247,7 @@
   }
 
   .mesh-bg {
-    background-color: var(--background);
-    background-image:
-      radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.06) 0px, transparent 50%),
-      radial-gradient(
-        at 100% 0%,
-        rgba(16, 185, 129, 0.04) 0px,
-        transparent 50%
-      ),
-      radial-gradient(
-        at 100% 100%,
-        rgba(37, 99, 235, 0.05) 0px,
-        transparent 50%
-      ),
-      radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.04) 0px, transparent 50%);
+    background: var(--background);
   }
 
   .neumorphic-button:hover {
@@ -294,44 +265,22 @@
   }
 
   .ambient-glow-mesh {
-    background-image:
-      radial-gradient(
-        circle at 15% 15%,
-        rgba(29, 99, 237, 0.07) 0%,
-        transparent 45%
-      ),
-      radial-gradient(
-        circle at 85% 25%,
-        rgba(13, 148, 136, 0.07) 0%,
-        transparent 40%
-      ),
-      radial-gradient(
-        circle at 50% 90%,
-        rgba(245, 158, 11, 0.04) 0%,
-        transparent 50%
-      );
+    background: #f6f7f8;
   }
 
-  /* 🌅 Periscale AI Modern Aesthetic Utilities */
+  /* Marketing actions and labels. */
   .bg-grid-dots {
-    background-image: radial-gradient(#d1d5db 1.2px, transparent 1.2px);
-    background-size: 24px 24px;
+    background-image: none;
   }
 
   .eyebrow-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(254, 215, 170, 0.85);
-    background: rgba(255, 247, 237, 0.95);
-    padding: 0.25rem 0.875rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #c2410c;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-    backdrop-filter: blur(8px);
-    letter-spacing: 0.08em;
+    padding: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--brand-blue);
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
@@ -340,31 +289,26 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-      135deg,
-      #ff8a00 0%,
-      #ff4500 52%,
-      #ff0055 100%
-    ) !important;
+    background: var(--brand-blue) !important;
     color: #ffffff !important;
-    font-weight: 700 !important;
-    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    border-radius: 0.65rem !important;
     border: none !important;
-    box-shadow: 0 4px 18px rgba(255, 69, 0, 0.35) !important;
-    transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: none !important;
+    transition:
+      background 200ms ease,
+      transform 200ms ease;
   }
 
   .btn-sunset:hover,
   .btn-primary-signature:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 26px rgba(255, 69, 0, 0.5) !important;
-    filter: brightness(1.06);
+    background: #a73612 !important;
+    transform: translateY(-1px);
   }
 
   .btn-sunset:active,
   .btn-primary-signature:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 10px rgba(255, 69, 0, 0.25) !important;
+    transform: translateY(0);
   }
 
   .btn-secondary-glass {
@@ -372,100 +316,105 @@
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e5e7eb;
     color: #1e293b;
     font-weight: 600;
-    border-radius: 9999px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    transition: all 220ms ease;
+    border-radius: 0.65rem;
+    box-shadow: none;
+    transition:
+      background 200ms ease,
+      border-color 200ms ease;
   }
 
   .btn-secondary-glass:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+    background: #f4f5f6;
+    border-color: #cbd0d6;
     color: #0f172a;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
 
   .btn-secondary-glass:active {
     transform: translateY(0);
   }
 
-  /* 🎨 Distinct Colored Cards System (Luminous Pastel Aesthetics) */
+  /* Muted country surfaces preserve each destination identity. */
   .card-color-rose,
   .card-dark-rose {
-    background: linear-gradient(180deg, #fff1f2 0%, #ffffff 85%);
-    border: 1px solid #fecdd3;
-    box-shadow: 0 4px 20px -4px rgba(244, 63, 94, 0.08);
-    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: #fce9e5;
+    border: 0;
+    box-shadow: none;
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .card-color-rose:hover,
   .card-dark-rose:hover {
-    border-color: #fda4af;
-    box-shadow: 0 12px 32px -4px rgba(244, 63, 94, 0.16);
-    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    transform: translateY(-2px);
   }
 
   .card-color-sky,
   .card-dark-cyan {
-    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 85%);
-    border: 1px solid #bae6fd;
-    box-shadow: 0 4px 20px -4px rgba(14, 165, 233, 0.08);
-    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: #e6f2fa;
+    border: 0;
+    box-shadow: none;
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .card-color-sky:hover,
   .card-dark-cyan:hover {
-    border-color: #7dd3fc;
-    box-shadow: 0 12px 32px -4px rgba(14, 165, 233, 0.16);
-    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    transform: translateY(-2px);
   }
 
   .card-color-purple,
   .card-dark-purple {
-    background: linear-gradient(180deg, #faf5ff 0%, #ffffff 85%);
-    border: 1px solid #e9d5ff;
-    box-shadow: 0 4px 20px -4px rgba(168, 85, 247, 0.08);
-    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: #eeebfa;
+    border: 0;
+    box-shadow: none;
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .card-color-purple:hover,
   .card-dark-purple:hover {
-    border-color: #d8b4fe;
-    box-shadow: 0 12px 32px -4px rgba(168, 85, 247, 0.16);
-    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    transform: translateY(-2px);
   }
 
   .card-color-amber,
   .card-dark-amber {
-    background: linear-gradient(180deg, #fffbeb 0%, #ffffff 85%);
-    border: 1px solid #fde68a;
-    box-shadow: 0 4px 20px -4px rgba(245, 158, 11, 0.08);
-    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: #fff1d9;
+    border: 0;
+    box-shadow: none;
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .card-color-amber:hover,
   .card-dark-amber:hover {
-    border-color: #fcd34d;
-    box-shadow: 0 12px 32px -4px rgba(245, 158, 11, 0.16);
-    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    transform: translateY(-2px);
   }
 
   .card-color-emerald,
   .card-dark-emerald {
-    background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 85%);
-    border: 1px solid #a7f3d0;
-    box-shadow: 0 4px 20px -4px rgba(16, 185, 129, 0.08);
-    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: #e5f3eb;
+    border: 0;
+    box-shadow: none;
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease;
   }
 
   .card-color-emerald:hover,
   .card-dark-emerald:hover {
-    border-color: #6ee7b7;
-    box-shadow: 0 12px 32px -4px rgba(16, 185, 129, 0.16);
-    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    transform: translateY(-2px);
   }
 
   dialog::backdrop {
@@ -779,4 +728,177 @@
     opacity: 0.55;
     transform: none;
   }
+}
+
+/* Public website palette; operational dashboards retain their own theme. */
+.public-site {
+  --brand-blue: #c4471c;
+  --brand-navy: #102b46;
+  --brand-sky: #f6f7f8;
+  --brand-green: #16704f;
+  --brand-amber: #b77916;
+  --ring: #c4471c;
+  background: #ffffff;
+}
+
+/* Frosted marketing cards: visible edges, readable surfaces, no coloured glow. */
+.public-site .marketing-glass-card,
+.public-site .glass-panel,
+.public-site .glass-panel-interactive {
+  background: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 6px 20px rgba(16, 43, 70, 0.055);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.public-site .marketing-glass-card:hover,
+.public-site .glass-panel-interactive:hover {
+  border-color: rgba(100, 116, 139, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 12px 28px rgba(16, 43, 70, 0.09);
+}
+
+.public-site .destination-glass-card {
+  border: 1px solid var(--country-edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 20px rgba(16, 43, 70, 0.055);
+}
+
+.public-site .destination-glass-card:hover {
+  border-color: var(--country-accent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 12px 28px rgba(16, 43, 70, 0.09);
+}
+
+.public-site .card-color-rose {
+  --country-edge: #e4b6ad;
+  --country-accent: #c65742;
+  --country-surface: rgba(252, 233, 229, 0.82);
+}
+.public-site .card-color-sky {
+  --country-edge: #a8cede;
+  --country-accent: #1682b5;
+  --country-surface: rgba(230, 242, 250, 0.82);
+}
+.public-site .card-color-purple {
+  --country-edge: #c6bce3;
+  --country-accent: #7860bc;
+  --country-surface: rgba(238, 235, 250, 0.82);
+}
+.public-site .card-color-amber {
+  --country-edge: #e7c58d;
+  --country-accent: #b77916;
+  --country-surface: rgba(255, 241, 217, 0.82);
+}
+
+.public-site .destination-visa-panel {
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 5px rgba(16, 43, 70, 0.04);
+}
+
+@supports (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .public-site .marketing-glass-card,
+  .public-site .glass-panel,
+  .public-site .glass-panel-interactive {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .public-site .destination-glass-card {
+    background: var(--country-surface);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .public-site .destination-visa-panel {
+    background: rgba(255, 255, 255, 0.66);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-site *,
+  .public-site *::before,
+  .public-site *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The enquiry form needs a bright surface against its navy backdrop. */
+.public-site .consultation-form-card {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 24px 64px rgba(0, 15, 31, 0.22),
+    inset 0 1px 0 #ffffff;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.public-site .consultation-form > div + div {
+  margin-top: 1.25rem;
+}
+
+.public-site .consultation-form label[for] {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #263b50;
+}
+
+.public-site
+  .consultation-form
+  :is(input:not([type="checkbox"]), select, textarea) {
+  border: 1px solid #cbd5df;
+  border-radius: 0.625rem;
+  background: #ffffff;
+  color: #152d43;
+  box-shadow: 0 1px 2px rgba(16, 43, 70, 0.03);
+  font-weight: 400;
+  font-size: 0.875rem;
+  min-height: 3rem;
+}
+
+.public-site .consultation-form :is(input, textarea)::placeholder {
+  color: #697b8e;
+  opacity: 1;
+}
+
+.public-site
+  .consultation-form
+  :is(input:not([type="checkbox"]), select, textarea):focus {
+  border-color: var(--brand-blue);
+  outline: 2px solid rgba(196, 71, 28, 0.22);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.public-site
+  .consultation-form
+  :is(input, select, textarea)[aria-invalid="true"] {
+  border-color: #be123c;
+}
+
+.public-site .consultation-form textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.public-site .consultation-form button[type="submit"] {
+  min-height: 3.25rem;
 }

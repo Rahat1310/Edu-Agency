@@ -37,7 +37,7 @@ function Brand({ label, locale }: { label: string; locale: Locale }) {
         alt="Study Abroad Consultancy"
         width={220}
         height={143}
-        className="h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105 sm:h-13 md:h-15 lg:h-16"
+        className="h-11 w-auto object-contain transition-transform duration-200 sm:h-13 md:h-15 lg:h-16"
         priority
       />
     </Link>
@@ -132,8 +132,8 @@ export function SiteHeader({
       name: dict.chrome.destinationLinks.china,
       href: localizedHref("/destinations/china", locale),
       visaTag: "X1 / X2 Visa",
-      accent: "hover:border-rose-300 hover:bg-rose-50/50 group/item",
-      tagColor: "bg-rose-100/80 text-rose-800 border-rose-200",
+      accent: "hover:border-stone-300 hover:bg-stone-50 group/item",
+      tagColor: "bg-stone-100 text-slate-600 border-transparent",
       desc:
         locale === "bn"
           ? "ইঞ্জিনিয়ারিং, মেডিকেল ও সরকারি স্কলারশিপ"
@@ -145,8 +145,8 @@ export function SiteHeader({
       name: dict.chrome.destinationLinks.india,
       href: localizedHref("/destinations/india", locale),
       visaTag: "SII + e-Student",
-      accent: "hover:border-amber-300 hover:bg-amber-50/50 group/item",
-      tagColor: "bg-amber-100/80 text-amber-800 border-amber-200",
+      accent: "hover:border-stone-300 hover:bg-stone-50 group/item",
+      tagColor: "bg-stone-100 text-slate-600 border-transparent",
       desc:
         locale === "bn"
           ? "স্বল্প খরচ, কাছাকাছি দূরত্ব ও স্বীকৃত ক্যাম্পাস"
@@ -158,8 +158,8 @@ export function SiteHeader({
       name: dict.chrome.destinationLinks.malaysia,
       href: localizedHref("/destinations/malaysia", locale),
       visaTag: "EMGS Pass",
-      accent: "hover:border-teal-300 hover:bg-teal-50/50 group/item",
-      tagColor: "bg-teal-100/80 text-teal-800 border-teal-200",
+      accent: "hover:border-stone-300 hover:bg-stone-50 group/item",
+      tagColor: "bg-stone-100 text-slate-600 border-transparent",
       desc:
         locale === "bn"
           ? "ব্রিটিশ ও অস্ট্রেলিয়ান গ্লোবাল শাখা ক্যাম্পাস"
@@ -171,8 +171,8 @@ export function SiteHeader({
       name: dict.chrome.destinationLinks["south-korea"],
       href: localizedHref("/destinations/south-korea", locale),
       visaTag: "D-2 / D-4 Visa",
-      accent: "hover:border-indigo-300 hover:bg-indigo-50/50 group/item",
-      tagColor: "bg-indigo-100/80 text-indigo-800 border-indigo-200",
+      accent: "hover:border-stone-300 hover:bg-stone-50 group/item",
+      tagColor: "bg-stone-100 text-slate-600 border-transparent",
       desc:
         locale === "bn"
           ? "রোবোটিক্স, এআই এবং জিকেএস স্কলারশিপ"
@@ -187,8 +187,8 @@ export function SiteHeader({
         lang={locale}
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? "border-b border-stone-200/80 bg-white/95 py-2.5 shadow-[0_8px_32px_-4px_rgba(15,23,42,0.08)] backdrop-blur-xl"
-            : "border-b border-stone-200/60 bg-white/85 py-3 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.03)] backdrop-blur-lg"
+            ? "border-b border-stone-200/70 bg-white py-2.5"
+            : "border-b border-stone-200/60 bg-white py-3"
         }`}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
@@ -205,13 +205,10 @@ export function SiteHeader({
               href={localizedHref("/", locale)}
               className={`focus-ring relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[0.84rem] font-semibold transition-all xl:text-sm ${
                 isHomeActive
-                  ? "bg-orange-50 font-bold text-orange-600 shadow-2xs"
-                  : "text-slate-700 hover:bg-stone-100/80 hover:text-orange-600"
+                  ? "bg-stone-100 font-semibold text-slate-900"
+                  : "text-slate-700 hover:bg-stone-100/80 hover:text-[var(--brand-blue)]"
               }`}
             >
-              {isHomeActive && (
-                <span className="size-1.5 rounded-full bg-orange-500"></span>
-              )}
               <span>{dict.chrome.nav.home}</span>
             </Link>
 
@@ -231,8 +228,8 @@ export function SiteHeader({
                 aria-expanded={activeFlyout === "destinations"}
                 className={`focus-ring inline-flex cursor-pointer items-center gap-1 rounded-full px-3.5 py-2 text-[0.84rem] font-semibold transition-all xl:text-sm ${
                   isDestinationsActive || activeFlyout === "destinations"
-                    ? "bg-orange-50/90 font-bold text-orange-600"
-                    : "text-slate-700 hover:bg-stone-100/80 hover:text-orange-600"
+                    ? "bg-stone-100 font-semibold text-slate-900"
+                    : "text-slate-700 hover:bg-stone-100/80 hover:text-[var(--brand-blue)]"
                 }`}
               >
                 <span>{dict.chrome.nav.destinations}</span>
@@ -247,12 +244,12 @@ export function SiteHeader({
               {/* Destinations Mega Menu Dropdown */}
               {activeFlyout === "destinations" && (
                 <div
-                  className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+0.5rem)] -left-20 w-[580px] rounded-2xl border border-stone-200/90 bg-white/98 p-4.5 shadow-2xl backdrop-blur-2xl duration-150 xl:-left-12"
+                  className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+0.5rem)] -left-20 w-[580px] rounded-2xl border border-stone-200/90 bg-white p-4.5 shadow-[0_16px_40px_rgba(15,23,42,0.1)] duration-150 xl:-left-12"
                   role="menu"
                 >
                   <div className="mb-3 flex items-center justify-between border-b border-stone-100 pb-2.5">
                     <div>
-                      <h3 className="font-display text-xs font-bold tracking-wider text-slate-900 uppercase">
+                      <h3 className="font-display text-xs font-semibold tracking-wider text-slate-900 uppercase">
                         {locale === "bn"
                           ? "আমাদের প্রধান স্টাডি রুট"
                           : "Featured Study Destinations"}
@@ -263,7 +260,7 @@ export function SiteHeader({
                           : "Direct university admissions with end-to-end visa desk"}
                       </p>
                     </div>
-                    <span className="rounded-full bg-orange-100/70 px-2 py-0.5 text-[0.65rem] font-bold text-orange-700">
+                    <span className="rounded-full bg-stone-100 px-2 py-0.5 text-[0.65rem] font-semibold text-slate-600">
                       {locale === "bn" ? "৪টি মূল রুট" : "4 Key Routes"}
                     </span>
                   </div>
@@ -277,14 +274,14 @@ export function SiteHeader({
                         className={`focus-ring flex flex-col gap-1 rounded-xl border border-stone-200/70 bg-stone-50/60 p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm ${dest.accent}`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1.5 text-sm font-bold text-slate-900">
+                          <span className="flex items-center gap-1.5 text-sm font-semibold text-slate-900">
                             <span className="text-base">{dest.flag}</span>
-                            <span className="transition-colors group-hover/item:text-orange-600">
+                            <span className="transition-colors group-hover/item:text-slate-600">
                               {dest.name}
                             </span>
                           </span>
                           <span
-                            className={`rounded-full border px-1.5 py-0.5 text-[0.62rem] font-bold ${dest.tagColor}`}
+                            className={`rounded-full border px-1.5 py-0.5 text-[0.62rem] font-semibold ${dest.tagColor}`}
                           >
                             {dest.visaTag}
                           </span>
@@ -300,7 +297,7 @@ export function SiteHeader({
                   <div className="mt-3.5 flex items-center justify-between border-t border-stone-100 pt-3">
                     <Link
                       href={localizedHref("/destinations", locale)}
-                      className="group/all inline-flex items-center gap-1 text-xs font-bold text-orange-600 hover:text-orange-700"
+                      className="group/all inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-600"
                     >
                       <span>
                         {locale === "bn"
@@ -330,8 +327,8 @@ export function SiteHeader({
                 aria-expanded={activeFlyout === "programs"}
                 className={`focus-ring inline-flex cursor-pointer items-center gap-1 rounded-full px-3.5 py-2 text-[0.84rem] font-semibold transition-all xl:text-sm ${
                   isProgramsActive || activeFlyout === "programs"
-                    ? "bg-orange-50/90 font-bold text-orange-600"
-                    : "text-slate-700 hover:bg-stone-100/80 hover:text-orange-600"
+                    ? "bg-stone-100 font-semibold text-slate-900"
+                    : "text-slate-700 hover:bg-stone-100/80 hover:text-[var(--brand-blue)]"
                 }`}
               >
                 <span>{dict.chrome.nav.programs}</span>
@@ -346,20 +343,20 @@ export function SiteHeader({
               {/* Programs Dropdown */}
               {activeFlyout === "programs" && (
                 <div
-                  className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+0.5rem)] left-0 w-[440px] rounded-2xl border border-stone-200/90 bg-white/98 p-4 shadow-2xl backdrop-blur-2xl duration-150"
+                  className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+0.5rem)] left-0 w-[440px] rounded-2xl border border-stone-200/90 bg-white p-4 shadow-[0_16px_40px_rgba(15,23,42,0.1)] duration-150"
                   role="menu"
                 >
                   <div className="space-y-2">
                     <Link
                       href={localizedHref("/programs", locale)}
-                      className="focus-ring group/prog flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-orange-200 hover:bg-orange-50/50"
+                      className="focus-ring group/prog flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-stone-200 hover:bg-stone-50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-600 transition-colors group-hover/prog:bg-orange-600 group-hover/prog:text-white">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-slate-600 transition-colors group-hover/prog:bg-slate-700 group-hover/prog:text-white">
                         <BookOpen className="size-4.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-slate-900 transition-colors group-hover/prog:text-orange-600">
+                          <span className="text-sm font-semibold text-slate-900 transition-colors group-hover/prog:text-slate-600">
                             {locale === "bn"
                               ? "সকল প্রোগ্রাম ব্রাউজ করুন"
                               : "Browse All Programs"}
@@ -378,19 +375,19 @@ export function SiteHeader({
 
                     <Link
                       href={localizedHref("/programs/compare", locale)}
-                      className="focus-ring group/comp flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-sky-200 hover:bg-sky-50/50"
+                      className="focus-ring group/comp flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-stone-200 hover:bg-stone-50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-600 transition-colors group-hover/comp:bg-sky-600 group-hover/comp:text-white">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-slate-600 transition-colors group-hover/comp:bg-slate-700 group-hover/comp:text-white">
                         <Layers className="size-4.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-slate-900 transition-colors group-hover/comp:text-sky-600">
+                          <span className="text-sm font-semibold text-slate-900 transition-colors group-hover/comp:text-slate-600">
                             {locale === "bn"
                               ? "প্রোগ্রাম তুলনা করুন"
                               : "Compare Programs"}
                           </span>
-                          <span className="py-0.2 rounded-full bg-sky-100 px-1.5 text-[0.62rem] font-bold text-sky-700">
+                          <span className="py-0.2 rounded-full bg-stone-100 px-1.5 text-[0.62rem] font-semibold text-slate-600">
                             Side-by-Side
                           </span>
                         </div>
@@ -405,7 +402,7 @@ export function SiteHeader({
 
                   {/* Popular Discipline Tags */}
                   <div className="mt-3 border-t border-stone-100 pt-2.5">
-                    <span className="text-[0.68rem] font-bold tracking-wider text-slate-400 uppercase">
+                    <span className="text-[0.68rem] font-semibold tracking-wider text-slate-400 uppercase">
                       {locale === "bn" ? "জনপ্রিয় বিষয়:" : "Popular Fields:"}
                     </span>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -418,7 +415,7 @@ export function SiteHeader({
                         <Link
                           key={tag}
                           href={`${localizedHref("/programs", locale)}?q=${encodeURIComponent(tag)}`}
-                          className="rounded-full border border-stone-200/80 bg-stone-50 px-2 py-0.5 text-[0.68rem] font-medium text-slate-600 transition-colors hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                          className="rounded-full border border-stone-200/80 bg-stone-50 px-2 py-0.5 text-[0.68rem] font-medium text-slate-600 transition-colors hover:border-stone-300 hover:bg-stone-50 hover:text-slate-600"
                         >
                           {tag}
                         </Link>
@@ -443,8 +440,8 @@ export function SiteHeader({
                 aria-expanded={activeFlyout === "tools"}
                 className={`focus-ring inline-flex cursor-pointer items-center gap-1 rounded-full px-3.5 py-2 text-[0.84rem] font-semibold transition-all xl:text-sm ${
                   isToolsActive || activeFlyout === "tools"
-                    ? "bg-orange-50/90 font-bold text-orange-600"
-                    : "text-slate-700 hover:bg-stone-100/80 hover:text-orange-600"
+                    ? "bg-stone-100 font-semibold text-slate-900"
+                    : "text-slate-700 hover:bg-stone-100/80 hover:text-[var(--brand-blue)]"
                 }`}
               >
                 <span>
@@ -461,20 +458,20 @@ export function SiteHeader({
               {/* Tools Dropdown */}
               {activeFlyout === "tools" && (
                 <div
-                  className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+0.5rem)] left-0 w-[450px] rounded-2xl border border-stone-200/90 bg-white/98 p-4 shadow-2xl backdrop-blur-2xl duration-150"
+                  className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+0.5rem)] left-0 w-[450px] rounded-2xl border border-stone-200/90 bg-white p-4 shadow-[0_16px_40px_rgba(15,23,42,0.1)] duration-150"
                   role="menu"
                 >
                   <div className="space-y-2">
                     {/* Cost Calculator */}
                     <Link
                       href={localizedHref("/cost-calculator", locale)}
-                      className="focus-ring group/calc flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-amber-200 hover:bg-amber-50/50"
+                      className="focus-ring group/calc flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-stone-200 hover:bg-stone-50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-600 transition-colors group-hover/calc:bg-amber-600 group-hover/calc:text-white">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-slate-600 transition-colors group-hover/calc:bg-slate-700 group-hover/calc:text-white">
                         <Calculator className="size-4.5" />
                       </div>
                       <div>
-                        <span className="text-sm font-bold text-slate-900 transition-colors group-hover/calc:text-amber-700">
+                        <span className="text-sm font-semibold text-slate-900 transition-colors group-hover/calc:text-slate-600">
                           {dict.chrome.nav.costs}
                         </span>
                         <p className="text-[0.73rem] text-slate-500">
@@ -488,17 +485,17 @@ export function SiteHeader({
                     {/* Eligibility Quiz */}
                     <Link
                       href={localizedHref("/eligibility-quiz", locale)}
-                      className="focus-ring group/quiz flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-emerald-200 hover:bg-emerald-50/50"
+                      className="focus-ring group/quiz flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-stone-200 hover:bg-stone-50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 transition-colors group-hover/quiz:bg-emerald-600 group-hover/quiz:text-white">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-slate-600 transition-colors group-hover/quiz:bg-slate-700 group-hover/quiz:text-white">
                         <CheckCircle2 className="size-4.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-slate-900 transition-colors group-hover/quiz:text-emerald-700">
+                          <span className="text-sm font-semibold text-slate-900 transition-colors group-hover/quiz:text-slate-600">
                             {dict.chrome.nav.eligibility}
                           </span>
-                          <span className="py-0.2 rounded-full bg-emerald-100 px-1.5 text-[0.62rem] font-bold text-emerald-800">
+                          <span className="py-0.2 rounded-full bg-stone-100 px-1.5 text-[0.62rem] font-semibold text-slate-600">
                             {locale === "bn" ? "৩ মিনিট" : "Instant Match"}
                           </span>
                         </div>
@@ -513,13 +510,13 @@ export function SiteHeader({
                     {/* Success Stories */}
                     <Link
                       href={localizedHref("/success-stories", locale)}
-                      className="focus-ring group/story flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-purple-200 hover:bg-purple-50/50"
+                      className="focus-ring group/story flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-all hover:border-stone-200 hover:bg-stone-50"
                     >
-                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-purple-100 text-purple-600 transition-colors group-hover/story:bg-purple-600 group-hover/story:text-white">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-stone-100 text-slate-600 transition-colors group-hover/story:bg-slate-700 group-hover/story:text-white">
                         <Sparkles className="size-4.5" />
                       </div>
                       <div>
-                        <span className="text-sm font-bold text-slate-900 transition-colors group-hover/story:text-purple-700">
+                        <span className="text-sm font-semibold text-slate-900 transition-colors group-hover/story:text-slate-600">
                           {dict.chrome.nav.stories}
                         </span>
                         <p className="text-[0.73rem] text-slate-500">
@@ -539,8 +536,8 @@ export function SiteHeader({
               href={localizedHref("/about", locale)}
               className={`focus-ring relative inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.84rem] font-semibold transition-all xl:text-sm ${
                 isAboutActive
-                  ? "bg-orange-50 font-bold text-orange-600 shadow-2xs"
-                  : "text-slate-700 hover:bg-stone-100/80 hover:text-orange-600"
+                  ? "bg-stone-100 font-semibold text-slate-900"
+                  : "text-slate-700 hover:bg-stone-100/80 hover:text-[var(--brand-blue)]"
               }`}
             >
               {isAboutActive && (
@@ -554,8 +551,8 @@ export function SiteHeader({
               href={localizedHref("/contact", locale)}
               className={`focus-ring relative inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.84rem] font-semibold transition-all xl:text-sm ${
                 isContactActive
-                  ? "bg-orange-50 font-bold text-orange-600 shadow-2xs"
-                  : "text-slate-700 hover:bg-stone-100/80 hover:text-orange-600"
+                  ? "bg-stone-100 font-semibold text-slate-900"
+                  : "text-slate-700 hover:bg-stone-100/80 hover:text-[var(--brand-blue)]"
               }`}
             >
               {isContactActive && (
@@ -573,7 +570,7 @@ export function SiteHeader({
             {/* High-Converting Consultation Button */}
             <Link
               href={localizedHref("/contact", locale)}
-              className="btn-sunset focus-ring group hidden min-h-9.5 items-center justify-center gap-2 rounded-full px-4.5 text-xs font-bold shadow-md hover:scale-[1.02] active:scale-[0.98] sm:inline-flex"
+              className="btn-sunset focus-ring group hidden min-h-9.5 items-center justify-center gap-2 rounded-full px-4.5 text-xs font-semibold shadow-md hover:scale-[1.02] active:scale-[0.98] sm:inline-flex"
             >
               <CalendarCheck className="size-3.5 text-white/90" />
               <span>
@@ -589,7 +586,7 @@ export function SiteHeader({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="focus-ring flex size-9.5 cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white text-slate-800 shadow-2xs transition-all hover:bg-stone-50 hover:text-orange-600 active:scale-95 lg:hidden"
+              className="focus-ring flex size-9.5 cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white text-slate-800 shadow-2xs transition-all hover:bg-stone-50 hover:text-[var(--brand-blue)] active:scale-95 lg:hidden"
               aria-label={dict.chrome.openMenu}
               aria-expanded={mobileMenuOpen}
             >
@@ -634,7 +631,7 @@ export function SiteHeader({
               <Link
                 href={localizedHref("/contact", locale)}
                 onClick={() => setMobileMenuOpen(false)}
-                className="btn-sunset flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold shadow-md"
+                className="btn-sunset flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold shadow-md"
               >
                 <Sparkles className="size-4" />
                 <span>
@@ -648,13 +645,13 @@ export function SiteHeader({
               {/* Destinations Section */}
               <div>
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+                  <span className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
                     {dict.chrome.nav.destinations}
                   </span>
                   <Link
                     href={localizedHref("/destinations", locale)}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-[0.72rem] font-bold text-orange-600"
+                    className="text-[0.72rem] font-semibold text-slate-600"
                   >
                     {locale === "bn" ? "সবগুলো →" : "View all →"}
                   </Link>
@@ -669,7 +666,7 @@ export function SiteHeader({
                     >
                       <div className="flex items-center gap-1.5">
                         <span className="text-base">{dest.flag}</span>
-                        <span className="line-clamp-1 text-xs font-bold text-slate-800">
+                        <span className="line-clamp-1 text-xs font-semibold text-slate-800">
                           {dest.name}
                         </span>
                       </div>
@@ -683,16 +680,16 @@ export function SiteHeader({
 
               {/* Programs & Comparison */}
               <div>
-                <span className="mb-2 block text-xs font-bold tracking-wider text-slate-400 uppercase">
+                <span className="mb-2 block text-xs font-semibold tracking-wider text-slate-400 uppercase">
                   {dict.chrome.nav.programs}
                 </span>
                 <div className="space-y-1.5">
                   <Link
                     href={localizedHref("/programs", locale)}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="focus-ring flex items-center gap-2.5 rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-orange-50 hover:text-orange-600"
+                    className="focus-ring flex items-center gap-2.5 rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-stone-50 hover:text-[var(--brand-blue)]"
                   >
-                    <BookOpen className="size-4 text-orange-600" />
+                    <BookOpen className="size-4 text-slate-600" />
                     <span className="text-xs">
                       {locale === "bn"
                         ? "সকল প্রোগ্রাম ব্রাউজ করুন"
@@ -702,9 +699,9 @@ export function SiteHeader({
                   <Link
                     href={localizedHref("/programs/compare", locale)}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="focus-ring flex items-center gap-2.5 rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-sky-50 hover:text-sky-600"
+                    className="focus-ring flex items-center gap-2.5 rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-stone-50 hover:text-slate-600"
                   >
-                    <Layers className="size-4 text-sky-600" />
+                    <Layers className="size-4 text-slate-600" />
                     <span className="text-xs">
                       {locale === "bn"
                         ? "প্রোগ্রাম তুলনা করুন"
@@ -716,17 +713,17 @@ export function SiteHeader({
 
               {/* Student Tools */}
               <div>
-                <span className="mb-2 block text-xs font-bold tracking-wider text-slate-400 uppercase">
+                <span className="mb-2 block text-xs font-semibold tracking-wider text-slate-400 uppercase">
                   {locale === "bn" ? "টুলস ও অ্যাসেসমেন্ট" : "Student Tools"}
                 </span>
                 <div className="space-y-1.5">
                   <Link
                     href={localizedHref("/cost-calculator", locale)}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="focus-ring flex items-center justify-between rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-amber-50 hover:text-amber-700"
+                    className="focus-ring flex items-center justify-between rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-stone-50 hover:text-slate-600"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Calculator className="size-4 text-amber-600" />
+                      <Calculator className="size-4 text-slate-600" />
                       <span className="text-xs">{dict.chrome.nav.costs}</span>
                     </div>
                     <span className="text-[0.65rem] text-slate-500">
@@ -737,15 +734,15 @@ export function SiteHeader({
                   <Link
                     href={localizedHref("/eligibility-quiz", locale)}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="focus-ring flex items-center justify-between rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-emerald-50 hover:text-emerald-700"
+                    className="focus-ring flex items-center justify-between rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-stone-50 hover:text-slate-600"
                   >
                     <div className="flex items-center gap-2.5">
-                      <CheckCircle2 className="size-4 text-emerald-600" />
+                      <CheckCircle2 className="size-4 text-slate-600" />
                       <span className="text-xs">
                         {dict.chrome.nav.eligibility}
                       </span>
                     </div>
-                    <span className="py-0.2 rounded-full bg-emerald-100 px-1.5 text-[0.62rem] font-bold text-emerald-800">
+                    <span className="py-0.2 rounded-full bg-stone-100 px-1.5 text-[0.62rem] font-semibold text-slate-600">
                       3 Min
                     </span>
                   </Link>
@@ -753,10 +750,10 @@ export function SiteHeader({
                   <Link
                     href={localizedHref("/success-stories", locale)}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="focus-ring flex items-center justify-between rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-purple-50 hover:text-purple-700"
+                    className="focus-ring flex items-center justify-between rounded-xl border border-stone-200/60 bg-stone-50/70 p-2.5 font-semibold text-slate-800 transition-colors hover:bg-stone-50 hover:text-slate-600"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Sparkles className="size-4 text-purple-600" />
+                      <Sparkles className="size-4 text-slate-600" />
                       <span className="text-xs">{dict.chrome.nav.stories}</span>
                     </div>
                     <span className="text-[0.65rem] text-slate-500">
@@ -795,9 +792,9 @@ export function SiteHeader({
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 py-2.5 text-xs font-bold text-emerald-800 shadow-2xs transition-colors hover:bg-emerald-100"
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 py-2.5 text-xs font-semibold text-slate-600 shadow-2xs transition-colors hover:bg-stone-100"
               >
-                <MessageCircle className="size-4 text-emerald-600" />
+                <MessageCircle className="size-4 text-slate-600" />
                 <span>
                   {locale === "bn"
                     ? "হোয়াটসঅ্যাপে তাৎক্ষণিক তথ্য নিন"

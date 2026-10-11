@@ -290,12 +290,13 @@ export const en = {
     ],
   },
   about: {
-    metaTitle: "About Us — Study Abroad Consultant | Study Beyond Borders. Dream Beyond Limits.",
+    metaTitle:
+      "About Us — Study Abroad Consultant | Study Beyond Borders. Dream Beyond Limits.",
     metaDescription:
-      "Built on 8+ years of China education experience, Study Abroad Consultant provides transparent, student-first guidance for China, India, Malaysia, South Korea, and Japan.",
+      "Meet Study Abroad Consultant, a Dhaka-based education consultancy supporting Bangladeshi students with counselling, university applications, scholarships, and student visa preparation.",
     ogTitle: "About Us — Study Abroad Consultant | Trusted Guidance from Dhaka",
     ogDescription:
-      "Every study abroad journey starts with the right guidance. Learn about our 8+ years of China education foundation, leadership, and honest counselling approach.",
+      "Learn about our team’s China education experience, company story, services, leadership, and commitments to students and families.",
     eyebrow: "About Our Agency",
     title: "Dedicated to Transparent Higher Education for Bangladeshi Families",
     lede: "We founded this agency on a clear conviction: Bangladeshi families need real admissions expertise and precise visa execution, not commercial marketing brochures. We specialize in four dynamic destinations and stay accountable through your first day on campus.",
