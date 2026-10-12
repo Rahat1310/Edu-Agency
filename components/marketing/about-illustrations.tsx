@@ -1,5 +1,4 @@
 import React from "react";
-import { BookOpen, Building2, Globe2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -365,13 +364,7 @@ export function EducationJourneyIllustration({
   );
 }
 
-/**
- * Illustration B — Our Journey Timeline
- * A horizontal/vertical timeline showing the real company progression:
- * 1. China-Focused Experience (8+ years through earlier business)
- * 2. Establishment of Study Abroad Consultant (New Identity)
- * 3. Broader study opportunities and the agency’s direction
- */
+/** Company history, presented as a simple timeline. */
 export function TimelineJourneyIllustration({
   className,
   locale = "en",
@@ -382,46 +375,29 @@ export function TimelineJourneyIllustration({
   const isBn = locale === "bn";
   const milestones = [
     {
-      icon: BookOpen,
-      label: isBn ? "টিমের পূর্ব অভিজ্ঞতা" : "Earlier team experience",
-      marker: isBn ? "৮+ বছর" : "8+ years",
-      title: isBn
-        ? "ঢাকা থেকে চীন-কেন্দ্রিক সেবা"
-        : "China-focused work from Dhaka",
+      marker: isBn ? "৮+ বছরের অভিজ্ঞতা" : "8+ years of experience",
+      title: isBn ? "চীনে উচ্চশিক্ষা নিয়ে কাজ" : "Our work with China",
       body: isBn
-        ? "ঢাকায় পূর্ববর্তী একটি প্রতিষ্ঠানের মাধ্যমে আমাদের টিম চীনে বিশ্ববিদ্যালয়ে ভর্তি, স্কলারশিপ গাইডেন্স ও কাগজপত্র প্রস্তুতিতে আট বছরেরও বেশি অভিজ্ঞতা অর্জন করে।"
-        : "Our team worked in Dhaka for more than eight years through an earlier China-focused education business, developing admissions, scholarship, and documentation experience.",
-      detail: isBn
-        ? "ভর্তি · স্কলারশিপ · কাগজপত্র"
-        : "Admissions · Scholarships · Documentation",
+        ? "আমাদের টিম ঢাকার একটি পূর্ববর্তী প্রতিষ্ঠানে চীনের বিশ্ববিদ্যালয়ে ভর্তি, স্কলারশিপ ও প্রয়োজনীয় কাগজপত্র নিয়ে আট বছরেরও বেশি সময় কাজ করেছে।"
+        : "Our team spent more than eight years at an earlier education consultancy in Dhaka, helping students with Chinese university admissions, scholarships, and application documents.",
     },
     {
-      icon: Building2,
-      label: isBn ? "নতুন ব্র্যান্ড পরিচয়" : "New brand identity",
       marker: isBn ? "ফেব্রুয়ারি ২০২৬" : "February 2026",
       title: isBn
-        ? "নতুন পরিচয়ে সম্প্রসারণ"
-        : "Expansion under a new identity",
+        ? "Study Abroad Consultant নামে যাত্রা"
+        : "A new name for our work",
       body: isBn
-        ? "ঢাকায় চলমান কাজকে Study Abroad Consultant নামে নতুন ব্র্যান্ড পরিচয়ে সম্প্রসারিত করি, আরও বেশি গন্তব্যে কাউন্সেলিং ও আবেদন সহায়তা দিতে।"
-        : "We expanded our existing Dhaka-based work under the brand Study Abroad Consultant, extending our counselling and application support to more destinations.",
-      detail: isBn
-        ? "Study Abroad Consultant · ঢাকা"
-        : "Study Abroad Consultant · Dhaka",
+        ? "Study Abroad Consultant নামে আমাদের কাজের পরিধি বাড়াই। চীনের পাশাপাশি আরও কয়েকটি দেশে পড়াশোনার জন্য কাউন্সেলিং ও আবেদন সহায়তা শুরু করি।"
+        : "We began operating under the name Study Abroad Consultant and expanded our counselling and application support to more study destinations.",
     },
     {
-      icon: Globe2,
-      label: isBn ? "বর্তমান সেবার পরিধি" : "Where we are today",
-      marker: isBn ? "৫টি গন্তব্য" : "5 destinations",
+      marker: isBn ? "এখন" : "Today",
       title: isBn
-        ? "চীনের অভিজ্ঞতা, আরও বিস্তৃত সুযোগ"
-        : "Experience beyond borders",
+        ? "পাঁচটি দেশে পড়াশোনার সহায়তা"
+        : "Supporting study in five countries",
       body: isBn
-        ? "এখন আমরা চীন, ভারত, মালয়েশিয়া, দক্ষিণ কোরিয়া ও জাপানে উচ্চশিক্ষার পরিকল্পনায় বাংলাদেশি শিক্ষার্থী ও পরিবারকে সহায়তা করি।"
-        : "Today, we support Bangladeshi students and families exploring higher education in China, India, Malaysia, South Korea, and Japan.",
-      detail: isBn
-        ? "ব্যক্তিগত কাউন্সেলিং · আন্তর্জাতিক উচ্চশিক্ষা"
-        : "Individual counselling · International study",
+        ? "এখন আমরা বাংলাদেশি শিক্ষার্থী ও পরিবারকে চীন, ভারত, মালয়েশিয়া, দক্ষিণ কোরিয়া ও জাপানে পড়াশোনার সুযোগ বুঝতে ও আবেদন প্রস্তুত করতে সাহায্য করি।"
+        : "We help Bangladeshi students and families explore study options and prepare applications for China, India, Malaysia, South Korea, and Japan.",
     },
   ];
 
@@ -429,114 +405,46 @@ export function TimelineJourneyIllustration({
     <section
       aria-labelledby={`journey-heading-${locale}`}
       className={cn(
-        "overflow-hidden rounded-3xl border border-slate-700 bg-[var(--brand-navy)] px-6 py-9 text-white sm:p-10 lg:p-12",
+        "mx-auto max-w-5xl border-t border-stone-200 pt-10 sm:pt-12",
         className,
       )}
     >
-      <div className="flex flex-col gap-5 border-b border-white/15 pb-7 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p className="text-[0.65rem] font-semibold tracking-[0.18em] text-orange-300 uppercase">
-            {isBn
-              ? "অভিজ্ঞতা থেকে প্রতিষ্ঠা"
-              : "Experience. Establishment. Expansion."}
-          </p>
-          <h3
-            id={`journey-heading-${locale}`}
-            className="font-heading mt-3 text-2xl font-semibold tracking-tight sm:text-3xl"
-          >
-            {isBn
-              ? "আমাদের পথচলার তিনটি অধ্যায়"
-              : "The chapters of our journey"}
-          </h3>
-        </div>
-        <p className="max-w-sm text-sm leading-6 text-slate-300">
+      <div className="max-w-2xl">
+        <h3
+          id={`journey-heading-${locale}`}
+          className="font-heading text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl"
+        >
+          {isBn ? "আমাদের পথচলা" : "How we got here"}
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
           {isBn
-            ? "ঢাকা থেকেই আমাদের পুরো পথচলা। নতুন পরিচয়ে সেই অভিজ্ঞতা পৌঁছাচ্ছে আরও বেশি উচ্চশিক্ষার গন্তব্যে।"
-            : "Dhaka has been our base throughout. Our new identity carries that experience into more study destinations."}
+            ? "চীন নিয়ে কাজের অভিজ্ঞতা থেকে আজকের Study Abroad Consultant।"
+            : "From our team’s work with China to Study Abroad Consultant today."}
         </p>
       </div>
-      <ol className="relative mt-8 grid gap-7 md:grid-cols-3 md:gap-5 lg:gap-7">
-        {milestones.map((item, index) => {
-          const Icon = item.icon;
-          const featured = index === 1;
-          return (
-            <li key={item.label} className="relative flex flex-col">
-              <div className="relative mb-5 flex items-center gap-3">
-                {index < milestones.length - 1 && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-5 left-10 hidden h-px w-[calc(100%+1.75rem)] bg-white/25 md:block"
-                  />
-                )}
-                <span
-                  className={cn(
-                    "relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border text-xs font-semibold",
-                    featured
-                      ? "border-orange-300 bg-[var(--brand-blue)] text-white"
-                      : "border-slate-500 bg-[var(--brand-navy)] text-orange-300",
-                  )}
-                >
-                  0{index + 1}
-                </span>
-                <span className="relative z-10 bg-[var(--brand-navy)] pr-3 text-xs font-medium text-slate-300">
-                  {item.label}
-                </span>
-              </div>
-              <article
-                className={cn(
-                  "flex flex-1 flex-col rounded-2xl border p-6 transition-transform duration-200 hover:-translate-y-1 lg:p-7",
-                  featured
-                    ? "border-white/90 bg-[#fffaf5] text-slate-900 shadow-[0_10px_28px_rgba(0,0,0,0.12)]"
-                    : "border-white/20 bg-white/[0.06] text-white backdrop-blur-sm",
-                )}
-              >
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <Icon
-                    className={cn(
-                      "size-6 stroke-[1.5]",
-                      featured ? "text-[var(--brand-blue)]" : "text-orange-300",
-                    )}
-                    aria-hidden="true"
-                  />
-                  <span
-                    className={cn(
-                      "text-xs font-semibold",
-                      featured ? "text-[var(--brand-blue)]" : "text-orange-200",
-                    )}
-                  >
-                    {item.marker}
-                  </span>
-                </div>
-                <h4 className="font-heading mt-6 text-xl leading-tight font-semibold tracking-tight">
-                  {item.title}
-                </h4>
-                <p
-                  className={cn(
-                    "mt-3 text-sm leading-6",
-                    featured ? "text-slate-600" : "text-slate-300",
-                  )}
-                >
-                  {item.body}
-                </p>
-                <div
-                  className={cn(
-                    "mt-6 border-t pt-4",
-                    featured ? "border-slate-200" : "border-white/15",
-                  )}
-                >
-                  <p
-                    className={cn(
-                      "text-xs leading-5",
-                      featured ? "text-slate-600" : "text-slate-300",
-                    )}
-                  >
-                    {item.detail}
-                  </p>
-                </div>
-              </article>
-            </li>
-          );
-        })}
+
+      <ol className="mt-8 grid gap-8 md:grid-cols-3 md:gap-0">
+        {milestones.map((item, index) => (
+          <li
+            key={item.marker}
+            className="relative border-l border-stone-200 pl-5 md:border-t md:border-l-0 md:pt-6 md:pr-7 md:pl-0 lg:pr-10"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute top-1 -left-[4.5px] size-2 rounded-full bg-[var(--brand-blue)] md:-top-[4.5px] md:left-0"
+            />
+            <p className="text-sm font-semibold text-[var(--brand-blue)]">
+              {item.marker}
+            </p>
+            <h4 className="font-heading mt-3 text-lg leading-7 font-semibold tracking-tight text-slate-900">
+              {item.title}
+            </h4>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
+            <span className="sr-only">
+              {isBn ? `ধাপ ${index + 1}` : `Stage ${index + 1}`}
+            </span>
+          </li>
+        ))}
       </ol>
     </section>
   );
@@ -896,7 +804,13 @@ export function LeadershipAvatar({
 
         {/* Verification / Executive Pin */}
         <div className="absolute -right-2 -bottom-2 flex size-7 items-center justify-center rounded-full border-2 border-white bg-orange-500 text-white shadow-sm">
-          <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+          <svg
+            className="size-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+          >
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
@@ -914,4 +828,3 @@ export function LeadershipAvatar({
     </div>
   );
 }
-

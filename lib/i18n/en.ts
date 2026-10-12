@@ -1,8 +1,8 @@
 export const en = {
   meta: {
-    siteName: "Study Abroad Consultancy",
+    siteName: "Study Abroad Consultant",
     defaultTitle:
-      "Study Abroad Consultancy — Specialized Study Routes from Bangladesh",
+      "Study Abroad Consultant — Specialized Study Routes from Bangladesh",
     defaultDescription:
       "Dhaka-based guidance for Bangladeshi students applying to China, India, Malaysia, and South Korea.",
   },
@@ -10,7 +10,7 @@ export const en = {
     skipToContent: "Skip to content",
     topBar: "Dhaka-based guidance for students & families",
     brandTag: "Bangladesh → Global Campuses",
-    brandAria: "Study Abroad Consultancy home",
+    brandAria: "Study Abroad Consultant home",
     navAria: "Primary navigation",
     mobileNavAria: "Mobile navigation",
     openMenu: "Open navigation menu",
@@ -33,7 +33,7 @@ export const en = {
     footerConnect: "Connect",
     footerPrivacy: "Privacy & legal",
     footerNewTab: "(opens in a new tab)",
-    footerCredit: "Guidance for students. Confidence for families.",
+    footerCredit: "Study beyond borders. Dream beyond limits.",
     footerContactTitle: "Headquarters & Contact",
     footerAddressLabel: "Dhaka Principal Office",
     footerAddressLine1: "1st Floor, House 16, Road 14",

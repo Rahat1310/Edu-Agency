@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Award,
   BookOpen,
+  Calendar,
   Compass,
   FileCheck2,
   FileText,
@@ -29,7 +30,86 @@ import {
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
+import { cn } from "@/lib/utils";
 import { getWhatsAppHref } from "@/lib/whatsapp";
+
+const STUDY_DESTINATIONS = [
+  {
+    id: "china",
+    flag: "🇨🇳",
+    nameEn: "China",
+    nameBn: "চীন",
+    badgeEn: "8+ Years Core Focus",
+    badgeBn: "৮+ বছরের মূল ভিত্তি",
+    isCore: true,
+    titleEn: "Our Longest-Standing Area of Experience",
+    titleBn: "আমাদের দীর্ঘতম বাস্তব অভিজ্ঞতা",
+    descEn:
+      "Support with university applications, government and university scholarship options, JW201/JW202 documentation, and student visa preparation.",
+    descBn:
+      "বিশ্ববিদ্যালয়ে ভর্তি, সরকারি ও প্রাদেশিক স্কলারশিপের সুযোগ এবং JW201/JW202 ভিসা ডকুমেন্টেশনে শতভাগ পেশাদার গাইডেন্স।",
+  },
+  {
+    id: "india",
+    flag: "🇮🇳",
+    nameEn: "India",
+    nameBn: "ভারত",
+    badgeEn: "Admission & Scholarships",
+    badgeBn: "ভর্তি ও স্কলারশিপ সহায়তা",
+    isCore: false,
+    titleEn: "Admission Applications & Scholarship Guidance",
+    titleBn: "ভর্তি আবেদন ও স্কলারশিপ সহায়তা",
+    descEn:
+      "Support with university and course selection, admission applications, available tuition fee waivers, and student visa preparation. Discuss the service scope and applicable costs with our team.",
+    descBn:
+      "বিশ্ববিদ্যালয় ও কোর্স নির্বাচন, ভর্তি আবেদন, উপলব্ধ টিউশন ফি ছাড় এবং স্টুডেন্ট ভিসা প্রস্তুতিতে সহায়তা। সেবার পরিধি ও প্রযোজ্য খরচ আমাদের টিমের সাথে আলোচনা করুন।",
+  },
+  {
+    id: "malaysia",
+    flag: "🇲🇾",
+    nameEn: "Malaysia",
+    nameBn: "মালয়েশিয়া",
+    badgeEn: "EMGS & Dual Degrees",
+    badgeBn: "EMGS ও ডুয়াল ডিগ্রি",
+    isCore: false,
+    titleEn: "University Admission & Student Pass Support",
+    titleBn: "গ্লোবাল ক্যাম্পাস ও আন্তর্জাতিক ক্যারিয়ার",
+    descEn:
+      "Guidance on university options, entry requirements, tuition costs, admission applications, and student pass documentation.",
+    descBn:
+      "বিশ্বমানের পাবলিক ও প্রাইভেট বিশ্ববিদ্যালয়ে ভর্তির যোগ্যতা, টিউশন খরচ, EMGS স্টুডেন্ট পাস প্রসেসিং এবং যুক্তরাজ্য/অস্ট্রেলিয়ান টুইনিং প্রোগ্রাম।",
+  },
+  {
+    id: "south-korea",
+    flag: "🇰🇷",
+    nameEn: "South Korea",
+    nameBn: "দক্ষিণ কোরিয়া",
+    badgeEn: "D-2 / D-4 Visa Pathways",
+    badgeBn: "D-2 / D-4 ভিসা পাথওয়ে",
+    isCore: false,
+    titleEn: "High-Tech Programs & GKS Pathways",
+    titleBn: "হাই-টেক শিক্ষা ও স্কলারশিপের সুযোগ",
+    descEn:
+      "Guidance on suitable undergraduate & graduate degrees, scholarship applications, language criteria, and meticulous Korean embassy visa filing.",
+    descBn:
+      "উপযুক্ত একাডেমিক প্রোগ্রাম, সরকারি ও প্রাতিষ্ঠানিক স্কলারশিপ, কোরিয়ান ল্যাঙ্গুয়েজ ট্রেনিং (TOPIK/IELTS) এবং সুনির্দিষ্ট ভিসা প্রস্তুতি।",
+  },
+  {
+    id: "japan",
+    flag: "🇯🇵",
+    nameEn: "Japan",
+    nameBn: "জাপান",
+    badgeEn: "COE & Academic Pathways",
+    badgeBn: "COE ও একাডেমি পাথওয়ে",
+    isCore: false,
+    titleEn: "Specialized Guidance for Academic Opportunities",
+    titleBn: "মানসম্মত শিক্ষা ও আধুনিক প্রযুক্তি",
+    descEn:
+      "Guidance for Bangladeshi students exploring suitable academic opportunities in Japan, clarifying language expectations, eligibility prerequisites, and application procedures.",
+    descBn:
+      "জাপানের বিশিষ্ট শিক্ষা প্রতিষ্ঠানগুলোতে উপযুক্ত কোর্স নির্বাচন, ভর্তি আবেদনের যোগ্যতা, COE সংক্রান্ত প্রস্তুতি এবং প্রয়োজনীয় দিকনির্দেশনা।",
+  },
+];
 
 interface AboutPageProps {
   locale?: Locale;
@@ -181,49 +261,99 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
         aria-label={
           isBn ? "প্রতিষ্ঠানের সংক্ষিপ্ত পরিচয়" : "Company at a glance"
         }
-        className="border-b border-stone-200 bg-white"
+        className="relative overflow-hidden border-b border-orange-200/60 bg-gradient-to-b from-[#faf5ee] via-[#fff4ea]/90 to-[#fdf8f3] py-4 sm:py-5"
       >
-        <PageShell>
-          <dl className="grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Premium Agency Sunset Mesh Ambient Lighting (Warm Sunset, Amber, Gold) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-28 left-1/4 h-72 w-[34rem] -translate-x-1/2 rounded-full bg-gradient-to-tr from-orange-300/35 via-amber-200/30 to-rose-200/20 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-20 right-1/4 h-64 w-[30rem] rounded-full bg-gradient-to-bl from-amber-200/35 via-orange-200/25 to-yellow-100/20 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-16 left-1/2 h-44 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-t from-orange-100/30 to-transparent blur-2xl"
+        />
+
+        <PageShell className="relative z-10">
+          {/* Quick Facts Translucent Glassmorphic Cards */}
+          <dl className="grid gap-3.5 py-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
+                icon: Calendar,
                 label: isBn ? "প্রতিষ্ঠিত" : "Established",
                 value: isBn ? "ফেব্রুয়ারি ২০২৬" : "February 2026",
+                iconColor: "text-orange-600",
+                haloColor: "group-hover:bg-orange-500/15",
               },
               {
+                icon: MapPin,
                 label: isBn ? "অবস্থান" : "Based in",
                 value: isBn ? "নিকুঞ্জা-২, ঢাকা" : "Nikunja-2, Dhaka",
+                iconColor: "text-[#c2410c]",
+                haloColor: "group-hover:bg-orange-600/15",
               },
               {
+                icon: Users,
                 label: isBn ? "যাদের জন্য কাজ করি" : "Who we support",
                 value: isBn
                   ? "বাংলাদেশি শিক্ষার্থী ও পরিবার"
                   : "Bangladeshi students & families",
+                iconColor: "text-emerald-700",
+                haloColor: "group-hover:bg-emerald-500/15",
               },
               {
+                icon: Award,
                 label: isBn ? "টিমের অভিজ্ঞতা" : "Team experience",
                 value: isBn
-                  ? "চীন উচ্চশিক্ষায় ৮+ বছর"
-                  : "8+ years in China education",
+                  ? "চীন উচ্চশিক্ষায় ৮+ বছর ও সম্প্রসারণ"
+                  : "8+ years in China & expanding",
+                iconColor: "text-amber-600",
+                haloColor: "group-hover:bg-amber-500/15",
               },
             ].map((item) => (
               <div
                 key={item.label}
-                className="border-l-2 border-orange-200 pl-4"
+                className="group relative flex min-h-[86px] items-center gap-3.5 overflow-hidden rounded-2xl border border-white/95 bg-white/70 p-4 shadow-[0_8px_30px_rgba(234,88,12,0.04),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-orange-950/[0.03] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-300/80 hover:bg-white/95 hover:shadow-[0_16px_36px_rgba(234,88,12,0.09),inset_0_1px_1px_rgba(255,255,255,1)]"
               >
-                <dt className="text-xs font-medium text-slate-500">
-                  {item.label}
-                </dt>
-                <dd className="mt-2 text-sm font-semibold text-[var(--brand-navy)]">
-                  {item.value}
-                </dd>
+                {/* Warm brand glass glow on hover */}
+                <div
+                  aria-hidden="true"
+                  className={cn(
+                    "pointer-events-none absolute -right-6 -top-6 size-24 rounded-full blur-xl transition-all duration-500",
+                    item.haloColor,
+                  )}
+                />
+
+                {/* Frosted Icon Capsule */}
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-orange-100/80 bg-gradient-to-br from-white/95 to-orange-50/50 shadow-[0_2px_8px_rgba(234,88,12,0.05),inset_0_1px_0_rgba(255,255,255,1)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
+                  <item.icon className={cn("size-4.5", item.iconColor)} />
+                </div>
+
+                {/* Content */}
+                <div className="min-w-0 flex-1">
+                  <dt className="text-[0.68rem] font-semibold tracking-[0.14em] text-slate-400 uppercase">
+                    {item.label}
+                  </dt>
+                  <dd className="mt-0.5 text-sm font-bold leading-snug text-slate-800 transition-colors group-hover:text-slate-900">
+                    {item.value}
+                  </dd>
+                </div>
               </div>
             ))}
           </dl>
+
+          {/* Frosted Translucent Sub-navigation Pills */}
           <nav
             aria-label={isBn ? "এই পৃষ্ঠার বিভাগসমূহ" : "On this page"}
-            className="flex flex-wrap gap-x-6 gap-y-3 border-t border-stone-200 py-5"
+            className="flex items-center gap-2 overflow-x-auto border-t border-orange-200/50 py-3.5 no-scrollbar scroll-smooth"
           >
+            <div className="flex shrink-0 items-center gap-1.5 pr-2.5 text-[0.68rem] font-bold tracking-[0.14em] text-slate-500 uppercase">
+              <span className="size-2 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 shadow-[0_0_8px_rgba(234,88,12,0.6)]" />
+              <span>{isBn ? "বিভাগে যান" : "Jump to"}</span>
+            </div>
             {[
               ["story", isBn ? "আমাদের গল্প" : "Our story"],
               ["purpose", isBn ? "লক্ষ্য ও দিকনির্দেশনা" : "Mission & vision"],
@@ -236,7 +366,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               <a
                 key={id}
                 href={`#${id}`}
-                className="focus-ring rounded text-xs font-semibold text-slate-600 transition-colors hover:text-[var(--brand-blue)]"
+                className="focus-ring shrink-0 rounded-full border border-white/95 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-[0_2px_8px_rgba(234,88,12,0.03),inset_0_1px_0_rgba(255,255,255,0.95)] backdrop-blur-md transition-all duration-200 hover:border-orange-300 hover:bg-white hover:text-orange-600 hover:shadow-xs active:scale-95"
               >
                 {label}
               </a>
@@ -321,6 +451,11 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   ? "ব্যক্তিগত কাউন্সেলিং, স্পষ্ট তথ্য এবং আবেদন প্রস্তুতিতে ব্যবহারিক সহায়তার মাধ্যমে বাংলাদেশি শিক্ষার্থী ও পরিবারকে উচ্চশিক্ষার সিদ্ধান্ত নিতে সাহায্য করা।"
                   : "To help Bangladeshi students and families make informed higher education decisions through individual counselling, clear information, and practical application support."}
               </p>
+              <p className="mt-3 text-base leading-7 text-slate-600">
+                {isBn
+                  ? "প্রতিটি শিক্ষার্থীর শিক্ষাগত যোগ্যতা, আগ্রহ, বাজেট এবং ভবিষ্যৎ লক্ষ্য বুঝে উপযুক্ত বিশ্ববিদ্যালয় ও প্রোগ্রাম খুঁজে নিতে সহায়তা করাই আমাদের উদ্দেশ্য। ভর্তি প্রক্রিয়া, স্কলারশিপের সুযোগ এবং প্রয়োজনীয় নথিপত্র সম্পর্কে স্বচ্ছ নির্দেশনা দিয়ে আমরা শিক্ষার্থীদের আত্মবিশ্বাসের সঙ্গে বিদেশে উচ্চশিক্ষার প্রস্তুতি নিতে সাহায্য করতে চাই।"
+                  : "We aim to understand each student’s academic background, interests, budget, and future goals so we can help them explore suitable universities and programmes. Through transparent guidance on admissions, scholarship opportunities, and required documents, we seek to help students prepare for studying abroad with confidence."}
+              </p>
             </article>
             <article className="marketing-glass-card rounded-2xl p-7 sm:p-9">
               <Globe2
@@ -334,6 +469,11 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                 {isBn
                   ? "শিক্ষার্থী কাউন্সেলিংয়ের মান ও প্রাতিষ্ঠানিক সম্পর্ক উন্নয়নের মাধ্যমে আরও বেশি বাংলাদেশি পরিবারের কাছে আন্তর্জাতিক উচ্চশিক্ষার সুযোগকে সহজবোধ্য করে তোলা।"
                   : "To make international education opportunities easier to understand and navigate for more Bangladeshi families, while strengthening our counselling standards and institutional relationships."}
+              </p>
+              <p className="mt-3 text-base leading-7 text-slate-600">
+                {isBn
+                  ? "আমরা এমন একটি ভবিষ্যতের স্বপ্ন দেখি, যেখানে নির্ভরযোগ্য তথ্য ও শিক্ষার্থীকেন্দ্রিক পরামর্শের মাধ্যমে বাংলাদেশের আরও বেশি শিক্ষার্থী বিশ্বমানের শিক্ষার সুযোগ অনুসন্ধান করতে পারবে। সততা, যত্ন এবং সেবার ধারাবাহিক উন্নয়নের মাধ্যমে আমরা পরিবারগুলোর বিশ্বস্ত সহযোগী হয়ে উঠতে চাই, যাতে শিক্ষার্থীরা আন্তর্জাতিক অভিজ্ঞতা অর্জন করে নিজ নিজ সমাজে অর্থবহ অবদান রাখতে পারে।"
+                  : "We envision a future where more students from Bangladesh can explore quality education around the world through reliable information and guidance centred on their needs. By building trust, showing care, and continually improving our services, we aspire to become a trusted partner for families and help students gain international experience they can use to contribute to their communities."}
               </p>
             </article>
           </div>
@@ -459,116 +599,57 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* China */}
-            <div className="marketing-glass-card relative rounded-2xl p-7 transition-all hover:border-orange-300 hover:shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="font-heading text-xl font-semibold text-slate-900">
-                  🇨🇳 {isBn ? "চীন" : "China"}
-                </span>
-                <span className="rounded-full bg-orange-100 px-3 py-1 text-[0.7rem] font-bold text-orange-800">
-                  {isBn ? "৮+ বছরের মূল ভিত্তি" : "8+ Years Core Focus"}
-                </span>
-              </div>
-              <h3 className="mt-4 text-sm font-bold text-slate-900">
-                {isBn
-                  ? "আমাদের দীর্ঘতম বাস্তব অভিজ্ঞতা"
-                  : "Our Longest-Standing Area of Experience"}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {isBn
-                  ? "বিশ্ববিদ্যালয়ে ভর্তি, সরকারি ও প্রাদেশিক স্কলারশিপের সুযোগ এবং JW201/JW202 ভিসা ডকুমেন্টেশনে শতভাগ পেশাদার গাইডেন্স।"
-                  : "Support with university applications, government and university scholarship options, JW201/JW202 documentation, and student visa preparation."}
-              </p>
-            </div>
+          <div className="mt-12 flex flex-wrap justify-center gap-6">
+            {STUDY_DESTINATIONS.map((dest) => {
+              const name = isBn ? dest.nameBn : dest.nameEn;
+              const badge = isBn ? dest.badgeBn : dest.badgeEn;
+              const title = isBn ? dest.titleBn : dest.titleEn;
+              const desc = isBn ? dest.descBn : dest.descEn;
 
-            {/* India */}
-            <div className="marketing-glass-card relative rounded-2xl p-7 transition-all hover:border-emerald-300 hover:shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="font-heading text-xl font-semibold text-slate-900">
-                  🇮🇳 {isBn ? "ভারত" : "India"}
-                </span>
-                <span className="rounded-full bg-emerald-100 px-3 py-1 text-[0.7rem] font-bold text-emerald-800">
-                  {isBn ? "ভর্তি গাইডেন্স" : "Admission Guidance"}
-                </span>
-              </div>
-              <h3 className="mt-4 text-sm font-bold text-slate-900">
-                {isBn
-                  ? "ভর্তি আবেদন ও স্কলারশিপ সহায়তা"
-                  : "Admission Applications & Scholarship Guidance"}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {isBn
-                  ? "বিশ্ববিদ্যালয় ও কোর্স নির্বাচন, ভর্তি আবেদন, উপলব্ধ টিউশন ফি ছাড় এবং স্টুডেন্ট ভিসা প্রস্তুতিতে সহায়তা। সেবার পরিধি ও প্রযোজ্য খরচ আমাদের টিমের সাথে আলোচনা করুন।"
-                  : "Support with university and course selection, admission applications, available tuition fee waivers, and student visa preparation. Discuss the service scope and applicable costs with our team."}
-              </p>
-            </div>
+              return (
+                <div
+                  key={dest.id}
+                  className="marketing-glass-card group relative flex w-full flex-col justify-between rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-950/5 sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className="text-2xl leading-none select-none"
+                          role="img"
+                          aria-label={name}
+                        >
+                          {dest.flag}
+                        </span>
+                        <span className="font-heading text-lg font-bold tracking-tight text-slate-900 transition-colors group-hover:text-orange-950">
+                          {name}
+                        </span>
+                      </div>
 
-            {/* Malaysia */}
-            <div className="marketing-glass-card relative rounded-2xl p-7 transition-all hover:border-sky-300 hover:shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="font-heading text-xl font-semibold text-slate-900">
-                  🇲🇾 {isBn ? "মালয়েশিয়া" : "Malaysia"}
-                </span>
-                <span className="rounded-full bg-sky-100 px-3 py-1 text-[0.7rem] font-bold text-sky-800">
-                  EMGS & Dual Degrees
-                </span>
-              </div>
-              <h3 className="mt-4 text-sm font-bold text-slate-900">
-                {isBn
-                  ? "গ্লোবাল ক্যাম্পাস ও আন্তর্জাতিক ক্যারিয়ার"
-                  : "University Admission & Student Pass Support"}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {isBn
-                  ? "বিশ্বমানের পাবলিক ও প্রাইভেট বিশ্ববিদ্যালয়ে ভর্তির যোগ্যতা, টিউশন খরচ, EMGS স্টুডেন্ট পাস প্রসেসিং এবং যুক্তরাজ্য/অস্ট্রেলিয়ান টুইনিং প্রোগ্রাম।"
-                  : "Guidance on university options, entry requirements, tuition costs, admission applications, and student pass documentation."}
-              </p>
-            </div>
+                      {dest.isCore ? (
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-200/90 bg-orange-50/90 px-3 py-1 text-[0.7rem] font-semibold text-orange-900 shadow-2xs">
+                          <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+                          {badge}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-200/90 bg-white/90 px-3 py-1 text-[0.7rem] font-medium text-slate-700 shadow-2xs">
+                          <span className="h-1.5 w-1.5 rounded-full bg-amber-500/80" />
+                          {badge}
+                        </span>
+                      )}
+                    </div>
 
-            {/* South Korea */}
-            <div className="marketing-glass-card relative rounded-2xl p-7 transition-all hover:border-purple-300 hover:shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="font-heading text-xl font-semibold text-slate-900">
-                  🇰🇷 {isBn ? "দক্ষিণ কোরিয়া" : "South Korea"}
-                </span>
-                <span className="rounded-full bg-purple-100 px-3 py-1 text-[0.7rem] font-bold text-purple-800">
-                  D-2 / D-4 Visa
-                </span>
-              </div>
-              <h3 className="mt-4 text-sm font-bold text-slate-900">
-                {isBn
-                  ? "হাই-টেক শিক্ষা ও স্কলারশিপের সুযোগ"
-                  : "High-Tech Programs & GKS Pathways"}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {isBn
-                  ? "উপযুক্ত একাডেমিক প্রোগ্রাম, সরকারি ও প্রাতিষ্ঠানিক স্কলারশিপ, কোরিয়ান ল্যাঙ্গুয়েজ ট্রেনিং (TOPIK/IELTS) এবং সুনির্দিষ্ট ভিসা প্রস্তুতি।"
-                  : "Guidance on suitable undergraduate & graduate degrees, scholarship applications, language criteria, and meticulous Korean embassy visa filing."}
-              </p>
-            </div>
+                    <h3 className="mt-4 text-sm font-bold text-slate-900">
+                      {title}
+                    </h3>
 
-            {/* Japan */}
-            <div className="marketing-glass-card relative rounded-2xl p-7 transition-all hover:border-rose-300 hover:shadow-md sm:col-span-2 lg:col-span-2">
-              <div className="flex items-center justify-between">
-                <span className="font-heading text-xl font-semibold text-slate-900">
-                  🇯🇵 {isBn ? "জাপান" : "Japan"}
-                </span>
-                <span className="rounded-full bg-rose-100 px-3 py-1 text-[0.7rem] font-bold text-rose-800">
-                  {isBn ? "নতুন দিগন্ত" : "Academic Excellence"}
-                </span>
-              </div>
-              <h3 className="mt-4 text-sm font-bold text-slate-900">
-                {isBn
-                  ? "মানসম্মত শিক্ষা ও আধুনিক প্রযুক্তি"
-                  : "Specialized Guidance for Academic Opportunities"}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {isBn
-                  ? "জাপানের বিশিষ্ট শিক্ষা প্রতিষ্ঠানগুলোতে উপযুক্ত কোর্স নির্বাচন, ভর্তি আবেদনের যোগ্যতা, COE সংক্রান্ত প্রস্তুতি এবং প্রয়োজনীয় দিকনির্দেশনা।"
-                  : "Guidance for Bangladeshi students exploring suitable academic opportunities in Japan, clarifying language expectations, eligibility prerequisites, and application procedures."}
-              </p>
-            </div>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </PageShell>
       </section>
@@ -712,22 +793,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               <p className="text-[0.7rem] font-semibold tracking-[0.18em] text-[var(--brand-blue)] uppercase">
                 {isBn ? "নেতৃত্বের বার্তা" : "A message from our CEO"}
               </p>
-              <div className="mt-6 flex aspect-[4/3] max-w-sm items-center justify-center rounded-2xl border border-slate-300/60 bg-[var(--brand-navy)] text-white">
-                <div className="text-center">
-                  <span
-                    aria-hidden="true"
-                    className="font-serif text-7xl tracking-tight text-white/90"
-                  >
-                    RH
-                  </span>
-                  <div
-                    aria-hidden="true"
-                    className="mx-auto mt-5 h-px w-12 bg-orange-400"
-                  />
-                  <p className="mt-5 text-xs tracking-[0.18em] text-white/65 uppercase">
-                    CEO &amp; Co-founder
-                  </p>
-                </div>
+              <div className="mt-6 aspect-[3/4] max-w-sm overflow-hidden rounded-2xl border border-slate-300/60">
+                <img
+                  src="/images/ceo-rakib-hasan.jpg"
+                  alt="Engr. MD Rakib Hasan – CEO & Co-founder"
+                  className="h-full w-full object-cover object-center"
+                />
               </div>
               <p className="font-display mt-5 text-lg font-semibold text-[var(--brand-navy)]">
                 Engr. MD Rakib Hasan

@@ -40,9 +40,99 @@ export function SiteFooter({
   return (
     <footer
       lang={locale}
-      className="mt-auto border-t border-slate-800 bg-[#08111D] text-slate-300"
+      className="relative mt-auto overflow-hidden border-t border-slate-800 bg-[#08111D] text-slate-300"
     >
-      <PageShell className="py-12 sm:py-16">
+      {/* 🏷️ Left Vertical Architectural "SAC" Watermark (Rotated -90°, Symmetrically Aligned & Enlarged) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1 sm:left-3 lg:left-6 top-1/2 z-0 -translate-y-1/2 select-none"
+      >
+        <svg
+          viewBox="0 0 160 480"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-72 w-auto sm:h-96 lg:h-[28rem] select-none pointer-events-none opacity-40 transition-all"
+          role="img"
+          aria-label="SAC left vertical watermark"
+        >
+          <defs>
+            <linearGradient id="sacVerticalGradLeft" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#EA580C" stopOpacity="0.16" />
+              <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.07" />
+              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.03" />
+            </linearGradient>
+            <linearGradient id="sacVerticalStrokeLeft" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#EA580C" stopOpacity="0.38" />
+              <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.14" />
+            </linearGradient>
+          </defs>
+          <g transform="rotate(-90 80 240)">
+            <text
+              x="80"
+              y="240"
+              dominantBaseline="central"
+              textAnchor="middle"
+              fontSize="145"
+              fontWeight="900"
+              fontFamily="system-ui, -apple-system, sans-serif"
+              letterSpacing="0.25em"
+              fill="url(#sacVerticalGradLeft)"
+              stroke="url(#sacVerticalStrokeLeft)"
+              strokeWidth="1.4"
+            >
+              SAC
+            </text>
+          </g>
+        </svg>
+      </div>
+
+      {/* 🏷️ Right Vertical Architectural "SAC" Watermark (Rotated +90°, Symmetrically Aligned & Enlarged) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-1 sm:right-3 lg:right-6 top-1/2 z-0 -translate-y-1/2 select-none"
+      >
+        <svg
+          viewBox="0 0 160 480"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-72 w-auto sm:h-96 lg:h-[28rem] select-none pointer-events-none opacity-40 transition-all"
+          role="img"
+          aria-label="SAC right vertical watermark"
+        >
+          <defs>
+            <linearGradient id="sacVerticalGradRight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#EA580C" stopOpacity="0.16" />
+              <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.07" />
+              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.03" />
+            </linearGradient>
+            <linearGradient id="sacVerticalStrokeRight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#EA580C" stopOpacity="0.38" />
+              <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.14" />
+            </linearGradient>
+          </defs>
+          <g transform="rotate(90 80 240)">
+            <text
+              x="80"
+              y="240"
+              dominantBaseline="central"
+              textAnchor="middle"
+              fontSize="145"
+              fontWeight="900"
+              fontFamily="system-ui, -apple-system, sans-serif"
+              letterSpacing="0.25em"
+              fill="url(#sacVerticalGradRight)"
+              stroke="url(#sacVerticalStrokeRight)"
+              strokeWidth="1.4"
+            >
+              SAC
+            </text>
+          </g>
+        </svg>
+      </div>
+
+      <PageShell className="relative z-10 py-12 sm:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Brand & Mission Column (3.5 cols) */}
           <div className="lg:col-span-3">
@@ -53,7 +143,7 @@ export function SiteFooter({
             >
               <Image
                 src="/logo.png"
-                alt="Study Abroad Consultancy"
+                alt="Study Abroad Consultant"
                 width={200}
                 height={130}
                 className="h-12 w-auto object-contain sm:h-14 md:h-15"
@@ -248,7 +338,7 @@ export function SiteFooter({
                   style={{ border: 0 }}
                   allowFullScreen={false}
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Study Abroad Consultancy Office Location Map"
+                  title="Study Abroad Consultant Office Location Map"
                   className="h-full w-full opacity-90 transition-opacity duration-300 hover:opacity-100"
                 />
               </div>
@@ -262,7 +352,7 @@ export function SiteFooter({
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-xs font-semibold text-white">
-                      Study Abroad Consultancy
+                      Study Abroad Consultant
                     </p>
                     <p className="truncate text-[0.68rem] text-slate-400">
                       Nikunja 2, Khilkhet, Dhaka

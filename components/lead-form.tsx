@@ -2,10 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  ArrowRight,
   ChevronDown,
   Compass,
-  Lock,
   Mail,
   MessageCircle,
   MessageSquare,
@@ -393,7 +391,7 @@ export function LeadForm({
         </div>
       ) : null}
 
-      {/* 8. Full-Width CTA Button & Trust Seal */}
+      {/* Submit */}
       <div className="space-y-2.5 pt-1">
         <button
           type="submit"
@@ -402,15 +400,8 @@ export function LeadForm({
             "btn-sunset focus-ring group w-full min-h-12.5 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm font-bold text-white shadow-lg hover:shadow-orange-500/30 active:scale-[0.99] transition-all disabled:opacity-60 flex",
           )}
         >
-          <Sparkles className="size-4 text-amber-200" />
           <span>{form.formState.isSubmitting ? copy.submitting : copy.submit}</span>
-          <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
         </button>
-
-        <div className="flex items-center justify-center gap-1.5 text-center text-[0.72rem] text-slate-500">
-          <Lock className="size-3 text-slate-400" />
-          <span>100% Confidential · Direct WhatsApp Delivery · Zero Spam</span>
-        </div>
       </div>
     </form>
   );

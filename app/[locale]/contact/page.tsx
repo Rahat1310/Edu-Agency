@@ -31,5 +31,5 @@ export default async function Contact({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
 
-  return <ContactPage dict={dict} />;
+  return <ContactPage dict={dict} locale={locale} />;
 }

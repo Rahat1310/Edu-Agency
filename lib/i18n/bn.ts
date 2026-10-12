@@ -2,9 +2,9 @@ import type { Dictionary } from "@/lib/i18n/types";
 
 export const bn: Dictionary = {
   meta: {
-    siteName: "স্টাডি অ্যাব্রড কনসালটেন্সি",
+    siteName: "স্টাডি অ্যাব্রড কনসালট্যান্ট",
     defaultTitle:
-      "স্টাডি অ্যাব্রড কনসালটেন্সি — বাংলাদেশ থেকে চারটি বিশেষায়িত স্টাডি রুট",
+      "স্টাডি অ্যাব্রড কনসালট্যান্ট — বাংলাদেশ থেকে চারটি বিশেষায়িত স্টাডি রুট",
     defaultDescription:
       "চীন, ভারত, মালয়েশিয়া ও দক্ষিণ কোরিয়ায় আবেদন করা বাংলাদেশি শিক্ষার্থীদের জন্য ঢাকার গাইডেন্স।",
   },
@@ -12,7 +12,7 @@ export const bn: Dictionary = {
     skipToContent: "মূল বিষয়ে যান",
     topBar: "শিক্ষার্থী ও পরিবারের জন্য ঢাকার গাইডেন্স",
     brandTag: "বাংলাদেশ → গ্লোবাল ক্যাম্পাস",
-    brandAria: "স্টাডি অ্যাব্রড কনসালটেন্সি হোম",
+    brandAria: "স্টাডি অ্যাব্রড কনসালট্যান্ট হোম",
     navAria: "প্রধান নেভিগেশন",
     mobileNavAria: "মোবাইল নেভিগেশন",
     openMenu: "নেভিগেশন মেনু খুলুন",
@@ -35,7 +35,7 @@ export const bn: Dictionary = {
     footerConnect: "সংযোগ",
     footerPrivacy: "গোপনীয়তা ও আইন",
     footerNewTab: "(নতুন ট্যাবে খুলবে)",
-    footerCredit: "শিক্ষার্থীর জন্য পথ। পরিবারের জন্য আস্থা।",
+    footerCredit: "সীমানা পেরিয়ে পড়াশোনা। স্বপ্নের কোনো সীমা নেই।",
     footerContactTitle: "প্রধান কার্যালয় ও যোগাযোগ",
     footerAddressLabel: "ঢাকা প্রধান অফিস",
     footerAddressLine1: "১ম তলা, বাসা ১৬, রোড ১৪",
