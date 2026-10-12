@@ -87,7 +87,9 @@ export function LeadForm({
           </Title>
         ) : null}
         <div className="rounded-2xl border border-emerald-200 bg-emerald-50/80 p-5 text-sm leading-relaxed text-emerald-900 shadow-2xs">
-          <p className="font-bold text-emerald-950">Thank you! Your submission was received.</p>
+          <p className="font-bold text-emerald-950">
+            Thank you! Your submission was received.
+          </p>
           <p className="mt-1 text-emerald-800">{copy.success}</p>
         </div>
       </div>
@@ -96,29 +98,38 @@ export function LeadForm({
 
   return (
     <form
-      className={cn("relative", compact ? "space-y-3.5" : "space-y-4.5", className)}
+      className={cn(
+        "relative",
+        compact ? "space-y-3.5" : "space-y-4.5",
+        className,
+      )}
       onSubmit={form.handleSubmit(async (values) => {
         setFormError(null);
 
-        const response = await fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: values.name,
-            phone: values.phone,
-            whatsapp: values.whatsapp,
-            email: values.email,
-            destinationInterest: values.destinationInterest,
-            message: values.message,
-            consent: values.consent,
-            turnstileToken: values.turnstileToken,
-            source,
-            [HONEYPOT_FIELD]: values[HONEYPOT_FIELD],
-          }),
-        });
+        if (siteKey && !values.turnstileToken) {
+          setFormError(copy.turnstileError);
+          return;
+        }
 
         let result: LeadSubmitResult;
         try {
+          const response = await fetch("/api/leads", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: values.name,
+              phone: values.phone,
+              whatsapp: values.whatsapp,
+              email: values.email,
+              destinationInterest: values.destinationInterest,
+              message: values.message,
+              consent: values.consent,
+              turnstileToken: values.turnstileToken,
+              source,
+              [HONEYPOT_FIELD]: values[HONEYPOT_FIELD],
+            }),
+          });
+
           result = (await response.json()) as LeadSubmitResult;
         } catch {
           setFormError(copy.genericError);
@@ -205,7 +216,7 @@ export function LeadForm({
       <div>
         <label
           htmlFor={`${fieldId}-name`}
-          className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+          className="block text-xs font-bold tracking-wider text-slate-700 uppercase"
         >
           {copy.nameLabel} <span className="text-rose-500">*</span>
         </label>
@@ -230,7 +241,7 @@ export function LeadForm({
         <div>
           <label
             htmlFor={`${fieldId}-phone`}
-            className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+            className="block text-xs font-bold tracking-wider text-slate-700 uppercase"
           >
             {copy.phoneLabel} <span className="text-rose-500">*</span>
           </label>
@@ -255,7 +266,7 @@ export function LeadForm({
         <div>
           <label
             htmlFor={`${fieldId}-whatsapp`}
-            className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+            className="block text-xs font-bold tracking-wider text-slate-700 uppercase"
           >
             {copy.whatsappLabel}
           </label>
@@ -282,7 +293,7 @@ export function LeadForm({
       <div>
         <label
           htmlFor={`${fieldId}-email`}
-          className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+          className="block text-xs font-bold tracking-wider text-slate-700 uppercase"
         >
           {copy.emailLabel}
         </label>
@@ -307,7 +318,7 @@ export function LeadForm({
       <div>
         <label
           htmlFor={`${fieldId}-destination`}
-          className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+          className="block text-xs font-bold tracking-wider text-slate-700 uppercase"
         >
           {copy.destinationLabel} <span className="text-rose-500">*</span>
         </label>
@@ -317,7 +328,10 @@ export function LeadForm({
           </span>
           <select
             id={`${fieldId}-destination`}
-            className={cn(inputWithIconClass, "appearance-none pr-10 cursor-pointer")}
+            className={cn(
+              inputWithIconClass,
+              "cursor-pointer appearance-none pr-10",
+            )}
             aria-invalid={Boolean(form.formState.errors.destinationInterest)}
             {...form.register("destinationInterest")}
           >
@@ -341,7 +355,7 @@ export function LeadForm({
       <div>
         <label
           htmlFor={`${fieldId}-message`}
-          className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+          className="block text-xs font-bold tracking-wider text-slate-700 uppercase"
         >
           {copy.messageLabel}
         </label>
@@ -353,7 +367,7 @@ export function LeadForm({
             id={`${fieldId}-message`}
             rows={compact ? 2 : 3}
             className={cn(
-              "w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-10 pr-3.5 py-2.5 text-sm font-medium text-slate-800 shadow-2xs transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,122,0,0.12)] focus:outline-none min-h-[85px]"
+              "min-h-[85px] w-full rounded-xl border border-slate-200 bg-slate-50/70 py-2.5 pr-3.5 pl-10 text-sm font-medium text-slate-800 shadow-2xs transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,122,0,0.12)] focus:outline-none",
             )}
             placeholder={copy.messagePlaceholder}
             aria-invalid={Boolean(form.formState.errors.message)}
@@ -365,10 +379,10 @@ export function LeadForm({
 
       {/* 6. Consent Checkbox */}
       <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-        <label className="flex items-start gap-2.5 text-xs leading-5 text-slate-600 cursor-pointer">
+        <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-5 text-slate-600">
           <input
             type="checkbox"
-            className="mt-0.5 size-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500/20 cursor-pointer accent-orange-600 shrink-0"
+            className="mt-0.5 size-4 shrink-0 cursor-pointer rounded border-slate-300 text-orange-600 accent-orange-600 focus:ring-orange-500/20"
             aria-invalid={Boolean(form.formState.errors.consent)}
             {...form.register("consent")}
           />
@@ -397,10 +411,12 @@ export function LeadForm({
           type="submit"
           disabled={form.formState.isSubmitting}
           className={cn(
-            "btn-sunset focus-ring group w-full min-h-12.5 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm font-bold text-white shadow-lg hover:shadow-orange-500/30 active:scale-[0.99] transition-all disabled:opacity-60 flex",
+            "btn-sunset focus-ring group flex min-h-12.5 w-full cursor-pointer items-center justify-center gap-2 rounded-xl text-sm font-bold text-white shadow-lg transition-all hover:shadow-orange-500/30 active:scale-[0.99] disabled:opacity-60",
           )}
         >
-          <span>{form.formState.isSubmitting ? copy.submitting : copy.submit}</span>
+          <span>
+            {form.formState.isSubmitting ? copy.submitting : copy.submit}
+          </span>
         </button>
       </div>
     </form>

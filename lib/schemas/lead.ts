@@ -63,18 +63,12 @@ export const leadFormSchema = z.object({
 });
 
 export const leadSubmissionSchema = leadFormSchema.extend({
-  turnstileToken: z
-    .string()
-    .trim()
-    .min(1, "Confirm you are not a robot before sending"),
+  turnstileToken: z.string().trim(),
   source: z.string().trim().max(40).optional(),
 });
 
 export const leadClientSchema = leadFormSchema.extend({
-  turnstileToken: z
-    .string()
-    .trim()
-    .min(1, "Confirm you are not a robot before sending"),
+  turnstileToken: z.string().trim(),
   [HONEYPOT_FIELD]: z.string().optional(),
 });
 

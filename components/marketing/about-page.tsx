@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Award,
@@ -15,7 +16,6 @@ import {
   MapPin,
   MessageCircle,
   PlaneTakeoff,
-  ShieldCheck,
   Users,
 } from "lucide-react";
 import * as motion from "framer-motion/client";
@@ -794,9 +794,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                 {isBn ? "নেতৃত্বের বার্তা" : "A message from our CEO"}
               </p>
               <div className="mt-6 aspect-[3/4] max-w-sm overflow-hidden rounded-2xl border border-slate-300/60">
-                <img
+                <Image
                   src="/images/ceo-rakib-hasan.jpg"
                   alt="Engr. MD Rakib Hasan – CEO & Co-founder"
+                  width={796}
+                  height={1024}
+                  sizes="(min-width: 1024px) 30vw, 384px"
                   className="h-full w-full object-cover object-center"
                 />
               </div>

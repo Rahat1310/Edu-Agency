@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
@@ -784,9 +785,12 @@ export function LeadershipAvatar({
       {/* Avatar Container with Subtle Outer Ring */}
       <div className="relative mb-5 flex size-28 items-center justify-center rounded-2xl border-2 border-stone-200 bg-stone-100 p-1 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-orange-500/50 group-hover:shadow-md sm:size-32">
         {imageSrc ? (
-          <img
+          <Image
             src={imageSrc}
             alt={`Portrait of ${name}`}
+            width={128}
+            height={128}
+            sizes="(min-width: 640px) 128px, 112px"
             className="size-full rounded-xl object-cover object-top"
           />
         ) : (
