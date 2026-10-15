@@ -98,7 +98,13 @@ export async function submitEligibilityQuiz(
     };
   }
 
-  const turnstile = await verifyTurnstileToken(parsed.data.turnstileToken, ip);
+  const turnstileConfigured = Boolean(
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ||
+    process.env.TURNSTILE_SECRET_KEY?.trim(),
+  );
+  const turnstile = turnstileConfigured
+    ? await verifyTurnstileToken(parsed.data.turnstileToken, ip)
+    : { ok: true as const };
 
   if (!turnstile.ok) {
     if (turnstile.reason === "missing_secret") {

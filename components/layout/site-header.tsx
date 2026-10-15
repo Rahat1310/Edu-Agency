@@ -20,6 +20,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { LanguageToggle } from "@/components/i18n/language-toggle";
 import { HeaderAuth } from "@/components/layout/header-auth";
+import { COST_CALCULATOR_ENABLED } from "@/lib/costs/config";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -475,9 +476,13 @@ export function SiteHeader({
                           {dict.chrome.nav.costs}
                         </span>
                         <p className="text-[0.73rem] text-slate-500">
-                          {locale === "bn"
-                            ? "টিউশন ফি, ভিসা খরচ ও জীবনযাত্রার রিয়েল-টাইম হিসাব"
-                            : "Calculate exact tuition, living costs, and BDT budget conversion"}
+                          {!COST_CALCULATOR_ENABLED
+                            ? locale === "bn"
+                              ? "শীঘ্রই আসছে"
+                              : "Coming soon"
+                            : locale === "bn"
+                              ? "টিউশন ফি, ভিসা খরচ ও জীবনযাত্রার রিয়েল-টাইম হিসাব"
+                              : "Calculate exact tuition, living costs, and BDT budget conversion"}
                         </p>
                       </div>
                     </Link>
@@ -727,7 +732,11 @@ export function SiteHeader({
                       <span className="text-xs">{dict.chrome.nav.costs}</span>
                     </div>
                     <span className="text-[0.65rem] text-slate-500">
-                      Calculator
+                      {COST_CALCULATOR_ENABLED
+                        ? "Calculator"
+                        : locale === "bn"
+                          ? "শীঘ্রই আসছে"
+                          : "Coming soon"}
                     </span>
                   </Link>
 

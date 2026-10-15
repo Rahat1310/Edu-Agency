@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
+import { programCountries, programLevels } from "@/db/schema";
 import { PageShell } from "@/components/layout/page-shell";
 import { MarketingEmptyState } from "@/components/marketing/empty-state";
 import { MarketingErrorState } from "@/components/marketing/error-state";
@@ -18,11 +19,7 @@ import type { BdtRates } from "@/lib/fx/load-rates";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
-import {
-  publicProgramCountries,
-  publicProgramLevels,
-  type CostCalculatorProgramOption,
-} from "@/lib/programs-public";
+import type { CostCalculatorProgramOption } from "@/lib/programs-public";
 
 type CostCalculatorPageProps = {
   locale: Locale;
@@ -76,7 +73,7 @@ export function CostCalculatorPage({
               className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800 normal-case focus:border-orange-500"
             >
               <option value="">{copy.destinationPlaceholder}</option>
-              {publicProgramCountries.map((country) => (
+              {programCountries.map((country) => (
                 <option key={country} value={country}>
                   {copy.destinations[country]}
                 </option>
@@ -91,7 +88,7 @@ export function CostCalculatorPage({
               className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800 normal-case focus:border-orange-500"
             >
               <option value="">{copy.allLevels}</option>
-              {publicProgramLevels.map((level) => (
+              {programLevels.map((level) => (
                 <option key={level} value={level}>
                   {copy.levels[level]}
                 </option>

@@ -15,6 +15,10 @@ import {
   educationLevels,
   eligibilityDestinations,
 } from "@/lib/eligibility";
+import {
+  eligibilitySteps as STEPS,
+  firstInvalidEligibilityStep,
+} from "@/lib/eligibility-form";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -25,14 +29,6 @@ import { cn } from "@/lib/utils";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 export type EligibilityCopy = Dictionary["eligibility"];
-
-const STEPS = [
-  "destination",
-  "education",
-  "tests",
-  "budget",
-  "contact",
-] as const;
 
 type Step = (typeof STEPS)[number];
 
@@ -62,6 +58,7 @@ export function EligibilityQuiz({
 
   const form = useForm({
     resolver: zodResolver(eligibilityClientSchema),
+    shouldUnregister: false,
     defaultValues: {
       name: "",
       phone: "",
@@ -84,6 +81,16 @@ export function EligibilityQuiz({
   const step = STEPS[stepIndex] ?? "destination";
   const isLast = step === "contact";
 
+  function showValidationErrors(fields: string[], message?: string) {
+    setStepIndex(firstInvalidEligibilityStep(fields));
+    setFormError(
+      message ||
+        (locale === "bn"
+          ? "ফলাফল দেখতে নিচের তথ্যগুলো ঠিক করুন।"
+          : "Please check the highlighted fields to see your result."),
+    );
+  }
+
   if (result) {
     return (
       <EligibilityResultCard
@@ -98,56 +105,68 @@ export function EligibilityQuiz({
   return (
     <form
       className="relative space-y-6"
-      onSubmit={form.handleSubmit(async (values) => {
-        setFormError(null);
-
-        const response = await fetch("/api/eligibility-quiz", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...values,
-            source: "eligibility-quiz",
-          }),
-        });
-
-        let payload: QuizSubmitResult;
-        try {
-          payload = (await response.json()) as QuizSubmitResult;
-        } catch {
-          setFormError(copy.genericError);
-          setResetSignal((value) => value + 1);
-          return;
-        }
-
-        if (payload.ok) {
-          setResult(payload.result);
-          return;
-        }
-
-        if (payload.fields) {
-          for (const [name, messages] of Object.entries(payload.fields)) {
-            const message = messages[0];
-            if (!message) {
-              continue;
-            }
-            form.setError(name as keyof typeof values, { message });
-          }
-        }
-
-        if (payload.code === "turnstile") {
-          setFormError(copy.turnstileError);
-        } else if (payload.code === "rate_limit") {
-          setFormError(copy.rateLimitError);
-        } else if (payload.code === "config") {
-          setFormError(copy.configError);
-        } else if (payload.code === "validation") {
+      onSubmit={form.handleSubmit(
+        async (values) => {
           setFormError(null);
-        } else {
-          setFormError(payload.message || copy.genericError);
-        }
 
-        setResetSignal((value) => value + 1);
-      })}
+          if (siteKey && !values.turnstileToken) {
+            form.setError("turnstileToken", { message: copy.turnstileError });
+            return;
+          }
+
+          let payload: QuizSubmitResult;
+          try {
+            const response = await fetch("/api/eligibility-quiz", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ...values,
+                source: "eligibility-quiz",
+              }),
+            });
+            payload = (await response.json()) as QuizSubmitResult;
+          } catch {
+            setFormError(copy.genericError);
+            setResetSignal((value) => value + 1);
+            return;
+          }
+
+          if (payload.ok) {
+            setResult(payload.result);
+            return;
+          }
+
+          if (payload.fields) {
+            for (const [name, messages] of Object.entries(payload.fields)) {
+              const message = messages[0];
+              if (!message) {
+                continue;
+              }
+              form.setError(name as keyof typeof values, { message });
+            }
+          }
+
+          if (payload.code === "turnstile") {
+            setFormError(copy.turnstileError);
+          } else if (payload.code === "rate_limit") {
+            setFormError(copy.rateLimitError);
+          } else if (payload.code === "config") {
+            setFormError(copy.configError);
+          } else if (payload.code === "validation") {
+            showValidationErrors(
+              Object.keys(payload.fields ?? {}),
+              Object.values(payload.fields ?? {}).flat()[0],
+            );
+          } else {
+            setFormError(payload.message || copy.genericError);
+          }
+
+          setResetSignal((value) => value + 1);
+        },
+        (errors) => {
+          showValidationErrors(Object.keys(errors));
+        },
+      )}
       noValidate
     >
       <ol className="flex flex-wrap gap-2" aria-label={copy.progressLabel}>
@@ -191,7 +210,7 @@ export function EligibilityQuiz({
       </div>
 
       {step === "destination" ? (
-        <fieldset>
+        <fieldset key="destination">
           <legend className="text-sm font-bold text-[var(--brand-navy)]">
             {copy.destinationLabel}
           </legend>
@@ -221,7 +240,7 @@ export function EligibilityQuiz({
       ) : null}
 
       {step === "education" ? (
-        <div>
+        <div key="education">
           <label
             htmlFor="quiz-education"
             className="text-sm font-bold text-[var(--brand-navy)]"
@@ -246,7 +265,7 @@ export function EligibilityQuiz({
       ) : null}
 
       {step === "tests" ? (
-        <div className="space-y-5">
+        <div key="tests" className="space-y-5">
           <p className="text-sm leading-6 text-[var(--brand-ink)]/80">
             {copy.testsIntro}
           </p>
@@ -313,7 +332,7 @@ export function EligibilityQuiz({
       ) : null}
 
       {step === "budget" ? (
-        <fieldset>
+        <fieldset key="budget">
           <legend className="text-sm font-bold text-[var(--brand-navy)]">
             {copy.budgetLabel}
           </legend>
@@ -341,7 +360,7 @@ export function EligibilityQuiz({
       ) : null}
 
       {step === "contact" ? (
-        <div className="space-y-5">
+        <div key="contact" className="space-y-5">
           <p className="text-sm leading-6 text-[var(--brand-ink)]/80">
             {copy.contactIntro}
           </p>
@@ -436,11 +455,7 @@ export function EligibilityQuiz({
                 }
                 resetSignal={resetSignal}
               />
-            ) : (
-              <p className="text-sm text-[var(--muted-foreground)]">
-                {copy.configError}
-              </p>
-            )}
+            ) : null}
             <FieldError
               message={form.formState.errors.turnstileToken?.message}
             />
@@ -460,6 +475,7 @@ export function EligibilityQuiz({
         ) : null}
         {isLast ? (
           <button
+            key="submit"
             type="submit"
             disabled={form.formState.isSubmitting}
             className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold text-white shadow-md hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
@@ -468,6 +484,7 @@ export function EligibilityQuiz({
           </button>
         ) : (
           <button
+            key="next"
             type="button"
             className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold text-white shadow-md hover:scale-[1.02] active:scale-[0.98]"
             onClick={async () => {

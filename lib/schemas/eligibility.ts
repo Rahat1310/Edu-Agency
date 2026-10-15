@@ -18,7 +18,8 @@ const optionalScore = (max: number, label: string) =>
         .min(0, `${label} is too low`)
         .max(max, `${label} is too high`),
     ])
-    .transform((value) => (typeof value === "number" ? value : undefined));
+    .transform((value) => (typeof value === "number" ? value : undefined))
+    .optional();
 
 const phoneSchema = z
   .string()
@@ -67,10 +68,7 @@ export const eligibilitySubmissionSchema = eligibilityAnswersSchema.extend({
   consent: z.boolean().refine((value) => value === true, {
     error: "Consent is required before we can store this result",
   }),
-  turnstileToken: z
-    .string()
-    .trim()
-    .min(1, "Confirm you are not a robot before sending"),
+  turnstileToken: z.string().trim(),
 });
 
 export const eligibilityClientSchema = eligibilitySubmissionSchema.extend({
