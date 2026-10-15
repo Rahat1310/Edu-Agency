@@ -1,23 +1,18 @@
 "use client";
-
 import Link from "next/link";
 import { ArrowRight, Compass, ShieldCheck, Users } from "lucide-react";
 import * as motion from "framer-motion/client";
-
 import { PageShell } from "@/components/layout/page-shell";
 import { EducationJourneyIllustration } from "@/components/marketing/about-illustrations";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
-
 interface HomeAboutSectionProps {
   locale: Locale;
   dict?: Dictionary;
 }
-
 export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
   const isBn = locale === "bn";
-
   return (
     <section className="relative overflow-hidden border-b border-stone-200/80 bg-white py-16 sm:py-24">
       <PageShell>
@@ -70,8 +65,8 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
             <div className="mt-4 inline-flex w-fit items-center gap-2 text-xs font-medium text-slate-600">
               <span>
                 {isBn
-                  ? "৮+ বছরের চীন উচ্চশিক্ষা অভিজ্ঞতা"
-                  : "8+ Years of China-Focused Education Experience"}
+                  ? "চীন উচ্চশিক্ষায় ১২+ বছরের অভিজ্ঞতা, বিশ্বজুড়ে সম্ভাবনা"
+                  : "12+ Years of China Expertise. Global Opportunities."}
               </span>
             </div>
 
@@ -89,8 +84,8 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
               </p>
               <p>
                 {isBn
-                  ? "চীন-কেন্দ্রিক উচ্চশিক্ষা কনসালটেন্সিতে আট বছরেরও বেশি অভিজ্ঞতার ওপর ভিত্তি করে, আমরা আমাদের দক্ষতা ও সেবাকে আরও বেশি আন্তর্জাতিক গন্তব্য ও সম্ভাবনায় সম্প্রসারিত করছি।"
-                  : "Building on more than eight years of experience in China-focused education consultancy, we are extending our expertise to more destinations and opportunities."}
+                  ? "চীন-কেন্দ্রিক উচ্চশিক্ষা কনসালটেন্সিতে বারো বছরেরও বেশি অভিজ্ঞতার ওপর ভিত্তি করে, আমরা আমাদের দক্ষতা ও সেবাকে আরও বেশি আন্তর্জাতিক গন্তব্য ও সম্ভাবনায় সম্প্রসারিত করছি।"
+                  : "Building on more than twelve years of experience in China-focused education consultancy, we are extending our expertise to more destinations and opportunities."}
               </p>
               <p className="font-medium text-slate-800">
                 {isBn

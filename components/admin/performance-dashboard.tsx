@@ -1,14 +1,6 @@
 "use client";
-
 import Link from "next/link";
-
 import { DeskEmptyState } from "@/components/desk/empty-state";
-import {
-  DeskPreviewBar,
-  DeskPreviewError,
-  useDeskPreview,
-} from "@/components/desk/preview";
-import { DeskTableSkeleton } from "@/components/desk/skeleton";
 import { leadStatusLabels, leadStatusOptions } from "@/lib/leads/labels";
 import {
   performanceHref,
@@ -20,60 +12,24 @@ import {
 } from "@/lib/performance/stats";
 import type { PerformanceSnapshot } from "@/lib/performance/types";
 import { cn } from "@/lib/utils";
-
 function formatCount(value: number): string {
   return new Intl.NumberFormat("en-US").format(value);
 }
-
 function formatPercent(value: number | null): string {
   return value === null ? "—" : `${value}%`;
 }
-
 export function PerformanceDashboard({
   snapshot,
 }: {
   snapshot: PerformanceSnapshot;
 }) {
-  const { preview, setPreview } = useDeskPreview();
   const query: PerformanceQuery = {
     range: snapshot.range,
     counselor: snapshot.combined ? "all" : (snapshot.counselorId ?? "all"),
   };
-  const empty =
-    preview === "empty" ||
-    (snapshot.assigned === 0 && snapshot.visa.decided === 0);
-
-  if (preview === "loading") {
-    return (
-      <div>
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <h1 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-ink)]">
-          Performance
-        </h1>
-        <p className="mt-1 text-[0.75rem] text-[var(--desk-ink-muted)]">
-          Loading stats…
-        </p>
-        <div className="mt-4">
-          <DeskTableSkeleton columns={2} rows={7} />
-        </div>
-      </div>
-    );
-  }
-
-  if (preview === "error") {
-    return (
-      <div>
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <div className="mt-3">
-          <DeskPreviewError onRetry={() => setPreview("off")} />
-        </div>
-      </div>
-    );
-  }
-
+  const empty = snapshot.assigned === 0 && snapshot.visa.decided === 0;
   return (
     <div>
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <h1 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-ink)]">
         Performance
       </h1>
@@ -198,7 +154,6 @@ export function PerformanceDashboard({
     </div>
   );
 }
-
 function StatCard({
   label,
   value,

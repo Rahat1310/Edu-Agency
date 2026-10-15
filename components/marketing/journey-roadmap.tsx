@@ -3,19 +3,26 @@
 import { useRef } from "react";
 import Link from "next/link";
 import {
-  Compass,
-  GraduationCap,
-  FileText,
-  Send,
-  Landmark,
-  ShieldCheck,
-  PlaneTakeoff,
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import {
   ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  Sparkles,
+  Check,
+  Compass,
+  FileText,
+  GraduationCap,
+  Landmark,
   Plane,
+  PlaneTakeoff,
+  School,
+  Send,
+  ShieldCheck,
 } from "lucide-react";
+
 import { PageShell } from "@/components/layout/page-shell";
 import { SectionHeading } from "@/components/marketing/section-heading";
 import type { Locale } from "@/lib/i18n/config";
@@ -23,363 +30,203 @@ import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
-interface JourneyRoadmapProps {
-  locale: Locale;
-  dict: Dictionary;
-}
-
-const STEP_CONFIGS = [
-  {
-    icon: Compass,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
-  {
-    icon: GraduationCap,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
-  {
-    icon: FileText,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
-  {
-    icon: Send,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
-  {
-    icon: Landmark,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
-  {
-    icon: ShieldCheck,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
-  {
-    icon: PlaneTakeoff,
-    tintClass: "marketing-glass-card",
-    iconBoxClass: "bg-slate-100 text-slate-700 border-transparent",
-    pillClass: "bg-transparent text-slate-500 border-transparent",
-    dotColor: "#16704f",
-  },
+const icons = [
+  Compass,
+  GraduationCap,
+  FileText,
+  Send,
+  Landmark,
+  ShieldCheck,
+  PlaneTakeoff,
+];
+const iconAnimations = [
+  { rotate: [0, -25, 15, 0] },
+  { y: [0, -6, 0], rotate: [0, -8, 0] },
+  { rotate: [0, -8, 0] },
+  { x: [0, 7, 0], y: [0, -7, 0] },
+  { y: [0, -4, 0] },
+  { scale: [1, 1.18, 1] },
+  { x: [0, 8, 0], y: [0, -8, 0] },
 ];
 
-const DEFAULT_STEP_CONFIG = STEP_CONFIGS[0]!;
+type JourneyStep = Dictionary["home"]["journeySteps"][number];
 
-export function JourneyRoadmap({ locale, dict }: JourneyRoadmapProps) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const steps = dict.home.journeySteps;
+function Milestone({
+  item,
+  index,
+  locale,
+}: {
+  item: JourneyStep;
+  index: number;
+  locale: Locale;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+  const reached = useInView(ref, { margin: "0px 0px -25% 0px", once: true });
+  const reducedMotion = useReducedMotion();
+  const highlighted = reached || reducedMotion;
+  const Icon = icons[index % icons.length] ?? Compass;
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -340, behavior: "smooth" });
-    }
-  };
+  return (
+    <li
+      ref={ref}
+      className="relative grid gap-5 pb-10 pl-14 last:pb-0 sm:pl-20 lg:grid-cols-2 lg:gap-24 lg:pb-16 lg:pl-0"
+    >
+      <span
+        aria-hidden="true"
+        className={cn(
+          "absolute top-7 left-4 z-10 flex size-6 -translate-x-1/2 items-center justify-center rounded-full border-4 border-[#f8f9fa] transition-colors duration-500 motion-reduce:transition-none sm:left-6 lg:left-1/2",
+          highlighted
+            ? "bg-orange-500 ring-1 ring-orange-200"
+            : "bg-slate-300 ring-1 ring-slate-200",
+        )}
+      >
+        {highlighted && <Check className="size-3 text-white" />}
+      </span>
+      <motion.article
+        initial={false}
+        animate={{ y: reached || reducedMotion ? 0 : 12 }}
+        transition={{ duration: reducedMotion ? 0 : 0.5 }}
+        className={cn(
+          "relative rounded-2xl border bg-white p-5 shadow-sm transition-colors duration-500 motion-reduce:transition-none sm:p-7",
+          index % 2 === 0 ? "lg:col-start-1" : "lg:col-start-2",
+          highlighted ? "border-orange-200" : "border-slate-200",
+        )}
+      >
+        <span
+          aria-hidden="true"
+          className={cn(
+            "absolute top-[38px] hidden h-px w-12 bg-orange-200 lg:block",
+            index % 2 === 0 ? "-right-12" : "-left-12",
+          )}
+        />
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-utility text-xs font-bold tracking-[0.14em] text-orange-700 uppercase">
+            {locale === "bn" ? "ধাপ" : "Step"} {item.step}
+          </span>
+          <span className="text-xs font-medium text-slate-500">{item.tag}</span>
+        </div>
+        <div className="mt-5 flex items-start gap-4">
+          <motion.span
+            aria-hidden="true"
+            animate={
+              reached && !reducedMotion
+                ? iconAnimations[index % iconAnimations.length]
+                : { rotate: 0, x: 0, y: 0, scale: 1 }
+            }
+            transition={{ duration: 0.8, delay: 0.15, ease: "easeInOut" }}
+            className={cn(
+              "flex size-12 shrink-0 items-center justify-center rounded-xl",
+              highlighted
+                ? "bg-orange-50 text-orange-600"
+                : "bg-slate-100 text-slate-500",
+            )}
+          >
+            <Icon className="size-6" />
+          </motion.span>
+          <div>
+            <h3 className="font-heading text-lg leading-snug font-bold text-slate-900 sm:text-xl">
+              {item.title}
+            </h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
+          </div>
+        </div>
+      </motion.article>
+    </li>
+  );
+}
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 340, behavior: "smooth" });
-    }
-  };
+export function JourneyRoadmap({
+  locale,
+  dict,
+}: {
+  locale: Locale;
+  dict: Dictionary;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start 70%", "end 70%"],
+  });
+  const markerTop = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section className="relative overflow-hidden bg-[#f8f9fa] py-20 sm:py-28">
-      {/* Soft Ambient Glows */}
-
-      <PageShell className="relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <SectionHeading
-              eyebrow={dict.home.journeyEyebrow}
-              title={
-                locale === "bn" ? (
-                  <>
-                    বাংলাদেশ থেকে{" "}
-                    <span className="text-[var(--brand-blue)]">
-                      স্বপ্নের ক্যাম্পাসে
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    From Bangladesh to{" "}
-                    <span className="text-[var(--brand-blue)]">
-                      Your Dream Campus
-                    </span>
-                  </>
-                )
-              }
-              lede={dict.home.journeyLede}
-            />
-          </div>
-
-          {/* Desktop Navigation Scroll Controls */}
-          <div className="hidden items-center gap-3 lg:flex">
-            <button
-              type="button"
-              onClick={scrollLeft}
-              className="flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all hover:border-orange-300 hover:bg-orange-50 hover:text-orange-600 active:scale-95"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
-            <button
-              type="button"
-              onClick={scrollRight}
-              className="flex size-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all hover:border-orange-300 hover:bg-orange-50 hover:text-orange-600 active:scale-95"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="size-5" />
-            </button>
-          </div>
+      <PageShell>
+        <div className="max-w-2xl">
+          <SectionHeading
+            eyebrow={dict.home.journeyEyebrow}
+            title={dict.home.journeyTitle}
+            lede={dict.home.journeyLede}
+          />
         </div>
 
-        {/* 
-          ======================================================================
-          1. DESKTOP VIEW: HORIZONTAL SCROLLABLE FLIGHT-PATH STRIP (lg+)
-          ======================================================================
-        */}
-        <div className="relative mt-14 hidden lg:block">
-          {/* Subtle Connecting Flight-Path Route Line behind cards */}
+        <div ref={trackRef} className="relative mt-12 sm:mt-16">
           <div
-            className="pointer-events-none absolute top-20 right-10 left-10 z-0 h-0.5 border-t-2 border-dashed border-slate-300"
             aria-hidden="true"
-          />
-
-          {/* Scrollable Track Container */}
-          <div
-            ref={scrollContainerRef}
-            className="no-scrollbar relative z-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pt-2 pb-6"
+            className="pointer-events-none absolute top-10 bottom-0 left-4 w-0.5 bg-slate-200 sm:left-6 lg:left-1/2"
           >
-            {steps.map((item, idx) => {
-              const cfg =
-                STEP_CONFIGS[idx % STEP_CONFIGS.length] ?? DEFAULT_STEP_CONFIG;
-              const IconComponent = cfg.icon;
-
-              return (
-                <div key={item.step} className="w-[305px] shrink-0 snap-start">
-                  <article
-                    className={cn(
-                      "group relative flex h-full flex-col justify-between rounded-2xl border p-6.5 shadow-2xs backdrop-blur-md transition-all duration-300",
-                      "hover:-translate-y-1 hover:shadow-md",
-                      cfg.tintClass,
-                    )}
-                  >
-                    {/* Top Flight Waypoint Dot & Connection Accent */}
-                    <div className="flex items-center justify-between gap-2">
-                      {/* Step Number Badge */}
-                      <span
-                        className={cn(
-                          "font-utility inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold tracking-widest uppercase shadow-2xs",
-                          cfg.pillClass,
-                        )}
-                      >
-                        <span
-                          className="size-2 rounded-full"
-                          style={{ backgroundColor: cfg.dotColor }}
-                        />
-                        STEP {item.step}
-                      </span>
-
-                      {/* Tag pill */}
-                      <span className="font-utility text-[0.68rem] font-bold tracking-wider text-slate-500 uppercase">
-                        {item.tag}
-                      </span>
-                    </div>
-
-                    {/* Step Icon with Micro Bounce Interaction */}
-                    <div className="mt-6 flex items-center gap-3">
-                      <div
-                        className={cn(
-                          "flex size-14 items-center justify-center rounded-2xl border shadow-xs transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3",
-                          cfg.iconBoxClass,
-                        )}
-                      >
-                        <IconComponent
-                          className="size-6.5"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      {idx < steps.length - 1 && (
-                        <div className="flex items-center text-slate-300 opacity-60">
-                          <span className="text-xs">┈┈┈</span>
-                          <Plane className="size-3.5 rotate-90 text-orange-400 opacity-70" />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Title & Body */}
-                    <div className="mt-5">
-                      <h3 className="font-heading text-lg font-bold tracking-tight text-slate-900 transition-colors group-hover:text-orange-600">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2.5 text-[0.88rem] leading-relaxed font-medium text-slate-600">
-                        {item.body}
-                      </p>
-                    </div>
-
-                    {/* Subtle Card Footer Indicator */}
-                    <div className="mt-6 flex items-center gap-1 border-t border-slate-200/60 pt-3 text-[0.7rem] font-bold text-slate-400">
-                      <span>Phase {idx + 1} of 7</span>
-                    </div>
-                  </article>
-                </div>
-              );
-            })}
-
-            {/* Finale Step: CTA Card to End the Strip */}
-            <div className="w-[340px] shrink-0 snap-start">
-              <aside className="relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-orange-300/80 bg-[var(--brand-blue)] p-7 text-white shadow-xl">
-                {/* Background Ambient Star */}
-                <div
-                  className="pointer-events-none absolute -top-8 -right-8 size-36 rounded-full bg-white/10 blur-xl"
-                  aria-hidden="true"
-                />
-
-                <div>
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 font-mono text-xs font-bold text-white backdrop-blur-md">
-                    <Sparkles className="size-3.5 text-amber-200" />
-                    <span>READY FOR TAKEOFF</span>
-                  </div>
-
-                  <h3 className="font-heading mt-6 text-2xl leading-tight font-semibold tracking-tight text-white">
-                    {locale === "bn"
-                      ? "আপনার প্রথম পদক্ষেপটি আজই নিন"
-                      : "Ready to Take Your First Step?"}
-                  </h3>
-
-                  <p className="mt-3 text-[0.92rem] leading-relaxed font-normal text-white/90">
-                    {locale === "bn"
-                      ? "অভিভাবকসহ আমাদের সাথে ফ্রি কাউন্সেলিং বুক করুন। সম্পূর্ণ রোডম্যাপ হাতে নিয়ে প্রস্তুতি শুরু করুন।"
-                      : "Book a complimentary session with our senior counselor. Get a personalized roadmap tailored to your profile & budget."}
-                  </p>
-                </div>
-
-                <div className="mt-8">
-                  <Link
-                    href={localizedHref("/contact", locale)}
-                    className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-center text-sm font-semibold text-orange-600 shadow-md transition-all hover:bg-orange-50"
-                  >
-                    <span>{dict.home.journeyCta}</span>
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </div>
-              </aside>
-            </div>
+            <motion.div
+              style={{ scaleY: reducedMotion ? 1 : scrollYProgress }}
+              className="absolute inset-0 origin-top bg-orange-500"
+            />
+            {!reducedMotion && (
+              <motion.span
+                style={{ top: markerTop }}
+                className="absolute left-1/2 z-20 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-[#f8f9fa] bg-orange-500 text-white shadow-sm"
+              >
+                <Plane className="size-4 rotate-[135deg]" />
+              </motion.span>
+            )}
           </div>
+          <ol className="relative">
+            {dict.home.journeySteps.map((item, index) => (
+              <Milestone
+                key={item.step}
+                item={item}
+                index={index}
+                locale={locale}
+              />
+            ))}
+          </ol>
         </div>
 
-        {/* 
-          ======================================================================
-          2. MOBILE VIEW: VERTICAL STACKED TIMELINE (< lg)
-          ======================================================================
-        */}
-        <div className="relative mt-12 block lg:hidden">
-          {/* Vertical Illuminated Flight-Path Spine */}
-          <div
-            className="absolute top-4 bottom-24 left-6 z-0 w-0.5 bg-[#f8f9fa]"
-            aria-hidden="true"
-          />
-
-          <ol className="relative z-10 space-y-6">
-            {steps.map((item, idx) => {
-              const cfg =
-                STEP_CONFIGS[idx % STEP_CONFIGS.length] ?? DEFAULT_STEP_CONFIG;
-              const IconComponent = cfg.icon;
-
-              return (
-                <li
-                  key={item.step}
-                  className="relative flex items-start gap-4 pl-2"
-                >
-                  {/* Waypoint Icon on the Spine */}
-                  <div
-                    className={cn(
-                      "relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-white shadow-md",
-                      cfg.iconBoxClass,
-                    )}
-                    style={{ backgroundColor: cfg.dotColor, color: "#ffffff" }}
-                  >
-                    <IconComponent className="size-4.5" aria-hidden="true" />
-                  </div>
-
-                  {/* Step Card */}
-                  <article
-                    className={cn(
-                      "group flex-1 rounded-2xl border p-5 shadow-2xs backdrop-blur-md transition-all duration-300 active:scale-[0.99]",
-                      cfg.tintClass,
-                    )}
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={cn(
-                          "font-utility rounded-full border px-2.5 py-0.5 text-[0.68rem] font-bold tracking-wider uppercase",
-                          cfg.pillClass,
-                        )}
-                      >
-                        STEP {item.step}
-                      </span>
-                      <span className="font-utility text-[0.65rem] font-bold text-slate-500 uppercase">
-                        {item.tag}
-                      </span>
-                    </div>
-
-                    <h3 className="font-heading mt-3 text-base font-bold text-slate-900">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
-                      {item.body}
-                    </p>
-                  </article>
-                </li>
-              );
-            })}
-
-            {/* Mobile Finale CTA Card */}
-            <li className="relative pt-4 pl-2">
-              <div className="overflow-hidden rounded-2xl bg-[var(--brand-blue)] p-6 text-white shadow-lg">
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-0.5 font-mono text-[0.68rem] font-bold text-white">
-                  <Sparkles className="size-3" />
-                  <span>START TODAY</span>
-                </span>
-                <h3 className="font-heading mt-3 text-xl font-semibold text-white">
-                  {locale === "bn"
-                    ? "আপনার প্রথম পদক্ষেপটি আজই নিন"
-                    : "Ready to Start Your Journey?"}
-                </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-white/90">
-                  {locale === "bn"
-                    ? "অভিভাবকসহ আমাদের সাথে ফ্রি কাউন্সেলিং বুক করুন।"
-                    : "Free 1-on-1 consultation with parents in the room."}
-                </p>
-                <div className="mt-5">
-                  <Link
-                    href={localizedHref("/contact", locale)}
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-center text-xs font-semibold text-orange-600 shadow-md transition-transform active:scale-98"
-                  >
-                    <span>{dict.home.journeyCta}</span>
-                    <ArrowRight className="size-3.5" />
-                  </Link>
-                </div>
-              </div>
-            </li>
-          </ol>
+        <div className="relative mt-10 pl-14 sm:pl-20 lg:mt-14 lg:pl-0">
+          <div className="rounded-3xl border border-orange-200 bg-white p-6 sm:p-10 lg:mx-auto lg:max-w-2xl lg:text-center">
+            <div
+              aria-hidden="true"
+              className="relative mb-6 inline-flex items-end gap-1 border-b-2 border-orange-200 px-5 pt-3 text-slate-800"
+            >
+              <span className="h-8 w-5 rounded-t-sm bg-orange-100" />
+              <School className="size-20 stroke-[1.2]" />
+              <span className="h-8 w-5 rounded-t-sm bg-orange-100" />
+              <span className="absolute -top-1 right-3 flex size-7 items-center justify-center rounded-full bg-emerald-50 text-emerald-700">
+                <Check className="size-4" />
+              </span>
+            </div>
+            <p className="font-utility text-xs font-bold tracking-[0.14em] text-orange-700 uppercase">
+              {locale === "bn"
+                ? "পরবর্তী গন্তব্য: ক্যাম্পাস"
+                : "Next stop: campus"}
+            </p>
+            <h3 className="font-heading mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+              {locale === "bn"
+                ? "ক্যাম্পাসের প্রথম দিনের প্রস্তুতি"
+                : "Ready for your first day"}
+            </h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">
+              {locale === "bn"
+                ? "পড়াশোনার পরিকল্পনা নিয়ে আমাদের কাউন্সেলরের সাথে কথা বলুন।"
+                : "Start with a conversation about your study plans. We’ll help you work through each step."}
+            </p>
+            <Link
+              href={localizedHref("/contact", locale)}
+              className="focus-ring mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-orange-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-700"
+            >
+              {dict.home.journeyCta}
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          </div>
         </div>
       </PageShell>
     </section>

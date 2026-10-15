@@ -1,16 +1,11 @@
 "use client";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { VisaRequirementRowActions } from "@/components/admin/visa-requirement-row-actions";
 import { DeskEmptyState } from "@/components/desk/empty-state";
 import { DeskErrorState } from "@/components/desk/error-state";
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
-import { DeskTableSkeleton } from "@/components/desk/skeleton";
 import type { ProgramCountry } from "@/db/schema";
 import { programCountryLabels } from "@/lib/programs-labels";
-
 export type VisaRequirementListRow = {
   id: string;
   destination: ProgramCountry;
@@ -21,7 +16,6 @@ export type VisaRequirementListRow = {
   canMoveUp: boolean;
   canMoveDown: boolean;
 };
-
 export function VisaRequirementsList({
   rows,
   loadError = false,
@@ -30,33 +24,14 @@ export function VisaRequirementsList({
   loadError?: boolean;
 }) {
   const router = useRouter();
-  const { preview, setPreview } = useDeskPreview();
-  const showLoading = preview === "loading";
-  const showError = preview === "error" || (preview === "off" && loadError);
-  const visibleRows = preview === "empty" ? [] : rows;
-
+  const showError = loadError;
+  const visibleRows = rows;
   function onRetry() {
-    if (preview === "error") {
-      setPreview("off");
-      return;
-    }
-
     router.refresh();
   }
-
-  if (showLoading) {
-    return (
-      <div className="mt-4 space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <DeskTableSkeleton columns={6} rows={8} />
-      </div>
-    );
-  }
-
   if (showError) {
     return (
       <div className="mt-4 space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
         <DeskErrorState
           title="Visa requirements could not load"
           body="Drafts and published rows are still in the database. Try again."
@@ -65,10 +40,8 @@ export function VisaRequirementsList({
       </div>
     );
   }
-
   return (
     <div className="mt-4 space-y-3">
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <p className="text-sm text-[var(--muted-foreground)]">
         {visibleRows.length} requirement{visibleRows.length === 1 ? "" : "s"}
       </p>

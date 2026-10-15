@@ -1,17 +1,9 @@
 "use client";
-
 import { useRouter } from "next/navigation";
-
 import { programCountries, programLevels } from "@/db/schema";
 import { PageShell } from "@/components/layout/page-shell";
 import { MarketingEmptyState } from "@/components/marketing/empty-state";
 import { MarketingErrorState } from "@/components/marketing/error-state";
-import {
-  MarketingPreviewBar,
-  useMarketingPreview,
-  type MarketingPreviewState,
-} from "@/components/marketing/preview";
-import { CostCalculatorResultSkeleton } from "@/components/marketing/skeleton";
 import type { YearlyCostEstimate } from "@/lib/costs/estimate";
 import { formatMoney } from "@/lib/costs/format";
 import type { CostCalculatorQuery } from "@/lib/costs/query";
@@ -20,7 +12,6 @@ import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { CostCalculatorProgramOption } from "@/lib/programs-public";
-
 type CostCalculatorPageProps = {
   locale: Locale;
   dict: Dictionary;
@@ -29,7 +20,6 @@ type CostCalculatorPageProps = {
   estimate: YearlyCostEstimate | null;
   rates: BdtRates | null;
 };
-
 export function CostCalculatorPage({
   locale,
   dict,
@@ -41,18 +31,14 @@ export function CostCalculatorPage({
   const copy = dict.costCalculator;
   const formAction = localizedHref("/cost-calculator", locale);
   const selectedProgram = programs.find((row) => row.id === query.programId);
-  const { preview, setPreview } = useMarketingPreview();
   const router = useRouter();
-
   return (
     <section className="py-10 sm:py-16">
       <PageShell>
-        <MarketingPreviewBar preview={preview} onChange={setPreview} />
-        <div className="eyebrow-pill mt-6 inline-flex items-center gap-2">
-          <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
+        <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)]">
           <span>{copy.eyebrow}</span>
         </div>
-        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.15]">
           {copy.title}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 font-normal text-slate-600">
@@ -135,9 +121,7 @@ export function CostCalculatorPage({
           query={query}
           estimate={estimate}
           rates={rates}
-          preview={preview}
           onRetry={() => {
-            setPreview("off");
             router.refresh();
           }}
         />
@@ -145,7 +129,6 @@ export function CostCalculatorPage({
     </section>
   );
 }
-
 function CostCalculatorOutcome({
   locale,
   copy,
@@ -153,7 +136,6 @@ function CostCalculatorOutcome({
   query,
   estimate,
   rates,
-  preview,
   onRetry,
 }: {
   locale: Locale;
@@ -162,25 +144,8 @@ function CostCalculatorOutcome({
   query: CostCalculatorQuery;
   estimate: YearlyCostEstimate | null;
   rates: BdtRates | null;
-  preview: MarketingPreviewState;
   onRetry: () => void;
 }) {
-  if (preview === "loading") {
-    return <CostCalculatorResultSkeleton label={copy.loadingAria} />;
-  }
-
-  if (preview === "error") {
-    return (
-      <MarketingErrorState
-        className="mt-10"
-        title={copy.errorTitle}
-        body={copy.errorBody}
-        retryLabel={retryLabel}
-        onRetry={onRetry}
-      />
-    );
-  }
-
   if (!query.destination) {
     return (
       <MarketingEmptyState
@@ -190,8 +155,7 @@ function CostCalculatorOutcome({
       />
     );
   }
-
-  if (preview === "empty" || !estimate) {
+  if (!estimate) {
     return (
       <MarketingEmptyState
         className="mt-10"
@@ -200,7 +164,6 @@ function CostCalculatorOutcome({
       />
     );
   }
-
   if (estimate && !rates) {
     return (
       <MarketingErrorState
@@ -212,7 +175,6 @@ function CostCalculatorOutcome({
       />
     );
   }
-
   if (estimate && rates) {
     return (
       <EstimateResult
@@ -223,10 +185,8 @@ function CostCalculatorOutcome({
       />
     );
   }
-
   return null;
 }
-
 function EstimateResult({
   locale,
   copy,
@@ -242,7 +202,6 @@ function EstimateResult({
     locale === "bn" ? "bn-BD" : "en-GB",
     { dateStyle: "medium" },
   ).format(new Date(rates.fetchedAt));
-
   const headlineLocal =
     estimate.headlineLocal != null && estimate.headlineLocalCurrency
       ? formatMoney(
@@ -251,7 +210,6 @@ function EstimateResult({
           locale,
         )
       : null;
-
   return (
     <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
       <div className="rounded-3xl border border-orange-500/20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 text-white shadow-xl sm:p-8">
@@ -346,7 +304,6 @@ function EstimateResult({
     </div>
   );
 }
-
 function BreakdownRow({
   locale,
   label,

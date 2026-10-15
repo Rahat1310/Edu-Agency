@@ -3,12 +3,10 @@ import { PageShell } from "@/components/layout/page-shell";
 import { DESTINATIONS, DESTINATION_SLUGS } from "@/lib/destinations";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
-
 type DestinationsIndexPageProps = {
   locale: Locale;
   dict: Dictionary;
 };
-
 export function DestinationsIndexPage({
   locale,
   dict,
@@ -16,11 +14,10 @@ export function DestinationsIndexPage({
   return (
     <section className="py-10 sm:py-16">
       <PageShell>
-        <div className="eyebrow-pill inline-flex items-center gap-2">
-          <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
+        <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)]">
           <span>{dict.destinationsIndex.eyebrow}</span>
         </div>
-        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.15]">
           {dict.destinationsIndex.title}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 font-normal text-slate-600">

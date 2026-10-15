@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-
 /**
  * Illustration A — Education Journey
  * A student beginning an international education journey:
@@ -332,7 +331,7 @@ export function EducationJourneyIllustration({
             fontWeight="700"
             fontFamily="sans-serif"
           >
-            8+ Years Depth
+            12+ Years Depth
           </text>
         </g>
 
@@ -364,7 +363,6 @@ export function EducationJourneyIllustration({
     </div>
   );
 }
-
 /** Company history, presented as a simple timeline. */
 export function TimelineJourneyIllustration({
   className,
@@ -376,20 +374,20 @@ export function TimelineJourneyIllustration({
   const isBn = locale === "bn";
   const milestones = [
     {
-      marker: isBn ? "৮+ বছরের অভিজ্ঞতা" : "8+ years of experience",
+      marker: isBn ? "১২+ বছরের অভিজ্ঞতা" : "12+ years of experience",
       title: isBn ? "চীনে উচ্চশিক্ষা নিয়ে কাজ" : "Our work with China",
       body: isBn
-        ? "আমাদের টিম ঢাকার একটি পূর্ববর্তী প্রতিষ্ঠানে চীনের বিশ্ববিদ্যালয়ে ভর্তি, স্কলারশিপ ও প্রয়োজনীয় কাগজপত্র নিয়ে আট বছরেরও বেশি সময় কাজ করেছে।"
-        : "Our team spent more than eight years at an earlier education consultancy in Dhaka, helping students with Chinese university admissions, scholarships, and application documents.",
+        ? "আমাদের টিম ঢাকার একটি পূর্ববর্তী প্রতিষ্ঠানে চীনের বিশ্ববিদ্যালয়ে ভর্তি, স্কলারশিপ ও প্রয়োজনীয় কাগজপত্র নিয়ে বারো বছরেরও বেশি সময় কাজ করেছে।"
+        : "Our team spent more than twelve years at an earlier education consultancy in Dhaka, helping students with Chinese university admissions, scholarships, and application documents.",
     },
     {
       marker: isBn ? "ফেব্রুয়ারি ২০২৬" : "February 2026",
       title: isBn
-        ? "Study Abroad Consultant নামে যাত্রা"
-        : "A new name for our work",
+        ? "অভিজ্ঞ পথচলা, নতুন পরিচয়"
+        : "An experienced team. A new name.",
       body: isBn
-        ? "Study Abroad Consultant নামে আমাদের কাজের পরিধি বাড়াই। চীনের পাশাপাশি আরও কয়েকটি দেশে পড়াশোনার জন্য কাউন্সেলিং ও আবেদন সহায়তা শুরু করি।"
-        : "We began operating under the name Study Abroad Consultant and expanded our counselling and application support to more study destinations.",
+        ? "চীন উচ্চশিক্ষায় ১২+ বছরের অভিজ্ঞতাকে সঙ্গে নিয়ে আমাদের টিম Study Abroad Consultant নামে নতুন পরিচয় গ্রহণ করে। চীনের পাশাপাশি আরও কয়েকটি দেশে কাউন্সেলিং ও আবেদন সহায়তার পরিধি বাড়াই।"
+        : "With 12+ years of China-focused education experience, our team introduced the name Study Abroad Consultant and expanded our counselling and application support to more study destinations.",
     },
     {
       marker: isBn ? "এখন" : "Today",
@@ -401,7 +399,6 @@ export function TimelineJourneyIllustration({
         : "We help Bangladeshi students and families explore study options and prepare applications for China, India, Malaysia, South Korea, and Japan.",
     },
   ];
-
   return (
     <section
       aria-labelledby={`journey-heading-${locale}`}
@@ -450,7 +447,6 @@ export function TimelineJourneyIllustration({
     </section>
   );
 }
-
 /**
  * Illustration C — Counselling Process
  * Simplified interaction between counselor & student:
@@ -760,7 +756,6 @@ export function CounsellingProcessIllustration({
     </div>
   );
 }
-
 /**
  * Minimal Leadership Avatar Placeholder
  * Clean, modern editorial avatar ready for real photo replacement via `imageSrc` prop.

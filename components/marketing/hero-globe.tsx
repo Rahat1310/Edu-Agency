@@ -1,16 +1,13 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import * as THREE from "three";
-
 /**
  * ============================================================================
  * 1. DATA STRUCTURES & COORDINATES
  * ============================================================================
  * Photorealistic 3D Satellite Globe for Global Education Agency
  */
-
 export interface GlobeNode {
   id: string;
   name: string;
@@ -29,7 +26,6 @@ export interface GlobeNode {
   partnerCount?: string;
   visaRate?: string;
 }
-
 export interface GlobeArc {
   id: string;
   from: string;
@@ -46,7 +42,6 @@ export interface GlobeArc {
   destUrl?: string;
   destName: string;
 }
-
 // Origin Point: Dhaka, Bangladesh (Bay of Bengal / Ganges Delta)
 export const ORIGIN_NODE: GlobeNode = {
   id: "dhaka",
@@ -68,7 +63,6 @@ export const ORIGIN_NODE: GlobeNode = {
   partnerCount: "40+ Direct Global Partner Universities",
   visaRate: "Central Advisory Desk",
 };
-
 // Destination Points with Academic Intel
 export const DESTINATION_NODES: GlobeNode[] = [
   {
@@ -172,11 +166,30 @@ export const DESTINATION_NODES: GlobeNode[] = [
     partnerCount: "12+ German & EU Campuses",
     visaRate: "98.1% Blocked Account Visa Support",
   },
+  {
+    id: "japan",
+    name: "Japan (Tokyo)",
+    country: "Japan",
+    city: "Tokyo",
+    lat: 35.6762,
+    lng: 139.6503,
+    color: "#e8365d", // Crimson Rose
+    glowColor: "rgba(232, 54, 93, 0.9)",
+    tag: "JP",
+    url: "/destinations/japan",
+    intake: "April 2027",
+    scholarship: "MEXT Government Scholarship · 70% University Waivers",
+    topPrograms: [
+      "Engineering & Robotics",
+      "Anime & Design Arts",
+      "Business & Japanese",
+    ],
+    partnerCount: "20+ MEXT Approved Campuses",
+    visaRate: "98.3% Student Visa Approval",
+  },
 ];
-
 // All nodes combined
 export const ALL_NODES: GlobeNode[] = [ORIGIN_NODE, ...DESTINATION_NODES];
-
 /**
  * Arcs mapping from Dhaka to all destination hubs.
  */
@@ -196,7 +209,6 @@ export const ARCS_DATA: GlobeArc[] = DESTINATION_NODES.map((dest, idx) => ({
   destUrl: dest.url,
   destName: dest.name,
 }));
-
 /**
  * ============================================================================
  * 2. GEOGRAPHIC COORDINATE CONVERTER
@@ -211,14 +223,11 @@ function latLngToVector3(
 ): THREE.Vector3 {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lng + 180) * (Math.PI / 180);
-
   const x = -(radius * Math.sin(phi) * Math.cos(theta));
   const z = radius * Math.sin(phi) * Math.sin(theta);
   const y = radius * Math.cos(phi);
-
   return new THREE.Vector3(x, y, z);
 }
-
 /**
  * Creates an ultra-crisp retina canvas sprite badge for 3D billboard labels
  */
@@ -231,11 +240,8 @@ function createCountryBadgeTexture(
   canvas.width = isOrigin ? 400 : 340;
   canvas.height = 130;
   const ctx = canvas.getContext("2d");
-
   if (!ctx) return new THREE.CanvasTexture(canvas);
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   const padX = 14;
   const padY = 14;
   const w = canvas.width - padX * 2;
@@ -243,27 +249,22 @@ function createCountryBadgeTexture(
   const r = h / 2;
   const x = padX;
   const y = padY;
-
   // 1. Soft cyber glow behind the badge
   ctx.shadowColor = color;
   ctx.shadowBlur = 0;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
-
   // 2. Dark glassmorphic pill background
   ctx.fillStyle = isOrigin ? "rgba(2, 14, 32, 0.96)" : "rgba(3, 9, 26, 0.94)";
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, r);
   ctx.fill();
-
   // 3. Crisp glowing neon border
   ctx.lineWidth = 4.0;
   ctx.strokeStyle = color;
   ctx.stroke();
-
   // Reset shadow for crisp text & icon
   ctx.shadowBlur = 0;
-
   // 4. Academic Insignia / Origin Indicator
   if (isOrigin) {
     // Central Hub Compass Pin
@@ -277,7 +278,6 @@ function createCountryBadgeTexture(
     ctx.beginPath();
     ctx.arc(pinX, pinY, 4.5, 0, Math.PI * 2);
     ctx.fill();
-
     // Origin Tag
     ctx.fillStyle = "#ffffff";
     ctx.font = "900 38px Inter, system-ui, -apple-system, sans-serif";
@@ -288,7 +288,6 @@ function createCountryBadgeTexture(
     // Bold Academic Graduation Cap (Mortarboard) vector insignia
     const capX = x + 44;
     const capY = y + h / 2;
-
     // Top Diamond Rhombus Mortarboard
     ctx.fillStyle = "#d69a24"; // Radiant Gold Cap
     ctx.beginPath();
@@ -298,19 +297,16 @@ function createCountryBadgeTexture(
     ctx.lineTo(capX - 22, capY - 4);
     ctx.closePath();
     ctx.fill();
-
     // Thin bright border on mortarboard
     ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2.0;
     ctx.stroke();
-
     // Cap Skullcap underneath
     ctx.fillStyle = "#ffffff";
     ctx.beginPath();
     ctx.moveTo(capX - 12, capY - 2);
     ctx.quadraticCurveTo(capX, capY + 12, capX + 12, capY - 2);
     ctx.fill();
-
     // Hanging Gold Tassel with Bead
     ctx.strokeStyle = "#d69a24";
     ctx.lineWidth = 2.8;
@@ -319,12 +315,10 @@ function createCountryBadgeTexture(
     ctx.lineTo(capX + 22, capY + 2);
     ctx.lineTo(capX + 22, capY + 12);
     ctx.stroke();
-
     ctx.fillStyle = "#ffffff";
     ctx.beginPath();
     ctx.arc(capX + 22, capY + 13, 2.5, 0, Math.PI * 2);
     ctx.fill();
-
     // Country Tag Text (e.g. CN, MY, KR, IN, EU)
     ctx.fillStyle = "#ffffff";
     ctx.font = "900 46px Inter, system-ui, -apple-system, sans-serif";
@@ -332,14 +326,12 @@ function createCountryBadgeTexture(
     ctx.textBaseline = "middle";
     ctx.fillText(tag, capX + 34, capY + 1);
   }
-
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;
   return texture;
 }
-
 /**
  * ============================================================================
  * 3. ATMOSPHERIC RAYLEIGH SCATTERING SHADER
@@ -373,7 +365,6 @@ const AtmosphereShader = {
     }
   `,
 };
-
 /**
  * ============================================================================
  * 4. 3D INTERACTIVE PHOTOREALISTIC SATELLITE GLOBE
@@ -384,31 +375,24 @@ export function HeroGlobe() {
   const router = useRouter();
   const [activeDest, setActiveDest] = useState<string | null>(null);
   const [hoveredNode, setHoveredNode] = useState<GlobeNode | null>(null);
-
   // Synchronous refs to prevent re-initializing Three.js on hover/selection
   const routerRef = useRef(router);
   routerRef.current = router;
-
   const activeDestRef = useRef(activeDest);
   activeDestRef.current = activeDest;
-
   const hoveredNodeRef = useRef(hoveredNode);
   hoveredNodeRef.current = hoveredNode;
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-
     let animationFrameId: number;
     const width = container.clientWidth || 1000;
     const height = container.clientHeight || 520;
-
     // --- 1. Scene, Camera, Renderer (Elevated Floating Horizon Perspective) ---
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1500);
     camera.position.set(0, 14, 228);
     camera.lookAt(0, -12, 0);
-
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
@@ -420,10 +404,8 @@ export function HeroGlobe() {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
     container.replaceChildren(renderer.domElement);
-
     const GLOBE_RADIUS = 112;
     const GLOBE_CENTER_Y = -60;
-
     // --- 2. Master Globe Group (Rotated so Bangladesh, India & Asia face camera) ---
     const globeGroup = new THREE.Group();
     // 180 degrees (Math.PI) brings 90° E (Dhaka/South Asia) directly to the front
@@ -431,11 +413,9 @@ export function HeroGlobe() {
     globeGroup.rotation.x = -0.22; // Axis tilted so Bangladesh/Dhaka hub sits prominent and higher up ("upside") on the dome
     globeGroup.position.set(0, GLOBE_CENTER_Y, 0);
     scene.add(globeGroup);
-
     // --- 3. High-Definition Photorealistic Satellite Earth ---
     const textureLoader = new THREE.TextureLoader();
     const loadedTextures: THREE.Texture[] = [];
-
     const loadTexture = (
       url: string,
       onLoad?: (t: THREE.Texture) => void,
@@ -446,7 +426,6 @@ export function HeroGlobe() {
       loadedTextures.push(tex);
       return tex;
     };
-
     const earthGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
     const earthMaterial = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color(0x0a1c30), // Rich deep oceanic base
@@ -458,7 +437,6 @@ export function HeroGlobe() {
       emissive: new THREE.Color(0xffcf70),
       emissiveIntensity: 0.25,
     });
-
     // A. NASA Blue Marble True Satellite Map (Sharp, Full Resolution with 16x Anisotropy)
     loadTexture("/textures/earth/earth_blue_marble.jpg", (tex) => {
       tex.colorSpace = THREE.SRGBColorSpace;
@@ -470,7 +448,6 @@ export function HeroGlobe() {
       earthMaterial.color.set(0xffffff); // Full satellite color transmission once texture is ready
       earthMaterial.needsUpdate = true;
     });
-
     // B. Elevation & Mountain Relief Bump Map
     loadTexture("/textures/earth/earth_topology.png", (tex) => {
       tex.generateMipmaps = true;
@@ -479,14 +456,12 @@ export function HeroGlobe() {
       earthMaterial.bumpScale = 1.1;
       earthMaterial.needsUpdate = true;
     });
-
     // C. Specular Ocean vs Matte Continents Map
     loadTexture("/textures/earth/earth_specular.jpg", (tex) => {
       tex.generateMipmaps = true;
       earthMaterial.roughnessMap = tex;
       earthMaterial.needsUpdate = true;
     });
-
     // D. Night City Lights Emissive Glow (Vibrant Sparkling Amber Cities)
     loadTexture("/textures/earth/earth_lights.png", (tex) => {
       tex.colorSpace = THREE.SRGBColorSpace;
@@ -496,10 +471,8 @@ export function HeroGlobe() {
       earthMaterial.emissiveIntensity = 0.25;
       earthMaterial.needsUpdate = true;
     });
-
     const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
     globeGroup.add(earthMesh);
-
     // --- 4. Floating Atmospheric Cloud Layer (Clearly Visible Luminous Cloud Formations) ---
     const cloudsGeometry = new THREE.SphereGeometry(
       GLOBE_RADIUS * 1.014,
@@ -512,7 +485,6 @@ export function HeroGlobe() {
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
-
     loadTexture("/textures/earth/earth_clouds.png", (tex) => {
       tex.generateMipmaps = true;
       tex.anisotropy = 4;
@@ -520,10 +492,8 @@ export function HeroGlobe() {
       cloudsMaterial.opacity = 0.35; // Luminous, clearly visible clouds drifting across continents
       cloudsMaterial.needsUpdate = true;
     });
-
     const cloudsMesh = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
     globeGroup.add(cloudsMesh);
-
     // --- 5. Outer Rayleigh Atmospheric Horizon Glow (Close exosphere hugging limb) ---
     const atmosphereGeometry = new THREE.SphereGeometry(
       GLOBE_RADIUS * 1.028,
@@ -544,53 +514,43 @@ export function HeroGlobe() {
     );
     atmosphereMesh.position.set(0, GLOBE_CENTER_Y, 0);
     // Keep the globe silhouette clean without a decorative halo.
-
     // --- 6. Solar, Ambient & Balanced Studio Daylight Lighting ---
     // Primary Daylight Sun: illuminates South Asia, Middle East & Europe
     const sunLight = new THREE.DirectionalLight(0xfff5ea, 2.2);
     sunLight.position.set(-105, 90, 160);
     scene.add(sunLight);
-
     // Secondary Daylight Sun: illuminates East Asia, China, Malaysia, Korea & Pacific
     const eastSunLight = new THREE.DirectionalLight(0xe8f2ff, 1.8);
     eastSunLight.position.set(105, 75, 140);
     scene.add(eastSunLight);
-
     // Luminous Ambient Fill: Deepens ocean blues and lets city lights and topography shine
     const ambientLight = new THREE.AmbientLight(0x4a6582, 0.9);
     scene.add(ambientLight);
-
     // Warm Sunset Rim Light (accents the golden horizon)
     const sunsetRimLight = new THREE.DirectionalLight(0xf0e8df, 0.4);
     sunsetRimLight.position.set(-140, 35, -25);
     scene.add(sunsetRimLight);
-
     // Soft Atmospheric Sky Rim Light
     const skyRimLight = new THREE.DirectionalLight(0xdbe5ee, 0.4);
     skyRimLight.position.set(130, 25, -30);
     scene.add(skyRimLight);
-
     // --- 7. Orbital Micro-Particle Field (Warm Amber & Atmospheric Cyan) ---
     const dustCount = 350;
     const dustGeometry = new THREE.BufferGeometry();
     const dustPositions = new Float32Array(dustCount * 3);
     const dustColors = new Float32Array(dustCount * 3);
-
     for (let i = 0; i < dustCount; i++) {
       const r = GLOBE_RADIUS * (1.03 + Math.random() * 0.75);
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-
       dustPositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       dustPositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       dustPositions[i * 3 + 2] = r * Math.cos(phi);
-
       const isWarm = Math.random() > 0.45;
       dustColors[i * 3] = isWarm ? 1.0 : 0.22;
       dustColors[i * 3 + 1] = isWarm ? 0.72 : 0.74;
       dustColors[i * 3 + 2] = isWarm ? 0.24 : 0.98;
     }
-
     dustGeometry.setAttribute(
       "position",
       new THREE.BufferAttribute(dustPositions, 3),
@@ -599,7 +559,6 @@ export function HeroGlobe() {
       "color",
       new THREE.BufferAttribute(dustColors, 3),
     );
-
     const dustMaterial = new THREE.PointsMaterial({
       size: 0.9,
       vertexColors: true,
@@ -611,7 +570,6 @@ export function HeroGlobe() {
     const dustParticles = new THREE.Points(dustGeometry, dustMaterial);
     dustParticles.position.set(0, GLOBE_CENTER_Y, 0);
     scene.add(dustParticles);
-
     // --- 8. Unique 3D Sci-Fi Holographic Beacons & Country Badges ---
     interface BeaconObject {
       node: GlobeNode;
@@ -632,7 +590,6 @@ export function HeroGlobe() {
         speed: number;
       }[];
     }
-
     const beaconObjects: BeaconObject[] = [];
     const nodeHitTargets: {
       mesh: THREE.Mesh;
@@ -642,7 +599,6 @@ export function HeroGlobe() {
     const beaconDisposables: (
       THREE.BufferGeometry | THREE.Material | THREE.Texture
     )[] = [];
-
     ALL_NODES.forEach((node) => {
       const normal = latLngToVector3(node.lat, node.lng, 1.0).normalize();
       const basePos = normal.clone().multiplyScalar(GLOBE_RADIUS * 1.002);
@@ -651,7 +607,6 @@ export function HeroGlobe() {
         .clone()
         .addScaledVector(normal, beamHeight / 2);
       const tipPos = basePos.clone().addScaledVector(normal, beamHeight);
-
       // A. Ground Reticle Anchor Disc
       const groundDiscGeo = new THREE.RingGeometry(
         0.12,
@@ -671,7 +626,6 @@ export function HeroGlobe() {
       groundDisc.lookAt(basePos.clone().addScaledVector(normal, 10));
       globeGroup.add(groundDisc);
       beaconDisposables.push(groundDiscGeo, groundDiscMat);
-
       // B. Ground Dual Staggered Radar Sonar Ripples
       const rippleRings: {
         mesh: THREE.Mesh;
@@ -685,7 +639,6 @@ export function HeroGlobe() {
         32,
       );
       beaconDisposables.push(rippleGeo);
-
       [0.0, 0.5].forEach((initialPhase) => {
         const rippleMat = new THREE.MeshBasicMaterial({
           color: new THREE.Color(node.color),
@@ -700,7 +653,6 @@ export function HeroGlobe() {
         rippleMesh.lookAt(basePos.clone().addScaledVector(normal, 10));
         globeGroup.add(rippleMesh);
         beaconDisposables.push(rippleMat);
-
         rippleRings.push({
           mesh: rippleMesh,
           phase: initialPhase,
@@ -708,7 +660,6 @@ export function HeroGlobe() {
           speed: node.isOrigin ? 0.0036 : 0.0028,
         });
       });
-
       // C. Tapered Holographic Light Pillar (Shooting up from surface)
       const beamGeo = new THREE.CylinderGeometry(
         0.22,
@@ -722,7 +673,6 @@ export function HeroGlobe() {
       const beamColors = new Float32Array(beamPosAttr.count * 3);
       const baseC = new THREE.Color(node.color);
       const tipC = new THREE.Color(0xffffff);
-
       for (let i = 0; i < beamPosAttr.count; i++) {
         const y = beamPosAttr.getY(i);
         const t = (y + beamHeight / 2) / beamHeight;
@@ -732,7 +682,6 @@ export function HeroGlobe() {
         beamColors[i * 3 + 2] = c.b;
       }
       beamGeo.setAttribute("color", new THREE.BufferAttribute(beamColors, 3));
-
       const beamMat = new THREE.MeshBasicMaterial({
         vertexColors: true,
         transparent: true,
@@ -749,7 +698,6 @@ export function HeroGlobe() {
       );
       globeGroup.add(beamMesh);
       beaconDisposables.push(beamGeo, beamMat);
-
       // D. Floating Luminous Diamond Crystal
       const diamondRadius = node.isOrigin ? 1.18 : 0.92;
       const diamondGeo = new THREE.OctahedronGeometry(diamondRadius, 0);
@@ -767,7 +715,6 @@ export function HeroGlobe() {
       diamondMesh.position.copy(tipPos);
       globeGroup.add(diamondMesh);
       beaconDisposables.push(diamondGeo, diamondMat);
-
       // E. Radiant White Energy Core
       const coreGeo = new THREE.SphereGeometry(
         node.isOrigin ? 0.42 : 0.32,
@@ -781,7 +728,6 @@ export function HeroGlobe() {
       coreMesh.position.copy(tipPos);
       globeGroup.add(coreMesh);
       beaconDisposables.push(coreGeo, coreMat);
-
       // F. Orbiting Gyro Gimbal Ring
       const ringRadius = node.isOrigin ? 1.8 : 1.45;
       const ringTube = 0.045;
@@ -796,7 +742,6 @@ export function HeroGlobe() {
       gimbalMesh.position.copy(tipPos);
       globeGroup.add(gimbalMesh);
       beaconDisposables.push(gimbalGeo, gimbalMat);
-
       // G. Crisp Country Insignia Sprite Billboard
       const badgeTex = createCountryBadgeTexture(
         node.tag,
@@ -805,7 +750,6 @@ export function HeroGlobe() {
       );
       loadedTextures.push(badgeTex);
       beaconDisposables.push(badgeTex);
-
       const badgeMat = new THREE.SpriteMaterial({
         map: badgeTex,
         transparent: true,
@@ -819,7 +763,6 @@ export function HeroGlobe() {
       badgeSprite.scale.copy(baseScale);
       globeGroup.add(badgeSprite);
       beaconDisposables.push(badgeMat);
-
       // H. Responsive Interactive Hit Target Sphere
       const hitGeo = new THREE.SphereGeometry(3.2, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
@@ -827,7 +770,6 @@ export function HeroGlobe() {
       hitMesh.position.copy(tipPos);
       globeGroup.add(hitMesh);
       beaconDisposables.push(hitGeo, hitMat);
-
       const beaconObj: BeaconObject = {
         node,
         normal,
@@ -842,11 +784,9 @@ export function HeroGlobe() {
         hitTarget: hitMesh,
         rippleRings,
       };
-
       beaconObjects.push(beaconObj);
       nodeHitTargets.push({ mesh: hitMesh, node, beacon: beaconObj });
     });
-
     // --- 9. Glowing 3D Curved Arcs Linking Elevated Beacons ---
     interface ArcObject {
       curve: THREE.QuadraticBezierCurve3;
@@ -858,22 +798,18 @@ export function HeroGlobe() {
       progress: number;
       speed: number;
     }
-
     const arcObjects: ArcObject[] = [];
-
     ARCS_DATA.forEach((arc) => {
       const originBeacon = beaconObjects.find((b) => b.node.isOrigin);
       const destBeacon = beaconObjects.find(
         (b) => b.node.name === arc.destName,
       );
-
       const startVec = originBeacon
         ? originBeacon.tipPos.clone()
         : latLngToVector3(arc.startLat, arc.startLng, GLOBE_RADIUS + 7.2);
       const endVec = destBeacon
         ? destBeacon.tipPos.clone()
         : latLngToVector3(arc.endLat, arc.endLng, GLOBE_RADIUS + 5.6);
-
       // Elevated midpoint for smooth parabolic curve between floating diamonds
       const midVec = new THREE.Vector3()
         .addVectors(startVec, endVec)
@@ -882,9 +818,7 @@ export function HeroGlobe() {
       const altitude =
         GLOBE_RADIUS * (1.1 + arc.altitude * (distance / GLOBE_RADIUS));
       midVec.normalize().multiplyScalar(altitude);
-
       const curve = new THREE.QuadraticBezierCurve3(startVec, midVec, endVec);
-
       // A. Static Fiber-Optic Arc Tube
       const curvePoints = curve.getPoints(50);
       const tubeGeo = new THREE.TubeGeometry(
@@ -894,13 +828,11 @@ export function HeroGlobe() {
         8,
         false,
       );
-
       const posAttr = tubeGeo.getAttribute("position");
       const count = posAttr ? posAttr.count : 0;
       const colors = new Float32Array(count * 3);
       const startC = new THREE.Color(arc.startColor);
       const endC = new THREE.Color(arc.endColor);
-
       for (let i = 0; i < count; i++) {
         const t = i / count;
         const c = startC.clone().lerp(endC, t);
@@ -909,7 +841,6 @@ export function HeroGlobe() {
         colors[i * 3 + 2] = c.b;
       }
       tubeGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-
       const tubeMat = new THREE.MeshBasicMaterial({
         vertexColors: true,
         transparent: true,
@@ -920,11 +851,9 @@ export function HeroGlobe() {
       const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
       globeGroup.add(tubeMesh);
       beaconDisposables.push(tubeGeo, tubeMat);
-
       // B. Animated Supersonic Student Flight Jetliner
       const gliderGroup = new THREE.Group();
       gliderGroup.scale.set(0.8, 0.8, 0.8);
-
       // 1. Fuselage Body (Gleaming white passenger airliner cabin)
       const fuselageGeo = new THREE.CylinderGeometry(0.85, 0.85, 3.8, 8);
       fuselageGeo.rotateX(Math.PI / 2); // Orient along +Z
@@ -933,14 +862,12 @@ export function HeroGlobe() {
       });
       const fuselageMesh = new THREE.Mesh(fuselageGeo, fuselageMat);
       gliderGroup.add(fuselageMesh);
-
       // Aerodynamic Nose Cone
       const noseGeo = new THREE.ConeGeometry(0.85, 2.2, 8);
       noseGeo.rotateX(Math.PI / 2);
       noseGeo.translate(0, 0, 2.9);
       const noseMesh = new THREE.Mesh(noseGeo, fuselageMat);
       gliderGroup.add(noseMesh);
-
       // 2. Swept Passenger Wings & Tail Fin (Wingspan: 7.2 units!)
       const wingGeo = new THREE.BufferGeometry();
       const wingVertices = new Float32Array([
@@ -964,7 +891,6 @@ export function HeroGlobe() {
       });
       const wingMesh = new THREE.Mesh(wingGeo, wingMat);
       gliderGroup.add(wingMesh);
-
       // 3. Twin Jet Engine Thrusters under wings
       const engineGeo = new THREE.CylinderGeometry(0.42, 0.52, 1.8, 8);
       engineGeo.rotateX(Math.PI / 2);
@@ -974,11 +900,9 @@ export function HeroGlobe() {
       const leftEngine = new THREE.Mesh(engineGeo, engineMat);
       leftEngine.position.set(-1.4, -0.45, -0.2);
       gliderGroup.add(leftEngine);
-
       const rightEngine = new THREE.Mesh(engineGeo, engineMat);
       rightEngine.position.set(1.4, -0.45, -0.2);
       gliderGroup.add(rightEngine);
-
       // 4. Luminous Nose Headlight & Cockpit Beacon
       const glowGeo = new THREE.SphereGeometry(0.75, 8, 8);
       const glowMat = new THREE.MeshBasicMaterial({
@@ -987,7 +911,6 @@ export function HeroGlobe() {
       const glowMesh = new THREE.Mesh(glowGeo, glowMat);
       glowMesh.position.set(0, 0, 3.8);
       gliderGroup.add(glowMesh);
-
       globeGroup.add(gliderGroup);
       beaconDisposables.push(
         fuselageGeo,
@@ -1000,12 +923,10 @@ export function HeroGlobe() {
         glowGeo,
         glowMat,
       );
-
       // C. Animated Trailing Particle Comet Tail
       const trailLength = arc.trailLength;
       const trailPositions = new Float32Array(trailLength * 3);
       const trailColors = new Float32Array(trailLength * 3);
-
       for (let i = 0; i < trailLength; i++) {
         const ratio = i / trailLength;
         const color = startC.clone().lerp(endC, ratio);
@@ -1013,14 +934,12 @@ export function HeroGlobe() {
         trailColors[i * 3 + 1] = color.g;
         trailColors[i * 3 + 2] = color.b;
       }
-
       const trailGeo = new THREE.BufferGeometry();
       trailGeo.setAttribute(
         "position",
         new THREE.BufferAttribute(trailPositions, 3),
       );
       trailGeo.setAttribute("color", new THREE.BufferAttribute(trailColors, 3));
-
       const trailMat = new THREE.PointsMaterial({
         size: 2.8,
         vertexColors: true,
@@ -1032,7 +951,6 @@ export function HeroGlobe() {
       const packetTrail = new THREE.Points(trailGeo, trailMat);
       globeGroup.add(packetTrail);
       beaconDisposables.push(trailGeo, trailMat);
-
       arcObjects.push({
         curve,
         tubeMesh,
@@ -1044,7 +962,6 @@ export function HeroGlobe() {
         speed: arc.speed,
       });
     });
-
     // --- 10. Mouse & Touch Interaction & Controls ---
     const DEFAULT_ROT_X = -0.22;
     let dragRotY = 0;
@@ -1055,35 +972,28 @@ export function HeroGlobe() {
     let idleTimeoutId: NodeJS.Timeout | null = null;
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2(-1000, -1000);
-
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
       autoRotate = false;
       if (idleTimeoutId) clearTimeout(idleTimeoutId);
       previousMousePosition = { x: e.clientX, y: e.clientY };
     };
-
     const onMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-
       if (isDragging) {
         const deltaX = e.clientX - previousMousePosition.x;
         const deltaY = e.clientY - previousMousePosition.y;
-
         dragRotY += deltaX * 0.0035;
         dragRotX = Math.max(-0.44, Math.min(0.04, dragRotX + deltaY * 0.003));
-
         previousMousePosition = { x: e.clientX, y: e.clientY };
       }
-
       // Raycast for hover detection on nodes
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(
         nodeHitTargets.map((n) => n.mesh),
       );
-
       if (intersects.length > 0 && intersects[0]) {
         const hit = nodeHitTargets.find(
           (n) => n.mesh === intersects[0]?.object,
@@ -1097,14 +1007,12 @@ export function HeroGlobe() {
           return;
         }
       }
-
       if (hoveredNodeRef.current !== null) {
         hoveredNodeRef.current = null;
         setHoveredNode(null);
       }
       container.style.cursor = isDragging ? "grabbing" : "grab";
     };
-
     const onMouseUp = () => {
       isDragging = false;
       if (idleTimeoutId) clearTimeout(idleTimeoutId);
@@ -1113,7 +1021,6 @@ export function HeroGlobe() {
         if (!isDragging) autoRotate = true;
       }, 3200);
     };
-
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 0 && e.touches[0]) {
         isDragging = true;
@@ -1125,22 +1032,18 @@ export function HeroGlobe() {
         };
       }
     };
-
     const onTouchMove = (e: TouchEvent) => {
       if (isDragging && e.touches.length > 0 && e.touches[0]) {
         const deltaX = e.touches[0].clientX - previousMousePosition.x;
         const deltaY = e.touches[0].clientY - previousMousePosition.y;
-
         dragRotY += deltaX * 0.0035;
         dragRotX = Math.max(-0.44, Math.min(0.04, dragRotX + deltaY * 0.003));
-
         previousMousePosition = {
           x: e.touches[0].clientX,
           y: e.touches[0].clientY,
         };
       }
     };
-
     const onTouchEnd = () => {
       isDragging = false;
       if (idleTimeoutId) clearTimeout(idleTimeoutId);
@@ -1148,13 +1051,11 @@ export function HeroGlobe() {
         if (!isDragging) autoRotate = true;
       }, 3200);
     };
-
     const onClick = () => {
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(
         nodeHitTargets.map((n) => n.mesh),
       );
-
       if (intersects.length > 0 && intersects[0]) {
         const hit = nodeHitTargets.find(
           (n) => n.mesh === intersects[0]?.object,
@@ -1164,7 +1065,6 @@ export function HeroGlobe() {
         }
       }
     };
-
     container.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
@@ -1172,11 +1072,9 @@ export function HeroGlobe() {
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
     container.addEventListener("click", onClick);
-
     // --- 11. Animation Loop ---
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-
       // A. Ambient slow sway centered on Bangladesh (Math.PI)
       // Keeps Dhaka Hub prominently centered and "upside" while providing dynamic 3D presence
       const time = performance.now() * 0.001;
@@ -1194,31 +1092,25 @@ export function HeroGlobe() {
         globeGroup.rotation.y = Math.PI + dragRotY;
         globeGroup.rotation.x = dragRotX;
       }
-
       // B. Slow atmospheric cloud drift relative to Earth surface
       cloudsMesh.rotation.y += 0.00032;
-
       // C. Rotate cosmic dust particle field slowly
       dustParticles.rotation.y -= 0.0004;
       dustParticles.rotation.x += 0.00015;
-
       // D. Animate 3D Holographic Beacons: Serene Drift, Slow Spin & Relaxed Sonar Waves
       beaconObjects.forEach((b, idx) => {
         // Slow, gentle vertical levitation
         const bob = Math.sin(time * 1.2 + idx * 0.9) * 0.22;
         const currentTip = b.tipPos.clone().addScaledVector(b.normal, bob);
-
         b.diamond.position.copy(currentTip);
         b.innerCore.position.copy(currentTip);
         b.gimbalRing.position.copy(currentTip);
         b.hitTarget.position.copy(currentTip);
         b.badgeSprite.position.copy(currentTip).addScaledVector(b.normal, 2.5);
-
         // Smooth, relaxed rotation without rapid glinting
         b.diamond.rotation.y += 0.006;
         b.gimbalRing.rotation.x += 0.007;
         b.gimbalRing.rotation.y += 0.005;
-
         // Hover scale and glow reaction
         const isHovered =
           hoveredNodeRef.current?.id === b.node.id ||
@@ -1234,7 +1126,6 @@ export function HeroGlobe() {
           isHovered ? 0.65 : 0.35,
           0.15,
         );
-
         // Animate slow, graceful radar sonar ripples with smooth sinusoidal falloff
         b.rippleRings.forEach((r) => {
           r.phase = (r.phase + r.speed) % 1.0;
@@ -1245,19 +1136,16 @@ export function HeroGlobe() {
           rMat.opacity = Math.max(0, fade * (b.node.isOrigin ? 0.65 : 0.5));
         });
       });
-
       // E. Animate supersonic student flight gliders traveling across arcs from Dhaka
       arcObjects.forEach((arc) => {
         arc.progress = (arc.progress + arc.speed) % 1.0;
         const currentPos = arc.curve.getPoint(arc.progress);
         const tangent = arc.curve.getTangent(arc.progress);
-
         arc.packetMesh.position.copy(currentPos);
         arc.packetMesh.quaternion.setFromUnitVectors(
           new THREE.Vector3(0, 0, 1),
           tangent,
         );
-
         // Update trailing comet tail
         const positions = arc.trailPositions;
         for (let i = 0; i < arc.trailLength; i++) {
@@ -1272,12 +1160,9 @@ export function HeroGlobe() {
           trailPosAttr.needsUpdate = true;
         }
       });
-
       renderer.render(scene, camera);
     };
-
     animate();
-
     // --- 12. Handle Window Resize ---
     const handleResize = () => {
       if (!container) return;
@@ -1287,9 +1172,7 @@ export function HeroGlobe() {
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
-
     window.addEventListener("resize", handleResize);
-
     // --- 13. Comprehensive Cleanup on Unmount ---
     return () => {
       cancelAnimationFrame(animationFrameId);
@@ -1302,7 +1185,6 @@ export function HeroGlobe() {
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
       container.removeEventListener("click", onClick);
-
       renderer.dispose();
       earthGeometry.dispose();
       earthMaterial.dispose();
@@ -1312,12 +1194,10 @@ export function HeroGlobe() {
       atmosphereMaterial.dispose();
       dustGeometry.dispose();
       dustMaterial.dispose();
-
       loadedTextures.forEach((tex) => tex.dispose());
       beaconDisposables.forEach((d) => d.dispose());
     };
   }, []);
-
   return (
     <div className="relative mx-auto flex w-full max-w-[1100px] flex-col items-center justify-center select-none">
       {/* Three.js WebGL Canvas Container: Purely floating underneath texts and hero */}

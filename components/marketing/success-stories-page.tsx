@@ -1,16 +1,8 @@
 "use client";
-
 import type { ReactNode } from "react";
 import Link from "next/link";
-
 import { PageShell } from "@/components/layout/page-shell";
 import { MarketingEmptyState } from "@/components/marketing/empty-state";
-import { MarketingErrorState } from "@/components/marketing/error-state";
-import {
-  MarketingPreviewBar,
-  useMarketingPreview,
-} from "@/components/marketing/preview";
-import { SuccessStoriesGridSkeleton } from "@/components/marketing/skeleton";
 import { SuccessStoryCard } from "@/components/marketing/success-story-card";
 import type { ProgramCountry } from "@/db/schema";
 import {
@@ -22,37 +14,31 @@ import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { SuccessStoryView } from "@/lib/success-stories/featured";
 import { cn } from "@/lib/utils";
-
 type SuccessStoriesPageProps = {
   locale: Locale;
   dict: Dictionary;
   destination: ProgramCountry | "";
   stories: SuccessStoryView[];
 };
-
 export function SuccessStoriesPage({
   locale,
   dict,
   destination,
   stories,
 }: SuccessStoriesPageProps) {
-  const { preview, setPreview } = useMarketingPreview();
   const copy = dict.successStories;
   const selectedSlug = destination
     ? destinationSlugFromCountry(destination)
     : "";
-  const visibleStories = preview === "empty" ? [] : stories;
+  const visibleStories = stories;
   const isFiltered = Boolean(destination);
-
   return (
     <section className="py-10 sm:py-16">
       <PageShell>
-        <MarketingPreviewBar preview={preview} onChange={setPreview} />
-        <div className="eyebrow-pill mt-4 inline-flex items-center gap-2">
-          <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
+        <div className="mt-4 text-sm font-semibold text-[var(--brand-blue)]">
           <span>{copy.eyebrow}</span>
         </div>
-        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.15]">
           {copy.title}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 font-normal text-slate-600">
@@ -93,17 +79,7 @@ export function SuccessStoriesPage({
               : copy.countMany.replace("{n}", String(visibleStories.length))}
         </p>
 
-        {preview === "loading" ? (
-          <SuccessStoriesGridSkeleton label={copy.loadingAria} />
-        ) : preview === "error" ? (
-          <MarketingErrorState
-            className="mt-10"
-            title={copy.errorTitle}
-            body={copy.errorBody}
-            retryLabel={dict.common.tryAgain}
-            onRetry={() => setPreview("off")}
-          />
-        ) : visibleStories.length === 0 ? (
+        {visibleStories.length === 0 ? (
           <MarketingEmptyState
             className="mt-10"
             title={isFiltered ? copy.emptyFilteredTitle : copy.emptyTitle}
@@ -148,7 +124,6 @@ export function SuccessStoriesPage({
     </section>
   );
 }
-
 function FilterLink({
   href,
   current,

@@ -44,16 +44,15 @@ export const en = {
     footerEmailValue: "support@studyabroadconsultantbd.com",
     footerHoursLabel: "Office Hours",
     footerHoursValue: "Sat – Thu: 10:00 AM – 6:00 PM (BST)",
-    footerCtaTitle: "Ready to Start Your Global Academic Journey?",
+    footerCtaTitle: "Planning to study abroad?",
     footerCtaSubtitle:
-      "Get genuine counseling, scholarship assessments, and visa roadmaps with complete transparency.",
+      "Talk to a counsellor about universities, scholarships, costs, and your application.",
     footerCtaButton: "Free Assessment",
     footerCallNow: "Call Hotline",
     footerMapLink: "Get Directions",
     footerQuickLinks: "Student Resources",
     footerTrustBadge: "Govt. Approved Educational Advisory",
-    footerLiveStatus:
-      "Counseling Desk Active · Fall 2026 & Spring 2027 Admissions Open",
+    footerLiveStatus: "Ask us about upcoming intakes",
     nav: {
       home: "Home",
       destinations: "Destinations",
@@ -74,7 +73,7 @@ export const en = {
   common: {
     placeholder: "Notice",
     researchPending:
-      "Program and intake details are updated continuously by our counseling desk.",
+      "Contact our counsellors to confirm programme details and upcoming intakes.",
     comingLater: "Check back soon for new sessions and announcements.",
     viewDestination: "Open destination guide",
     browsePrograms: "Browse programs for this country",
@@ -86,42 +85,41 @@ export const en = {
     closesTomorrow: "{destination} {intake} closes tomorrow",
     closesToday: "{destination} {intake} closes today",
     placeholderNote:
-      "Intake deadlines are verified and updated regularly based on official university announcements.",
+      "Confirm the application deadline with the university before submitting your documents.",
     emptyTitle: "No deadline set yet",
-    empty:
-      "No application deadline is on the desk yet for {destination}. A counselor will add it when the intake is confirmed.",
+    empty: "Contact us for the latest application dates for {destination}.",
     emptyCompact: "Deadline not set yet",
     errorTitle: "We couldn't load this deadline",
     errorBody:
-      "Try again in a moment. Official dates still come from the university — this is the desk copy.",
+      "Please try again, or contact us to check the university’s application deadline.",
     loadingAria: "Loading the intake deadline",
   },
   successStories: {
     metaTitle: "Success stories from Bangladesh",
     metaDescription:
-      "Students from Bangladesh on China, India, Malaysia, and South Korea — published only when a counselor marks the story live.",
-    ogTitle: "What the route felt like",
+      "Read about Bangladeshi students’ experiences of applying to universities and studying abroad.",
+    ogTitle: "Students share their study abroad experiences",
     ogDescription:
-      "Short, founder-approved stories. Drafts stay off this page.",
+      "Students share their experiences with applications, moving abroad, and university life.",
     eyebrow: "Student voices",
     title: "Success stories",
-    body: "Only published stories appear here. Filter by destination — the URL is shareable. Photos are public marketing assets, not private student files.",
+    body: "Hear from students about choosing a university, preparing their applications, and settling into life abroad. Choose a destination to explore their stories.",
     destinationLabel: "Destination",
     allDestinations: "All destinations",
     filter: "Filter",
     filterAria: "Filter stories by destination",
-    countZero: "No published stories",
-    countOne: "1 published story",
-    countMany: "{n} published stories",
-    emptyTitle: "No published stories yet",
+    countZero: "No student stories yet",
+    countOne: "1 student story",
+    countMany: "{n} student stories",
+    emptyTitle: "No student stories yet",
     empty:
-      "No student stories are live yet. Drafts stay in the desk until a counselor publishes them.",
+      "We’ll share student experiences here soon. In the meantime, talk to our counsellors about your study plans.",
     emptyFilteredTitle: "None for this destination yet",
     emptyFiltered:
-      "No published stories for this destination yet. Try all destinations, or ask a counselor — families often share after they land.",
+      "There are no stories for this destination yet. Browse other destinations or ask our counsellors about studying here.",
     errorTitle: "We couldn't load these stories",
     errorBody:
-      "The stories are still on the desk. Try again, or WhatsApp us if this keeps happening.",
+      "Please try again. If the problem continues, contact us on WhatsApp.",
     loadingAria: "Loading success stories",
     seeAll: "See all stories",
     contactCta: "Talk to a counselor",
@@ -136,20 +134,19 @@ export const en = {
     ogDescription:
       "Providing complete application, visa, and Bangladesh Bank student file guidance for China, India, Malaysia, and South Korea.",
     eyebrow: "Admissions & Visa Consultancy",
-    title: "Bangladesh's Trusted Bridge to World's Top Universities",
+    title: "Study abroad with guidance from Dhaka",
     lede: "Full-service support — from application to visa — for Malaysia, China, South Korea & India.",
     primaryCta: "Book a Free Consultation",
     secondaryCta: "Explore Study Destinations",
     routeListAria: "The four study routes we counsel",
     valueEyebrow: "Why Families Trust Us",
-    valueTitle:
-      "Built for Bangladeshi Families: Transparent Paperwork, Zero Guesswork",
+    valueTitle: "Practical advice for students and families",
     valueLede:
       "Student visa success depends on precise documentation. We map out the destination country's exact immigration criteria and prepare your Bangladesh Bank tuition remittance file before you pay any university deposit.",
     values: [
       {
         tag: "Visa & Compliance",
-        title: "Exact Visa Procedures, Not Generic Advice",
+        title: "Help with your destination’s visa requirements",
         body: "We don't hand you a generic checklist. We build your application around each government's actual requirements — from China's JW201/JW202 forms and Malaysia's EMGS portal to India's SII-ID and South Korea's D-2/D-4 visa categories.",
       },
       {
@@ -164,10 +161,10 @@ export const en = {
       },
     ],
     journeyEyebrow: "7-Step Roadmap",
-    journeyTitle: "From Bangladesh to Your Dream Campus",
+    journeyTitle: "How we help, from application to arrival",
     journeyLede:
-      "A transparent, predictable process designed to remove all guesswork from initial profile evaluation to university hostel arrival.",
-    journeyCta: "Start Your Journey — Book Free Consultation",
+      "See the steps involved in choosing a programme, applying, preparing your visa documents, and travelling to university.",
+    journeyCta: "Book a free consultation",
     journeySteps: [
       {
         step: "01",
@@ -235,9 +232,9 @@ export const en = {
     destinationsLede:
       "Explore university intakes, tuition costs in BDT, and complete visa requirements for our core destination countries.",
     universitiesEyebrow: "Accredited Global Institutions",
-    universitiesTitle: "Direct Gateways to World-Class Campuses",
+    universitiesTitle: "Explore universities across Asia",
     universitiesLede:
-      "Explore handpicked public flagships and premier private universities across Asia with verified degree recognition and direct scholarship pathways.",
+      "Browse universities in China, India, Malaysia, and South Korea. Ask a counsellor about courses, entry requirements, and scholarship options.",
     universitiesFilterAll: "All Campuses",
     universitiesFilterMalaysia: "Malaysia",
     universitiesFilterChina: "China",
@@ -296,20 +293,20 @@ export const en = {
       "Meet Study Abroad Consultant, a Dhaka-based education consultancy supporting Bangladeshi students with counselling, university applications, scholarships, and student visa preparation.",
     ogTitle: "About Us — Study Abroad Consultant | Trusted Guidance from Dhaka",
     ogDescription:
-      "Learn about our team’s China education experience, company story, services, leadership, and commitments to students and families.",
+      "Discover our team’s 12+ years of China-focused education experience, global study opportunities, services, and commitment to students and families.",
     eyebrow: "About Our Agency",
-    title: "Dedicated to Transparent Higher Education for Bangladeshi Families",
-    lede: "We founded this agency on a clear conviction: Bangladeshi families need real admissions expertise and precise visa execution, not commercial marketing brochures. We specialize in four dynamic destinations and stay accountable through your first day on campus.",
+    title: "Study abroad guidance for students and families",
+    lede: "We help students in Bangladesh apply to universities in China, India, Malaysia, and South Korea. Our team supports course selection, applications, visa preparation, and travel planning.",
     founderEyebrow: "Our Mission",
-    founderTitle: "Direct Counselor Accountability, Never a Call Center",
+    founderTitle: "Work with a dedicated counsellor",
     founderBody: [
-      "After seeing countless Bangladeshi students struggle with misleading advice, delayed files, and unexpected visa refusals from generic agencies that claim to represent forty countries, we took a different path. We chose to specialize deeply in four key destinations — China, India, Malaysia, and South Korea.",
-      "By focusing on these specific education systems, we master the exact government portals, university admissions standards, and embassy requirements. Every student and family works directly with dedicated, experienced counselors who take personal responsibility for the success of their file.",
+      "Our work focuses on China, India, Malaysia, and South Korea. We help students compare courses and understand the documents and costs involved in applying.",
+      "Your counsellor helps you prepare your application and keeps you informed about the next steps. Families are welcome to join the discussion.",
     ],
     missionEyebrow: "Core Values",
-    missionTitle: "Clarity, Integrity, and Proven Document Execution",
+    missionTitle: "Clear advice at each step",
     missionBody:
-      "We believe high-quality international education should be transparent and accessible. From your very first profile evaluation to your flight departure, we provide accurate tuition estimates in BDT, direct admission without hidden charges, and structured remittance support under Bangladesh Bank guidelines.",
+      "We explain application requirements, discuss tuition and living costs, and help you prepare your documents. Before you commit, ask us for a breakdown of university charges and our service fees.",
     trustEyebrow: "Why Families Trust Us",
     trustTitle: "Our Commitments to Every Student",
     trustSignals: [
@@ -340,7 +337,7 @@ export const en = {
       "Visit our office or connect with a counselor on WhatsApp for personalized admission and visa advice.",
     eyebrow: "Get in Touch",
     title: "Speak with a Senior Counselor",
-    lede: "Every student's academic profile and financial budget is unique. Tell us your study goals and academic background, and we will outline a realistic, step-by-step admissions and visa roadmap.",
+    lede: "Tell us what you want to study, your qualifications, and your budget. A counsellor will help you explore your options and plan your application.",
     detailsTitle: "Office Location",
     addressLabel: "Office Address",
     addressLines: [
@@ -360,7 +357,7 @@ export const en = {
     formBody:
       "Provide your name, contact number, and intended country of study. A counselor will review your profile and reach out on WhatsApp.",
     formHint:
-      "Your personal information is handled with strict confidentiality under data privacy standards. A counselor reviews every submission personally.",
+      "We use the details you submit to respond to your enquiry and discuss your study plans.",
   },
   leadForm: {
     nameLabel: "Name",
@@ -443,7 +440,7 @@ export const en = {
       adjective: "Chinese",
       metaTitle: "Study in China from Bangladesh",
       metaDescription:
-        "China for Bangladeshi students: X1 for long stays, X2 for short ones. The embassy file is the admission letter plus JW201 or JW202 — not a generic invitation.",
+        "Explore study options in China, including tuition, scholarships, entry requirements, and visa preparation for Bangladeshi students.",
       ogTitle: "China: direct admissions and structured visa documentation",
       ogDescription:
         "MBBS, engineering, and HSK pathways. JW201/JW202 before the X1 or X2 interview.",
@@ -453,14 +450,14 @@ export const en = {
         "China offers world-class infrastructure, globally accredited medical (MBBS) and engineering degrees, and generous Chinese Government (CSC) and provincial scholarships. Our team ensures your admission notice and JW201/JW202 documentation are in perfect order before embassy submission.",
       why: [
         "Generous CSC and university scholarship opportunities that significantly reduce tuition and accommodation expenses.",
-        "WHO/BMDC-recognized MBBS programs and cutting-edge engineering faculties taught in English.",
+        "Explore English-taught medicine and engineering programmes, with guidance on entry requirements and recognition.",
         "A systematic visa process (X1/X2) with predictable timelines when supported by proper JW form documentation.",
       ],
       visaName: "X1 / X2 student visa",
       visaExplanation:
         "Long-term degree study (X1) or short-term courses (X2), processed with official JW201/JW202 university approval.",
       visaSummary:
-        "X1 for long-term study, X2 for short-term. The embassy file is built around the admission letter and the JW201 or JW202 form — not a generic “invitation.”",
+        "Visa preparation includes checking your admission letter, JW201 or JW202 form, and the requirements for your length of study.",
       visaSteps: [
         "Receive the university admission letter.",
         "University issues JW201 or JW202.",
@@ -512,14 +509,14 @@ export const en = {
         "India for Bangladeshi students: register on the Study in India portal first. The SII-ID is required for the e-Student visa — skipping the portal is how files stall.",
       ogTitle: "India: the portal comes before the visa",
       ogDescription:
-        "SII registration, then the SII-ID, then the e-Student visa. Medicine, engineering, and management seats from a desk that treats the portal as step one.",
+        "SII registration, then the SII-ID, then the e-Student visa. Guidance on medicine, engineering, and management applications, starting with the required registration.",
       tagline: "Close to home, culturally familiar, and document-specific.",
       overview:
         "India provides quality higher education with cultural proximity, English-medium instruction, and cost-effective living. Admissions and student visas are strictly governed by the Study in India (SII) portal, which must be completed first to generate your unique SII-ID.",
       why: [
         "High academic standards with close geographic and cultural proximity to Bangladesh.",
         "Significantly lower overall tuition and living costs compared to Western or East Asian alternatives.",
-        "Mandatory SII portal integration ensures streamlined admission and direct e-Student visa processing.",
+        "Guidance on Study in India registration and the documents needed for your application.",
       ],
       visaName: "e-Student visa via Study in India (SII)",
       visaExplanation:
@@ -577,7 +574,7 @@ export const en = {
         "Malaysia for Bangladeshi students: the Student Pass runs through EMGS. After Approval to Study, apply for the eVISA while still outside the country.",
       ogTitle: "Malaysia: EMGS first. Apply from outside.",
       ogDescription:
-        "Two gates — EMGS approval, then the Single Entry Visa. English-medium degrees, explained as a sequence, not a sticker at the airport.",
+        "Explore English-taught programmes in Malaysia, tuition costs, scholarships, and Student Pass preparation.",
       tagline:
         "Globally ranked English-medium degrees in a student-friendly hub.",
       overview:
@@ -712,9 +709,8 @@ export const en = {
     eyebrow: "Programs",
     title: "Programs & universities directory",
     body: "Explore verified undergraduate, postgraduate, and language programs across our four core destinations.",
-    filterLabel: "Requested country filter",
-    noFilter:
-      "No country filter in the link yet. Open a destination page and use its programs button.",
+    filterLabel: "Selected country",
+    noFilter: "Choose a country to browse its programmes.",
     countryLabel: "Country",
     levelLabel: "Level",
     fieldLabel: "Field",
@@ -723,8 +719,9 @@ export const en = {
     allLevels: "All levels",
     applyFilters: "Apply filters",
     clearFilters: "Clear filters",
-    empty: "No published programs match these filters.",
-    resultCount: "published programs",
+    empty:
+      "No programmes match your filters. Try another country, level, or subject.",
+    resultCount: "programmes",
     pageLabel: "Page",
     previous: "Previous",
     next: "Next",
@@ -743,14 +740,14 @@ export const en = {
       cap: "You can compare up to 3 programs. Uncheck one to add another.",
       metaTitle: "Compare programs",
       metaDescription:
-        "Compare up to three published programs side by side — university, tuition in local currency and taka, intake, requirements, and scholarships.",
+        "Compare up to three programmes side by side — university, tuition in local currency and taka, intake, requirements, and scholarships.",
       title: "Compare programs",
-      lede: "Up to three published listings, side by side. The link keeps your selection so you can send it to a parent or counselor.",
+      lede: "Compare tuition, entry requirements, and scholarships for up to three programmes. Share your comparison with your family or a counsellor.",
       emptyTitle: "Nothing to compare yet",
       empty:
-        "Select up to three programs in the directory, then open Compare. The address bar keeps the same ids.",
+        "Choose up to three programmes from the directory and select Compare.",
       missing:
-        "One or more listings in this link are no longer published, so they are not in the table.",
+        "Some selected programmes are no longer available. Return to the directory to choose another programme.",
       back: "Back to programs",
       remove: "Remove",
       emptyCell: "Not listed",
@@ -775,29 +772,29 @@ export const en = {
       "Estimate one year of tuition and living costs for China, India, Malaysia, or South Korea, in local currency and taka.",
     ogTitle: "Estimated Yearly Study & Living Costs in BDT",
     ogDescription:
-      "Tuition plus twelve months of living in local currency and BDT. A counselor verifies your exact file budget.",
+      "Estimate tuition and twelve months of living costs in local currency and BDT. Discuss your budget with a counsellor.",
     eyebrow: "Costs",
     title: "Calculate Your Yearly Study & Living Budget",
     lede: "Select a destination, degree level, or specific university program to view an itemized estimate of tuition and 12-month living expenses in BDT.",
     disclaimer:
-      "Estimated figures only — not a formal invoice. Actual tuition and living expenses vary based on university, city, and lifestyle. A counselor will calculate your exact file budget.",
+      "Use this estimate to plan your budget. Actual costs depend on the university, city, and your living arrangements. A counsellor can help you review the costs.",
     destinationLabel: "Destination",
     destinationPlaceholder: "Choose a destination",
     levelLabel: "Level (optional)",
     allLevels: "Any level",
-    programLabel: "Published program (optional)",
+    programLabel: "Programme (optional)",
     programPlaceholder: "Use the typical tuition band",
     noPrograms:
-      "No published programs match this filter yet — the typical band is used.",
+      "No programmes match this filter yet — the typical band is used.",
     submit: "Show estimate",
     promptTitle: "Choose a destination",
     prompt: "Choose a destination to see a year of tuition plus living costs.",
     emptyBandsTitle: "Cost bands not listed yet",
     emptyBands:
-      "Cost bands for this route are not in the database yet. Ask a counselor, or try again after the table is seeded.",
+      "Estimates for this destination are not available yet. Contact a counsellor to discuss tuition and living costs.",
     errorTitle: "We couldn't build this estimate",
     errorBody:
-      "Try again in a moment, or WhatsApp a counselor for a quote on the file.",
+      "Please try again, or contact a counsellor on WhatsApp for help with your budget.",
     ratesError:
       "The exchange rate did not load, so we cannot show taka yet. Try again.",
     loadingAria: "Loading the cost calculator",
@@ -807,13 +804,13 @@ export const en = {
     yearlyLabel: "Year",
     livingSubtotal: "Living subtotal (12 months)",
     tuitionGeneric: "Typical tuition band for this route",
-    tuitionProgram: "Published tuition for this program",
+    tuitionProgram: "Listed tuition for this programme",
     localLabel: "Local",
     bdtLabel: "Taka (BDT)",
     rateLive:
-      "Taka conversion is a public mid-market rate, cached and refreshed at most once a day — not a bank selling rate.",
+      "BDT estimates use an indicative exchange rate. Your bank’s rate and transfer fees may differ.",
     rateFallback:
-      "The live exchange feed was unavailable, so this uses a fallback taka rate. Not a bank selling rate.",
+      "The latest exchange rate is unavailable. This estimate uses a reference rate; confirm the current rate with your bank.",
     rateAsOf: "Rate dated",
     destinations: {
       china: "China",
@@ -842,7 +839,7 @@ export const en = {
       "Evaluate your eligibility for China, India, Malaysia, or South Korea — education, tests, and budget evaluated by our counselors.",
     eyebrow: "Eligibility Assessment",
     title: "Check Your Study Abroad Eligibility in 2 Minutes",
-    lede: "Answer four quick questions about your education, test scores, and target budget to receive a personalized eligibility assessment and recommendation from our senior counselors.",
+    lede: "Answer questions about your destination, education, test scores, and budget for an initial eligibility result. A counsellor can help you check the requirements of individual programmes.",
     progressLabel: "Quiz steps",
     steps: {
       destination: "Destination",
@@ -879,7 +876,8 @@ export const en = {
     englishOptionalLabel: "English scores, if you have them",
     notTaken: "Not taken",
     budgetLabel: "Rough yearly budget (tuition + living, BDT)",
-    budgetHint: "A band is enough. Exact fees come later, per university.",
+    budgetHint:
+      "Choose your approximate yearly budget. Fees vary by university.",
     budget: {
       under_8l: "Under ৳8 lakh",
       "8_15l": "৳8–15 lakh",
@@ -887,7 +885,7 @@ export const en = {
       over_25l: "Over ৳25 lakh",
     },
     contactIntro:
-      "We store this with the quiz so a counselor can follow up. WhatsApp is still the fastest reply.",
+      "Leave your contact details so a counsellor can discuss your results and study options with you.",
     nameLabel: "Name",
     phoneLabel: "Phone",
     phoneHint: "Include country code, e.g. +880 1XXX-XXXXXX",
@@ -905,69 +903,69 @@ export const en = {
     rateLimitError:
       "Please wait before sending another quiz. You can try again in a few minutes.",
     configError:
-      "The quiz is not ready to save results yet. Use WhatsApp or the contact form instead.",
+      "The assessment is temporarily unavailable. Contact us on WhatsApp or use the contact form.",
     genericError:
       "We could not finish that just now. Try again, or use WhatsApp.",
     verdicts: {
-      strong: "Looks workable on paper",
-      possible: "A path, with gaps",
-      stretch: "A stretch with this file",
+      strong: "Your profile looks suitable",
+      possible: "Some requirements need a review",
+      stretch: "More preparation may be needed",
     },
     results: {
       china: {
         strong: {
-          title: "China looks workable on this file.",
-          body: "The education level, language path, and budget band line up with how we usually open a China case. This is not an offer — a counselor still checks the university and the JW201/JW202 sequence.",
+          title: "Explore your study options in China.",
+          body: "Your education, language score, and budget appear to fit our initial criteria for China. A counsellor will review your qualifications and the university’s requirements with you.",
         },
         possible: {
-          title: "China is possible, with something to close.",
-          body: "There is a China path here, but a test, budget, or level still sits short of a clean file. English-taught programs and a language year are different doors.",
+          title: "Review your options for China.",
+          body: "Some of your answers need a closer review. A counsellor can help you check language requirements, costs, and suitable programmes.",
         },
         stretch: {
-          title: "China is a stretch with the current answers.",
-          body: "The file as entered does not yet meet the usual China desk bar. A counselor can say whether HSK study, an English-taught list, or another route is the honest next step.",
+          title: "Plan your next steps for China.",
+          body: "Your answers suggest that further preparation may be needed. Discuss your qualifications, language study, and budget with a counsellor before choosing a programme.",
         },
       },
       india: {
         strong: {
-          title: "India looks workable on this file.",
-          body: "The level, English score, and budget band fit how we usually start an India case. The first official step is still SII registration — the e-Student visa comes after the SII-ID.",
+          title: "Explore your study options in India.",
+          body: "Your education, language score, and budget appear to fit our initial criteria for India. A counsellor will review your qualifications and the university’s requirements with you.",
         },
         possible: {
-          title: "India is possible, with something to close.",
-          body: "There is an India path, but IELTS/TOEFL or the budget band still needs work before a clean SII file. A counselor can say whether a different intake or university list fits better.",
+          title: "Review your options for India.",
+          body: "Some of your answers need a closer review. A counsellor can help you check language requirements, costs, and suitable programmes.",
         },
         stretch: {
-          title: "India is a stretch with the current answers.",
-          body: "The file as entered sits below the usual India desk bar. Raising the English score, or looking at another of the four routes, is the conversation to have next.",
+          title: "Plan your next steps for India.",
+          body: "Your answers suggest that further preparation may be needed. Discuss your qualifications, language study, and budget with a counsellor before choosing a programme.",
         },
       },
       malaysia: {
         strong: {
-          title: "Malaysia looks workable on this file.",
-          body: "The level, English score, and budget band fit a typical EMGS Student Pass case. The applicant must be outside Malaysia when that pass is filed — that sequence is the work, not a generic visa form.",
+          title: "Explore your study options in Malaysia.",
+          body: "Your education, language score, and budget appear to fit our initial criteria for Malaysia. A counsellor will review your qualifications and the university’s requirements with you.",
         },
         possible: {
-          title: "Malaysia is possible, with something to close.",
-          body: "EMGS will still want a coherent English score and a budget that covers tuition plus living. One of those is short here. A counselor can say whether a later intake or a different institution list is the fix.",
+          title: "Review your options for Malaysia.",
+          body: "Some of your answers need a closer review. A counsellor can help you check language requirements, costs, and suitable programmes.",
         },
         stretch: {
-          title: "Malaysia is a stretch with the current answers.",
-          body: "The file as entered does not yet meet the usual Malaysia desk bar — often the budget band or IELTS/TOEFL. This route is rarely the cheapest of the four.",
+          title: "Plan your next steps for Malaysia.",
+          body: "Your answers suggest that further preparation may be needed. Discuss your qualifications, language study, and budget with a counsellor before choosing a programme.",
         },
       },
       south_korea: {
         strong: {
-          title: "South Korea looks workable on this file.",
-          body: "The level, language path, and budget band fit how we usually open a Korea case. D-2 is the degree visa; D-4 is the language/non-degree door — those are not interchangeable.",
+          title: "Explore your study options in South Korea.",
+          body: "Your education, language score, and budget appear to fit our initial criteria for South Korea. A counsellor will review your qualifications and the university’s requirements with you.",
         },
         possible: {
-          title: "South Korea is possible, with something to close.",
-          body: "There is a Korea path, often through a D-4 language year if TOPIK is still low. Budget and degree level still need a counselor’s eye before anyone files D-2.",
+          title: "Review your options for South Korea.",
+          body: "Some of your answers need a closer review. A counsellor can help you check language requirements, costs, and suitable programmes.",
         },
         stretch: {
-          title: "South Korea is a stretch with the current answers.",
-          body: "The file as entered sits below the usual Korea desk bar. A language year, a higher budget band, or another of the four routes is the honest next conversation.",
+          title: "Plan your next steps for South Korea.",
+          body: "Your answers suggest that further preparation may be needed. Discuss your qualifications, language study, and budget with a counsellor before choosing a programme.",
         },
       },
     },
@@ -977,15 +975,15 @@ export const en = {
       "education.accepted":
         "Your current level can work, though it is not the most common entry for this route.",
       "education.gap":
-        "Your current level is an unusual fit for the programs we usually file on this route.",
+        "Your education level may not meet the entry requirements for these programmes. Discuss suitable options with a counsellor.",
       "language.hsk.met":
         "HSK is at or above the starting bar we use for Chinese-taught files.",
       "language.hsk.below":
-        "HSK is below the starting bar — a language year or an English-taught list may be the door.",
+        "Your HSK level is below our initial criteria. Consider language preparation or ask about English-taught programmes.",
       "language.topik.met":
         "TOPIK is at or above the starting bar we use for Korean-taught files.",
       "language.topik.below":
-        "TOPIK is below the starting bar — a D-4 language year is often the honest first step.",
+        "Your TOPIK level is below our initial criteria. Ask a counsellor about language preparation and programme requirements.",
       "language.ielts.met":
         "IELTS meets the English-taught starting bar for this route.",
       "language.ielts.below":
@@ -995,7 +993,7 @@ export const en = {
       "language.toefl.below":
         "TOEFL is below the starting bar we use for English-taught files on this route.",
       "language.none":
-        "No test score was entered. The file is incomplete until IELTS, TOEFL, or the route’s language test exists.",
+        "You have not entered a test score. Check the language requirements of your chosen programme with a counsellor.",
       "budget.met":
         "The budget band covers the usual yearly range we see on this route.",
       "budget.close":
@@ -1009,7 +1007,7 @@ export const en = {
       "route.malaysia":
         "Malaysia’s Student Pass runs through EMGS. The applicant should be outside Malaysia when that is filed.",
       "route.south_korea":
-        "Korea splits D-2 (degree) and D-4 (language / non-degree). Mixing those two is a common stall.",
+        "Degree and language programmes use different visa categories. Confirm the category for your course before applying.",
     },
     whatsappResultMessage: {
       china:
@@ -1029,7 +1027,7 @@ export const en = {
     launcherClose: "Close chat",
     title: "Ask Study Abroad Consultancy",
     subtitle:
-      "Quick answers about our four routes. A counselor handles the rest.",
+      "Ask about studying abroad or contact a counsellor for personal advice.",
     placeholder: "Ask about China, India, Malaysia, or South Korea…",
     send: "Send",
     sending: "Thinking…",
@@ -1038,12 +1036,12 @@ export const en = {
     you: "You",
     assistant: "Study Abroad Consultancy",
     greeting:
-      "Hello — I can explain which countries we help with, and the high-level path from application to visa. I will not guess document lists or fees. For those, leave your number and a counselor will follow up.",
+      "Hello! Which country or programme are you interested in? I can answer general questions. For advice about your documents, fees, or eligibility, I can help you reach a counsellor.",
     handoff:
       "That needs a counselor rather than a quick answer. Leave your details and we will reach out on WhatsApp.",
     formHeading: "Talk to a counselor",
     formIntro:
-      "Same as the contact form — a counselor follows up on WhatsApp within one business day.",
+      "Leave your details and a counsellor will contact you on WhatsApp.",
     rateLimitError: "Please wait before sending another question.",
     unavailable:
       "I'm having trouble right now — here's how to reach a counselor directly.",

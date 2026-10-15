@@ -1,16 +1,12 @@
 "use client";
-
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-
 import {
   createLeadVisaApplication,
   updateLeadVisaApplication,
 } from "@/app/admin/leads/actions";
 import { DeskEmptyState } from "@/components/desk/empty-state";
 import { DeskErrorState } from "@/components/desk/error-state";
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
-import { DeskVisaSkeleton } from "@/components/desk/skeleton";
 import { useDeskToast } from "@/components/desk/toast";
 import { visaApplicationSubStatuses } from "@/db/schema";
 import type { LeadActivityItem } from "@/lib/leads/activity-types";
@@ -21,7 +17,6 @@ import {
 } from "@/lib/visa-applications/copy";
 import { toDatetimeLocalValue } from "@/lib/visa-applications/dates";
 import type { DeskVisaApplication } from "@/lib/visa-applications/types";
-
 type LeadVisaSectionProps = {
   leadId: string;
   visa: DeskVisaApplication | null;
@@ -33,10 +28,8 @@ type LeadVisaSectionProps = {
     activity: LeadActivityItem | null,
   ) => void;
 };
-
 const fieldClass =
   "desk-focus mt-1 w-full rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-bg)] px-2 py-1.5 text-sm font-normal text-[var(--desk-ink)] normal-case";
-
 export function LeadVisaSection({
   leadId,
   visa,
@@ -46,11 +39,9 @@ export function LeadVisaSection({
   onUpdated,
 }: LeadVisaSectionProps) {
   const router = useRouter();
-  const { preview, setPreview } = useDeskPreview();
   const [liveMessage, setLiveMessage] = useState("");
   const [saveError, setSaveError] = useState<string | null>(null);
   const announceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   useEffect(() => {
     return () => {
       if (announceTimer.current) {
@@ -58,13 +49,8 @@ export function LeadVisaSection({
       }
     };
   }, []);
-
-  const showLoading = preview === "loading";
-  const showError = preview === "error" || (preview === "off" && loadError);
-  const showEmpty =
-    preview === "empty" || (preview === "off" && !loadError && !visa);
-  const isDev = process.env.NODE_ENV !== "production";
-
+  const showError = loadError;
+  const showEmpty = !loadError && !visa;
   function announceStatus(message: string) {
     setSaveError(null);
     setLiveMessage("");
@@ -75,47 +61,28 @@ export function LeadVisaSection({
       setLiveMessage(message);
     }, 0);
   }
-
   function announceError(message: string) {
     setLiveMessage("");
     setSaveError(message);
   }
-
   function onRetry() {
-    if (preview === "error") {
-      setPreview("off");
-      return;
-    }
-
     router.refresh();
   }
-
-  if (!inVisaStage && !loadError && preview === "off" && !isDev) {
+  if (!inVisaStage && !loadError) {
     return null;
   }
-
-  if (!inVisaStage && !loadError && preview === "off") {
-    return (
-      <div>
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-      </div>
-    );
+  if (!inVisaStage && !loadError) {
+    return <div></div>;
   }
-
   return (
-    <section
-      aria-labelledby="lead-visa-heading"
-      aria-busy={showLoading || undefined}
-    >
+    <section aria-labelledby="lead-visa-heading" aria-busy={undefined}>
       <h3
         id="lead-visa-heading"
         className="text-[0.68rem] font-semibold tracking-[0.06em] text-[var(--desk-ink-muted)] uppercase"
       >
         Visa
       </h3>
-      <div className="mt-2">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-      </div>
+      <div className="mt-2"></div>
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {liveMessage}
       </p>
@@ -128,9 +95,7 @@ export function LeadVisaSection({
         </p>
       ) : null}
       <div className="mt-2">
-        {showLoading ? (
-          <DeskVisaSkeleton />
-        ) : showError ? (
+        {showError ? (
           <DeskErrorState
             title="Visa tracking could not load"
             body="The rest of this file is still here. Try again."
@@ -157,7 +122,6 @@ export function LeadVisaSection({
     </section>
   );
 }
-
 function MissingVisaFile({
   leadId,
   hasLinkedApplication,
@@ -173,12 +137,10 @@ function MissingVisaFile({
 }) {
   const { toast } = useDeskToast();
   const [busy, setBusy] = useState(false);
-
   async function onCreate() {
     if (busy) {
       return;
     }
-
     setBusy(true);
     const result = await createLeadVisaApplication({ leadId });
     if (!result.ok) {
@@ -191,7 +153,6 @@ function MissingVisaFile({
       setBusy(false);
       return;
     }
-
     onUpdated(result.visa, result.activity);
     onAnnounce(visaApplicationStudentLine(result.visa));
     toast({
@@ -201,7 +162,6 @@ function MissingVisaFile({
     });
     setBusy(false);
   }
-
   return (
     <div aria-busy={busy || undefined}>
       <DeskEmptyState
@@ -227,7 +187,6 @@ function MissingVisaFile({
     </div>
   );
 }
-
 function VisaForm({
   leadId,
   visa,
@@ -254,7 +213,6 @@ function VisaForm({
   );
   const [notes, setNotes] = useState(visa.notes ?? "");
   const [saving, setSaving] = useState(false);
-
   useEffect(() => {
     setSubStatus(visa.subStatus);
     setReferenceNumber(visa.referenceNumber ?? "");
@@ -262,13 +220,11 @@ function VisaForm({
     setDecidedAt(toDatetimeLocalValue(visa.decidedAt));
     setNotes(visa.notes ?? "");
   }, [visa]);
-
   async function onSave(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (saving) {
       return;
     }
-
     setSaving(true);
     const result = await updateLeadVisaApplication({
       leadId,
@@ -278,7 +234,6 @@ function VisaForm({
       decidedAt,
       notes,
     });
-
     if (!result.ok) {
       toast({
         title: "Visa file not saved",
@@ -289,7 +244,6 @@ function VisaForm({
       setSaving(false);
       return;
     }
-
     onUpdated(result.visa, result.activity);
     const studentLine = visaApplicationStudentLine(result.visa);
     if (result.activity === null) {
@@ -314,7 +268,6 @@ function VisaForm({
     });
     setSaving(false);
   }
-
   return (
     <div>
       <p className="text-xs text-[var(--desk-ink-muted)]">

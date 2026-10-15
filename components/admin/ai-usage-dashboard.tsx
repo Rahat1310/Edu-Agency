@@ -1,20 +1,11 @@
 "use client";
-
 import { DeskEmptyState } from "@/components/desk/empty-state";
-import {
-  DeskPreviewBar,
-  DeskPreviewError,
-  useDeskPreview,
-} from "@/components/desk/preview";
-import { DeskTableSkeleton } from "@/components/desk/skeleton";
 import { aiProviderUsageLabels } from "@/lib/ai/usage-caps";
 import type { ProviderUsageSummary, UsageDayTotal } from "@/lib/ai/usage-view";
 import { cn } from "@/lib/utils";
-
 function formatCount(value: number): string {
   return new Intl.NumberFormat("en-US").format(value);
 }
-
 function capLine(row: ProviderUsageSummary): string {
   const daily = `${formatCount(row.cap.requests)} req/day`;
   if (row.cap.tokensPerMinute) {
@@ -25,7 +16,6 @@ function capLine(row: ProviderUsageSummary): string {
   }
   return `~${daily}`;
 }
-
 export function AiUsageDashboard({
   todayYmd,
   providers,
@@ -35,41 +25,10 @@ export function AiUsageDashboard({
   providers: ProviderUsageSummary[];
   daily: UsageDayTotal[];
 }) {
-  const { preview, setPreview } = useDeskPreview();
   const warned = providers.filter((row) => row.warned);
-  const weekEmpty = preview === "empty" || daily.length === 0;
-
-  if (preview === "loading") {
-    return (
-      <div>
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <h1 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-ink)]">
-          AI usage
-        </h1>
-        <p className="mt-1 text-[0.75rem] text-[var(--desk-ink-muted)]">
-          Loading usage…
-        </p>
-        <div className="mt-4">
-          <DeskTableSkeleton columns={6} rows={3} />
-        </div>
-      </div>
-    );
-  }
-
-  if (preview === "error") {
-    return (
-      <div>
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <div className="mt-3">
-          <DeskPreviewError onRetry={() => setPreview("off")} />
-        </div>
-      </div>
-    );
-  }
-
+  const weekEmpty = daily.length === 0;
   return (
     <div>
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <h1 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-ink)]">
         AI usage
       </h1>
@@ -246,8 +205,7 @@ export function AiUsageDashboard({
                       {formatCount(row.calls)}
                     </td>
                     <td className="px-3 py-2 tabular-nums">
-                      {formatCount(row.successes)} /{" "}
-                      {formatCount(row.failures)}
+                      {formatCount(row.successes)} / {formatCount(row.failures)}
                     </td>
                     <td className="px-3 py-2 tabular-nums">
                       {formatCount(row.tokensIn)} / {formatCount(row.tokensOut)}
@@ -262,7 +220,6 @@ export function AiUsageDashboard({
     </div>
   );
 }
-
 function UsageBar({
   percent,
   warned,
@@ -273,7 +230,6 @@ function UsageBar({
   label: string;
 }) {
   const width = Math.min(100, percent);
-
   return (
     <div>
       <div

@@ -1,33 +1,24 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-
 import { refreshProgramMatches } from "@/app/portal/matches/actions";
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
 import { MatchCard } from "@/components/portal/match-card";
 import { MatchProfileForm } from "@/components/portal/match-profile-form";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import { PortalErrorState } from "@/components/portal/portal-error-state";
-import {
-  PortalMatchesSkeleton,
-  PortalMatchRankingSkeleton,
-} from "@/components/portal/portal-skeletons";
+import { PortalMatchRankingSkeleton } from "@/components/portal/portal-skeletons";
 import type {
   MatchProfileDraft,
   PortalMatchRanking,
 } from "@/lib/matching/types";
 import { getWhatsAppHref } from "@/lib/whatsapp";
-
 export type { PortalMatchRanking };
-
 type PortalMatchesProps = {
   studentName: string;
   draft: MatchProfileDraft;
   hasCompleteProfile: boolean;
   ranking: PortalMatchRanking | null;
 };
-
 export function PortalMatches({
   studentName,
   draft,
@@ -35,53 +26,25 @@ export function PortalMatches({
   ranking,
 }: PortalMatchesProps) {
   const router = useRouter();
-  const { preview, setPreview } = useDeskPreview();
   const [refreshError, setRefreshError] = useState<string | null>(null);
   const [rankingPending, startRanking] = useTransition();
   const whatsappHref = getWhatsAppHref(
     `Hi, I'm ${studentName}. I want to talk through the programs that came up for my file.`,
   );
-
-  if (preview === "loading") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <PortalMatchesSkeleton />
-      </div>
-    );
-  }
-
-  if (preview === "error") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <div className="mx-auto max-w-2xl">
-          <PortalErrorState
-            title="We couldn't load your matches"
-            body="Your file is still here. Try again, or WhatsApp us if this keeps happening."
-            onRetry={() => setPreview("off")}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  const visibleRanking = preview === "empty" ? emptyPreviewRanking() : ranking;
-
+  const visibleRanking = ranking;
   return (
     <div className="space-y-3">
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <div className="mx-auto max-w-2xl">
         <p className="font-utility text-[0.68rem] font-semibold tracking-[0.14em] text-[var(--brand-green)] uppercase">
           Matches
         </p>
         <h1 className="font-display mt-2 text-3xl font-bold tracking-[-0.04em] text-[var(--desk-accent)]">
-          Programs that fit this file
+          Suggested programmes
         </h1>
         <p className="mt-2 text-base leading-7 text-[var(--desk-ink-muted)]">
-          We filter the published directory first — destination, level, and
-          tuition band — then rank a short list. This is not an offer, and it is
-          not an admission or scholarship score.
+          These suggestions use your destination, education level, and tuition
+          budget. Check the entry requirements with a counsellor before
+          applying.
         </p>
 
         <section className="mt-8 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
@@ -89,8 +52,8 @@ export function PortalMatches({
             Your matching details
           </h2>
           <p className="mt-2 text-sm leading-6 text-[var(--desk-ink-muted)]">
-            Education, destinations, scores, and budget. Saving this writes it
-            to your file and rebuilds the list.
+            Update your education, preferred destinations, test scores, and
+            budget to refresh your suggestions.
           </p>
           <div className="mt-5">
             <MatchProfileForm
@@ -105,7 +68,7 @@ export function PortalMatches({
           </div>
         </section>
 
-        {preview === "empty" || hasCompleteProfile || rankingPending ? (
+        {hasCompleteProfile || rankingPending ? (
           <section className="mt-6" aria-busy={rankingPending}>
             <div className="flex flex-wrap items-end justify-between gap-3 px-1">
               <h2
@@ -163,16 +126,6 @@ export function PortalMatches({
     </div>
   );
 }
-
-function emptyPreviewRanking(): PortalMatchRanking {
-  return {
-    matches: [],
-    shortlistCount: 0,
-    cached: false,
-    emptyShortlist: true,
-  };
-}
-
 function MatchResults({
   ranking,
   whatsappHref,
@@ -185,7 +138,6 @@ function MatchResults({
   if (!ranking) {
     return null;
   }
-
   if (ranking.error) {
     return (
       <div className="mt-4">
@@ -197,13 +149,12 @@ function MatchResults({
       </div>
     );
   }
-
   if (ranking.emptyShortlist || ranking.matches.length === 0) {
     return (
       <div className="mt-4">
         <PortalEmptyState
-          title="Nothing in the directory passed the hard filters"
-          body="That usually means the published programs don't match this destination, level, or tuition band yet. Widen the destinations, or WhatsApp us and we'll look by hand."
+          title="No programmes match your preferences"
+          body="Try another destination or budget range, or contact us on WhatsApp for help finding a programme."
           action={
             <a
               href={whatsappHref}
@@ -218,7 +169,6 @@ function MatchResults({
       </div>
     );
   }
-
   return (
     <div>
       <ol

@@ -1,32 +1,20 @@
 "use client";
-
 import Link from "next/link";
-
 import { PageShell } from "@/components/layout/page-shell";
-import { MarketingEmptyState } from "@/components/marketing/empty-state";
-import { MarketingErrorState } from "@/components/marketing/error-state";
-import {
-  MarketingPreviewBar,
-  useMarketingPreview,
-} from "@/components/marketing/preview";
-import { DestinationPageSkeleton } from "@/components/marketing/skeleton";
 import { DESTINATIONS, type DestinationSlug } from "@/lib/destinations";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
-
 type PreDeparturePageProps = {
   locale: Locale;
   slug: DestinationSlug;
   dict: Dictionary;
 };
-
 export function PreDeparturePage({
   locale,
   slug,
   dict,
 }: PreDeparturePageProps) {
-  const { preview, setPreview } = useMarketingPreview();
   const destination = DESTINATIONS[slug];
   const copy = dict.destinations[slug];
   const brief = copy.preDeparture;
@@ -49,42 +37,11 @@ export function PreDeparturePage({
       body: brief.orientation,
     },
   ] as const;
-
-  if (preview === "loading") {
-    return (
-      <div>
-        <PageShell className="pt-10 sm:pt-16">
-          <MarketingPreviewBar preview={preview} onChange={setPreview} />
-        </PageShell>
-        <DestinationPageSkeleton label={dict.preDeparture.loadingAria} />
-      </div>
-    );
-  }
-
-  if (preview === "error") {
-    return (
-      <section className="py-10 sm:py-16">
-        <PageShell>
-          <MarketingPreviewBar preview={preview} onChange={setPreview} />
-          <div className="mt-6">
-            <MarketingErrorState
-              title={dict.preDeparture.errorTitle}
-              body={dict.preDeparture.errorBody}
-              retryLabel={dict.common.tryAgain}
-              onRetry={() => setPreview("off")}
-            />
-          </div>
-        </PageShell>
-      </section>
-    );
-  }
-
   return (
     <>
       <section className="pt-10 pb-12 sm:pt-16 sm:pb-16">
         <PageShell>
-          <MarketingPreviewBar preview={preview} onChange={setPreview} />
-          <div className="eyebrow-pill mt-4 inline-flex items-center gap-2">
+          <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)]">
             <span
               className="size-2 rounded-full ring-2 ring-white"
               style={{ backgroundColor: destination.color }}
@@ -94,7 +51,7 @@ export function PreDeparturePage({
               {destination.code} · {dict.preDeparture.eyebrow}
             </span>
           </div>
-          <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+          <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.15]">
             {brief.title}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 font-normal text-slate-600">
@@ -114,12 +71,7 @@ export function PreDeparturePage({
 
       <section className="border-t border-stone-200 py-16 sm:py-20">
         <PageShell>
-          {preview === "empty" ? (
-            <MarketingEmptyState
-              title={dict.preDeparture.emptyTitle}
-              body={dict.preDeparture.emptyBody}
-            />
-          ) : (
+          {
             <ol className="grid gap-6 lg:grid-cols-2">
               {blocks.map((block) => (
                 <li key={block.title}>
@@ -134,7 +86,7 @@ export function PreDeparturePage({
                 </li>
               ))}
             </ol>
-          )}
+          }
         </PageShell>
       </section>
     </>

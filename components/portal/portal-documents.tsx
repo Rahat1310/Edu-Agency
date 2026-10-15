@@ -1,14 +1,9 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
 import { useDeskToast } from "@/components/desk/toast";
 import { PortalInfoDrawer } from "@/components/portal/info-drawer";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
-import { PortalErrorState } from "@/components/portal/portal-error-state";
-import { PortalDocumentsSkeleton } from "@/components/portal/portal-skeletons";
 import type { LeadDestinationInterest } from "@/db/schema";
 import type { StudentDocumentRow } from "@/lib/documents/types";
 import {
@@ -33,13 +28,11 @@ import { documentHints } from "@/lib/portal/copy";
 import { cn } from "@/lib/utils";
 import { documentTypeAnchorId } from "@/lib/visa-requirements/checklist";
 import { getWhatsAppHref } from "@/lib/whatsapp";
-
 export type VisaUploadSlot = {
   documentTypeKey: string;
   documentName: string;
   description: string | null;
 };
-
 type PortalDocumentsProps = {
   applicationId: string;
   documents: StudentDocumentRow[];
@@ -48,9 +41,7 @@ type PortalDocumentsProps = {
   visaSlots?: VisaUploadSlot[];
   focusType?: string | null;
 };
-
 type UploadPhase = "idle" | "start" | "put" | "save";
-
 export function PortalDocuments({
   applicationId,
   documents,
@@ -59,53 +50,24 @@ export function PortalDocuments({
   visaSlots = [],
   focusType = null,
 }: PortalDocumentsProps) {
-  const { preview, setPreview } = useDeskPreview();
   const hints = documentHints(destination);
   const whatsappHref = getWhatsAppHref(
     `Hi, I'm ${studentName}. I want to check which documents you need from me.`,
   );
-  const rows = preview === "empty" ? [] : documents;
+  const rows = documents;
   const extraSlots = visaSlots.filter(
     (slot) => !isGeneralDocumentType(slot.documentTypeKey),
   );
-
   useEffect(() => {
     if (!focusType) {
       return;
     }
-
     document
       .getElementById(documentTypeAnchorId(focusType))
       ?.scrollIntoView({ block: "start", behavior: "smooth" });
   }, [focusType]);
-
-  if (preview === "loading") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <PortalDocumentsSkeleton />
-      </div>
-    );
-  }
-
-  if (preview === "error") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <div className="mx-auto max-w-2xl">
-          <PortalErrorState
-            title="We couldn't load your papers"
-            body="Nothing you already sent is lost. Try again, or WhatsApp us if this keeps happening."
-            onRetry={() => setPreview("off")}
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-3">
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <div className="mx-auto max-w-2xl">
         <p className="font-utility text-[0.68rem] font-semibold tracking-[0.14em] text-[var(--brand-green)] uppercase">
           Documents
@@ -201,7 +163,6 @@ export function PortalDocuments({
     </div>
   );
 }
-
 function TypeCard({
   applicationId,
   type,
@@ -227,41 +188,34 @@ function TypeCard({
   const [problem, setProblem] = useState<UploadProblem | null>(null);
   const [liveMessage, setLiveMessage] = useState("");
   const busy = phase !== "idle";
-
   function announce(message: string, nextProblem?: UploadProblem | null) {
     if (nextProblem) {
       setProblem(nextProblem);
       setLiveMessage("");
       return;
     }
-
     setProblem(null);
     setLiveMessage(message);
   }
-
   async function onFile(file: File | undefined) {
     if (!file || busy) {
       return;
     }
-
     const chosen = explainChooseFileProblem(file, DOCUMENT_MAX_BYTES);
     if (chosen) {
       announce(`${chosen.title}. ${chosen.description}`, chosen);
       return;
     }
-
     const contentType = mimeForFile(file);
     if (!contentType) {
       const wrongType = explainWrongTypeFile();
       announce(`${wrongType.title}. ${wrongType.description}`, wrongType);
       return;
     }
-
     setPhase("start");
     setPercent(8);
     let stage: UploadPhase = "start";
     announce(`Sending ${label}.`);
-
     try {
       const intentResponse = await fetch("/api/portal/documents/upload-url", {
         method: "POST",
@@ -281,7 +235,6 @@ function TypeCard({
         uploadUrl?: string;
         headers?: Record<string, string>;
       };
-
       if (
         !intentResponse.ok ||
         !intent.ok ||
@@ -297,12 +250,10 @@ function TypeCard({
         announce(`${mapped.title}. ${mapped.description}`, mapped);
         return;
       }
-
       stage = "put";
       setPhase("put");
       setPercent(10);
       announce(`Sending ${label}.`);
-
       const put = await putFileWithProgress(
         intent.uploadUrl,
         file,
@@ -311,7 +262,6 @@ function TypeCard({
           setPercent(10 + Math.round(progress.percent * 0.8));
         },
       );
-
       if (!put.ok) {
         const mapped = explainUploadProblem({
           stage: "put",
@@ -320,12 +270,10 @@ function TypeCard({
         announce(`${mapped.title}. ${mapped.description}`, mapped);
         return;
       }
-
       stage = "save";
       setPhase("save");
       setPercent(92);
       announce(`Saving ${label} to your file.`);
-
       const completeResponse = await fetch("/api/portal/documents/complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -342,7 +290,6 @@ function TypeCard({
         ok?: boolean;
         message?: string;
       };
-
       if (!completeResponse.ok || !complete.ok) {
         const mapped = explainUploadProblem({
           stage: "save",
@@ -352,7 +299,6 @@ function TypeCard({
         announce(`${mapped.title}. ${mapped.description}`, mapped);
         return;
       }
-
       setPercent(100);
       const success =
         "It's in your file. A counselor will look at it. Status starts as waiting.";
@@ -377,7 +323,6 @@ function TypeCard({
       }
     }
   }
-
   const progressLabel =
     phase === "start"
       ? "Getting a place to send it…"
@@ -386,7 +331,6 @@ function TypeCard({
         : phase === "save"
           ? "Saving to your file…"
           : "";
-
   return (
     <section
       id={documentTypeAnchorId(type)}
@@ -485,16 +429,13 @@ function TypeCard({
     </section>
   );
 }
-
 function DocumentRow({ row }: { row: StudentDocumentRow }) {
   const { toast } = useDeskToast();
   const [opening, setOpening] = useState(false);
-
   async function openView() {
     if (opening) {
       return;
     }
-
     setOpening(true);
     try {
       const response = await fetch(`/api/portal/documents/${row.id}/view`);
@@ -504,7 +445,6 @@ function DocumentRow({ row }: { row: StudentDocumentRow }) {
         message?: string;
         expiresInSeconds?: number;
       };
-
       if (!response.ok || !payload.ok || !payload.url) {
         toast({
           title: "We couldn't open that file",
@@ -515,7 +455,6 @@ function DocumentRow({ row }: { row: StudentDocumentRow }) {
         });
         return;
       }
-
       window.open(payload.url, "_blank", "noopener,noreferrer");
       toast({
         title: "Link opened",
@@ -532,7 +471,6 @@ function DocumentRow({ row }: { row: StudentDocumentRow }) {
       setOpening(false);
     }
   }
-
   return (
     <li
       className="rounded-xl border border-[var(--desk-line)] bg-[var(--desk-bg)] px-3 py-3"
@@ -569,7 +507,6 @@ function DocumentRow({ row }: { row: StudentDocumentRow }) {
     </li>
   );
 }
-
 async function readJson(response: Response): Promise<unknown> {
   try {
     return await response.json();
@@ -577,7 +514,6 @@ async function readJson(response: Response): Promise<unknown> {
     return {};
   }
 }
-
 function mimeForFile(file: File): DocumentMimeType | null {
   if (
     isAllowedDocumentMime(file.type) &&
@@ -585,7 +521,6 @@ function mimeForFile(file: File): DocumentMimeType | null {
   ) {
     return file.type;
   }
-
   const ext = file.name.split(".").pop()?.toLowerCase();
   if (ext === "pdf") {
     return "application/pdf";
@@ -596,6 +531,5 @@ function mimeForFile(file: File): DocumentMimeType | null {
   if (ext === "png") {
     return "image/png";
   }
-
   return null;
 }

@@ -1,13 +1,8 @@
 "use client";
-
 import Link from "next/link";
-
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
 import { MatchCard } from "@/components/portal/match-card";
 import { PortalInfoDrawer } from "@/components/portal/info-drawer";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
-import { PortalErrorState } from "@/components/portal/portal-error-state";
-import { PortalDashboardSkeleton } from "@/components/portal/portal-skeletons";
 import { VisaChecklistSection } from "@/components/portal/visa-checklist";
 import { VisaStatusSection } from "@/components/portal/visa-status-section";
 import type { LeadDestinationInterest, LeadStatus } from "@/db/schema";
@@ -25,7 +20,6 @@ import {
   type PortalTask,
 } from "@/lib/portal-tasks";
 import { getWhatsAppHref } from "@/lib/whatsapp";
-
 export function PortalDashboard({
   name,
   destination,
@@ -49,7 +43,6 @@ export function PortalDashboard({
   visaLine?: string | null;
   visaStatusError?: boolean;
 }) {
-  const { preview, setPreview } = useDeskPreview();
   const guide = portalGuideFor(status);
   const tasks = portalTasksFor(status);
   const preDepartureHref = preDepartureDashboardHref(destination, status);
@@ -57,35 +50,9 @@ export function PortalDashboard({
   const whatsappHref = getWhatsAppHref(
     `Hi, I'm ${name}. I'm checking my file in the student portal.`,
   );
-  const feed = preview === "empty" ? [] : activity;
-
-  if (preview === "loading") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <PortalDashboardSkeleton />
-      </div>
-    );
-  }
-
-  if (preview === "error") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <div className="mx-auto max-w-2xl">
-          <PortalErrorState
-            title="We couldn't open your file"
-            body="Your papers are still here. Try again, or WhatsApp us if this keeps happening."
-            onRetry={() => setPreview("off")}
-          />
-        </div>
-      </div>
-    );
-  }
-
+  const feed = activity;
   return (
     <div className="space-y-3">
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <div className="mx-auto max-w-2xl">
         {forbidden ? (
           <p
@@ -150,9 +117,10 @@ export function PortalDashboard({
               Pre-departure notes for {programCountryLabels[lockedCountry]}
             </h2>
             <p className="mt-2 text-[0.95rem] leading-6 text-[var(--desk-ink)]">
-              Review essential arrival notes for student housing, airport pickup,
-              SIM setup, and campus orientation. Always confirm flight dates and
-              arrival arrangements with your counselor before making travel bookings.
+              Review essential arrival notes for student housing, airport
+              pickup, SIM setup, and campus orientation. Always confirm flight
+              dates and arrival arrangements with your counselor before making
+              travel bookings.
             </p>
             <Link
               href={preDepartureHref}
@@ -177,18 +145,7 @@ export function PortalDashboard({
             We filter the directory first, then rank a short list. This is not
             an offer, and it is not a scholarship score.
           </p>
-          <DashboardMatches
-            ranking={
-              preview === "empty"
-                ? {
-                    matches: [],
-                    shortlistCount: 0,
-                    cached: false,
-                    emptyShortlist: true,
-                  }
-                : ranking
-            }
-          />
+          <DashboardMatches ranking={ranking} />
           <Link
             href="/portal/matches"
             className="desk-focus desk-press mt-4 inline-flex min-h-11 items-center rounded-full border border-[var(--desk-line)] bg-[var(--desk-bg)] px-4 text-sm font-semibold text-[var(--desk-ink)]"
@@ -264,7 +221,6 @@ export function PortalDashboard({
     </div>
   );
 }
-
 function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
   if (!ranking) {
     return (
@@ -273,7 +229,6 @@ function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
       </p>
     );
   }
-
   if (ranking.error) {
     return (
       <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
@@ -281,7 +236,6 @@ function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
       </p>
     );
   }
-
   if (ranking.emptyShortlist || ranking.matches.length === 0) {
     return (
       <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
@@ -290,7 +244,6 @@ function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
       </p>
     );
   }
-
   return (
     <ol className="mt-4 list-none space-y-3">
       {ranking.matches.map((match) => (
@@ -301,7 +254,6 @@ function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
     </ol>
   );
 }
-
 function TaskRow({ task, index }: { task: PortalTask; index: number }) {
   const body = (
     <>
@@ -323,7 +275,6 @@ function TaskRow({ task, index }: { task: PortalTask; index: number }) {
       </span>
     </>
   );
-
   if (task.href) {
     return (
       <li>
@@ -336,16 +287,13 @@ function TaskRow({ task, index }: { task: PortalTask; index: number }) {
       </li>
     );
   }
-
   return <li className="flex gap-3">{body}</li>;
 }
-
 function StudentUpdate({ item }: { item: StudentActivityItem }) {
   const text =
     item.type === "stage_change" && item.toStatus
       ? portalGuideFor(item.toStatus).headline
       : (item.content ?? "An update was shared with you.");
-
   return (
     <article className="rounded-xl border border-[var(--desk-line)] bg-[var(--desk-bg)] px-3 py-3">
       <p className="text-[0.95rem] leading-6 whitespace-pre-wrap text-[var(--desk-ink)]">

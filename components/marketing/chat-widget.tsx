@@ -1,5 +1,4 @@
 "use client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, Send, X } from "lucide-react";
 import Image from "next/image";
@@ -11,33 +10,24 @@ import {
   type FormEvent,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-
 import { LeadForm, type LeadFormCopy } from "@/components/lead-form";
-import {
-  MarketingPreviewBar,
-  useMarketingPreview,
-} from "@/components/marketing/preview";
 import type { ChatApiResult } from "@/lib/ai/chat-types";
 import { useDeskMotion } from "@/lib/desk/motion";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
-
 export type ChatWidgetCopy = Dictionary["chatbot"];
-
 type ChatWidgetProps = {
   locale: Locale;
   copy: ChatWidgetCopy;
   leadCopy: LeadFormCopy;
   whatsappHref: string;
 };
-
 type ChatMessage = {
   id: string;
   role: "user" | "assistant";
   text: string;
 };
-
 export function ChatWidget({
   locale,
   copy,
@@ -45,7 +35,6 @@ export function ChatWidget({
   whatsappHref,
 }: ChatWidgetProps) {
   const { reduce, panel, overlay } = useDeskMotion();
-  const { preview, setPreview } = useMarketingPreview();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
   const [pending, setPending] = useState(false);
@@ -55,7 +44,6 @@ export function ChatWidget({
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     { id: "greeting", role: "assistant", text: copy.greeting },
   ]);
-
   const panelRef = useRef<HTMLElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -64,11 +52,8 @@ export function ChatWidget({
   const subtitleId = useId();
   const panelId = useId();
   const inputId = useId();
-
-  const showTyping = pending || preview === "loading";
-  const showUnavailablePreview = preview === "error";
-  const showHandoff = offerLead || showUnavailablePreview;
-
+  const showTyping = pending;
+  const showHandoff = offerLead;
   useEffect(() => {
     const node = listRef.current;
     if (!node) {
@@ -76,47 +61,38 @@ export function ChatWidget({
     }
     node.scrollTop = node.scrollHeight;
   }, [messages, offerLead, showTyping, showHandoff]);
-
   useEffect(() => {
     if (!open) {
       return;
     }
-
     const previouslyFocused =
       document.activeElement instanceof HTMLElement
         ? document.activeElement
         : null;
-
     const focusTimer = window.setTimeout(() => {
       inputRef.current?.focus();
     }, 0);
-
     const launcherButton = launcherRef.current;
     const root = panelRef.current;
-
     function onDocumentKeyDown(event: globalThis.KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
         setOpen(false);
         return;
       }
-
       if (event.key !== "Tab" || !root) {
         return;
       }
-
       const focusable = [
         ...root.querySelectorAll<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         ),
       ].filter((el) => !el.hasAttribute("disabled") && el.tabIndex !== -1);
-
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (!first || !last) {
         return;
       }
-
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -125,9 +101,7 @@ export function ChatWidget({
         first.focus();
       }
     }
-
     document.addEventListener("keydown", onDocumentKeyDown);
-
     return () => {
       window.clearTimeout(focusTimer);
       document.removeEventListener("keydown", onDocumentKeyDown);
@@ -138,7 +112,6 @@ export function ChatWidget({
       }
     };
   }, [open]);
-
   function handoffToCounselor() {
     setError(null);
     setOfferLead(true);
@@ -151,26 +124,22 @@ export function ChatWidget({
       },
     ]);
   }
-
   async function sendMessage(raw: string) {
     const text = raw.trim();
     if (!text || pending) {
       return;
     }
-
     const userId = `user-${Date.now()}`;
     setMessages((current) => [...current, { id: userId, role: "user", text }]);
     setDraft("");
     setPending(true);
     setError(null);
-
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text, locale }),
       });
-
       let result: ChatApiResult;
       try {
         result = (await response.json()) as ChatApiResult;
@@ -178,26 +147,21 @@ export function ChatWidget({
         handoffToCounselor();
         return;
       }
-
       if (!result.ok) {
         if (result.code === "rate_limit") {
           setError(copy.rateLimitError);
           return;
         }
-
         handoffToCounselor();
         return;
       }
-
       const reply = result.offerLead
         ? result.text || copy.handoff
         : result.text;
-
       setMessages((current) => [
         ...current,
         { id: `assistant-${Date.now()}`, role: "assistant", text: reply },
       ]);
-
       if (result.offerLead) {
         setOfferLead(true);
         setLeadPrefill((current) => current || text);
@@ -209,19 +173,16 @@ export function ChatWidget({
       inputRef.current?.focus();
     }
   }
-
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     void sendMessage(draft);
   }
-
   function onComposerKeyDown(event: ReactKeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       void sendMessage(draft);
     }
   }
-
   return (
     <div className="pointer-events-none fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex flex-col items-end gap-3">
       <AnimatePresence>
@@ -300,7 +261,6 @@ export function ChatWidget({
                 ref={listRef}
                 className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-slate-50 px-3 py-3"
               >
-                <MarketingPreviewBar preview={preview} onChange={setPreview} />
                 <div
                   role="log"
                   aria-live="polite"
@@ -332,12 +292,7 @@ export function ChatWidget({
                   </ul>
                 </div>
                 {showTyping ? <TypingIndicator label={copy.typing} /> : null}
-                {showUnavailablePreview ? (
-                  <p className="mr-auto max-w-[90%] rounded-2xl border border-stone-200 bg-white px-3 py-2 text-sm leading-6 text-slate-800">
-                    <span className="sr-only">{copy.assistant}: </span>
-                    {copy.unavailable}
-                  </p>
-                ) : null}
+                {null}
                 {error ? (
                   <p
                     role="alert"
@@ -434,7 +389,7 @@ export function ChatWidget({
         {!open ? (
           <span className="pointer-events-none absolute top-1/2 right-full mr-3 hidden -translate-y-1/2 items-center gap-1.5 rounded-full border border-stone-200/90 bg-white/95 px-3.5 py-1.5 text-xs font-bold whitespace-nowrap text-slate-800 shadow-lg backdrop-blur-md group-hover:inline-flex">
             <span className="size-2 animate-pulse rounded-full bg-orange-500" />
-            {locale === "bn" ? "এআই সহকারী" : "AI Assistant"}
+            {copy.launcherOpen}
           </span>
         ) : null}
       </div>
@@ -467,7 +422,6 @@ export function ChatWidget({
     </div>
   );
 }
-
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -481,7 +435,6 @@ function WhatsAppIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function TypingIndicator({ label }: { label: string }) {
   return (
     <div

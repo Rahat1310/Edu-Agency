@@ -1,47 +1,23 @@
 "use client";
-
 import { DeskEmptyState } from "@/components/desk/empty-state";
-import { DeskErrorState } from "@/components/desk/error-state";
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
-import { DeskAutomationHistorySkeleton } from "@/components/desk/skeleton";
 import { formatLeadDate } from "@/lib/leads/labels";
 import type { DeskAutomationEvent } from "@/lib/messages/types";
-
 type AutomationHistoryProps = {
   events: DeskAutomationEvent[];
 };
-
 export function AutomationHistory({ events }: AutomationHistoryProps) {
-  const { preview, setPreview } = useDeskPreview();
-  const showLoading = preview === "loading";
-  const showEmpty =
-    preview === "empty" || (preview === "off" && events.length === 0);
-  const showError = preview === "error";
-
+  const showEmpty = events.length === 0;
   return (
-    <section
-      aria-labelledby="lead-automation-heading"
-      aria-busy={showLoading || undefined}
-    >
+    <section aria-labelledby="lead-automation-heading" aria-busy={undefined}>
       <h3
         id="lead-automation-heading"
         className="text-[0.68rem] font-semibold tracking-[0.06em] text-[var(--desk-ink-muted)] uppercase"
       >
         Reminders & nurture
       </h3>
+      <div className="mt-2"></div>
       <div className="mt-2">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-      </div>
-      <div className="mt-2">
-        {showLoading ? (
-          <DeskAutomationHistorySkeleton />
-        ) : showError ? (
-          <DeskErrorState
-            title="Reminder history could not load"
-            body="The rest of this file is still here. Try again."
-            onRetry={() => setPreview("off")}
-          />
-        ) : showEmpty ? (
+        {showEmpty ? (
           <DeskEmptyState
             title="No reminders or nurture yet"
             body="Intake deadline reminders and idle-lead follow-ups will list here after the scheduled jobs send them."

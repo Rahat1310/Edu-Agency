@@ -1,12 +1,8 @@
 "use client";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import { PortalErrorState } from "@/components/portal/portal-error-state";
-import { VisaChecklistSkeleton } from "@/components/portal/portal-skeletons";
 import type { LeadDestinationInterest } from "@/db/schema";
 import {
   visaChecklistComingSoonBody,
@@ -19,7 +15,6 @@ import {
   visaChecklistUploadHref,
   type VisaChecklist,
 } from "@/lib/visa-requirements/checklist";
-
 export function VisaChecklistSection({
   checklist,
   destination,
@@ -30,38 +25,24 @@ export function VisaChecklistSection({
   loadError?: boolean;
 }) {
   const router = useRouter();
-  const { preview, setPreview } = useDeskPreview();
-  const showLoading = preview === "loading";
-  const showError = preview === "error" || (preview === "off" && loadError);
-  const showEmpty =
-    preview === "empty" ||
-    (preview === "off" && !loadError && checklist.total === 0);
-
+  const showError = loadError;
+  const showEmpty = !loadError && checklist.total === 0;
   function onRetry() {
-    if (preview === "error") {
-      setPreview("off");
-      return;
-    }
-
     router.refresh();
   }
-
   return (
     <section
       className="mt-6 space-y-3"
       aria-labelledby="visa-checklist-heading"
-      aria-busy={showLoading || undefined}
+      aria-busy={undefined}
     >
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <h2
         id="visa-checklist-heading"
         className="px-1 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]"
       >
         Visa checklist
       </h2>
-      {showLoading ? (
-        <VisaChecklistSkeleton />
-      ) : showError ? (
+      {showError ? (
         <PortalErrorState
           title={visaChecklistLoadErrorTitle}
           body={visaChecklistLoadErrorBody}
@@ -78,7 +59,6 @@ export function VisaChecklistSection({
     </section>
   );
 }
-
 function ChecklistBody({ checklist }: { checklist: VisaChecklist }) {
   const progressLine = visaChecklistProgressLine(
     checklist.submittedCount,
@@ -89,7 +69,6 @@ function ChecklistBody({ checklist }: { checklist: VisaChecklist }) {
     checklist.total === 0
       ? 0
       : Math.round((checklist.submittedCount / checklist.total) * 100);
-
   return (
     <div className="rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
       <div
@@ -116,7 +95,6 @@ function ChecklistBody({ checklist }: { checklist: VisaChecklist }) {
         {checklist.items.map((item) => {
           const needsUpload =
             item.status === "missing" || item.status === "rejected";
-
           return (
             <li key={item.id}>
               <article className="rounded-xl border border-[var(--desk-line)] bg-[var(--desk-bg)] px-4 py-4">

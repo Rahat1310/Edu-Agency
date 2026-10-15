@@ -1,16 +1,9 @@
 "use client";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-
 import { DeskDataTable } from "@/components/desk/data-table";
 import { DeskEmptyState } from "@/components/desk/empty-state";
-import {
-  DeskPreviewBar,
-  DeskPreviewError,
-  useDeskPreview,
-} from "@/components/desk/preview";
 import { DeskTableSkeleton } from "@/components/desk/skeleton";
 import {
   formatLeadDate,
@@ -19,44 +12,30 @@ import {
   leadStatusLabels,
   leadStatusOptions,
 } from "@/lib/leads/labels";
-import type {
-  LeadListResult,
-  LeadListRow,
-} from "@/lib/leads/list-types";
+import type { LeadListResult, LeadListRow } from "@/lib/leads/list-types";
 import {
   leadListHasActiveFilters,
   leadsListHref,
   type LeadListQuery,
 } from "@/lib/leads/list-query";
 import { cn } from "@/lib/utils";
-
 const SEARCH_DEBOUNCE_MS = 300;
-
 type LeadsDeskProps = {
   query: LeadListQuery;
   list: LeadListResult;
   selectedKey?: string;
 };
-
-export function LeadsDesk({
-  query,
-  list,
-  selectedKey,
-}: LeadsDeskProps) {
+export function LeadsDesk({ query, list, selectedKey }: LeadsDeskProps) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [search, setSearch] = useState(query.q);
-  const { preview, setPreview } = useDeskPreview();
-
   useEffect(() => {
     setSearch(query.q);
   }, [query.q]);
-
   useEffect(() => {
     if (search === query.q) {
       return;
     }
-
     const handle = window.setTimeout(() => {
       startTransition(() => {
         router.replace(leadsListHref(query, { q: search, page: 1 }), {
@@ -64,32 +43,18 @@ export function LeadsDesk({
         });
       });
     }, SEARCH_DEBOUNCE_MS);
-
     return () => window.clearTimeout(handle);
   }, [query, router, search]);
-
   function replaceQuery(overrides: Partial<LeadListQuery>) {
     startTransition(() => {
       router.replace(leadsListHref(query, overrides), { scroll: false });
     });
   }
-
   const hasFilters = leadListHasActiveFilters(query);
-  const showLoading = pending || preview === "loading";
-  const showEmpty = preview === "empty" || (list.total === 0 && !hasFilters);
-
-  if (preview === "error") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <DeskPreviewError onRetry={() => setPreview("off")} />
-      </div>
-    );
-  }
-
+  const showLoading = pending;
+  const showEmpty = list.total === 0 && !hasFilters;
   return (
     <div className="space-y-3">
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <form
         className="grid gap-2 rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-surface)] p-3 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
         onSubmit={(event) => {
@@ -272,12 +237,10 @@ export function LeadsDesk({
     </div>
   );
 }
-
 function PhoneCell({ row }: { row: LeadListRow }) {
   if (!row.whatsapp || row.whatsapp === row.phone) {
     return row.phone;
   }
-
   return (
     <span>
       {row.phone}
@@ -287,7 +250,6 @@ function PhoneCell({ row }: { row: LeadListRow }) {
     </span>
   );
 }
-
 function SortHeader({
   href,
   active,

@@ -1,11 +1,6 @@
 "use client";
-
 import { useEffect, useRef } from "react";
-
 import { DeskEmptyState } from "@/components/desk/empty-state";
-import { DeskErrorState } from "@/components/desk/error-state";
-import { DeskPreviewBar, useDeskPreview } from "@/components/desk/preview";
-import { DeskMessageThreadSkeleton } from "@/components/desk/skeleton";
 import { formatLeadDate } from "@/lib/leads/labels";
 import {
   threadChannelLabels,
@@ -13,51 +8,29 @@ import {
 } from "@/lib/messages/labels";
 import type { DeskThreadMessage } from "@/lib/messages/types";
 import { cn } from "@/lib/utils";
-
 type MessageThreadProps = {
   messages: DeskThreadMessage[];
 };
-
 export function MessageThread({ messages }: MessageThreadProps) {
-  const { preview, setPreview } = useDeskPreview();
   const endRef = useRef<HTMLLIElement>(null);
-  const showLoading = preview === "loading";
-  const showEmpty =
-    preview === "empty" || (preview === "off" && messages.length === 0);
-  const showError = preview === "error";
-
+  const showEmpty = messages.length === 0;
   useEffect(() => {
-    if (showLoading || showEmpty || showError) {
+    if (showEmpty) {
       return;
     }
-
     endRef.current?.scrollIntoView({ block: "nearest" });
-  }, [messages.length, showEmpty, showError, showLoading]);
-
+  }, [messages.length, showEmpty]);
   return (
-    <section
-      aria-labelledby="lead-messages-heading"
-      aria-busy={showLoading || undefined}
-    >
+    <section aria-labelledby="lead-messages-heading" aria-busy={undefined}>
       <h3
         id="lead-messages-heading"
         className="text-[0.68rem] font-semibold tracking-[0.06em] text-[var(--desk-ink-muted)] uppercase"
       >
         Messages
       </h3>
+      <div className="mt-2"></div>
       <div className="mt-2">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-      </div>
-      <div className="mt-2">
-        {showLoading ? (
-          <DeskMessageThreadSkeleton />
-        ) : showError ? (
-          <DeskErrorState
-            title="Messages could not load"
-            body="The rest of this file is still here. Try again."
-            onRetry={() => setPreview("off")}
-          />
-        ) : showEmpty ? (
+        {showEmpty ? (
           <DeskEmptyState
             title="No messages yet"
             body="WhatsApp and Messenger replies land here in one thread, oldest first. Email follow-ups stay in reminders and nurture below."
@@ -81,12 +54,10 @@ export function MessageThread({ messages }: MessageThreadProps) {
     </section>
   );
 }
-
 function ThreadBubble({ message }: { message: DeskThreadMessage }) {
   const outbound = message.direction === "outbound";
   const channel = threadChannelLabels[message.channel];
   const direction = outbound ? "Sent" : "Received";
-
   return (
     <article className={cn("flex", outbound ? "justify-end" : "justify-start")}>
       <div

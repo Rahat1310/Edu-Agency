@@ -1,16 +1,9 @@
 "use client";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-
 import { linkUnmatchedMessage } from "@/app/admin/unmatched-messages/actions";
 import { DeskEmptyState } from "@/components/desk/empty-state";
-import {
-  DeskPreviewBar,
-  DeskPreviewError,
-  useDeskPreview,
-} from "@/components/desk/preview";
 import { DeskTableSkeleton } from "@/components/desk/skeleton";
 import { useDeskToast } from "@/components/desk/toast";
 import {
@@ -21,15 +14,12 @@ import {
 import { threadChannelLabels } from "@/lib/messages/labels";
 import { mergeLeadOptions } from "@/lib/messages/suggestions";
 import type { DeskLeadMatch, UnmatchedMessageRow } from "@/lib/messages/types";
-
 const SEARCH_DEBOUNCE_MS = 300;
-
 type UnmatchedMessagesQueueProps = {
   rows: UnmatchedMessageRow[];
   searchQuery: string;
   searchedLeads: DeskLeadMatch[];
 };
-
 export function UnmatchedMessagesQueue({
   rows,
   searchQuery,
@@ -37,19 +27,15 @@ export function UnmatchedMessagesQueue({
 }: UnmatchedMessagesQueueProps) {
   const router = useRouter();
   const { toast } = useDeskToast();
-  const { preview, setPreview } = useDeskPreview();
   const [pending, startTransition] = useTransition();
   const [search, setSearch] = useState(searchQuery);
-
   useEffect(() => {
     setSearch(searchQuery);
   }, [searchQuery]);
-
   useEffect(() => {
     if (search === searchQuery) {
       return;
     }
-
     const handle = window.setTimeout(() => {
       startTransition(() => {
         const params = new URLSearchParams();
@@ -64,14 +50,10 @@ export function UnmatchedMessagesQueue({
         );
       });
     }, SEARCH_DEBOUNCE_MS);
-
     return () => window.clearTimeout(handle);
   }, [router, search, searchQuery]);
-
-  const showLoading = pending || preview === "loading";
-  const showEmpty =
-    preview === "empty" || (preview === "off" && rows.length === 0);
-
+  const showLoading = pending;
+  const showEmpty = rows.length === 0;
   function link(messageId: string, leadId: string) {
     startTransition(async () => {
       const result = await linkUnmatchedMessage({ messageId, leadId });
@@ -83,19 +65,8 @@ export function UnmatchedMessagesQueue({
       router.refresh();
     });
   }
-
-  if (preview === "error") {
-    return (
-      <div className="space-y-3">
-        <DeskPreviewBar preview={preview} onChange={setPreview} />
-        <DeskPreviewError onRetry={() => setPreview("off")} />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-3">
-      <DeskPreviewBar preview={preview} onChange={setPreview} />
       <form
         className="rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-surface)] p-3"
         onSubmit={(event) => {
@@ -156,7 +127,6 @@ export function UnmatchedMessagesQueue({
     </div>
   );
 }
-
 function UnmatchedRow({
   row,
   searchedLeads,
@@ -171,7 +141,6 @@ function UnmatchedRow({
   const options = mergeLeadOptions(row.suggestedLeads, searchedLeads);
   const channel = threadChannelLabels[row.channel];
   const sender = row.externalSenderId?.trim() || "Unknown sender";
-
   return (
     <li className="rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-surface)] px-4 py-3">
       <div className="flex flex-wrap items-start justify-between gap-2">

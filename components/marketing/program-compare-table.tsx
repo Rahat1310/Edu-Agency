@@ -1,17 +1,10 @@
 "use client";
-
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { PageShell } from "@/components/layout/page-shell";
 import { MarketingEmptyState } from "@/components/marketing/empty-state";
 import { MarketingErrorState } from "@/components/marketing/error-state";
-import {
-  MarketingPreviewBar,
-  useMarketingPreview,
-} from "@/components/marketing/preview";
-import { ProgramCompareTableSkeleton } from "@/components/marketing/skeleton";
 import { parseAmount } from "@/lib/costs/estimate";
 import { formatMoney } from "@/lib/costs/format";
 import { tuitionCurrencies, type TuitionCurrency } from "@/db/schema";
@@ -26,11 +19,9 @@ import {
   programLevelLabels,
 } from "@/lib/programs-labels";
 import type { PublicProgramDetail } from "@/lib/programs-public";
-
 function isTuitionCurrency(value: string): value is TuitionCurrency {
   return (tuitionCurrencies as readonly string[]).includes(value);
 }
-
 type ProgramCompareTableProps = {
   locale: Locale;
   dict: Dictionary;
@@ -38,7 +29,6 @@ type ProgramCompareTableProps = {
   requestedCount: number;
   rates: BdtRates | null;
 };
-
 export function ProgramCompareTable({
   locale,
   dict,
@@ -47,14 +37,11 @@ export function ProgramCompareTable({
   rates,
 }: ProgramCompareTableProps) {
   const copy = dict.programs.compare;
-  const { preview, setPreview } = useMarketingPreview();
   const router = useRouter();
-  const visiblePrograms = preview === "empty" ? [] : programs;
-
+  const visiblePrograms = programs;
   return (
     <section className="py-10 sm:py-16">
       <PageShell>
-        <MarketingPreviewBar preview={preview} onChange={setPreview} />
         <Link
           href={
             programs.length > 0
@@ -77,20 +64,7 @@ export function ProgramCompareTable({
           {copy.lede}
         </p>
 
-        {preview === "loading" ? (
-          <ProgramCompareTableSkeleton label={copy.loadingAria} />
-        ) : preview === "error" ? (
-          <MarketingErrorState
-            className="mt-10"
-            title={copy.errorTitle}
-            body={copy.errorBody}
-            retryLabel={dict.common.tryAgain}
-            onRetry={() => {
-              setPreview("off");
-              router.refresh();
-            }}
-          />
-        ) : visiblePrograms.length === 0 ? (
+        {visiblePrograms.length === 0 ? (
           <MarketingEmptyState
             className="mt-10"
             title={copy.emptyTitle}
@@ -114,7 +88,6 @@ export function ProgramCompareTable({
             rates={rates}
             retryLabel={dict.common.tryAgain}
             onRatesRetry={() => {
-              setPreview("off");
               router.refresh();
             }}
           />
@@ -123,7 +96,6 @@ export function ProgramCompareTable({
     </section>
   );
 }
-
 function CompareTable({
   locale,
   dict,
@@ -205,7 +177,6 @@ function CompareTable({
       ),
     },
   ];
-
   return (
     <>
       {requestedCount > programs.length ? (
@@ -301,7 +272,6 @@ function CompareTable({
     </>
   );
 }
-
 function TuitionCell({
   locale,
   copy,
@@ -319,7 +289,6 @@ function TuitionCell({
   const local = isTuitionCurrency(currency)
     ? formatMoney(parsed, currency, locale)
     : `${amount} ${currency}`;
-
   if (!rates || !isTuitionCurrency(currency)) {
     return (
       <span className="font-semibold text-[var(--brand-navy)] tabular-nums">
@@ -327,7 +296,6 @@ function TuitionCell({
       </span>
     );
   }
-
   const bdt = toBdt(parsed, currency, rates);
   return (
     <>
