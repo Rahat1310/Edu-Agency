@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/lib/i18n/config";
 import { languageAlternates } from "@/lib/i18n/get-dictionary";
+import { en } from "@/lib/i18n/en";
 import { localizedHref } from "@/lib/i18n/paths";
+import { SOCIAL_PREVIEW_IMAGE } from "@/lib/seo/social-preview";
 
 type PageMetadataInput = {
   title: string;
@@ -42,24 +44,17 @@ export function pageMetadata({
       type: "website",
       locale: locale === "bn" ? "bn_BD" : "en_US",
       alternateLocale: locale === "bn" ? ["en_US"] : ["bn_BD"],
-      siteName: "Study Abroad Consultancy",
+      siteName: en.meta.siteName,
       title: socialTitle,
       description: socialDescription,
       url: canonical,
-      images: [
-        {
-          url: "/logo.png",
-          width: 1089,
-          height: 708,
-          alt: "Study Abroad Consultancy",
-        },
-      ],
+      images: [SOCIAL_PREVIEW_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: socialTitle,
       description: socialDescription,
-      images: ["/logo.png"],
+      images: [SOCIAL_PREVIEW_IMAGE],
     },
   };
 }

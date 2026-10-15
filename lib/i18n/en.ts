@@ -129,10 +129,9 @@ export const en = {
       "Study Abroad Consultancy — Study in China, India, Malaysia & South Korea from Bangladesh",
     metaDescription:
       "Expert admissions, scholarship, and student visa guidance for Bangladeshi students targeting China, India, Malaysia, and South Korea.",
-    ogTitle:
-      "Direct Admissions & Student Visa Guidance for Asian Study Destinations",
+    ogTitle: "Study Abroad Consultant | From Bangladesh to Global Campuses",
     ogDescription:
-      "Providing complete application, visa, and Bangladesh Bank student file guidance for China, India, Malaysia, and South Korea.",
+      "Admissions, scholarships, and student visa guidance for Bangladeshi students heading to China, India, Malaysia, and South Korea. Book a free consultation.",
     eyebrow: "Admissions & Visa Consultancy",
     title: "Study abroad with guidance from Dhaka",
     lede: "Full-service support — from application to visa — for Malaysia, China, South Korea & India.",
