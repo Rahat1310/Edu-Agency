@@ -3,29 +3,24 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowRight,
   Award,
   BookOpen,
-  Calendar,
   Compass,
   FileText,
   Globe2,
   Mail,
   MapPin,
   MessageCircle,
-  Users,
 } from "lucide-react";
 import * as motion from "framer-motion/client";
 import { PageShell } from "@/components/layout/page-shell";
 import {
   CounsellingProcessIllustration,
   EducationJourneyIllustration,
-  TimelineJourneyIllustration,
 } from "@/components/marketing/about-illustrations";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
-import { cn } from "@/lib/utils";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 const STUDY_DESTINATIONS = [
   {
@@ -33,15 +28,15 @@ const STUDY_DESTINATIONS = [
     flag: "🇨🇳",
     nameEn: "China",
     nameBn: "চীন",
-    badgeEn: "12+ Years Core Focus",
-    badgeBn: "১২+ বছরের মূল ভিত্তি",
+    badgeEn: "China-focused guidance",
+    badgeBn: "চীনে পড়াশোনার পরামর্শ",
     isCore: true,
     titleEn: "Our Longest-Standing Area of Experience",
     titleBn: "আমাদের দীর্ঘতম বাস্তব অভিজ্ঞতা",
     descEn:
       "Support with university applications, government and university scholarship options, JW201/JW202 documentation, and student visa preparation.",
     descBn:
-      "বিশ্ববিদ্যালয়ে ভর্তি, সরকারি ও প্রাদেশিক স্কলারশিপের সুযোগ এবং JW201/JW202 ভিসা ডকুমেন্টেশনে শতভাগ পেশাদার গাইডেন্স।",
+      "বিশ্ববিদ্যালয়ে ভর্তি আবেদন, সরকারি ও বিশ্ববিদ্যালয় স্কলারশিপের সুযোগ, JW201/JW202 কাগজপত্র ও স্টুডেন্ট ভিসার প্রস্তুতিতে সহায়তা।",
   },
   {
     id: "india",
@@ -67,11 +62,11 @@ const STUDY_DESTINATIONS = [
     badgeBn: "EMGS ও ডুয়াল ডিগ্রি",
     isCore: false,
     titleEn: "University Admission & Student Pass Support",
-    titleBn: "গ্লোবাল ক্যাম্পাস ও আন্তর্জাতিক ক্যারিয়ার",
+    titleBn: "বিশ্ববিদ্যালয়ে ভর্তি ও স্টুডেন্ট পাসের সহায়তা",
     descEn:
       "Guidance on university options, entry requirements, tuition costs, admission applications, and student pass documentation.",
     descBn:
-      "বিশ্বমানের পাবলিক ও প্রাইভেট বিশ্ববিদ্যালয়ে ভর্তির যোগ্যতা, টিউশন খরচ, EMGS স্টুডেন্ট পাস প্রসেসিং এবং যুক্তরাজ্য/অস্ট্রেলিয়ান টুইনিং প্রোগ্রাম।",
+      "বিশ্ববিদ্যালয়ের বিকল্প, ভর্তির যোগ্যতা, টিউশন খরচ, ভর্তি আবেদন ও স্টুডেন্ট পাসের কাগজপত্র সম্পর্কে পরামর্শ।",
   },
   {
     id: "south-korea",
@@ -81,10 +76,10 @@ const STUDY_DESTINATIONS = [
     badgeEn: "D-2 / D-4 Visa Pathways",
     badgeBn: "D-2 / D-4 ভিসা পাথওয়ে",
     isCore: false,
-    titleEn: "High-Tech Programs & GKS Pathways",
-    titleBn: "হাই-টেক শিক্ষা ও স্কলারশিপের সুযোগ",
+    titleEn: "Degree programmes & scholarship guidance",
+    titleBn: "ডিগ্রি প্রোগ্রাম ও স্কলারশিপের পরামর্শ",
     descEn:
-      "Guidance on suitable undergraduate & graduate degrees, scholarship applications, language criteria, and meticulous Korean embassy visa filing.",
+      "Guidance on suitable undergraduate & graduate degrees, scholarship applications, language criteria, and student visa preparation.",
     descBn:
       "উপযুক্ত একাডেমিক প্রোগ্রাম, সরকারি ও প্রাতিষ্ঠানিক স্কলারশিপ, কোরিয়ান ল্যাঙ্গুয়েজ ট্রেনিং (TOPIK/IELTS) এবং সুনির্দিষ্ট ভিসা প্রস্তুতি।",
   },
@@ -96,10 +91,10 @@ const STUDY_DESTINATIONS = [
     badgeEn: "COE & Academic Pathways",
     badgeBn: "COE ও একাডেমি পাথওয়ে",
     isCore: false,
-    titleEn: "Specialized Guidance for Academic Opportunities",
-    titleBn: "মানসম্মত শিক্ষা ও আধুনিক প্রযুক্তি",
+    titleEn: "Study options & application guidance",
+    titleBn: "পড়াশোনার বিকল্প ও আবেদনের পরামর্শ",
     descEn:
-      "Guidance for Bangladeshi students exploring suitable academic opportunities in Japan, clarifying language expectations, eligibility prerequisites, and application procedures.",
+      "Guidance for Bangladeshi students exploring suitable academic opportunities in Japan, clarifying language expectations, entry requirements, and application procedures.",
     descBn:
       "জাপানের বিশিষ্ট শিক্ষা প্রতিষ্ঠানগুলোতে উপযুক্ত কোর্স নির্বাচন, ভর্তি আবেদনের যোগ্যতা, COE সংক্রান্ত প্রস্তুতি এবং প্রয়োজনীয় দিকনির্দেশনা।",
   },
@@ -107,8 +102,12 @@ const STUDY_DESTINATIONS = [
 interface AboutPageProps {
   locale?: Locale;
   dict?: Dictionary;
+  hasPublishedStories?: boolean;
 }
-export function AboutPage({ locale = "en" }: AboutPageProps) {
+export function AboutPage({
+  locale = "en",
+  hasPublishedStories = false,
+}: AboutPageProps) {
   const isBn = locale === "bn";
   const whatsappConsultationHref = getWhatsAppHref(
     isBn
@@ -149,8 +148,8 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               </div>
               <p className="mt-5 text-xs font-medium tracking-wide text-slate-500">
                 {isBn
-                  ? "ঢাকা, বাংলাদেশ · চীন উচ্চশিক্ষায় ১২+ বছরের অভিজ্ঞতা"
-                  : "Dhaka, Bangladesh · 12+ years of China education expertise"}
+                  ? "নিকুঞ্জা, ঢাকা, বাংলাদেশ"
+                  : "Nikunja, Dhaka, Bangladesh"}
               </p>
             </div>
             <div className="border-l-2 border-[var(--brand-blue)] py-2 pl-6 sm:pl-8">
@@ -189,8 +188,8 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               {/* Main Heading */}
               <h2 className="font-heading mt-4 text-3xl leading-[1.12] font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem]">
                 {isBn
-                  ? "বাংলাদেশি শিক্ষার্থী ও পরিবারের জন্য উচ্চশিক্ষার দিকনির্দেশনা।"
-                  : "Education guidance for students and families in Bangladesh."}
+                  ? "বাংলাদেশি শিক্ষার্থীদের বিদেশে পড়াশোনার পরিকল্পনায় সহায়তা।"
+                  : "Helping Bangladeshi students plan their studies abroad."}
               </h2>
 
               {/* 12+ Years Experience Highlight Badge */}
@@ -206,28 +205,32 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               {/* Supporting Copy */}
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg sm:leading-relaxed">
                 {isBn
-                  ? "Study Abroad Consultant ঢাকাভিত্তিক একটি শিক্ষা পরামর্শ প্রতিষ্ঠান। আমরা বাংলাদেশি শিক্ষার্থী ও তাদের পরিবারকে আন্তর্জাতিক উচ্চশিক্ষার পরিকল্পনায় সহায়তা করি। আমাদের সেবার মধ্যে রয়েছে ব্যক্তিগত কাউন্সেলিং, বিশ্ববিদ্যালয় ও কোর্স নির্বাচন, স্কলারশিপ গাইডেন্স, ভর্তি আবেদন সহায়তা, স্টুডেন্ট ভিসা প্রস্তুতি এবং প্রি-ডিপার্চার পরামর্শ।"
-                  : "Study Abroad Consultant is a Dhaka-based education consultancy supporting Bangladeshi students and their families in planning international higher education. We provide individual counselling, university and course selection, scholarship guidance, admission application support, student visa preparation, and pre-departure guidance."}
+                  ? "Study Abroad Consultant ঢাকার নিকুঞ্জে অবস্থিত একটি শিক্ষা পরামর্শ প্রতিষ্ঠান। আমরা শিক্ষার্থীদের বিশ্ববিদ্যালয় ও কোর্স তুলনা করতে, খরচ বুঝতে, স্কলারশিপের সুযোগ খুঁজতে এবং ভর্তি ও স্টুডেন্ট ভিসার আবেদন প্রস্তুত করতে সাহায্য করি। আপনার শিক্ষাগত যোগ্যতা, আগ্রহ ও বাজেট বুঝেই আমাদের কাউন্সেলিং শুরু হয়।"
+                  : "Study Abroad Consultant is an education consultancy based in Nikunja, Dhaka. We help students compare universities and courses, understand costs, explore scholarships, and prepare admission and student visa applications. Our counselling starts with your academic background, interests, and budget."}
               </p>
 
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <a
-                  href="#story"
-                  className="btn-sunset inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold text-white shadow-md"
-                >
-                  <span>
-                    {isBn ? "আমাদের গল্প দেখুন" : "Explore Our Story"}
-                  </span>
-                  <ArrowRight className="size-4" />
-                </a>
-
                 <Link
                   href={localizedHref("/eligibility-quiz", locale)}
-                  className="btn-secondary-glass focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-bold text-slate-800 shadow-xs transition-all hover:border-orange-300 hover:bg-white hover:text-orange-600"
+                  className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold text-white shadow-md"
                 >
                   {isBn ? "ফ্রি প্রোফাইল মূল্যায়ন" : "Free Profile Assessment"}
                 </Link>
+                <a
+                  href={whatsappConsultationHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-secondary-glass focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-bold text-slate-800 shadow-xs hover:bg-white"
+                >
+                  <MessageCircle
+                    className="size-4 text-emerald-600"
+                    aria-hidden="true"
+                  />
+                  {isBn
+                    ? "হোয়াটসঅ্যাপে কাউন্সেলরের সঙ্গে কথা বলুন"
+                    : "WhatsApp Our Counsellor"}
+                </a>
               </div>
             </motion.div>
 
@@ -242,16 +245,14 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               }}
               className="lg:col-span-5"
             >
-              <EducationJourneyIllustration />
+              <EducationJourneyIllustration showExperienceBadge={false} />
             </motion.div>
           </div>
         </PageShell>
       </section>
 
       <section
-        aria-label={
-          isBn ? "প্রতিষ্ঠানের সংক্ষিপ্ত পরিচয়" : "Company at a glance"
-        }
+        aria-label={isBn ? "এই পৃষ্ঠার বিভাগসমূহ" : "About page sections"}
         className="relative overflow-hidden border-b border-orange-200/60 bg-gradient-to-b from-[#faf5ee] via-[#fff4ea]/90 to-[#fdf8f3] py-4 sm:py-5"
       >
         {/* Premium Agency Sunset Mesh Ambient Lighting (Warm Sunset, Amber, Gold) */}
@@ -269,73 +270,6 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
         />
 
         <PageShell className="relative z-10">
-          {/* Quick Facts Translucent Glassmorphic Cards */}
-          <dl className="grid gap-3.5 py-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: Calendar,
-                label: isBn ? "নতুন নামে পথচলা" : "Rebranded",
-                value: isBn ? "ফেব্রুয়ারি ২০২৬" : "February 2026",
-                iconColor: "text-orange-600",
-                haloColor: "group-hover:bg-orange-500/15",
-              },
-              {
-                icon: MapPin,
-                label: isBn ? "অবস্থান" : "Based in",
-                value: isBn ? "নিকুঞ্জা-২, ঢাকা" : "Nikunja-2, Dhaka",
-                iconColor: "text-[#c2410c]",
-                haloColor: "group-hover:bg-orange-600/15",
-              },
-              {
-                icon: Users,
-                label: isBn ? "যাদের জন্য কাজ করি" : "Who we support",
-                value: isBn
-                  ? "বাংলাদেশি শিক্ষার্থী ও পরিবার"
-                  : "Bangladeshi students & families",
-                iconColor: "text-emerald-700",
-                haloColor: "group-hover:bg-emerald-500/15",
-              },
-              {
-                icon: Award,
-                label: isBn ? "টিমের অভিজ্ঞতা" : "Team experience",
-                value: isBn
-                  ? "চীন উচ্চশিক্ষায় ১২+ বছর ও সম্প্রসারণ"
-                  : "12+ years in China & expanding",
-                iconColor: "text-amber-600",
-                haloColor: "group-hover:bg-amber-500/15",
-              },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="group relative flex min-h-[86px] items-center gap-3.5 overflow-hidden rounded-2xl border border-white/95 bg-white/70 p-4 shadow-[0_8px_30px_rgba(234,88,12,0.04),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-orange-950/[0.03] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-300/80 hover:bg-white/95 hover:shadow-[0_16px_36px_rgba(234,88,12,0.09),inset_0_1px_1px_rgba(255,255,255,1)]"
-              >
-                {/* Warm brand glass glow on hover */}
-                <div
-                  aria-hidden="true"
-                  className={cn(
-                    "pointer-events-none absolute -top-6 -right-6 size-24 rounded-full blur-xl transition-all duration-500",
-                    item.haloColor,
-                  )}
-                />
-
-                {/* Frosted Icon Capsule */}
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-orange-100/80 bg-gradient-to-br from-white/95 to-orange-50/50 shadow-[0_2px_8px_rgba(234,88,12,0.05),inset_0_1px_0_rgba(255,255,255,1)] backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
-                  <item.icon className={cn("size-4.5", item.iconColor)} />
-                </div>
-
-                {/* Content */}
-                <div className="min-w-0 flex-1">
-                  <dt className="text-[0.68rem] font-semibold tracking-[0.14em] text-slate-400 uppercase">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-0.5 text-sm leading-snug font-bold text-slate-800 transition-colors group-hover:text-slate-900">
-                    {item.value}
-                  </dd>
-                </div>
-              </div>
-            ))}
-          </dl>
-
           {/* Frosted Translucent Sub-navigation Pills */}
           <nav
             aria-label={isBn ? "এই পৃষ্ঠার বিভাগসমূহ" : "On this page"}
@@ -352,7 +286,6 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               ["destinations", isBn ? "গন্তব্যসমূহ" : "Destinations"],
               ["services", isBn ? "সেবাসমূহ" : "Services"],
               ["ceo-message", isBn ? "সিইওর বার্তা" : "CEO’s message"],
-              ["team", isBn ? "আমাদের টিম" : "Leadership"],
             ].map(([id, label]) => (
               <a
                 key={id}
@@ -371,54 +304,35 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
             ========================================================================= */}
       <section
         id="story"
-        className="relative scroll-mt-20 border-b border-stone-200/80 bg-white py-16 sm:py-24"
+        className="relative scroll-mt-28 border-b border-stone-200/80 bg-white py-16 sm:py-24"
       >
         <PageShell>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-1 text-xs font-bold text-orange-700 shadow-2xs">
-              <span>{isBn ? "বাস্তব ইতিহাস ও পথচলা" : "OUR STORY"}</span>
-            </div>
-            <h2 className="font-heading mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              {isBn
-                ? "চীনের অভিজ্ঞতা থেকে আন্তর্জাতিক উচ্চশিক্ষার পথচলা।"
-                : "China experience. A broader education journey."}
+            <h2 className="text-xs font-bold tracking-wide text-orange-700">
+              {isBn ? "আমাদের গল্প" : "Our story"}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="font-heading mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               {isBn
-                ? "ঢাকায় চীন-কেন্দ্রিক শিক্ষা পরামর্শ সেবায় আমাদের টিমের বারো বছরেরও বেশি অভিজ্ঞতার ভিত্তিতে নতুন ব্র্যান্ড পরিচয়ে আমাদের পথচলা।"
-                : "Our new brand identity is grounded in over a decade of education consultancy activities in China that our team has undertaken in Dhaka."}
+                ? "চীন দিয়ে শুরু। এখন আরও গন্তব্যে পড়াশোনার সহায়তা।"
+                : "Starting with China. Growing to support more study destinations."}
             </p>
           </div>
-
-          {/* Editorial Story narrative card */}
-          <div className="mx-auto mt-12 max-w-4xl rounded-3xl border border-stone-200/90 bg-stone-50/60 p-6 sm:p-10">
-            <div className="prose prose-slate max-w-none space-y-4 text-base leading-relaxed text-slate-700">
-              <p>
-                {isBn
-                  ? "ঢাকা থেকেই আমাদের টিমের আন্তর্জাতিক উচ্চশিক্ষা পরামর্শ সেবার পথচলা শুরু হয়, চীনে উচ্চশিক্ষার সুযোগকে কেন্দ্র করে।"
-                  : "The international education project of our team was initiated in Dhaka focusing on academic study opportunity in China."}
-              </p>
-              <p>
-                {isBn
-                  ? "বারো বছরেরও বেশি সময় ধরে আমাদের টিমের সদস্যরা ঢাকায় পূর্ববর্তী একটি প্রতিষ্ঠানের মাধ্যমে চীন-কেন্দ্রিক উচ্চশিক্ষা কনসালটেন্সিতে নিষ্ঠার সাথে কাজ করেছেন। এই দীর্ঘ সময়ে তারা চীনা বিশ্ববিদ্যালয়ে সরাসরি ভর্তি, সরকারি ও বিশ্ববিদ্যালয় স্কলারশিপের নিয়মাবলী, JW201/JW202 নথিপত্র প্রস্তুতকরণ এবং শিক্ষার্থীদের সুনির্দিষ্ট শিক্ষাপরিকল্পনায় বাস্তব অভিজ্ঞতা অর্জন করেছেন।"
-                  : "Our team has over 12 years of experience in education consultancy to the China market, drawing on a previous business in Dhaka. They worked on university admissions, guidance on scholarships, student documentation and education planning."}
-              </p>
-              <p>
-                {isBn
-                  ? "চীন উচ্চশিক্ষায় আমাদের টিমের ১২+ বছরের অভিজ্ঞতাকে সঙ্গে নিয়ে ফেব্রুয়ারি ২০২৬-এ আমরা Study Abroad Consultant নামে নতুন পরিচয় গ্রহণ করি এবং আরও বেশি আন্তর্জাতিক গন্তব্যে আমাদের সেবা সম্প্রসারিত করি।"
-                  : "In February 2026, we launched our new name: Study Abroad Consultant, reflecting our team's years of experience in the China education industry and extending our services to students at more international study destinations."}
-              </p>
-              <p>
-                {isBn
-                  ? "আজ আমরা বাংলাদেশি শিক্ষার্থীদের চীন ছাড়াও ভারত, মালয়েশিয়া, দক্ষিণ কোরিয়া এবং জাপানে বাস্তবসম্মত উচ্চশিক্ষার সুযোগগুলো অনুসন্ধানে নির্ভরযোগ্য সহায়তা প্রদান করছি।"
-                  : "We are helping the students from Bangladesh today to explore the opportunities in China, India, Malaysia, South Korea and Japan."}
-              </p>
-            </div>
-          </div>
-
-          {/* Timeline Illustration */}
-          <div className="mt-12">
-            <TimelineJourneyIllustration locale={locale} />
+          <div className="mx-auto mt-8 max-w-3xl space-y-4 rounded-3xl border border-stone-200/90 bg-stone-50/60 p-6 text-base leading-7 text-slate-700 sm:p-10">
+            <p>
+              {isBn
+                ? "আমাদের টিমের অভিজ্ঞতার শুরু ঢাকার আগের একটি শিক্ষা পরামর্শ প্রতিষ্ঠানের মাধ্যমে বাংলাদেশি শিক্ষার্থীদের চীনের বিশ্ববিদ্যালয়ে আবেদন করতে সহায়তা করার মধ্য দিয়ে। সেই কাজের মধ্যে ছিল ভর্তি আবেদন, স্কলারশিপের পরামর্শ এবং শিক্ষার্থীদের প্রয়োজনীয় কাগজপত্র প্রস্তুতিতে সহায়তা।"
+                : "Our team’s experience began with helping Bangladeshi students apply to universities in China through an earlier education consultancy in Dhaka. That work included admission applications, scholarship guidance, and student documentation."}
+            </p>
+            <p>
+              {isBn
+                ? "আরও বেশি গন্তব্যে সেবা সম্প্রসারণের সঙ্গে সঙ্গে ফেব্রুয়ারি ২০২৬-এ আমরা Study Abroad Consultant নামটি চালু করি।"
+                : "In February 2026, we introduced the name Study Abroad Consultant as we expanded our services to more destinations."}
+            </p>
+            <p>
+              {isBn
+                ? "বর্তমানে আমরা চীন, ভারত, মালয়েশিয়া, দক্ষিণ কোরিয়া ও জাপানে পড়তে আগ্রহী শিক্ষার্থীদের সহায়তা করি। উপযুক্ত বিকল্প তুলনা করা, খরচ বোঝা এবং আবেদনের প্রতিটি ধাপের প্রস্তুতিতে আমরা পাশে থাকি।"
+                : "Today, we support students considering China, India, Malaysia, South Korea, and Japan. We help them compare suitable options, understand the costs, and prepare for each stage of the application."}
+            </p>
           </div>
         </PageShell>
       </section>
@@ -439,13 +353,8 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               </h2>
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {isBn
-                  ? "ব্যক্তিগত কাউন্সেলিং, স্পষ্ট তথ্য এবং আবেদন প্রস্তুতিতে ব্যবহারিক সহায়তার মাধ্যমে বাংলাদেশি শিক্ষার্থী ও পরিবারকে উচ্চশিক্ষার সিদ্ধান্ত নিতে সাহায্য করা।"
-                  : "By providing individual counseling, informing students and families of higher education options, and supporting application process, to assist Bangladeshi students and families in making informed choices about higher education."}
-              </p>
-              <p className="mt-3 text-base leading-7 text-slate-600">
-                {isBn
-                  ? "প্রতিটি শিক্ষার্থীর শিক্ষাগত যোগ্যতা, আগ্রহ, বাজেট এবং ভবিষ্যৎ লক্ষ্য বুঝে উপযুক্ত বিশ্ববিদ্যালয় ও প্রোগ্রাম খুঁজে নিতে সহায়তা করাই আমাদের উদ্দেশ্য। ভর্তি প্রক্রিয়া, স্কলারশিপের সুযোগ এবং প্রয়োজনীয় নথিপত্র সম্পর্কে স্বচ্ছ নির্দেশনা দিয়ে আমরা শিক্ষার্থীদের আত্মবিশ্বাসের সঙ্গে বিদেশে উচ্চশিক্ষার প্রস্তুতি নিতে সাহায্য করতে চাই।"
-                  : "Our objective is to find out about the students' background, interests, budget and future aspirations so we are able to find appropriate universities and programmes for them to consider. We strive to boost student confidence in preparing for studying abroad by providing clear guidance regarding admissions, scholarship opportunities and the necessary documents."}
+                  ? "ব্যক্তিগত কাউন্সেলিং, খরচ ও যোগ্যতার শর্ত সম্পর্কে স্পষ্ট তথ্য এবং আবেদন প্রস্তুতিতে ব্যবহারিক সহায়তার মাধ্যমে বাংলাদেশি শিক্ষার্থীদের ভেবেচিন্তে পড়াশোনার সিদ্ধান্ত নিতে সাহায্য করা।"
+                  : "To help Bangladeshi students make informed study choices through individual counselling, clear information about costs and requirements, and practical application support."}
               </p>
             </article>
             <article className="marketing-glass-card rounded-2xl p-7 sm:p-9">
@@ -458,13 +367,8 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               </h2>
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {isBn
-                  ? "শিক্ষার্থী কাউন্সেলিংয়ের মান ও প্রাতিষ্ঠানিক সম্পর্ক উন্নয়নের মাধ্যমে আরও বেশি বাংলাদেশি পরিবারের কাছে আন্তর্জাতিক উচ্চশিক্ষার সুযোগকে সহজবোধ্য করে তোলা।"
-                  : "To bring the concept of international education to the fore in more Bangladeshi families and to improve their understanding and journey of study abroad in a meaningful way, and to improve our counselling standards and institutional relationships."}
-              </p>
-              <p className="mt-3 text-base leading-7 text-slate-600">
-                {isBn
-                  ? "আমরা এমন একটি ভবিষ্যতের স্বপ্ন দেখি, যেখানে নির্ভরযোগ্য তথ্য ও শিক্ষার্থীকেন্দ্রিক পরামর্শের মাধ্যমে বাংলাদেশের আরও বেশি শিক্ষার্থী বিশ্বমানের শিক্ষার সুযোগ অনুসন্ধান করতে পারবে। সততা, যত্ন এবং সেবার ধারাবাহিক উন্নয়নের মাধ্যমে আমরা পরিবারগুলোর বিশ্বস্ত সহযোগী হয়ে উঠতে চাই, যাতে শিক্ষার্থীরা আন্তর্জাতিক অভিজ্ঞতা অর্জন করে নিজ নিজ সমাজে অর্থবহ অবদান রাখতে পারে।"
-                  : "We see a tomorrow, where more students of Bangladesh will have access to reliable information, guidance and explore quality education around the globe through the students centric approach. We aim to be a trusted partner of the family, demonstrate care and continually strive to improve our services so that students can gain international experiences which they can use to service their communities."}
+                  ? "সৎ পরামর্শ, যত্নসহকারে আবেদন প্রস্তুতিতে সহায়তা এবং পড়াশোনার বিকল্পগুলো স্পষ্টভাবে বুঝিয়ে দেওয়ার জন্য শিক্ষার্থী ও পরিবার অন্যদের কাছে সুপারিশ করবেন—এমন একটি পরামর্শ প্রতিষ্ঠান হয়ে ওঠা।"
+                  : "To become a consultancy that students and families recommend for honest advice, careful application support, and a clear understanding of their study options."}
               </p>
             </article>
           </div>
@@ -510,12 +414,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   </div>
                   <div>
                     <h3 className="font-heading text-base font-bold text-slate-900">
-                      {isBn ? "শিক্ষার্থীকে বোঝা" : "Understand the Student"}
+                      {isBn ? "আপনার পরিকল্পনা বোঝা" : "Understand your plans"}
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-slate-600">
                       {isBn
-                        ? "শিক্ষাগত রেকর্ড, পারিবারিক বাজেট (বিডিটিতে), একাডেমিক আগ্রহ এবং দীর্ঘমেয়াদী ক্যারিয়ার লক্ষ্য পুঙ্খানুপুঙ্খভাবে মূল্যায়ন করি।"
-                        : "We discuss your academic record, subject interests, language qualifications, and family budget before recommending options."}
+                        ? "পড়াশোনার বিকল্প প্রস্তাব করার আগে আপনার শিক্ষাগত যোগ্যতা, বিষয়ের আগ্রহ, বাজেট ও ভবিষ্যৎ পরিকল্পনা নিয়ে আলোচনা করি।"
+                        : "We discuss your academic background, subject interests, budget, and future plans before suggesting study options."}
                     </p>
                   </div>
                 </div>
@@ -526,14 +430,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   </div>
                   <div>
                     <h3 className="font-heading text-base font-bold text-slate-900">
-                      {isBn
-                        ? "উপযুক্ত সুযোগগুলো অনুসন্ধান"
-                        : "Explore Suitable Opportunities"}
+                      {isBn ? "বিকল্পগুলো বুঝিয়ে বলা" : "Explain your options"}
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-slate-600">
                       {isBn
-                        ? "বাস্তবসম্মত প্রবেশাধিকার, আসল টিউশন খরচ এবং ন্যায্য স্কলারশিপের সম্ভাবনা নিয়ে বিভিন্ন দেশের তুলনা করে সেরা বিকল্প খুঁজে নিই।"
-                        : "We compare suitable programmes, published entry requirements, estimated costs, and scholarship eligibility with you."}
+                        ? "উপযুক্ত কোর্স, ভর্তির যোগ্যতা, আনুমানিক খরচ এবং উপলব্ধ স্কলারশিপ তুলনা করতে সাহায্য করি।"
+                        : "We help you compare suitable courses, entry requirements, estimated costs, and available scholarships."}
                     </p>
                   </div>
                 </div>
@@ -545,13 +447,13 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   <div>
                     <h3 className="font-heading text-base font-bold text-slate-900">
                       {isBn
-                        ? "পরবর্তী পদক্ষেপগুলো স্পষ্টভাবে জানানো"
-                        : "Explain the Next Steps"}
+                        ? "পরবর্তী ধাপের প্রস্তুতি"
+                        : "Prepare the next steps"}
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-slate-600">
                       {isBn
-                        ? "আবেদনের ধাপ, প্রয়োজনীয় কাগজপত্র, সম্ভাব্য খরচ ও সময়সীমা বুঝিয়ে দিই। ভর্তি, স্কলারশিপ এবং ভিসার চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট প্রতিষ্ঠান ও কর্তৃপক্ষের।"
-                        : "We explain application steps, required documents, estimated fees, and relevant deadlines. Admission, scholarship, and visa decisions remain with the issuing institutions and authorities."}
+                        ? "কোন কাগজপত্র কখন প্রস্তুত করতে হবে তা বোঝাতে প্রয়োজনীয় নথি, সময়সীমা ও আবেদনের ধাপগুলো বুঝিয়ে দিই।"
+                        : "We explain the documents, deadlines, and application steps so you know what to prepare and when."}
                     </p>
                   </div>
                 </div>
@@ -567,7 +469,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
       </section>
 
       {/* =========================================================================
-            SECTION 4 — STUDY DESTINATIONS: Opening Doors to International Education
+            SECTION 4 — STUDY DESTINATIONS: Where we can help you study
             ========================================================================= */}
       <section
         id="destinations"
@@ -581,7 +483,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
             <h2 className="font-heading mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               {isBn
                 ? "আন্তর্জাতিক উচ্চশিক্ষার দ্বার উন্মোচন"
-                : "Opening Doors to International Education"}
+                : "Where we can help you study"}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
               {isBn
@@ -645,7 +547,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
       </section>
 
       {/* =========================================================================
-            SECTION 5 — WHAT WE HELP WITH: Support Beyond University Selection
+            SECTION 5 — WHAT WE HELP WITH: Support with your study plans
             ========================================================================= */}
       <section
         id="services"
@@ -654,12 +556,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
         <PageShell>
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/80 bg-orange-50/90 px-3.5 py-1 text-xs font-bold text-orange-700 shadow-2xs">
-              <span>{isBn ? "আমাদের সেবাসমূহ" : "COMPREHENSIVE SERVICES"}</span>
+              <span>{isBn ? "আমাদের সেবাসমূহ" : "OUR SERVICES"}</span>
             </div>
             <h2 className="font-heading mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               {isBn
                 ? "শুধু বিশ্ববিদ্যালয় নির্বাচন নয়, সার্বিক সহায়তা"
-                : "Support Beyond University Selection"}
+                : "Support with your study plans"}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
               {isBn
@@ -668,58 +570,111 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* 1 */}
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div className="marketing-glass-card rounded-2xl p-6">
               <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
-                <Compass className="size-5" />
+                <Compass className="size-5" aria-hidden="true" />
               </div>
               <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
-                {isBn
-                  ? "১. স্টুডেন্ট প্রোফাইল মূল্যায়ন"
-                  : "1. Student Profile Assessment"}
+                {isBn ? "প্রোফাইল মূল্যায়ন" : "Profile Assessment"}
               </h3>
               <p className="mt-2 text-sm leading-6 text-slate-600">
                 {isBn
-                  ? "শিক্ষাগত রেকর্ড, ভাষা স্কোর ও আর্থিক সামর্থ্যের বাস্তবভিত্তিক বিশ্লেষণ।"
-                  : "A review of your academic record, language qualifications, study history, and budget to identify suitable study options."}
+                  ? "উপযুক্ত বিকল্প খুঁজতে আপনার শিক্ষাগত যোগ্যতা, ভাষার দক্ষতা, পড়াশোনার ইতিহাস ও বাজেট পর্যালোচনা করি।"
+                  : "We review your academic background, language qualifications, study history, and budget to identify suitable options."}
               </p>
             </div>
-
-            {/* 2 */}
             <div className="marketing-glass-card rounded-2xl p-6">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
-                <BookOpen className="size-5" />
+              <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
+                <BookOpen className="size-5" aria-hidden="true" />
               </div>
               <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
                 {isBn
-                  ? "২. বিশ্ববিদ্যালয় ও কোর্স নির্বাচন"
-                  : "2. University & Course Selection"}
+                  ? "বিশ্ববিদ্যালয় ও কোর্স নির্বাচন"
+                  : "University & Course Selection"}
               </h3>
               <p className="mt-2 text-sm leading-6 text-slate-600">
                 {isBn
-                  ? "শিক্ষার্থীর ক্যারিয়ার আকাঙ্ক্ষার সাথে সামঞ্জস্যপূর্ণ প্রতিষ্ঠানের তালিকা প্রণয়ন।"
-                  : "A shortlist of universities and courses based on your interests, entry eligibility, career plans, and estimated costs."}
+                  ? "ভর্তির যোগ্যতা, আগ্রহ, ক্যারিয়ার পরিকল্পনা ও আনুমানিক খরচ বিবেচনা করে বিশ্ববিদ্যালয় ও কোর্স তুলনা করতে সাহায্য করি।"
+                  : "We help you compare universities and courses based on entry requirements, interests, career plans, and estimated costs."}
               </p>
             </div>
-
-            {/* 3 */}
             <div className="marketing-glass-card rounded-2xl p-6">
-              <div className="flex size-10 items-center justify-center rounded-xl bg-blue-100 text-blue-700">
-                <FileText className="size-5" />
+              <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
+                <Award className="size-5" aria-hidden="true" />
               </div>
               <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
-                {isBn
-                  ? "৩. আবেদন ও ডকুমেন্ট প্রস্তুতি"
-                  : "3. Application & Document Preparation"}
+                {isBn ? "স্কলারশিপের পরামর্শ" : "Scholarship Guidance"}
               </h3>
               <p className="mt-2 text-sm leading-6 text-slate-600">
                 {isBn
-                  ? "আবেদনপত্র পূরণ, প্রয়োজনীয় কাগজপত্র যাচাই এবং সঠিক সময়ে জমা দেওয়ার সম্পূর্ণ সহায়তা।"
-                  : "End-to-end support with application forms, document verification, and timely submission to meet university deadlines."}
+                  ? "উপলব্ধ স্কলারশিপ, যোগ্যতার শর্ত ও আবেদনের ধাপ বুঝিয়ে দিই। স্কলারশিপ পাওয়া নির্ভর করে প্রদানকারী প্রতিষ্ঠানের শর্ত ও নির্বাচন প্রক্রিয়ার ওপর।"
+                  : "We explain available scholarships, eligibility requirements, and application steps. Awards depend on the provider’s criteria and selection process."}
+              </p>
+            </div>
+            <div className="marketing-glass-card rounded-2xl p-6">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
+                <FileText className="size-5" aria-hidden="true" />
+              </div>
+              <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
+                {isBn
+                  ? "ভর্তি আবেদনে সহায়তা"
+                  : "Admission Application Support"}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {isBn
+                  ? "আবেদনপত্র ও প্রয়োজনীয় কাগজপত্র প্রস্তুত করতে, শর্তগুলো যাচাই করতে এবং সময়সীমা মনে রাখতে সাহায্য করি।"
+                  : "We help you prepare application forms and supporting documents, check requirements, and keep track of deadlines."}
+              </p>
+            </div>
+            <div className="marketing-glass-card rounded-2xl p-6">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
+                <Globe2 className="size-5" aria-hidden="true" />
+              </div>
+              <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
+                {isBn
+                  ? "স্টুডেন্ট ভিসার প্রস্তুতি"
+                  : "Student Visa Preparation"}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {isBn
+                  ? "স্টুডেন্ট ভিসার আবেদনের জন্য প্রয়োজনীয় কাগজপত্র, ফরম ও অন্যান্য প্রস্তুতি সম্পর্কে দিকনির্দেশনা দিই।"
+                  : "We guide you through the relevant document requirements, forms, and preparation for your student visa application."}
+              </p>
+            </div>
+            <div className="marketing-glass-card rounded-2xl p-6">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700">
+                <MapPin className="size-5" aria-hidden="true" />
+              </div>
+              <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
+                {isBn
+                  ? "আবাসন ও যাত্রার প্রস্তুতি"
+                  : "Accommodation & Pre-Departure Guidance"}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {isBn
+                  ? "আবাসনের বিকল্প বুঝতে এবং ভ্রমণ, বিশ্ববিদ্যালয়ে নিবন্ধন ও পৌঁছানোর পরের প্রস্তুতিতে সাহায্য করি।"
+                  : "We help you understand accommodation options and prepare for travel, university registration, and arrival."}
               </p>
             </div>
           </div>
+          <p className="mx-auto mt-8 max-w-3xl text-sm leading-6 text-slate-600">
+            {isBn
+              ? "ভর্তি, স্কলারশিপ ও ভিসার সিদ্ধান্ত সংশ্লিষ্ট বিশ্ববিদ্যালয় ও কর্তৃপক্ষ নেয়। আমাদের কাজ হলো শর্তগুলো বুঝতে এবং আবেদন প্রস্তুত করতে আপনাকে সাহায্য করা।"
+              : "Admission, scholarship, and visa decisions are made by the relevant universities and authorities. Our role is to help you understand the requirements and prepare your application."}
+          </p>
+          {hasPublishedStories ? (
+            <div className="mt-6 text-center">
+              <Link
+                href={localizedHref("/success-stories", locale)}
+                className="focus-ring inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 text-sm font-semibold text-orange-700 hover:bg-orange-50"
+              >
+                {isBn
+                  ? "শিক্ষার্থীদের অভিজ্ঞতা পড়ুন"
+                  : "Read our students’ stories"}
+              </Link>
+            </div>
+          ) : null}
         </PageShell>
       </section>
 
@@ -762,24 +717,24 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                 className="font-serif text-3xl leading-[1.25] tracking-tight text-[var(--brand-navy)] sm:text-4xl"
               >
                 {isBn
-                  ? "আপনার উচ্চশিক্ষার সিদ্ধান্তে আমাদের দায়িত্ব।"
-                  : "Your education deserves thoughtful guidance."}
+                  ? "ভালো পরামর্শের শুরু মন দিয়ে শোনা থেকে।"
+                  : "Good advice starts with listening."}
               </h2>
-              <div className="mt-7 space-y-5 text-base leading-8 text-slate-600">
+              <div className="mt-7 max-w-2xl space-y-5 text-base leading-8 text-slate-600">
                 <p>
                   {isBn
-                    ? "বিদেশে উচ্চশিক্ষার সিদ্ধান্তের সাথে একজন শিক্ষার্থীর স্বপ্ন এবং তার পরিবারের প্রত্যাশা জড়িয়ে থাকে। তাই একজন পরামর্শদাতার প্রথম দায়িত্ব হলো মনোযোগ দিয়ে শোনা—শিক্ষার্থী কী পড়তে চায়, তার প্রস্তুতি কেমন এবং পরিবার কোন বাজেটের মধ্যে পরিকল্পনা করছে।"
-                    : "When you decide to study abroad, you are uniting what you want to do and what you hope for the future with your family. As advisors, I think it's our duty to listen and find out what the student wants to study, and what they're ready to do, and the amount of money that their family is going to be spending."}
+                    ? "বিদেশে পড়াশোনা একজন শিক্ষার্থী ও তার পরিবারের জন্য বড় সিদ্ধান্ত। বিশ্ববিদ্যালয়ের পরামর্শ দেওয়ার আগে আমাদের বুঝতে হবে আপনি কী পড়তে চান, পড়াশোনার পরে কী করতে চান এবং আপনার পরিবার কতটা খরচ বহন করতে পারবে।"
+                    : "Studying abroad is a big decision for a student and their family. Before recommending a university, we need to understand what you want to study, what you hope to do afterwards, and what your family can afford."}
                 </p>
                 <p>
                   {isBn
-                    ? "আমাদের টিম ঢাকা থেকে বারো বছরেরও বেশি সময় ধরে চীন-কেন্দ্রিক উচ্চশিক্ষা পরামর্শ সেবায় কাজ করেছে। সেই অভিজ্ঞতাকে সঙ্গে নিয়ে ফেব্রুয়ারি ২০২৬-এ আমরা Study Abroad Consultant নামে নতুন পরিচয় গ্রহণ করি। গন্তব্যের পরিধি বেড়েছে; ব্যক্তিগত মনোযোগ এবং দায়িত্বশীল পরামর্শের গুরুত্ব আমাদের কাছে একই আছে।"
-                    : "We have worked in the education consultancy arena from Dhaka, focused on China for over 12 years. We welcome you aboard our exciting journey, which continues into the new name we announce in February 2026, 'Study Abroad Consultant'. The list of destinations has expanded and the care and consideration which we give to our clients is very much at the heart of our services."}
+                    ? "Study Abroad Consultant-এ আমাদের দায়িত্ব হলো আপনার বিকল্পগুলো স্পষ্টভাবে বুঝিয়ে দেওয়া এবং যত্নসহকারে আবেদন প্রস্তুত করতে সাহায্য করা। সিদ্ধান্ত নেওয়ার আগে সম্ভাব্য খরচ, ভর্তির যোগ্যতা এবং পরবর্তী ধাপগুলো আপনার জানা থাকা উচিত।"
+                    : "At Study Abroad Consultant, our responsibility is to explain your options clearly and help you prepare your application carefully. You should understand the likely costs, entry requirements, and next steps before making a commitment."}
                 </p>
                 <p>
                   {isBn
-                    ? "আমরা চাই শিক্ষার্থী ও তার পরিবার বিশ্ববিদ্যালয়ের বিকল্প, আবেদনের শর্ত, সম্ভাব্য খরচ এবং পরবর্তী ধাপগুলো বুঝে সিদ্ধান্ত নিক। ভর্তি, স্কলারশিপ ও ভিসার ফলাফল সংশ্লিষ্ট কর্তৃপক্ষ নির্ধারণ করে; আমাদের কাজ হলো যথাযথ প্রস্তুতি ও স্পষ্ট দিকনির্দেশনায় সহায়তা করা। আপনার উচ্চশিক্ষার পরিকল্পনা আমাদের সাথে শেয়ার করার জন্য আপনাকে স্বাগতম।"
-                    : "We want students and their families to know the choices of universities, criteria for application, approximate price ranges and next steps before committing to a university. It is our responsibility to ensure that you are prepared and make sound choices regarding admission, as well as scholarship and visa decisions which will be made by universities and the necessary authorities. I welcome you to present yourself a plan for studying with our team."}
+                    ? "আপনার পরিকল্পনা নিয়ে আমাদের টিমের সঙ্গে কথা বলার আমন্ত্রণ রইল। আমরা সময় নিয়ে আপনার পরিস্থিতি বুঝব এবং কীভাবে এগোবেন তা ঠিক করতে সাহায্য করব।"
+                    : "I invite you to speak with our team about your plans. We will take the time to understand your situation and help you decide how to move forward."}
                 </p>
               </div>
               <div className="mt-8 border-t border-stone-300/70 pt-5">
@@ -858,7 +813,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   Nikunja-2, Khilkhet, Dhaka
                 </p>
 
-                <div className="mt-6 space-y-4 text-xs sm:text-sm">
+                <div className="mt-6 min-w-0 space-y-4 text-xs sm:text-sm">
                   {/* Address */}
                   <div className="flex items-start gap-3">
                     <MapPin className="mt-0.5 size-4 shrink-0 text-orange-400" />
@@ -876,7 +831,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   <div className="flex items-start gap-3">
                     <MessageCircle className="mt-0.5 size-4 shrink-0 text-emerald-400" />
                     <div>
-                      <p className="text-xs text-slate-400">WhatsApp Direct</p>
+                      <p className="text-xs text-slate-400">Phone / WhatsApp</p>
                       <a
                         href="https://wa.me/8801354935958"
                         target="_blank"
@@ -908,12 +863,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                     <div>
                       <p className="text-xs text-slate-400">Website</p>
                       <a
-                        href="https://studyabroadconsultantbd.com"
+                        href="https://www.studyabroadconsultantbd.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="font-medium text-white hover:text-sky-300"
+                        className="font-medium break-all text-white hover:text-sky-300"
                       >
-                        studyabroadconsultantbd.com
+                        www.studyabroadconsultantbd.com
                       </a>
                     </div>
                   </div>

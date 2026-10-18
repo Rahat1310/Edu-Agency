@@ -8,8 +8,10 @@ import { cn } from "@/lib/utils";
  */
 export function EducationJourneyIllustration({
   className,
+  showExperienceBadge = true,
 }: {
   className?: string;
+  showExperienceBadge?: boolean;
 }) {
   return (
     <div
@@ -310,30 +312,32 @@ export function EducationJourneyIllustration({
         </g>
 
         {/* Destination Location Badges Floating */}
-        <g transform="translate(24, 90)">
-          <rect
-            x="0"
-            y="0"
-            width="112"
-            height="34"
-            rx="17"
-            fill="#FFFFFF"
-            stroke="#E2E8F0"
-            strokeWidth="1"
-            filter="url(#softShadow)"
-          />
-          <circle cx="17" cy="17" r="7" fill="url(#eduSunset)" />
-          <text
-            x="32"
-            y="21"
-            fill="#0F172A"
-            fontSize="11"
-            fontWeight="700"
-            fontFamily="sans-serif"
-          >
-            12+ Years Depth
-          </text>
-        </g>
+        {showExperienceBadge ? (
+          <g transform="translate(24, 90)">
+            <rect
+              x="0"
+              y="0"
+              width="112"
+              height="34"
+              rx="17"
+              fill="#FFFFFF"
+              stroke="#E2E8F0"
+              strokeWidth="1"
+              filter="url(#softShadow)"
+            />
+            <circle cx="17" cy="17" r="7" fill="url(#eduSunset)" />
+            <text
+              x="32"
+              y="21"
+              fill="#0F172A"
+              fontSize="11"
+              fontWeight="700"
+              fontFamily="sans-serif"
+            >
+              12+ Years Depth
+            </text>
+          </g>
+        ) : null}
 
         <g transform="translate(370, 310)">
           <rect

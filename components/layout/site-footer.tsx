@@ -18,9 +18,8 @@ import type { Dictionary } from "@/lib/i18n/types";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 const SOCIAL_LINKS = [
-  { label: "Facebook", href: "https://www.facebook.com/" },
-  { label: "Messenger", href: "https://www.messenger.com/" },
-  { label: "Instagram", href: "https://www.instagram.com/" },
+  { label: "Facebook", href: "https://www.facebook.com/Studyabroadconsultantbd01/" },
+  { label: "Instagram", href: "https://www.instagram.com/study_abroad_consultant_bd/" },
 ] as const;
 
 const OFFICE_MAP_LINK = "https://maps.app.goo.gl/f98QPnkAhscY3WAYA";
