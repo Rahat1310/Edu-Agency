@@ -5,12 +5,14 @@ import Image from "next/image";
 import {
   Award,
   BookOpen,
+  Calendar,
   Compass,
   FileText,
   Globe2,
   Mail,
   MapPin,
   MessageCircle,
+  Users,
 } from "lucide-react";
 import * as motion from "framer-motion/client";
 import { PageShell } from "@/components/layout/page-shell";
@@ -270,6 +272,55 @@ export function AboutPage({
         />
 
         <PageShell className="relative z-10">
+          <dl
+            aria-label={isBn ? "এক নজরে প্রতিষ্ঠান" : "Company at a glance"}
+            className="grid grid-cols-1 gap-3.5 py-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {[
+              {
+                icon: Calendar,
+                label: isBn ? "নতুন ব্র্যান্ড পরিচয়" : "Rebranded",
+                value: isBn ? "ফেব্রুয়ারি ২০২৬" : "February 2026",
+              },
+              {
+                icon: MapPin,
+                label: isBn ? "অবস্থান" : "Based in",
+                value: isBn ? "নিকুঞ্জা-২, ঢাকা" : "Nikunja-2, Dhaka",
+              },
+              {
+                icon: Users,
+                label: isBn ? "যাদের জন্য কাজ করি" : "Who we support",
+                value: isBn
+                  ? "বাংলাদেশি শিক্ষার্থী ও পরিবার"
+                  : "Bangladeshi students & families",
+              },
+              {
+                icon: Globe2,
+                label: isBn ? "পড়াশোনার গন্তব্য" : "Study destinations",
+                value: isBn
+                  ? "চীন, ভারত, মালয়েশিয়া, দক্ষিণ কোরিয়া ও জাপান"
+                  : "China, India, Malaysia, South Korea & Japan",
+              },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="flex min-w-0 items-start gap-3.5 rounded-2xl border border-white/95 bg-white/70 p-4 shadow-[0_8px_30px_rgba(234,88,12,0.04),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-orange-950/[0.03] backdrop-blur-xl"
+              >
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-orange-100/80 bg-gradient-to-br from-white/95 to-orange-50/50 text-orange-700 shadow-xs">
+                  <item.icon className="size-4.5" aria-hidden="true" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <dt className="text-[0.68rem] font-semibold tracking-[0.14em] text-slate-500 uppercase">
+                    {item.label}
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 font-bold text-slate-800">
+                    {item.value}
+                  </dd>
+                </div>
+              </div>
+            ))}
+          </dl>
+
           {/* Frosted Translucent Sub-navigation Pills */}
           <nav
             aria-label={isBn ? "এই পৃষ্ঠার বিভাগসমূহ" : "On this page"}
