@@ -8,6 +8,7 @@ import {
   BookOpen,
   Calendar,
   Compass,
+  FileText,
   Globe2,
   Mail,
   MapPin,
@@ -385,7 +386,7 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
               {isBn
                 ? "ঢাকায় চীন-কেন্দ্রিক শিক্ষা পরামর্শ সেবায় আমাদের টিমের বারো বছরেরও বেশি অভিজ্ঞতার ভিত্তিতে নতুন ব্র্যান্ড পরিচয়ে আমাদের পথচলা।"
-                : "Our new brand identity builds on more than twelve years of China-focused education consultancy work carried out by our team in Dhaka."}
+                : "Our new brand identity is grounded in over a decade of education consultancy activities in China that our team has undertaken in Dhaka."}
             </p>
           </div>
 
@@ -395,22 +396,22 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               <p>
                 {isBn
                   ? "ঢাকা থেকেই আমাদের টিমের আন্তর্জাতিক উচ্চশিক্ষা পরামর্শ সেবার পথচলা শুরু হয়, চীনে উচ্চশিক্ষার সুযোগকে কেন্দ্র করে।"
-                  : "Our team’s international education work began in Dhaka, with a focus on study opportunities in China."}
+                  : "The international education project of our team was initiated in Dhaka focusing on academic study opportunity in China."}
               </p>
               <p>
                 {isBn
                   ? "বারো বছরেরও বেশি সময় ধরে আমাদের টিমের সদস্যরা ঢাকায় পূর্ববর্তী একটি প্রতিষ্ঠানের মাধ্যমে চীন-কেন্দ্রিক উচ্চশিক্ষা কনসালটেন্সিতে নিষ্ঠার সাথে কাজ করেছেন। এই দীর্ঘ সময়ে তারা চীনা বিশ্ববিদ্যালয়ে সরাসরি ভর্তি, সরকারি ও বিশ্ববিদ্যালয় স্কলারশিপের নিয়মাবলী, JW201/JW202 নথিপত্র প্রস্তুতকরণ এবং শিক্ষার্থীদের সুনির্দিষ্ট শিক্ষাপরিকল্পনায় বাস্তব অভিজ্ঞতা অর্জন করেছেন।"
-                  : "Members of our team bring more than twelve years of China-focused education consultancy experience gained through an earlier business in Dhaka. Their work covered university admissions, scholarship guidance, student documentation, and education planning."}
+                  : "Our team has over 12 years of experience in education consultancy to the China market, drawing on a previous business in Dhaka. They worked on university admissions, guidance on scholarships, student documentation and education planning."}
               </p>
               <p>
                 {isBn
                   ? "চীন উচ্চশিক্ষায় আমাদের টিমের ১২+ বছরের অভিজ্ঞতাকে সঙ্গে নিয়ে ফেব্রুয়ারি ২০২৬-এ আমরা Study Abroad Consultant নামে নতুন পরিচয় গ্রহণ করি এবং আরও বেশি আন্তর্জাতিক গন্তব্যে আমাদের সেবা সম্প্রসারিত করি।"
-                  : "In February 2026, we introduced our new name, Study Abroad Consultant, building on our team’s 12+ years of China-focused education experience and expanding our support to more international study destinations."}
+                  : "In February 2026, we launched our new name: Study Abroad Consultant, reflecting our team's years of experience in the China education industry and extending our services to students at more international study destinations."}
               </p>
               <p>
                 {isBn
                   ? "আজ আমরা বাংলাদেশি শিক্ষার্থীদের চীন ছাড়াও ভারত, মালয়েশিয়া, দক্ষিণ কোরিয়া এবং জাপানে বাস্তবসম্মত উচ্চশিক্ষার সুযোগগুলো অনুসন্ধানে নির্ভরযোগ্য সহায়তা প্রদান করছি।"
-                  : "Today, we help Bangladeshi students explore opportunities in China, India, Malaysia, South Korea, and Japan."}
+                  : "We are helping the students from Bangladesh today to explore the opportunities in China, India, Malaysia, South Korea and Japan."}
               </p>
             </div>
           </div>
@@ -439,12 +440,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {isBn
                   ? "ব্যক্তিগত কাউন্সেলিং, স্পষ্ট তথ্য এবং আবেদন প্রস্তুতিতে ব্যবহারিক সহায়তার মাধ্যমে বাংলাদেশি শিক্ষার্থী ও পরিবারকে উচ্চশিক্ষার সিদ্ধান্ত নিতে সাহায্য করা।"
-                  : "To help Bangladeshi students and families make informed higher education decisions through individual counselling, clear information, and practical application support."}
+                  : "By providing individual counseling, informing students and families of higher education options, and supporting application process, to assist Bangladeshi students and families in making informed choices about higher education."}
               </p>
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {isBn
                   ? "প্রতিটি শিক্ষার্থীর শিক্ষাগত যোগ্যতা, আগ্রহ, বাজেট এবং ভবিষ্যৎ লক্ষ্য বুঝে উপযুক্ত বিশ্ববিদ্যালয় ও প্রোগ্রাম খুঁজে নিতে সহায়তা করাই আমাদের উদ্দেশ্য। ভর্তি প্রক্রিয়া, স্কলারশিপের সুযোগ এবং প্রয়োজনীয় নথিপত্র সম্পর্কে স্বচ্ছ নির্দেশনা দিয়ে আমরা শিক্ষার্থীদের আত্মবিশ্বাসের সঙ্গে বিদেশে উচ্চশিক্ষার প্রস্তুতি নিতে সাহায্য করতে চাই।"
-                  : "We aim to understand each student’s academic background, interests, budget, and future goals so we can help them explore suitable universities and programmes. Through transparent guidance on admissions, scholarship opportunities, and required documents, we seek to help students prepare for studying abroad with confidence."}
+                  : "Our objective is to find out about the students' background, interests, budget and future aspirations so we are able to find appropriate universities and programmes for them to consider. We strive to boost student confidence in preparing for studying abroad by providing clear guidance regarding admissions, scholarship opportunities and the necessary documents."}
               </p>
             </article>
             <article className="marketing-glass-card rounded-2xl p-7 sm:p-9">
@@ -458,12 +459,12 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {isBn
                   ? "শিক্ষার্থী কাউন্সেলিংয়ের মান ও প্রাতিষ্ঠানিক সম্পর্ক উন্নয়নের মাধ্যমে আরও বেশি বাংলাদেশি পরিবারের কাছে আন্তর্জাতিক উচ্চশিক্ষার সুযোগকে সহজবোধ্য করে তোলা।"
-                  : "To make international education opportunities easier to understand and navigate for more Bangladeshi families, while strengthening our counselling standards and institutional relationships."}
+                  : "To bring the concept of international education to the fore in more Bangladeshi families and to improve their understanding and journey of study abroad in a meaningful way, and to improve our counselling standards and institutional relationships."}
               </p>
               <p className="mt-3 text-base leading-7 text-slate-600">
                 {isBn
                   ? "আমরা এমন একটি ভবিষ্যতের স্বপ্ন দেখি, যেখানে নির্ভরযোগ্য তথ্য ও শিক্ষার্থীকেন্দ্রিক পরামর্শের মাধ্যমে বাংলাদেশের আরও বেশি শিক্ষার্থী বিশ্বমানের শিক্ষার সুযোগ অনুসন্ধান করতে পারবে। সততা, যত্ন এবং সেবার ধারাবাহিক উন্নয়নের মাধ্যমে আমরা পরিবারগুলোর বিশ্বস্ত সহযোগী হয়ে উঠতে চাই, যাতে শিক্ষার্থীরা আন্তর্জাতিক অভিজ্ঞতা অর্জন করে নিজ নিজ সমাজে অর্থবহ অবদান রাখতে পারে।"
-                  : "We envision a future where more students from Bangladesh can explore quality education around the world through reliable information and guidance centred on their needs. By building trust, showing care, and continually improving our services, we aspire to become a trusted partner for families and help students gain international experience they can use to contribute to their communities."}
+                  : "We see a tomorrow, where more students of Bangladesh will have access to reliable information, guidance and explore quality education around the globe through the students centric approach. We aim to be a trusted partner of the family, demonstrate care and continually strive to improve our services so that students can gain international experiences which they can use to service their communities."}
               </p>
             </article>
           </div>
@@ -701,6 +702,23 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                   : "A shortlist of universities and courses based on your interests, entry eligibility, career plans, and estimated costs."}
               </p>
             </div>
+
+            {/* 3 */}
+            <div className="marketing-glass-card rounded-2xl p-6">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-blue-100 text-blue-700">
+                <FileText className="size-5" />
+              </div>
+              <h3 className="font-heading mt-4 text-base font-bold text-slate-900">
+                {isBn
+                  ? "৩. আবেদন ও ডকুমেন্ট প্রস্তুতি"
+                  : "3. Application & Document Preparation"}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {isBn
+                  ? "আবেদনপত্র পূরণ, প্রয়োজনীয় কাগজপত্র যাচাই এবং সঠিক সময়ে জমা দেওয়ার সম্পূর্ণ সহায়তা।"
+                  : "End-to-end support with application forms, document verification, and timely submission to meet university deadlines."}
+              </p>
+            </div>
           </div>
         </PageShell>
       </section>
@@ -751,17 +769,17 @@ export function AboutPage({ locale = "en" }: AboutPageProps) {
                 <p>
                   {isBn
                     ? "বিদেশে উচ্চশিক্ষার সিদ্ধান্তের সাথে একজন শিক্ষার্থীর স্বপ্ন এবং তার পরিবারের প্রত্যাশা জড়িয়ে থাকে। তাই একজন পরামর্শদাতার প্রথম দায়িত্ব হলো মনোযোগ দিয়ে শোনা—শিক্ষার্থী কী পড়তে চায়, তার প্রস্তুতি কেমন এবং পরিবার কোন বাজেটের মধ্যে পরিকল্পনা করছে।"
-                    : "Choosing to study abroad brings together a student’s ambitions and a family’s hopes for the future. I believe our first responsibility as advisers is to listen: to understand what a student wants to study, how they are prepared, and the budget their family is planning around."}
+                    : "When you decide to study abroad, you are uniting what you want to do and what you hope for the future with your family. As advisors, I think it's our duty to listen and find out what the student wants to study, and what they're ready to do, and the amount of money that their family is going to be spending."}
                 </p>
                 <p>
                   {isBn
                     ? "আমাদের টিম ঢাকা থেকে বারো বছরেরও বেশি সময় ধরে চীন-কেন্দ্রিক উচ্চশিক্ষা পরামর্শ সেবায় কাজ করেছে। সেই অভিজ্ঞতাকে সঙ্গে নিয়ে ফেব্রুয়ারি ২০২৬-এ আমরা Study Abroad Consultant নামে নতুন পরিচয় গ্রহণ করি। গন্তব্যের পরিধি বেড়েছে; ব্যক্তিগত মনোযোগ এবং দায়িত্বশীল পরামর্শের গুরুত্ব আমাদের কাছে একই আছে।"
-                    : "Our team spent more than twelve years working in China-focused education consultancy from Dhaka. In February 2026, we introduced our new name, Study Abroad Consultant, carrying that experience forward. Our range of destinations has grown, while personal attention and responsible advice remain central to how we work."}
+                    : "We have worked in the education consultancy arena from Dhaka, focused on China for over 12 years. We welcome you aboard our exciting journey, which continues into the new name we announce in February 2026, 'Study Abroad Consultant'. The list of destinations has expanded and the care and consideration which we give to our clients is very much at the heart of our services."}
                 </p>
                 <p>
                   {isBn
                     ? "আমরা চাই শিক্ষার্থী ও তার পরিবার বিশ্ববিদ্যালয়ের বিকল্প, আবেদনের শর্ত, সম্ভাব্য খরচ এবং পরবর্তী ধাপগুলো বুঝে সিদ্ধান্ত নিক। ভর্তি, স্কলারশিপ ও ভিসার ফলাফল সংশ্লিষ্ট কর্তৃপক্ষ নির্ধারণ করে; আমাদের কাজ হলো যথাযথ প্রস্তুতি ও স্পষ্ট দিকনির্দেশনায় সহায়তা করা। আপনার উচ্চশিক্ষার পরিকল্পনা আমাদের সাথে শেয়ার করার জন্য আপনাকে স্বাগতম।"
-                    : "We want students and their families to understand their university options, application requirements, likely costs, and next steps before making a commitment. Universities and the relevant authorities determine admission, scholarship, and visa outcomes; our role is to support careful preparation and informed decisions. I welcome you to share your study plans with our team."}
+                    : "We want students and their families to know the choices of universities, criteria for application, approximate price ranges and next steps before committing to a university. It is our responsibility to ensure that you are prepared and make sound choices regarding admission, as well as scholarship and visa decisions which will be made by universities and the necessary authorities. I welcome you to present yourself a plan for studying with our team."}
                 </p>
               </div>
               <div className="mt-8 border-t border-stone-300/70 pt-5">
