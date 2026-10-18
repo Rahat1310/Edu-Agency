@@ -8,12 +8,9 @@ export function getSiteUrl(): string {
     return fromEnv.replace(/\/$/, "");
   }
 
-  const vercel = process.env.VERCEL_URL?.trim();
-  if (vercel) {
-    return `https://${vercel.replace(/\/$/, "")}`;
-  }
-
-  return "http://localhost:3000";
+  // Keep share images and canonical URLs on the public domain even when the
+  // deployment provider supplies a temporary deployment hostname.
+  return "https://www.studyabroadconsultantbd.com";
 }
 
 export function absoluteUrl(path: string): string {

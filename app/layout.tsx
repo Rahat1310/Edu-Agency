@@ -11,6 +11,8 @@ import {
 } from "next/font/google";
 
 import { clerkAppearance } from "@/lib/clerk-appearance";
+import { en } from "@/lib/i18n/en";
+import { SOCIAL_PREVIEW_IMAGE } from "@/lib/seo/social-preview";
 import { getSiteUrl } from "@/lib/site-url";
 import { cn } from "@/lib/utils";
 
@@ -55,19 +57,18 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    siteName: "Study Abroad Consultancy",
-    images: [
-      {
-        url: "/logo.png",
-        width: 1089,
-        height: 708,
-        alt: "Study Abroad Consultancy Logo",
-      },
-    ],
+    type: "website",
+    url: "/",
+    siteName: en.meta.siteName,
+    title: en.home.ogTitle,
+    description: en.home.ogDescription,
+    images: [SOCIAL_PREVIEW_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/logo.png"],
+    title: en.home.ogTitle,
+    description: en.home.ogDescription,
+    images: [SOCIAL_PREVIEW_IMAGE],
   },
 };
 
