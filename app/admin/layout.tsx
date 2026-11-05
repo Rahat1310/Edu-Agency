@@ -1,6 +1,8 @@
 import { DeskShell } from "@/components/desk/desk-shell";
 import { requireDashboardAccess } from "@/lib/auth-helpers";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default async function AdminLayout({
   children,
 }: Readonly<{

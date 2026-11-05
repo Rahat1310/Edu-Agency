@@ -214,7 +214,7 @@ export function AboutPage({
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
-                  href={localizedHref("/eligibility-quiz", locale)}
+                  href={localizedHref("/consultation", locale)}
                   className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold text-white shadow-md"
                 >
                   {isBn ? "ফ্রি প্রোফাইল মূল্যায়ন" : "Free Profile Assessment"}
@@ -830,7 +830,7 @@ export function AboutPage({
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href={localizedHref("/eligibility-quiz", locale)}
+                  href={localizedHref("/consultation", locale)}
                   className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
                 >
                   {isBn

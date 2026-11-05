@@ -18,6 +18,11 @@ export type SendWhatsAppResult = {
 };
 
 const GRAPH_VERSION = "v21.0";
+export class WhatsAppRequestError extends Error {
+  constructor(public status: number) {
+    super(`WhatsApp request rejected (${status})`);
+  }
+}
 
 /** E.164 digits without a leading plus, for Cloud API `to`. */
 export function whatsappRecipient(raw: string): string {
@@ -97,6 +102,7 @@ export async function sendWhatsAppMessage(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(20000),
   });
 
   const body = (await response.json()) as {
@@ -105,9 +111,7 @@ export async function sendWhatsAppMessage(
   };
 
   if (!response.ok) {
-    throw new Error(
-      body.error?.message ?? `WhatsApp Cloud API responded ${response.status}`,
-    );
+    throw new WhatsAppRequestError(response.status);
   }
 
   return {

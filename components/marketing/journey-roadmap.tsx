@@ -220,7 +220,7 @@ export function JourneyRoadmap({
                 : "Start with a conversation about your study plans. We’ll help you work through each step."}
             </p>
             <Link
-              href={localizedHref("/contact", locale)}
+              href={localizedHref("/consultation", locale)}
               className="focus-ring mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-orange-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-700"
             >
               {dict.home.journeyCta}

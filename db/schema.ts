@@ -111,6 +111,18 @@ export const leads = pgTable(
     }).notNull(),
     message: text("message"),
     quizAnswers: jsonb("quiz_answers"),
+    assessment:
+      jsonb("assessment").$type<
+        import("../lib/consultation/schema").StoredAssessment
+      >(),
+    reference: text("reference").unique(),
+    submissionKey: uuid("submission_key").unique(),
+    submissionHash: text("submission_hash"),
+    assessmentStatus: text("assessment_status").notNull().default("NEW"),
+    consentAt: timestamp("consent_at", { withTimezone: true }),
+    consentVersion: text("consent_version"),
+    followUpAt: timestamp("follow_up_at", { withTimezone: true }),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
     source: text("source").notNull().default("website"),
     status: text("status", { enum: leadStatuses }).notNull().default("new"),
     // Manual desk assignment (Section 5.3 / 5.8). Unassigned leads are
@@ -594,3 +606,55 @@ export type MessageChannel = (typeof messageChannels)[number];
 export type ThreadChannel = (typeof threadChannels)[number];
 export type NurtureSend = typeof nurtureSends.$inferSelect;
 export type NewNurtureSend = typeof nurtureSends.$inferInsert;
+
+// Contact profile extends an existing staff identity; assignments keep using users.id.
+export const counselorProfiles = pgTable(
+  "counselor_profiles",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .references(() => users.id),
+    fullName: text("full_name").notNull(),
+    title: text("title").notNull(),
+    phone: text("phone").notNull(),
+    whatsapp: text("whatsapp").notNull(),
+    email: text("email"),
+    active: boolean("active").notNull().default(false),
+    autoAssign: boolean("auto_assign").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("one_auto_assign_counselor")
+      .on(t.autoAssign)
+      .where(sql`${t.autoAssign} = true`),
+  ],
+);
+
+export const assessmentOutbox = pgTable(
+  "assessment_outbox",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    leadId: uuid("lead_id")
+      .notNull()
+      .references(() => leads.id),
+    channel: text("channel").notNull(),
+    status: text("status").notNull().default("pending"),
+    attempts: integer("attempts").notNull().default(0),
+    nextAttemptAt: timestamp("next_attempt_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    providerId: text("provider_id"),
+    error: text("error"),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("assessment_outbox_lead_channel").on(t.leadId, t.channel),
+  ],
+);

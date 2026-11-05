@@ -4,6 +4,7 @@ export type SendEmailInput = {
   to: string;
   subject: string;
   text: string;
+  html?: string;
   idempotencyKey?: string;
 };
 
@@ -43,6 +44,7 @@ export async function sendTransactionalEmail(
       to: input.to,
       subject: input.subject,
       text: input.text,
+      html: input.html,
     },
     input.idempotencyKey ? { idempotencyKey: input.idempotencyKey } : undefined,
   );

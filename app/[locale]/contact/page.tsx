@@ -31,5 +31,19 @@ export default async function Contact({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
 
-  return <ContactPage dict={dict} locale={locale} />;
+  return (
+    <>
+      <div className="bg-slate-50 px-4 py-4 text-center text-sm">
+        Looking for admission and scholarship counselling?{" "}
+        <a
+          className="font-semibold text-blue-800 underline"
+          href={locale === "bn" ? "/bn/consultation" : "/consultation"}
+        >
+          Request a free student profile assessment
+        </a>
+        .
+      </div>
+      <ContactPage dict={dict} locale={locale} />
+    </>
+  );
 }

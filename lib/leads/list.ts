@@ -59,6 +59,7 @@ function listWhere(query: LeadListQuery) {
     filters.push(
       or(
         ilike(leads.name, pattern),
+        ilike(leads.reference, pattern),
         ilike(leads.phone, pattern),
         ilike(leads.email, pattern),
       ),

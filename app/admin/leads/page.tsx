@@ -1,3 +1,5 @@
+import { AssessmentDashboard } from "@/components/consultation/admin-dashboard";
+
 import { Suspense } from "react";
 
 import { LeadDetailPanel } from "@/components/desk/lead-detail-panel";
@@ -13,7 +15,10 @@ type PageProps = {
 
 export default async function AdminLeadsPage({ searchParams }: PageProps) {
   const user = await requireDashboardAccess();
-  const query = parseLeadListQuery(await searchParams);
+  const params = await searchParams;
+  if (params.view !== "legacy" && !params.lead)
+    return <AssessmentDashboard params={params} />;
+  const query = parseLeadListQuery(params);
   const list = await listLeads(query);
   const actorLabel = user.fullName?.trim() || user.email;
 
@@ -23,15 +28,10 @@ export default async function AdminLeadsPage({ searchParams }: PageProps) {
         Leads
       </h1>
       <p className="mt-1 text-[0.75rem] text-[var(--desk-ink-muted)]">
-        Newest first. Open a row for the detail panel. Filters stay in the
-        URL.
+        Newest first. Open a row for the detail panel. Filters stay in the URL.
       </p>
       <div className="mt-4">
-        <LeadsDesk
-          query={query}
-          list={list}
-          selectedKey={query.lead}
-        />
+        <LeadsDesk query={query} list={list} selectedKey={query.lead} />
       </div>
       {query.lead ? (
         <Suspense

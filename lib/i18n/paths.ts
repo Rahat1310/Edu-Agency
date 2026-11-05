@@ -3,6 +3,7 @@ import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n/config";
 const MARKETING_PREFIXES = [
   "/about",
   "/contact",
+  "/consultation",
   "/destinations",
   "/programs",
   "/privacy",

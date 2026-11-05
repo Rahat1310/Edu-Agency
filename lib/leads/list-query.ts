@@ -1,7 +1,4 @@
-import {
-  leadListQuerySchema,
-  type LeadListQuery,
-} from "@/lib/schemas/lead";
+import { leadListQuerySchema, type LeadListQuery } from "@/lib/schemas/lead";
 
 export type { LeadListQuery };
 
@@ -31,7 +28,7 @@ export function leadsListHref(
   overrides: Partial<LeadListQuery> = {},
 ): string {
   const next = { ...query, ...overrides };
-  const params = new URLSearchParams();
+  const params = new URLSearchParams({ view: "legacy" });
 
   if (next.q) {
     params.set("q", next.q);
@@ -64,8 +61,8 @@ export function leadsListHref(
 export function leadListHasActiveFilters(query: LeadListQuery): boolean {
   return Boolean(
     query.q ||
-      query.destinationInterest ||
-      query.status ||
-      query.sort !== "created",
+    query.destinationInterest ||
+    query.status ||
+    query.sort !== "created",
   );
 }

@@ -152,7 +152,7 @@ export function HomeAboutSection({ locale }: HomeAboutSectionProps) {
               </Link>
 
               <Link
-                href={localizedHref("/eligibility-quiz", locale)}
+                href={localizedHref("/consultation", locale)}
                 className="btn-secondary-glass focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-6 text-sm font-bold text-slate-800 shadow-xs transition-all hover:border-orange-300 hover:bg-white hover:text-orange-600"
               >
                 {isBn

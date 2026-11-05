@@ -10,6 +10,7 @@ export const revalidate = 3600;
 const STATIC_PAGES = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/about", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/consultation", changeFrequency: "monthly", priority: 0.8 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.6 },
   { path: "/destinations", changeFrequency: "monthly", priority: 0.8 },
   { path: "/programs", changeFrequency: "daily", priority: 0.8 },

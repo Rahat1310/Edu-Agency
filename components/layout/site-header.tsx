@@ -574,7 +574,7 @@ export function SiteHeader({
 
             {/* High-Converting Consultation Button */}
             <Link
-              href={localizedHref("/contact", locale)}
+              href={localizedHref("/consultation", locale)}
               className="btn-sunset focus-ring group hidden min-h-9.5 items-center justify-center gap-2 rounded-full px-4.5 text-xs font-semibold shadow-md hover:scale-[1.02] active:scale-[0.98] sm:inline-flex"
             >
               <CalendarCheck className="size-3.5 text-white/90" />
@@ -634,7 +634,7 @@ export function SiteHeader({
             <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4">
               {/* Primary Mobile CTA Button */}
               <Link
-                href={localizedHref("/contact", locale)}
+                href={localizedHref("/consultation", locale)}
                 onClick={() => setMobileMenuOpen(false)}
                 className="btn-sunset flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold shadow-md"
               >

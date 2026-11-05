@@ -121,7 +121,7 @@ export function HomePage({
               className="mt-6 flex flex-wrap items-center justify-center gap-3.5"
             >
               <Link
-                href={localizedHref("/contact", locale)}
+                href={localizedHref("/consultation", locale)}
                 className="btn-sunset inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
               >
                 {locale === "bn"
@@ -371,7 +371,7 @@ export function HomePage({
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href={localizedHref("/contact", locale)}
+                  href={localizedHref("/consultation", locale)}
                   className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
                 >
                   {dict.home.leadCta}
@@ -409,7 +409,7 @@ export function HomePage({
                 <p className="mt-2 text-sm leading-6 text-slate-600">
                   {locale === "bn"
                     ? "১ মিনিটে পূরণ করুন · সম্পূর্ণ তথ্য গোপনীয়"
-                    : "Tell us a little about yourself. Your first consultation is free."}
+                    : "Tell us a little about yourself. Your consultation is always free."}
                 </p>
               </div>
 
