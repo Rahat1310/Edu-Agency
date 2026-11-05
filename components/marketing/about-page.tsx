@@ -214,7 +214,7 @@ export function AboutPage({
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
-                  href={localizedHref("/consultation", locale)}
+                  href={localizedHref("/eligibility-quiz", locale)}
                   className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold text-white shadow-md"
                 >
                   {isBn ? "ফ্রি প্রোফাইল মূল্যায়ন" : "Free Profile Assessment"}
@@ -714,17 +714,17 @@ export function AboutPage({
               ? "ভর্তি, স্কলারশিপ ও ভিসার সিদ্ধান্ত সংশ্লিষ্ট বিশ্ববিদ্যালয় ও কর্তৃপক্ষ নেয়। আমাদের কাজ হলো শর্তগুলো বুঝতে এবং আবেদন প্রস্তুত করতে আপনাকে সাহায্য করা।"
               : "Admission, scholarship, and visa decisions are made by the relevant universities and authorities. Our role is to help you understand the requirements and prepare your application."}
           </p>
-          {hasPublishedStories ? (
-            <div className="mt-6 text-center">
-              <Link
-                href={localizedHref("/success-stories", locale)}
-                className="focus-ring inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 text-sm font-semibold text-orange-700 hover:bg-orange-50"
-              >
-                {isBn
-                  ? "শিক্ষার্থীদের অভিজ্ঞতা পড়ুন"
-                  : "Read our students’ stories"}
-              </Link>
-            </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              href={localizedHref("/success-stories", locale)}
+              className="focus-ring inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 text-sm font-semibold text-orange-700 hover:bg-orange-50"
+            >
+              {isBn
+                ? "শিক্ষার্থীদের অভিজ্ঞতা পড়ুন"
+                : "Read our students’ stories"}
+            </Link>
+          </div>
           ) : null}
         </PageShell>
       </section>
@@ -830,7 +830,7 @@ export function AboutPage({
 
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href={localizedHref("/consultation", locale)}
+                  href={localizedHref("/eligibility-quiz", locale)}
                   className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold shadow-md"
                 >
                   {isBn
