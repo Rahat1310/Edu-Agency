@@ -1,14 +1,10 @@
 import Link from "next/link";
+import { AssessmentSections } from "@/components/consultation/assessment-sections";
 import { notFound } from "next/navigation";
 import { eq, desc } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/db";
-import {
-  leads,
-  counselorProfiles,
-  leadActivity,
-  assessmentOutbox,
-} from "@/db/schema";
+import { leads, counselorProfiles, leadActivity } from "@/db/schema";
 import { requireDashboardAccess } from "@/lib/auth-helpers";
 import { statuses } from "@/lib/consultation/schema";
 import {
@@ -16,7 +12,7 @@ import {
   formatAssessmentDate,
   formatAssessmentStatus,
 } from "@/lib/consultation/presentation";
-import { updateAssessment, retryAssessmentNotification } from "./actions";
+import { updateAssessment } from "./actions";
 export default async function LeadDetails({
   params,
 }: {
@@ -27,14 +23,13 @@ export default async function LeadDetails({
   if (!z.uuid().safeParse(id).success) notFound();
   const [lead] = await db.select().from(leads).where(eq(leads.id, id));
   if (!lead) notFound();
-  const [counselors, notes, jobs] = await Promise.all([
+  const [counselors, notes] = await Promise.all([
     db.select().from(counselorProfiles),
     db
       .select()
       .from(leadActivity)
       .where(eq(leadActivity.leadId, id))
       .orderBy(desc(leadActivity.createdAt)),
-    db.select().from(assessmentOutbox).where(eq(assessmentOutbox.leadId, id)),
   ]);
   const input =
     "mt-1 block w-full rounded border border-slate-300 bg-white p-3 text-slate-900";
@@ -149,76 +144,7 @@ export default async function LeadDetails({
         <h2 id="full-assessment-heading" className="text-lg font-semibold">
           Full assessment
         </h2>
-        {sections.map(({ title, rows }) => (
-          <section
-            key={title}
-            className="overflow-hidden rounded-xl border border-slate-200 bg-white"
-          >
-            <h3 className="border-b border-slate-100 bg-slate-50 px-5 py-4 font-semibold text-slate-900">
-              {title}
-            </h3>
-            <dl className="grid gap-x-8 px-5 sm:grid-cols-2">
-              {rows.map(({ label, value }) => (
-                <div
-                  key={label}
-                  className="min-w-0 border-b border-slate-100 py-4"
-                >
-                  <dt className="text-sm text-slate-500">{label}</dt>
-                  <dd className="mt-1 break-words whitespace-pre-wrap text-slate-900">
-                    {Array.isArray(value) ? (
-                      <ul className="list-disc space-y-1 pl-5">
-                        {value.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      value
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-        ))}
-      </section>
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Notification delivery</h2>
-        <p className="text-sm">
-          Accepted means the provider accepted the request; it does not confirm
-          delivery. Check the provider before retrying an uncertain request.
-        </p>
-        {jobs.map((j) => (
-          <div key={j.id} className="rounded border bg-white p-4">
-            <strong>
-              {{
-                email: "Office email",
-                student_email: "Student confirmation email",
-                whatsapp: "Office WhatsApp",
-              }[j.channel] ?? formatAssessmentStatus(j.channel)}
-              :{" "}
-              {j.status === "accepted"
-                ? "Accepted by provider"
-                : formatAssessmentStatus(j.status)}
-            </strong>
-            <p>
-              Attempts: {j.attempts} · Provider ID: {j.providerId ?? "—"}
-            </p>
-            <p>{j.error}</p>
-            {["failed", "review_required", "configuration_required"].includes(
-              j.status,
-            ) && (
-              <form action={retryAssessmentNotification}>
-                <input type="hidden" name="id" value={j.id} />
-                <label className="my-3 block">
-                  <input type="checkbox" required /> I verified configuration
-                  and confirmed this alert needs resending in the provider
-                  dashboard.
-                </label>
-                <button className="underline">Retry notification</button>
-              </form>
-            )}
-          </div>
-        ))}
+        <AssessmentSections sections={sections} />
       </section>
       <section>
         <h2 className="text-lg font-semibold">Private notes & history</h2>

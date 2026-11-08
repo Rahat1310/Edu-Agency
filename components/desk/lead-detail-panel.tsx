@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import { addLeadNote, assignLeadCounselor } from "@/app/admin/leads/actions";
+import { AssessmentSections } from "@/components/consultation/assessment-sections";
 import { AutomationHistory } from "@/components/desk/automation-history";
 import { DeskDrawer } from "@/components/desk/drawer";
 import { DeskErrorState } from "@/components/desk/error-state";
@@ -322,12 +324,47 @@ export function LeadDetailPanel({
                 )}
               </dd>
             </div>
-            <Field label="Source" value={lead.source} />
+            <Field
+              label="Source"
+              value={
+                lead.source === "consultation"
+                  ? "Student assessment form"
+                  : lead.source
+              }
+            />
             <Field label="Created" value={formatLeadDate(lead.createdAt)} />
             <Field label="Message" value={lead.message} />
           </dl>
 
           <QuizFields value={lead.quizAnswers} />
+
+          {lead.assessmentSections.length > 0 && (
+            <section
+              aria-labelledby="desk-assessment-heading"
+              className="space-y-3 text-sm"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3
+                  id="desk-assessment-heading"
+                  className="font-semibold text-[var(--desk-ink)]"
+                >
+                  Student assessment
+                </h3>
+                <Link
+                  href={`/admin/leads/${lead.id}`}
+                  className="text-[var(--desk-accent-2)] underline"
+                >
+                  Open full assessment
+                </Link>
+              </div>
+              {lead.reference && (
+                <p className="text-[var(--desk-ink-muted)]">
+                  Reference: {lead.reference}
+                </p>
+              )}
+              <AssessmentSections sections={lead.assessmentSections} compact />
+            </section>
+          )}
 
           <MessageThread messages={messages} />
 

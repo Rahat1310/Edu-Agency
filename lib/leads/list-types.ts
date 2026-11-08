@@ -1,4 +1,5 @@
 import type { LeadDestinationInterest, LeadStatus } from "@/db/schema";
+import type { AssessmentSection } from "@/lib/consultation/presentation";
 
 export type LeadListRow = {
   id: string;
@@ -16,6 +17,8 @@ export type LeadDetail = LeadListRow & {
   source: string;
   quizAnswers: unknown;
   assignedCounselorId: string | null;
+  reference: string | null;
+  assessmentSections: AssessmentSection[];
 };
 
 export type LeadListResult = {

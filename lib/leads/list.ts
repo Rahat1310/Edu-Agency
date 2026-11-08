@@ -3,7 +3,8 @@ import "server-only";
 import { and, asc, desc, eq, ilike, or, sql } from "drizzle-orm";
 
 import { db } from "@/db";
-import { leads } from "@/db/schema";
+import { leads, counselorProfiles } from "@/db/schema";
+import { buildAssessmentSections } from "@/lib/consultation/presentation";
 import { listDocumentsForLead } from "@/lib/documents/list";
 import type { StudentDocumentRow } from "@/lib/documents/types";
 import { listLeadActivity } from "@/lib/leads/activity";
@@ -41,6 +42,10 @@ const detailColumns = {
   source: leads.source,
   quizAnswers: leads.quizAnswers,
   assignedCounselorId: leads.assignedCounselorId,
+  reference: leads.reference,
+  assessment: leads.assessment,
+  consentAt: leads.consentAt,
+  consentVersion: leads.consentVersion,
 } as const;
 
 function likePattern(query: string): string {
@@ -127,8 +132,20 @@ export type LeadPanel = {
 
 export async function getLeadDetail(id: string): Promise<LeadDetail | null> {
   const [row] = await db
-    .select(detailColumns)
+    .select({
+      ...detailColumns,
+      counselor: {
+        fullName: counselorProfiles.fullName,
+        title: counselorProfiles.title,
+        phone: counselorProfiles.phone,
+        whatsapp: counselorProfiles.whatsapp,
+      },
+    })
     .from(leads)
+    .leftJoin(
+      counselorProfiles,
+      eq(counselorProfiles.id, leads.assignedCounselorId),
+    )
     .where(eq(leads.id, id))
     .limit(1);
 
@@ -136,9 +153,19 @@ export async function getLeadDetail(id: string): Promise<LeadDetail | null> {
     return null;
   }
 
+  const { assessment, consentAt, consentVersion, counselor, ...detail } = row;
   return {
-    ...row,
+    ...detail,
     createdAt: toIso(row.createdAt),
+    assessmentSections: assessment
+      ? buildAssessmentSections({
+          assessment,
+          counselor: counselor ?? undefined,
+          source: row.source,
+          consentAt,
+          consentVersion,
+        })
+      : [],
   };
 }
 
