@@ -3,6 +3,10 @@ import { and, desc, eq, ilike, or, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { leads, counselorProfiles } from "@/db/schema";
 import { countries, statuses } from "@/lib/consultation/schema";
+import {
+  formatAssessmentDate,
+  formatAssessmentStatus,
+} from "@/lib/consultation/presentation";
 export async function AssessmentDashboard({
   params,
 }: {
@@ -89,7 +93,7 @@ export async function AssessmentDashboard({
             key={s}
             className="rounded-xl border border-slate-200 bg-white p-3"
           >
-            <p className="text-xs">{s.replaceAll("_", " ")}</p>
+            <p className="text-xs">{formatAssessmentStatus(s)}</p>
             <strong className="text-2xl">
               {s === "TOTAL"
                 ? counts.reduce((n, r) => n + r.n, 0)
@@ -117,7 +121,9 @@ export async function AssessmentDashboard({
           <select name="status" defaultValue={status} className={input}>
             <option value="">All statuses</option>
             {statuses.map((s) => (
-              <option key={s}>{s}</option>
+              <option key={s} value={s}>
+                {formatAssessmentStatus(s)}
+              </option>
             ))}
           </select>
         </label>
@@ -188,12 +194,10 @@ export async function AssessmentDashboard({
                   {l.assessment?.country}
                   <p>{l.assessment?.degree}</p>
                 </td>
-                <td className="p-4">{l.assessmentStatus}</td>
                 <td className="p-4">
-                  {l.createdAt?.toLocaleString("en-GB", {
-                    timeZone: "Asia/Dhaka",
-                  })}
+                  {formatAssessmentStatus(l.assessmentStatus)}
                 </td>
+                <td className="p-4">{formatAssessmentDate(l.createdAt)}</td>
               </tr>
             ))}
           </tbody>

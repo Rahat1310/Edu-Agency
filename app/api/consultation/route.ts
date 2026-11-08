@@ -7,6 +7,7 @@ import { leads, counselorProfiles } from "@/db/schema";
 import { assessmentSchema, CONSENT_VERSION } from "@/lib/consultation/schema";
 import { defaultCounsellor } from "@/lib/consultation/counsellor";
 import { processAssessmentOutbox } from "@/lib/consultation/notifications";
+import { isEmailConfigured } from "@/lib/email/config";
 import { getRequestIp } from "@/lib/request-ip";
 import { rateLimit } from "@/lib/rate-limit";
 import { verifyTurnstileToken } from "@/lib/turnstile";
@@ -104,7 +105,7 @@ export async function POST(request: Request) {
             "South Korea": "south_korea",
           } as Record<string, string>
         )[a.country] ?? "undecided";
-      // Single SQL statement: assignment and lead insert share one snapshot. Trigger queues both jobs in the same transaction.
+      // Save the lead and optional student email job atomically. The existing trigger queues staff alerts.
       await db.execute(sql`
         WITH assigned AS (
           SELECT p.* FROM counselor_profiles p JOIN users u ON u.id=p.id
@@ -112,7 +113,7 @@ export async function POST(request: Request) {
             AND p.full_name NOT LIKE '%TO BE CONFIGURED%'
             AND p.phone ~ '^[+][1-9][0-9]{6,14}$' AND p.whatsapp ~ '^[+][1-9][0-9]{6,14}$'
           LIMIT 1
-        )
+        ), created AS (
         INSERT INTO leads(name,phone,whatsapp,email,destination_interest,source,status,assessment,reference,submission_key,submission_hash,consent_at,consent_version,assigned_counselor_id)
         VALUES (${a.name},${a.phone},${a.whatsapp || null},${a.email || null},${destination},'consultation','new',
         ${JSON.stringify(a)}::jsonb || jsonb_build_object('assignedCounselor', COALESCE(
@@ -120,7 +121,12 @@ export async function POST(request: Request) {
           ${JSON.stringify(defaultCounsellor)}::jsonb)),
         'SAC-' || to_char(now() AT TIME ZONE 'Asia/Dhaka','YYYY') || '-' || (SELECT lpad(n, greatest(length(n),6), '0') FROM (SELECT nextval('assessment_reference_seq')::text n) seq),
         ${key}::uuid,${hash},now(),${CONSENT_VERSION},
-        (SELECT id FROM assigned)) ON CONFLICT (submission_key) DO NOTHING`);
+        (SELECT id FROM assigned)) ON CONFLICT (submission_key) DO NOTHING
+        RETURNING id
+        )
+        INSERT INTO assessment_outbox(lead_id, channel)
+        SELECT id, 'student_email' FROM created WHERE ${a.email !== ""}
+        ON CONFLICT (lead_id, channel) DO NOTHING`);
     }
     const [lead] = await db
       .select()
@@ -136,17 +142,30 @@ export async function POST(request: Request) {
       : [];
     // Start email delivery after the response. The durable outbox also supports scheduled retries.
     after(async () => {
-      try {
-        await processAssessmentOutbox({ leadId: lead.id, channel: "email" });
-      } catch {
-        console.error(
-          "[consultation] Email processing failed; notification remains queued.",
-        );
-      }
+      await Promise.all(
+        (["email", "student_email"] as const).map(async (channel) => {
+          try {
+            await processAssessmentOutbox({
+              leadId: lead.id,
+              channel,
+            });
+          } catch {
+            console.error(
+              "[consultation] Email processing failed; notification remains queued.",
+            );
+          }
+        }),
+      );
     });
     return json({
       reference: lead.reference,
       firstName: a.name.split(" ")[0],
+      studentEmail: a.email || undefined,
+      emailStatus: !a.email
+        ? "not_provided"
+        : isEmailConfigured() && process.env.NEXT_PUBLIC_APP_URL?.trim()
+          ? "queued"
+          : "unavailable",
       counselor: counselor
         ? {
             fullName: counselor.fullName,

@@ -34,6 +34,37 @@ Missing/inactive staff profile: keep `assigned_counselor_id` empty and save the 
 
 ## Email activation
 
+Brevo is now supported by the shared transactional sender and takes precedence
+when `BREVO_API_KEY` is configured. Set `EMAIL_FROM` to your Brevo-verified sender,
+for example `Study Abroad Consultant <support@your-domain.com>`. Optionally set
+`EMAIL_REPLY_TO` to the mailbox you read in Gmail. Use a Brevo **API key**, not the
+SMTP key used for Gmail's Send as configuration. Gmail can continue handling
+manual replies; the website calls Brevo directly. The example environment file
+contains these settings. No real Brevo message has been sent or verified.
+
+Brevo uses a stable IdempotencyKey for each queued notification, but provider
+deduplication has a limited lifetime. Timeouts, server errors and unreadable
+acceptance responses go to manual review for consultation jobs rather than being
+blindly resent. Accepted means provider acceptance, not confirmed inbox delivery.
+Existing Resend deployments still work when no Brevo key is configured; a failed
+Brevo send does not fall back to another provider. The historical Resend setup
+notes below apply only to that alternative configuration.
+
+Student copies: new submissions with an email address also enqueue a separate
+`student_email` outbox job in the same SQL statement as the lead insert. The
+lead/channel unique index prevents duplicate jobs on submission retries. The
+student and office emails are processed independently after the response and by
+the existing scheduled worker. No database migration is needed; channel is text.
+Older submissions are not backfilled or emailed automatically.
+
+The student email contains the reference and counsellor contact snapshot, without
+academic answers or private admin links. The confirmation page also offers a
+client-side `.txt` download of these details, even without an email address or
+email configuration. It reports queued email as queued, not delivered, and shows
+an unavailable notice when sender configuration is missing. Email remains optional.
+These receipts do not link an anonymous assessment to a student login or add
+account-based retrieval. No confirmation data is stored in browser local storage.
+
 After a successful save, Next.js `after()` starts the current assessment's email job immediately. Email failure does not undo the saved answers or hide the confirmation. The worker claims only that lead's email job, so submitting the form cannot send unrelated queued notifications. Inngest remains the durable retry mechanism for temporary failures and interrupted jobs.
 
 Set `RESEND_API_KEY` and `EMAIL_FROM` to a verified sender/domain in the existing Resend account. Recipient is fixed to `support@studyabroadconsultantbd.com`. The structured plaintext and escaped HTML include the complete assessment, consent/source, Dhaka time, assigned contact and protected admin link. Set a real HTTPS `NEXT_PUBLIC_APP_URL`. Resend idempotency keys are stable per job. Provider request acceptance is recorded as `accepted`, never represented as confirmed inbox delivery. Missing keys record `configuration_required` (not a successful dry run). No actual delivery has been tested with live credentials.

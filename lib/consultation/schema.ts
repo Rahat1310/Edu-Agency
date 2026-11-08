@@ -6,9 +6,6 @@ export const countries = [
   "India",
   "Malaysia",
   "Japan",
-  "Finland",
-  "Greece",
-  "Cyprus",
   "Other",
   "Not Sure Yet",
 ] as const;
@@ -33,6 +30,15 @@ export const tests = [
   "Not Taken",
 ] as const;
 export const CONSENT_VERSION = "assessment-contact-v1";
+export const supportingDocumentOptions = [
+  "Research paper",
+  "Recommendation letter",
+  "Statement of purpose (SOP) letter",
+  "Extracurricular activities",
+  "Other supporting documents",
+  "Police clearance",
+  "Medical certificate",
+] as const;
 export const CONSENT_TEXT =
   "I agree that Study Abroad Consultant will store my submitted information and contact me about counselling, admissions and scholarship enquiries.";
 export function normalizePhone(raw: string) {
@@ -96,6 +102,11 @@ export const assessmentSchema = z
       .max(10),
     hskLevel: z.string().max(2),
     hskScore: z.string().max(3),
+    supportingDocuments: z
+      .array(z.enum(supportingDocumentOptions))
+      .max(supportingDocumentOptions.length)
+      .optional(),
+    otherInformation: z.string().trim().max(2000).optional(),
     publications: z.enum(["", "Yes", "No"]),
     publicationCount: z.string().max(4),
     publicationDetails: z.string().trim().max(2000),
@@ -228,4 +239,6 @@ export type Confirmation = {
   reference: string;
   firstName: string;
   counselor: CounsellorContact | null;
+  studentEmail?: string;
+  emailStatus?: "queued" | "unavailable" | "not_provided";
 };

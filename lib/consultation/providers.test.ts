@@ -53,6 +53,7 @@ test("official template is sent only to supplied office recipient; errors are cl
 test("transactional email uses verified sender and provider idempotency", async () => {
   const original = global.fetch;
   const env = { ...process.env };
+  delete process.env.BREVO_API_KEY;
   process.env.RESEND_API_KEY = "re_mock";
   process.env.EMAIL_FROM = "Test <test@example.com>";
   try {
