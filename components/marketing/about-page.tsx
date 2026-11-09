@@ -715,16 +715,17 @@ export function AboutPage({
               : "Admission, scholarship, and visa decisions are made by the relevant universities and authorities. Our role is to help you understand the requirements and prepare your application."}
           </p>
 
-          <div className="mt-6 text-center">
-            <Link
-              href={localizedHref("/success-stories", locale)}
-              className="focus-ring inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 text-sm font-semibold text-orange-700 hover:bg-orange-50"
-            >
-              {isBn
-                ? "শিক্ষার্থীদের অভিজ্ঞতা পড়ুন"
-                : "Read our students’ stories"}
-            </Link>
-          </div>
+          {hasPublishedStories ? (
+            <div className="mt-6 text-center">
+              <Link
+                href={localizedHref("/success-stories", locale)}
+                className="focus-ring inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 text-sm font-semibold text-orange-700 hover:bg-orange-50"
+              >
+                {isBn
+                  ? "শিক্ষার্থীদের অভিজ্ঞতা পড়ুন"
+                  : "Read our students’ stories"}
+              </Link>
+            </div>
           ) : null}
         </PageShell>
       </section>
