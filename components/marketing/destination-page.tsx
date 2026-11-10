@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChinaDestinationPage } from "@/components/marketing/china-destination-page";
 
 import { DestinationCard } from "@/components/marketing/destination-card";
 import { DestinationIntakeBlock } from "@/components/marketing/destination-intake-block";
@@ -27,6 +28,7 @@ export function DestinationPage({
   dict,
   countdown,
 }: DestinationPageProps) {
+  if (slug === "china") return <ChinaDestinationPage locale={locale} />;
   const destination = DESTINATIONS[slug];
   const copy = dict.destinations[slug];
   const programsHref = localizedHref(`/programs?country=${slug}`, locale);

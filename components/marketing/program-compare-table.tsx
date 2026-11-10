@@ -143,16 +143,22 @@ function CompareTable({
     {
       key: "tuition",
       label: dict.programs.tuitionLabel,
-      values: programs.map((program) => (
-        <TuitionCell
-          key={program.id}
-          locale={locale}
-          copy={copy}
-          amount={program.tuitionAmount}
-          currency={program.tuitionCurrency}
-          rates={rates}
-        />
-      )),
+      values: programs.map((program) =>
+        program.tuitionDisplay ? (
+          <span key={program.id} className="font-semibold">
+            {program.tuitionDisplay}
+          </span>
+        ) : (
+          <TuitionCell
+            key={program.id}
+            locale={locale}
+            copy={copy}
+            amount={program.tuitionAmount}
+            currency={program.tuitionCurrency}
+            rates={rates}
+          />
+        ),
+      ),
     },
     {
       key: "intake",

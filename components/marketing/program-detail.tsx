@@ -1,5 +1,7 @@
 import { MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { getChinaOffer } from "@/lib/china-2027";
+import { ChinaOfferDetail } from "@/components/marketing/china-offer-detail";
 
 import { PageShell } from "@/components/layout/page-shell";
 import { costCalculatorHref } from "@/lib/costs/href";
@@ -29,6 +31,9 @@ export function ProgramDetail({
   locale,
   dict,
 }: ProgramDetailProps) {
+  const chinaOffer = getChinaOffer(program.id);
+  if (chinaOffer)
+    return <ChinaOfferDetail offer={chinaOffer} locale={locale} />;
   const intake = program.intakeMonths?.filter(Boolean) ?? [];
   const countryName = programCountryLabels[program.country];
   const levelName = programLevelLabels[program.level];
@@ -65,9 +70,11 @@ export function ProgramDetail({
           <span className="font-utility rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-bold tracking-wider text-orange-700 uppercase">
             {countryName} · {levelName}
           </span>
-          <span className="font-utility rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-            Verified Partner Campus
-          </span>
+          {program.country !== "china" ? (
+            <span className="font-utility rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+              Verified Partner Campus
+            </span>
+          ) : null}
         </div>
 
         {/* University & Degree Title */}
@@ -77,6 +84,24 @@ export function ProgramDetail({
         <p className="mt-3 text-xl font-bold text-orange-600 sm:text-2xl">
           {program.field}
         </p>
+        {program.country === "china" ? (
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-7 text-amber-950">
+            <p>
+              {locale === "bn"
+                ? "এটি আগের তালিকার তথ্য। এই প্রোগ্রামের ২০২৭-এর ফি বা প্রাপ্যতা যাচাই করা হয়নি।"
+                : "This is an older listing. Its 2027 availability and fees have not been verified."}
+            </p>
+            <Link
+              href={localizedHref("/programs?country=china", locale)}
+              className="focus-ring mt-2 inline-flex min-h-11 items-center font-bold underline"
+            >
+              {locale === "bn"
+                ? "বর্তমান ২০২৭-এর অফার দেখুন"
+                : "Explore the current 2027 offers"}{" "}
+              →
+            </Link>
+          </div>
+        ) : null}
 
         {/* Key Metrics: Tuition & Intake */}
         <dl className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -156,9 +181,9 @@ export function ProgramDetail({
             Want to apply for {program.universityName}?
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
-            Send your HSC/O-Level or Bachelor transcript to our senior counselor.
-            We will calculate your exact scholarship waiver and provide a complete
-            admission roadmap directly on WhatsApp.
+            Send your HSC/O-Level or Bachelor transcript to our senior
+            counselor. We will calculate your exact scholarship waiver and
+            provide a complete admission roadmap directly on WhatsApp.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-4">
             <a

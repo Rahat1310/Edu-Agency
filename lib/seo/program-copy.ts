@@ -1,6 +1,7 @@
 import type { ProgramCountry, ProgramLevel } from "@/db/schema";
 import type { Locale } from "@/lib/i18n/config";
 import type { PublicProgramDetail } from "@/lib/programs-public";
+import { getChinaOffer } from "@/lib/china-2027";
 
 const countryCode: Record<ProgramCountry, string> = {
   china: "CN",
@@ -15,6 +16,8 @@ const levelEn: Record<ProgramLevel, string> = {
   phd: "PhD",
   language: "language",
   diploma: "diploma",
+  foundation: "foundation",
+  foundation_bachelor: "foundation-to-bachelor",
 };
 
 const levelBn: Record<ProgramLevel, string> = {
@@ -23,6 +26,8 @@ const levelBn: Record<ProgramLevel, string> = {
   phd: "পিএইচডি",
   language: "ভাষা",
   diploma: "ডিপ্লোমা",
+  foundation: "ফাউন্ডেশন",
+  foundation_bachelor: "ফাউন্ডেশন থেকে স্নাতক",
 };
 
 const educationalLevel: Record<ProgramLevel, string> = {
@@ -31,6 +36,8 @@ const educationalLevel: Record<ProgramLevel, string> = {
   phd: "Doctoral degree",
   language: "Language program",
   diploma: "Diploma",
+  foundation: "Foundation program",
+  foundation_bachelor: "Foundation and conditional bachelor's pathway",
 };
 
 export type ProgramSeoCopy = {
@@ -53,6 +60,23 @@ export function programSeoCopy(
   program: PublicProgramDetail,
   locale: Locale,
 ): ProgramSeoCopy {
+  const offer = getChinaOffer(program.id);
+  if (offer) {
+    const description =
+      locale === "bn"
+        ? `${offer.university} · ${offer.intake} · ${offer.title}। বিষয়, ফি, স্কলারশিপ ও যোগ্যতার শর্ত দেখুন।`
+        : `${offer.title} at ${offer.university}, ${offer.intake}. ${offer.tuition.display}. Explore majors, scholarship coverage, entry requirements and deadlines.`;
+    return {
+      title: `${offer.university} | ${offer.title} | ${offer.intake}`,
+      description,
+      ogTitle: `${offer.university} · ${offer.intake}`,
+      ogDescription: description,
+      courseName: offer.title,
+      courseDescription: description,
+      countryCode: "CN",
+      educationalLevel: educationalLevel[offer.level],
+    };
+  }
   const code = countryCode[program.country];
   const tuition = `${program.tuitionAmount} ${program.tuitionCurrency}`;
 
@@ -210,12 +234,16 @@ export function programCourseJsonLd(
           "@type": "Thing",
           name: program.field,
         },
-        offers: {
-          "@type": "Offer",
-          category: "Tuition",
-          price: program.tuitionAmount,
-          priceCurrency: program.tuitionCurrency,
-        },
+        ...(!getChinaOffer(program.id)
+          ? {
+              offers: {
+                "@type": "Offer",
+                category: "Tuition",
+                price: program.tuitionAmount,
+                priceCurrency: program.tuitionCurrency,
+              },
+            }
+          : {}),
         hasCourseInstance: {
           "@type": "CourseInstance",
           courseMode: "Onsite",
