@@ -17,7 +17,9 @@ export default async function AdminLeadsPage({ searchParams }: PageProps) {
   const user = await requireDashboardAccess();
   const params = await searchParams;
   if (params.view !== "legacy" && !params.lead)
-    return <AssessmentDashboard params={params} />;
+    return (
+      <AssessmentDashboard params={params} canDelete={user.role === "admin"} />
+    );
   const query = parseLeadListQuery(params);
   const list = await listLeads(query);
   const actorLabel = user.fullName?.trim() || user.email;
@@ -31,7 +33,12 @@ export default async function AdminLeadsPage({ searchParams }: PageProps) {
         Newest first. Open a row for the detail panel. Filters stay in the URL.
       </p>
       <div className="mt-4">
-        <LeadsDesk query={query} list={list} selectedKey={query.lead} />
+        <LeadsDesk
+          query={query}
+          list={list}
+          selectedKey={query.lead}
+          canDelete={user.role === "admin"}
+        />
       </div>
       {query.lead ? (
         <Suspense

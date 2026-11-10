@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LeadDeleteButton } from "@/components/admin/lead-delete-button";
 import { and, desc, eq, ilike, or, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { leads, counselorProfiles } from "@/db/schema";
@@ -9,8 +10,10 @@ import {
 } from "@/lib/consultation/presentation";
 export async function AssessmentDashboard({
   params,
+  canDelete = false,
 }: {
   params: Record<string, string | string[] | undefined>;
+  canDelete?: boolean;
 }) {
   const get = (k: string) =>
     typeof params[k] === "string" ? (params[k] as string).slice(0, 160) : "";
@@ -175,6 +178,7 @@ export async function AssessmentDashboard({
                   {h}
                 </th>
               ))}
+              {canDelete && <th className="p-4">Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -198,6 +202,17 @@ export async function AssessmentDashboard({
                   {formatAssessmentStatus(l.assessmentStatus)}
                 </td>
                 <td className="p-4">{formatAssessmentDate(l.createdAt)}</td>
+                {canDelete && (
+                  <td className="p-4">
+                    <LeadDeleteButton
+                      leadId={l.id}
+                      name={l.name}
+                      returnHref={href(
+                        rows.length === 1 && page > 1 ? page - 1 : page,
+                      )}
+                    />
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

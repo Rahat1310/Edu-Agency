@@ -2,17 +2,19 @@
 
 import { revalidatePath } from "next/cache";
 
-import { requireDashboardAccess } from "@/lib/auth-helpers";
+import { requireDashboardAccess, requireRole } from "@/lib/auth-helpers";
 import { DOCUMENT_REJECT_NOTE_MESSAGE } from "@/lib/documents/constants";
 import { persistDocumentReview } from "@/lib/documents/review";
 import type { StudentDocumentRow } from "@/lib/documents/types";
 import { persistLeadAssignment } from "@/lib/leads/assign";
 import { insertLeadNote } from "@/lib/leads/activity";
+import { persistLeadDeletion } from "@/lib/leads/delete";
 import type { LeadActivityItem } from "@/lib/leads/activity-types";
 import { reviewDocumentSchema } from "@/lib/schemas/document";
 import {
   addLeadNoteSchema,
   assignLeadCounselorSchema,
+  deleteLeadSchema,
 } from "@/lib/schemas/lead";
 import {
   updateVisaApplicationSchema,
@@ -22,6 +24,33 @@ import { validateRequest } from "@/lib/validation-helpers";
 import { ensureVisaApplicationForLead } from "@/lib/visa-applications/ensure";
 import type { DeskVisaApplication } from "@/lib/visa-applications/types";
 import { persistVisaApplicationUpdate } from "@/lib/visa-applications/update";
+
+export type DeleteLeadResult = { ok: true } | { ok: false; message: string };
+
+export async function deleteLead(input: unknown): Promise<DeleteLeadResult> {
+  await requireRole("admin");
+  const parsed = validateRequest(deleteLeadSchema, input);
+
+  if (!parsed.success) {
+    return { ok: false, message: "That lead could not be found." };
+  }
+
+  try {
+    if (!(await persistLeadDeletion(parsed.data.leadId))) {
+      return { ok: false, message: "This lead has already been deleted." };
+    }
+  } catch (error) {
+    console.error("[leads] Failed to delete lead", error);
+    return {
+      ok: false,
+      message: "The lead could not be deleted. Please try again.",
+    };
+  }
+
+  revalidatePath("/admin", "layout");
+  revalidatePath("/portal", "layout");
+  return { ok: true };
+}
 
 export type AddLeadNoteResult =
   { ok: true; activity: LeadActivityItem } | { ok: false; message: string };

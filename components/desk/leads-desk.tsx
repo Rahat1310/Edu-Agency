@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
+import { LeadDeleteButton } from "@/components/admin/lead-delete-button";
+import type { DeskTableColumn } from "@/components/desk/data-table";
 import { DeskDataTable } from "@/components/desk/data-table";
 import { DeskEmptyState } from "@/components/desk/empty-state";
 import { DeskTableSkeleton } from "@/components/desk/skeleton";
@@ -24,8 +26,14 @@ type LeadsDeskProps = {
   query: LeadListQuery;
   list: LeadListResult;
   selectedKey?: string;
+  canDelete?: boolean;
 };
-export function LeadsDesk({ query, list, selectedKey }: LeadsDeskProps) {
+export function LeadsDesk({
+  query,
+  list,
+  selectedKey,
+  canDelete = false,
+}: LeadsDeskProps) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [search, setSearch] = useState(query.q);
@@ -141,7 +149,7 @@ export function LeadsDesk({ query, list, selectedKey }: LeadsDeskProps) {
       </form>
 
       {showLoading ? (
-        <DeskTableSkeleton columns={5} rows={8} />
+        <DeskTableSkeleton columns={canDelete ? 6 : 5} rows={8} />
       ) : showEmpty ? (
         <DeskEmptyState
           title="No leads yet"
@@ -193,6 +201,27 @@ export function LeadsDesk({ query, list, selectedKey }: LeadsDeskProps) {
                 className: "tabular-nums",
                 cell: (row) => formatLeadDate(row.createdAt),
               },
+              ...(canDelete
+                ? ([
+                    {
+                      id: "actions",
+                      header: "Actions",
+                      cell: (row) => (
+                        <LeadDeleteButton
+                          leadId={row.id}
+                          name={row.name}
+                          returnHref={leadsListHref(query, {
+                            lead: selectedKey === row.id ? "" : query.lead,
+                            page:
+                              list.rows.length === 1 && list.page > 1
+                                ? list.page - 1
+                                : list.page,
+                          })}
+                        />
+                      ),
+                    },
+                  ] satisfies DeskTableColumn<LeadListRow>[])
+                : []),
             ]}
             rows={list.rows}
             rowKey={(row) => row.id}

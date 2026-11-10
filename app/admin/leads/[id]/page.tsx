@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LeadDeleteButton } from "@/components/admin/lead-delete-button";
 import { AssessmentSections } from "@/components/consultation/assessment-sections";
 import { notFound } from "next/navigation";
 import { eq, desc } from "drizzle-orm";
@@ -18,7 +19,7 @@ export default async function LeadDetails({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireDashboardAccess();
+  const user = await requireDashboardAccess();
   const { id } = await params;
   if (!z.uuid().safeParse(id).success) notFound();
   const [lead] = await db.select().from(leads).where(eq(leads.id, id));
@@ -54,7 +55,16 @@ export default async function LeadDetails({
       <Link href="/admin/leads" className="underline">
         Back to leads
       </Link>
-      <h1 className="text-2xl font-bold">{lead.reference ?? lead.name}</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-bold">{lead.reference ?? lead.name}</h1>
+        {user.role === "admin" && (
+          <LeadDeleteButton
+            leadId={lead.id}
+            name={lead.name}
+            returnHref="/admin/leads"
+          />
+        )}
+      </div>
       <p>
         {lead.name} · {formatAssessmentDate(lead.createdAt)}
       </p>

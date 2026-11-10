@@ -138,6 +138,10 @@ export const addLeadNoteSchema = z.object({
 
 export type AddLeadNoteInput = z.infer<typeof addLeadNoteSchema>;
 
+export const deleteLeadSchema = z.object({
+  leadId: z.string().uuid(),
+});
+
 export const assignLeadCounselorSchema = z.object({
   leadId: z.string().uuid(),
   counselorId: z.union([z.literal(""), z.string().uuid()]),
