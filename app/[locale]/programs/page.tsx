@@ -46,6 +46,10 @@ export default async function Programs({ params, searchParams }: PageProps) {
     level: first(raw.level),
     field: first(raw.field),
     page: first(raw.page),
+    intake: first(raw.intake),
+    university: first(raw.university),
+    language: first(raw.language),
+    scholarship: first(raw.scholarship),
   });
   const list = await getPublishedProgramPage(filters);
   const selectedIds = parseCompareIds(first(raw.ids));

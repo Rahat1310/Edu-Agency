@@ -43,6 +43,8 @@ export const programLevels = [
   "phd",
   "language",
   "diploma",
+  "foundation",
+  "foundation_bachelor",
 ] as const;
 
 export const tuitionCurrencies = ["CNY", "INR", "MYR", "KRW"] as const;

@@ -20,6 +20,10 @@ export function publicProgramsHref(
   if (filters.field) {
     params.set("field", filters.field);
   }
+  if (filters.intake) params.set("intake", filters.intake);
+  if (filters.university) params.set("university", filters.university);
+  if (filters.language) params.set("language", filters.language);
+  if (filters.scholarship) params.set("scholarship", "1");
 
   if (filters.page && filters.page > 1) {
     params.set("page", String(filters.page));

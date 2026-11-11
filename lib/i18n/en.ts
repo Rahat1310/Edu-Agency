@@ -437,20 +437,20 @@ export const en = {
     china: {
       name: "China",
       adjective: "Chinese",
-      metaTitle: "Study in China from Bangladesh",
+      metaTitle:
+        "Study in China 2027 | Universities, Programs and Scholarships",
       metaDescription:
-        "Explore study options in China, including tuition, scholarships, entry requirements, and visa preparation for Bangladeshi students.",
-      ogTitle: "China: direct admissions and structured visa documentation",
+        "Explore March and September 2027 offers from 24 institutions in China. Compare programs, tuition, scholarships, campus life and requirements for Bangladeshi students.",
+      ogTitle: "Your next campus could be in China",
       ogDescription:
-        "MBBS, engineering, and HSK pathways. JW201/JW202 before the X1 or X2 interview.",
-      tagline:
-        "Direct degree and medical pathways with clear document sequencing.",
+        "Explore universities and scholarship opportunities for March and September 2027. Find a route that fits your results, subject and budget.",
+      tagline: "Explore universities, scholarships and study routes for 2027.",
       overview:
-        "China offers world-class infrastructure, globally accredited medical (MBBS) and engineering degrees, and generous Chinese Government (CSC) and provincial scholarships. Our team ensures your admission notice and JW201/JW202 documentation are in perfect order before embassy submission.",
+        "Compare March and September 2027 language, foundation and degree offers in China. Explore campus life, entry requirements and scholarships, with clear information about tuition, accommodation and award conditions.",
       why: [
         "Generous CSC and university scholarship opportunities that significantly reduce tuition and accommodation expenses.",
         "Explore English-taught medicine and engineering programmes, with guidance on entry requirements and recognition.",
-        "A systematic visa process (X1/X2) with predictable timelines when supported by proper JW form documentation.",
+        "Prepare your admission and visa documents with guidance on the requirements for your selected university and length of study.",
       ],
       visaName: "X1 / X2 student visa",
       visaExplanation:
@@ -466,7 +466,7 @@ export const en = {
       fields: [
         {
           name: "MBBS / clinical medicine",
-          note: "English-medium curricula with international accreditation.",
+          note: "English-taught options; check program recognition and licensing requirements before choosing a medical degree.",
         },
         {
           name: "Engineering & technology",
@@ -823,6 +823,8 @@ export const en = {
       phd: "PhD",
       language: "Language",
       diploma: "Diploma",
+      foundation: "Foundation",
+      foundation_bachelor: "Foundation + Bachelor",
     },
     categories: {
       tuition: "Tuition",

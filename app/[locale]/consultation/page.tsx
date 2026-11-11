@@ -1,7 +1,11 @@
 import { AssessmentForm } from "@/components/consultation/assessment-form";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import { pageMetadata } from "@/lib/seo/page-metadata";
-type Props = { params: Promise<{ locale: string }> };
+import { getChinaOffer } from "@/lib/china-2027";
+type Props = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 export async function generateMetadata({ params }: Props) {
   return pageMetadata({
     title: "Free Student Profile Assessment | Study Abroad Consultant",
@@ -11,13 +15,34 @@ export async function generateMetadata({ params }: Props) {
     locale: await resolveLocale(params),
   });
 }
-export default async function Consultation({ params }: Props) {
+export default async function Consultation({ params, searchParams }: Props) {
   const locale = await resolveLocale(params);
+  const query = await searchParams;
+  const offer =
+    typeof query.programId === "string"
+      ? getChinaOffer(query.programId)
+      : undefined;
+  const china = query.destination === "china" || Boolean(offer);
   return (
     <main className="bg-slate-50 px-4 py-12 sm:py-20">
       <div className="mx-auto max-w-4xl">
         <AssessmentForm
           locale={locale}
+          initialStudyPlan={
+            china
+              ? {
+                  country: "China",
+                  intake: offer
+                    ? offer.intake === "March 2027"
+                      ? "2027-03"
+                      : "2027-09"
+                    : "",
+                  otherInformation: offer
+                    ? `Interested in ${offer.title} at ${offer.university}, ${offer.intake}.`
+                    : "",
+                }
+              : undefined
+          }
           introduction={
             <header className="mb-10 max-w-3xl">
               <p className="mb-3 text-sm font-semibold tracking-wider text-[#92702c] uppercase">

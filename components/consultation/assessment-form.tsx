@@ -102,11 +102,18 @@ const button =
 export function AssessmentForm({
   locale,
   introduction,
+  initialStudyPlan,
 }: {
   locale: Locale;
   introduction?: ReactNode;
+  initialStudyPlan?: Partial<
+    Pick<Assessment, "country" | "intake" | "otherInformation">
+  >;
 }) {
-  const [a, setA] = useState(initial);
+  const [a, setA] = useState<Assessment>(() => ({
+    ...initial,
+    ...initialStudyPlan,
+  }));
   const [step, setStep] = useState(0);
   const [review, setReview] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});

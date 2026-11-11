@@ -51,7 +51,8 @@ export default async function Destination({ params }: PageProps) {
   }
 
   const dict = getDictionary(locale);
-  const countdown = await loadUpcomingCountdownForSlug(slug);
+  const countdown =
+    slug === "china" ? null : await loadUpcomingCountdownForSlug(slug);
 
   return (
     <DestinationPage
