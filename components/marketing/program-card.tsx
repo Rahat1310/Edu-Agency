@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getChinaOffer } from "@/lib/china-2027";
 
 import { ProgramCompareCheckbox } from "@/components/marketing/program-compare";
 import type { Locale } from "@/lib/i18n/config";
@@ -17,6 +18,7 @@ type ProgramCardProps = {
 };
 
 export function ProgramCard({ program, locale, dict }: ProgramCardProps) {
+  const offer = getChinaOffer(program.id);
   const href = localizedHref(`/programs/${program.id}`, locale);
   const intake = program.intakeMonths?.filter(Boolean) ?? [];
 
@@ -36,13 +38,38 @@ export function ProgramCard({ program, locale, dict }: ProgramCardProps) {
         {program.universityName}
       </h2>
       <p className="mt-2 text-sm leading-6 text-slate-600">{program.field}</p>
+      {offer ? (
+        <>
+          <p className="mt-2 text-xs text-slate-500">
+            {offer.location} · {offer.language}
+          </p>
+          <p className="mt-3 text-xs leading-6 font-semibold text-emerald-800">
+            {offer.scholarship.summary}
+          </p>
+          {offer.eligibility !== "eligible" ? (
+            <p
+              className={`mt-2 text-xs leading-6 font-semibold ${offer.eligibility === "unavailable" ? "text-red-700" : "text-amber-800"}`}
+            >
+              {offer.eligibility === "unavailable"
+                ? locale === "bn"
+                  ? "বাংলাদেশি আবেদনকারীদের জন্য উন্মুক্ত নয়"
+                  : "Not open to Bangladeshi applicants"
+                : locale === "bn"
+                  ? "কিছু শর্ত নিশ্চিত করতে হবে"
+                  : "Some conditions need confirmation"}
+            </p>
+          ) : null}
+        </>
+      ) : null}
       <dl className="mt-4 space-y-1 text-sm">
         <div>
           <dt className="sr-only">{dict.programs.tuitionLabel}</dt>
           <dd className="font-bold text-slate-900 tabular-nums">
-            {program.tuitionAmount} {program.tuitionCurrency}
+            {offer
+              ? offer.tuition.display
+              : `${program.tuitionAmount} ${program.tuitionCurrency}`}
           </dd>
-          {program.country === "china" && (
+          {program.country === "china" && !offer && (
             <dd className="mt-1 text-xs leading-5 font-normal text-slate-500">
               {locale === "bn"
                 ? "আনুমানিক বার্ষিক টিউশন · কোর্স ও ভাষা নিশ্চিত করুন"

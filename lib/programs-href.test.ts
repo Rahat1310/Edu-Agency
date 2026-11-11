@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { publicProgramsHref } from "@/lib/programs-href";
 import { parsePublicProgramFilters } from "@/lib/programs-public";
+import { filterChinaOffers, hasChinaOnlyFilters } from "@/lib/china-2027";
 
 test("university selection survives pagination and comparison links in both locales", () => {
   const filters = parsePublicProgramFilters({
@@ -24,6 +25,50 @@ test("university selection survives pagination and comparison links in both loca
     assert.equal(url.searchParams.get("page"), "2");
     assert.equal(url.searchParams.get("ids"), id);
   }
+});
+
+test("non-China university links keep their filter and include database programs", () => {
+  const filters = parsePublicProgramFilters({
+    country: "malaysia",
+    university: "Universiti Malaya",
+  });
+  assert.equal(filters.university, "Universiti Malaya");
+  assert.equal(hasChinaOnlyFilters(filters), false);
+  assert.equal(filterChinaOffers(filters).length, 0);
+});
+
+test("China institution filters accept existing university-name links as well as catalogue IDs", () => {
+  const byName = filterChinaOffers(
+    parsePublicProgramFilters({
+      country: "china",
+      university: "Xiamen University",
+    }),
+  );
+  const byId = filterChinaOffers(
+    parsePublicProgramFilters({
+      country: "china",
+      university: "xiamen-university",
+    }),
+  );
+  assert.ok(byName.length > 0);
+  assert.deepEqual(
+    byName.map((offer) => offer.id),
+    byId.map((offer) => offer.id),
+  );
+});
+
+test("changing country clears the China catalogue institution and intake", () => {
+  const filters = parsePublicProgramFilters({
+    country: "india",
+    university: "xiamen-university",
+    intake: "March 2027",
+    language: "English",
+    scholarship: "1",
+  });
+  assert.equal(filters.university, "");
+  assert.equal(filters.intake, "");
+  assert.equal(filters.language, "");
+  assert.equal(filters.scholarship, false);
 });
 
 test("university names with query characters remain a single filter", () => {

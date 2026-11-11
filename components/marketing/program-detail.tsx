@@ -1,5 +1,7 @@
 import { MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { getChinaOffer } from "@/lib/china-2027";
+import { ChinaOfferDetail } from "@/components/marketing/china-offer-detail";
 
 import { PageShell } from "@/components/layout/page-shell";
 import { costCalculatorHref } from "@/lib/costs/href";
@@ -30,6 +32,9 @@ export function ProgramDetail({
   locale,
   dict,
 }: ProgramDetailProps) {
+  const chinaOffer = getChinaOffer(program.id);
+  if (chinaOffer)
+    return <ChinaOfferDetail offer={chinaOffer} locale={locale} />;
   const intake = program.intakeMonths?.filter(Boolean) ?? [];
   const countryName = programCountryLabels[program.country];
   const levelName = programLevelLabels[program.level];
@@ -82,6 +87,24 @@ export function ProgramDetail({
         <p className="mt-3 text-xl font-bold text-orange-600 sm:text-2xl">
           {program.field}
         </p>
+        {program.country === "china" ? (
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-7 text-amber-950">
+            <p>
+              {locale === "bn"
+                ? "এটি আগের তালিকার তথ্য। এই প্রোগ্রামের ২০২৭-এর ফি বা প্রাপ্যতা যাচাই করা হয়নি।"
+                : "This is an older listing. Its 2027 availability and fees have not been verified."}
+            </p>
+            <Link
+              href={localizedHref("/programs?country=china", locale)}
+              className="focus-ring mt-2 inline-flex min-h-11 items-center font-bold underline"
+            >
+              {locale === "bn"
+                ? "বর্তমান ২০২৭-এর অফার দেখুন"
+                : "Explore the current 2027 offers"}{" "}
+              →
+            </Link>
+          </div>
+        ) : null}
 
         {program.country === "china" && (
           <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-600">

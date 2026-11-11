@@ -1,0 +1,3716 @@
+[
+  {
+    "id": "d9dc4535-5766-5712-bf60-ecdbeb5419c5",
+    "university": "Chongqing Medical University",
+    "universityId": "chongqing-medical-university",
+    "location": "Chongqing",
+    "level": "foundation",
+    "title": "English foundation and CSCA preparation",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "One semester",
+    "tuition": {
+      "amount": 10000,
+      "display": "CNY 10,000 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 2,400 / semester (double); CNY 4,800 (single)"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 450"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / half-year"
+      },
+      {
+        "label": "Residence / visa extension",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "English",
+      "Chinese",
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "CSCA examination preparation"
+    ],
+    "requirements": [
+      "Age 17–20; guardian documents required if under 18.",
+      "At least 70% in the high school exit examination for applicants from Bangladesh.",
+      "MOI is accepted; an English interview is required."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency evidence",
+      "Bank statement showing CNY 30,000"
+    ],
+    "notes": [
+      "Foundation study prepares you for later applications. A bachelor place or scholarship is not guaranteed."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-15",
+        "display": "2027-01-15"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Foundation/1.CQMU-Foundation-English-March-2027.docx"
+  },
+  {
+    "id": "eb1df2bf-a31e-5e69-95d7-a5ebe22380a7",
+    "university": "South China University of Technology",
+    "universityId": "south-china-university-of-technology",
+    "location": "Guangzhou, Guangdong",
+    "level": "foundation",
+    "title": "International foundation program",
+    "intake": "March 2027",
+    "language": "English / Chinese",
+    "duration": "One semester",
+    "tuition": {
+      "amount": 9000,
+      "display": "CNY 9,000 Chinese / 11,500 English per semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "Arrange off-campus housing; cost not specified"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 450, non-refundable"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400–500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Mathematics",
+      "Physics",
+      "English",
+      "Comprehensive Chinese",
+      "Introduction to Computer Science"
+    ],
+    "requirements": [
+      "Age 18–24; under-18 applicants are not accepted.",
+      "Academic result: 75% in the supplied criteria.",
+      "The supplied offer lists IELTS 5.0, TOEFL iBT 3.5 on the updated 1–6 scale, or Duolingo 100 for English-medium entry."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "University application form"
+    ],
+    "notes": [
+      "The supplied offer excludes MOI, while SCUT’s public foundation guide describes MOI exceptions. Confirm the policy for March 2027 and your selected medium, including any HSK requirement for the Chinese-medium track.",
+      "TOEFL introduced a 1–6 reporting scale in January 2026. The 3.5 figure is not a score out of 120; confirm which score format the university will use.",
+      "Bachelor progression depends on meeting the university’s completion and entry requirements.",
+      "A hard copy of the authenticated / apostilled police clearance is requested after pre-admission."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-31",
+        "display": "2026-12-31"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Foundation/2.SCUT-Foundation-March-2027.docx"
+  },
+  {
+    "id": "6f68bffa-9c47-5b45-920f-fd49d35cb2b4",
+    "university": "Jiangsu Normal University",
+    "universityId": "jiangsu-normal-university",
+    "location": "Xuzhou, Jiangsu",
+    "level": "foundation",
+    "title": "CSCA foundation program",
+    "intake": "March 2027",
+    "language": "English / Chinese",
+    "duration": "Half a year",
+    "tuition": {
+      "amount": 7500,
+      "display": "CNY 7,500 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 1,000 / semester, four-bed room; subject to availability"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500, non-refundable"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 500"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "Chinese language and HSK preparation",
+      "Introduction to China"
+    ],
+    "requirements": [
+      "Age 17–27; guardian documents required if under 18 on 1 January 2027.",
+      "At least 60% academic result; MOI accepted.",
+      "Interview required; CSCA is not required to enter this foundation course."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency certificate",
+      "Bank statement showing at least USD 5,000"
+    ],
+    "notes": [
+      "Full tuition must be paid by the pre-admission payment deadline. Dormitories are allocated in payment order."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-15",
+        "display": "2027-01-15"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Foundation/3.JSNU-Foundation-March-2027.docx"
+  },
+  {
+    "id": "9b6f8ab0-60c2-5af9-9d9c-21002d8c0d22",
+    "university": "Hangzhou Dianzi University",
+    "universityId": "hangzhou-dianzi-university",
+    "location": "Hangzhou, Zhejiang",
+    "level": "foundation",
+    "title": "English foundation program",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "One semester",
+    "tuition": {
+      "amount": 6300,
+      "display": "CNY 6,300 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 2,700 / semester, two-person room"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Bachelor scholarship considered after foundation",
+      "details": [
+        "The university determines a bachelor scholarship from the student’s overall performance. No award is promised for the foundation semester."
+      ],
+      "available": true
+    },
+    "majors": [
+      "One-semester English-taught foundation program; subject timetable to be confirmed"
+    ],
+    "requirements": [
+      "Age 18–24. Bangladesh is included in the offer’s eligible countries.",
+      "IELTS 5.0, TOEFL 70, Duolingo 90 or EF SET B1 as listed in the offer.",
+      "An interview may be required. Attendance must exceed 95%, and all course examinations must be passed."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "Progression to September 2027 bachelor study is conditional on meeting all entry and completion requirements.",
+      "Chinese-taught bachelor applicants must also meet HSK 4 with at least 180."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-15",
+        "display": "2026-12-15"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Foundation/4.HDU-Foundation Program-March 2027.doc"
+  },
+  {
+    "id": "81e308a7-25f8-5ba7-8fba-a47f5d2d8f02",
+    "university": "Civil Aviation University of China",
+    "universityId": "civil-aviation-university-of-china",
+    "location": "Tianjin",
+    "level": "foundation_bachelor",
+    "title": "Foundation + English-taught bachelor pathway",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "Half-year foundation + four-year bachelor",
+    "tuition": {
+      "amount": 7500,
+      "display": "CNY 7,500 / foundation semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Foundation accommodation",
+        "value": "CNY 3,000 / semester, double room"
+      },
+      {
+        "label": "Foundation insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400, non-refundable"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400–600"
+      },
+      {
+        "label": "Bachelor tuition before scholarship",
+        "value": "CNY 15,000 / year"
+      },
+      {
+        "label": "Bachelor accommodation",
+        "value": "CNY 6,000 / year"
+      },
+      {
+        "label": "Bachelor insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Bachelor visa fee",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Conditional bachelor scholarship",
+      "details": [
+        "First- or second-class bachelor awards may be considered after foundation study, based on performance and examinations. The latest undergraduate scholarship policy applies."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Chinese",
+      "General Education of International Civil Aviation I and II",
+      "Overview of Chinese Culture",
+      "Mathematics",
+      "Physics",
+      "Further Study and Admission Guidance",
+      "Explore China and Civil Aviation"
+    ],
+    "requirements": [
+      "Age 17–24; at least 60% academic result.",
+      "Guardian certification is required for under-18 applicants under the conditions specified by the university.",
+      "The course lists IELTS above 5.5, TOEFL above 70 or Duolingo above 85. MOI acceptance needs confirmation because the offer’s table and document list differ."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Three-minute English self-introduction video",
+      "Passport valid beyond 31 July 2027"
+    ],
+    "notes": [
+      "Bachelor progression requires passing the foundation graduation examinations. Confirm the HSK and subject requirements for the chosen bachelor course.",
+      "The offer requests a CNY 10,900 payment after pre-admission; obtain a written breakdown and payment deadline.",
+      "The supplied offer does not give a complete bachelor-major list. Confirm the intended major before applying."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-06",
+        "display": "2027-01-06"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Foundation+Bachelor/1.CAUC-0.5+4-English Taught-March 2027.docx"
+  },
+  {
+    "id": "dd9f42db-acc6-57c8-847d-b7e1162d2511",
+    "university": "Shandong University of Technology",
+    "universityId": "shandong-university-of-technology",
+    "location": "Zibo, Shandong",
+    "level": "foundation_bachelor",
+    "title": "Language + chinese-taught bachelor pathway",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "Half-year language + four-year bachelor",
+    "tuition": {
+      "amount": 5000,
+      "display": "CNY 5,000 / language semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Bachelor tuition",
+        "value": "CNY 10,000 / year"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Four-bed room free; CNY 5,200 / year double or CNY 10,400 single"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 470, first year"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Dormitory deposit",
+        "value": "CNY 500, refundable"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Chinese Language and Literature (Business Chinese)",
+      "Business Administration (Business Management)"
+    ],
+    "requirements": [
+      "Age 18–25. Open to Asia and North Africa in the supplied offer.",
+      "CSCA score required for admission to the 4.5-year academic route.",
+      "Without a CSCA report, the initial March stage is language study; September major entry depends on submission of CSCA scores and satisfactory conduct."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "Do not treat the language semester as unconditional bachelor admission.",
+      "Free accommodation is for the four-bed option only."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Foundation+Bachelor/2.SDUT-0.5+4 Bachelor-Chinese-March -2027.docx"
+  },
+  {
+    "id": "93e7c8d4-c2f9-5292-9666-2e8200240498",
+    "university": "Shandong University of Technology",
+    "universityId": "shandong-university-of-technology",
+    "location": "Zibo, Shandong",
+    "level": "foundation_bachelor",
+    "title": "Language + english-taught bachelor pathway",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "Half-year language + four-year bachelor",
+    "tuition": {
+      "amount": 5000,
+      "display": "CNY 5,000 / language semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Bachelor tuition",
+        "value": "CNY 12,000 / year"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Four-bed room free; CNY 5,200 / year double or CNY 10,400 single"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 470, first year"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Dormitory deposit",
+        "value": "CNY 500, refundable"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Mechanical Design,Manufacturing, and Automation",
+      "Computer Science and Technology",
+      "International Economics and Trade",
+      "Civil Engineering",
+      "Electrical Engineering and Automation",
+      "Energy and Power Engineering(Vehicle Engine Specialization)",
+      "English (Business English Specialization)",
+      "Resource Exploration Engineering."
+    ],
+    "requirements": [
+      "Age 18–25. Open to Asia and North Africa in the supplied offer.",
+      "CSCA score required for admission to the 4.5-year academic route.",
+      "Without a CSCA report, the initial March stage is language study; September major entry depends on submission of CSCA scores and satisfactory conduct."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "Do not treat the language semester as unconditional bachelor admission.",
+      "Free accommodation is for the four-bed option only."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Foundation+Bachelor/2.SDUT-0.5+4 Bachelor-English-March -2027.docx"
+  },
+  {
+    "id": "a6a44ceb-9bde-54ab-a0e8-7a96c87842be",
+    "university": "Xingtai University",
+    "universityId": "xingtai-university",
+    "location": "Xingtai, Hebei",
+    "level": "foundation_bachelor",
+    "title": "Language + International Economics and Trade bachelor",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "Half-year language + four-year bachelor",
+    "tuition": {
+      "amount": 4500,
+      "display": "CNY 4,500 / language semester, tuition + housing",
+      "period": "semester",
+      "basis": "combined",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Bachelor tuition + accommodation after scholarship",
+        "value": "CNY 10,400 / year, three-person room"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Reduced tuition and housing package",
+      "details": [
+        "The offer combines tuition and accommodation: CNY 4,500 for the language semester, then CNY 10,400 per bachelor year. It does not state an award duration or renewal policy."
+      ],
+      "available": true
+    },
+    "majors": ["International Economics and Trade"],
+    "requirements": [
+      "Age 18–28.",
+      "The offer indicates country restrictions without naming the eligible countries. Bangladesh eligibility must be confirmed."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Applicant video"
+    ],
+    "notes": [
+      "Confirm progression criteria and award renewal conditions before paying."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-15",
+        "display": "2026-12-15"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Foundation+Bachelor/3.Xingtai University0.5+4 -Bachelor-English-March-2027.docx"
+  },
+  {
+    "id": "133600ca-3865-56f6-9e28-e665421cd1f0",
+    "university": "South China University of Technology",
+    "universityId": "south-china-university-of-technology",
+    "location": "Guangzhou, Guangdong",
+    "level": "language",
+    "title": "General Chinese language",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 8500,
+      "display": "CNY 8,500 / semester; CNY 16,200 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "Off-campus housing; cost not specified"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 450"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400–500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–45. MOI accepted as English-proficiency evidence."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "University application form"
+    ],
+    "notes": [
+      "Authenticated / apostilled police clearance hard copy requested after pre-admission."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-31",
+        "display": "2026-12-31"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/1.SCUT-Chinese Language-March-2027.docx"
+  },
+  {
+    "id": "02ad7794-23fb-5e61-9118-b175bd70d722",
+    "university": "Guizhou Vocational and Technical College of Water Resources and Hydropower",
+    "universityId": "guizhou-vocational-and-technical-college-of-water-resources-and-hydropower",
+    "location": "Guiyang, Guizhou",
+    "level": "language",
+    "title": "One-year Chinese language",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "March 2027–January 2028",
+    "tuition": {
+      "amount": 4800,
+      "display": "CNY 4,800 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Accommodation before scholarship",
+        "value": "CNY 1,200, four-bed room; confirm billing period"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 500"
+      }
+    ],
+    "scholarship": {
+      "summary": "Tuition and housing waiver options",
+      "details": [
+        "Type A: tuition and accommodation waived.",
+        "Type B: tuition reduced to CNY 1,000 / year. Type C: tuition reduced to CNY 2,000 / year.",
+        "Accommodation coverage for Types B and C is not stated; confirm separately."
+      ],
+      "available": true
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 17–25; a Chinese guardian is required if under 18.",
+      "Students already in China cannot apply for this language offer."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "A later diploma application requires HSK 3 above 180; a diploma place is not included in this language admission."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/10.Guizhou Vocational and Technical College of  Water Resources and Hydropower-Chinese Language-March 2027.docx"
+  },
+  {
+    "id": "2b263ec3-04fe-5b34-bfe5-e381f1508644",
+    "university": "Shandong University of Technology",
+    "universityId": "shandong-university-of-technology",
+    "location": "Zibo, Shandong",
+    "level": "language",
+    "title": "Chinese language with later bachelor option",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 5000,
+      "display": "CNY 5,000 / semester; CNY 8,000 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "Four-bed room free; CNY 5,200 / year double or CNY 10,400 single"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 470"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Dormitory deposit",
+        "value": "CNY 500, refundable"
+      }
+    ],
+    "scholarship": {
+      "summary": "Conditional later bachelor award",
+      "details": [
+        "A one-off CNY 5,000 award is described for students admitted to September 2027 bachelor study after submitting CSCA scores and meeting conduct requirements. This is not an automatic language-course tuition discount."
+      ],
+      "available": true
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–30. Applicants from Asia and North Africa may apply.",
+      "No entrance examination or interview specified."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/11.SDUT-Language-March -2027.docx"
+  },
+  {
+    "id": "10a49601-952d-55d9-817c-728adb898785",
+    "university": "South China Agricultural University",
+    "universityId": "south-china-agricultural-university",
+    "location": "Guangzhou, Guangdong",
+    "level": "language",
+    "title": "Chinese language semester",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "March–July 2027",
+    "tuition": {
+      "amount": 8500,
+      "display": "CNY 8,500 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 4,200 / semester, double room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "About CNY 500"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–35. Academic result: 75% in the supplied criteria."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "University application form",
+      "Resume"
+    ],
+    "notes": ["The supplied offer describes an X2 study route."],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/12.South China Agricultural University-Chinese Language-March-2027.docx"
+  },
+  {
+    "id": "d285af5c-1cc1-5eb4-9c00-7e231af84339",
+    "university": "Chang’an University",
+    "universityId": "chang-an-university",
+    "location": "Xi’an, Shaanxi",
+    "level": "language",
+    "title": "Chinese language semester",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "March–July 2027",
+    "tuition": {
+      "amount": 8000,
+      "display": "CNY 8,000 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 600 / month, double room with shared washroom; limited availability"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 16–45. Confirm guardian arrangements for under-18 applicants."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency certificate"
+    ],
+    "notes": [
+      "Students without a dormitory reservation must arrange off-campus housing."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-25",
+        "display": "2026-12-25"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/13.Chang’an University-Language-March 2027.docx"
+  },
+  {
+    "id": "d0e60c81-2011-5031-963e-be09d7b0b04b",
+    "university": "Huazhong University of Science and Technology",
+    "universityId": "huazhong-university-of-science-and-technology",
+    "location": "Wuhan, Hubei",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 8000,
+      "display": "CNY 8,000 / semester; CNY 16,000 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 700–1,400 / month, by room type"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 500 / semester; CNY 1,000 / year"
+      },
+      {
+        "label": "Visa fee",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "About CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 16–35; guardian letter in China required if under 18."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency evidence",
+      "Bank statement of at least USD 3,000"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-31",
+        "display": "2026-12-31"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/14.Huazhong University of Science and Technology- Chinese Language-March 2027.docx"
+  },
+  {
+    "id": "13b36539-57d3-5552-a6dc-37a736b1be62",
+    "university": "Huazhong University of Science and Technology",
+    "universityId": "huazhong-university-of-science-and-technology",
+    "location": "Wuhan, Hubei",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 8000,
+      "display": "CNY 8,000 / semester; CNY 16,000 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 700–1,400 / month, by room type"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 500 / semester; CNY 1,000 / year"
+      },
+      {
+        "label": "Visa fee",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "About CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 16–35; guardian letter in China required if under 18."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency evidence",
+      "Bank statement of at least USD 3,000"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Language/1.Huazhong University of Science and Technology- Chinese Language-September 2027.docx"
+  },
+  {
+    "id": "a61a9223-9f3f-5362-a056-2deb21764171",
+    "university": "Huazhong University of Science and Technology",
+    "universityId": "huazhong-university-of-science-and-technology",
+    "location": "Wuhan, Hubei",
+    "level": "language",
+    "title": "3+3 Chinese language and internship program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "Three months of Chinese + three-month internship",
+    "tuition": {
+      "amount": 5500,
+      "display": "CNY 5,500 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 700–1,400 / month, by room type"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 500 / semester; CNY 1,000 / year"
+      },
+      {
+        "label": "Visa / extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "About CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Elementary Comprehensive Chinese",
+      "Business Chinese",
+      "Chinese Panorama",
+      "Chinese Speaking and Listening"
+    ],
+    "requirements": [
+      "Age 16–35; guardian letter in China required if under 18."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency evidence",
+      "Bank statement of at least USD 3,000",
+      "Work / internship certificate if available"
+    ],
+    "notes": [
+      "The offer describes a three-month company internship. Placement arrangements, visa permission, insurance and any payment must be confirmed; no paid employment is promised."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-31",
+        "display": "2026-12-31"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/15.Huazhong University of Science and Technology- 3+3 program-March 2027.docx"
+  },
+  {
+    "id": "773de2b7-8b8a-57f4-968f-52284e572ee5",
+    "university": "Huazhong University of Science and Technology",
+    "universityId": "huazhong-university-of-science-and-technology",
+    "location": "Wuhan, Hubei",
+    "level": "language",
+    "title": "3+3 Chinese language and internship program",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "Three months of Chinese + three-month internship",
+    "tuition": {
+      "amount": 5500,
+      "display": "CNY 5,500 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 700–1,400 / month, by room type"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 500 / semester; CNY 1,000 / year"
+      },
+      {
+        "label": "Visa / extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "About CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Elementary Comprehensive Chinese",
+      "Business Chinese",
+      "Chinese Panorama",
+      "Chinese Speaking and Listening"
+    ],
+    "requirements": [
+      "Age 16–35; guardian letter in China required if under 18."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency evidence",
+      "Bank statement of at least USD 3,000",
+      "Work / internship certificate if available"
+    ],
+    "notes": [
+      "The offer describes a three-month company internship. Placement arrangements, visa permission, insurance and any payment must be confirmed; no paid employment is promised."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Language/2.Huazhong University of Science and Technology- 3+3 program-September 2027.docx"
+  },
+  {
+    "id": "aec835af-335d-5bf7-a606-a0228e69f81e",
+    "university": "Hechi University",
+    "universityId": "hechi-university",
+    "location": "Hechi, Guangxi",
+    "level": "language",
+    "title": "Chinese language and HSK preparation",
+    "intake": "March 2027",
+    "language": "English / Chinese",
+    "duration": "1.5 years, March 2027–June 2028",
+    "tuition": {
+      "amount": 9000,
+      "display": "CNY 9,000 / 1.5-year program",
+      "period": "program",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 3,000 / 1.5 years, four-bed room"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 1,380 / 1.5 years"
+      },
+      {
+        "label": "Textbooks",
+        "value": "CNY 900 / 1.5 years"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 350"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Zhiyuan award after enrollment",
+      "details": [
+        "Students with results above 80% may apply for CNY 1,000 / year after one semester and payment of all fees. The university decides application timing and selection."
+      ],
+      "available": true
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–25; beginners accepted.",
+      "Country restrictions are indicated but not specified; confirm Bangladesh eligibility."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "Visa extension and residence-permit lines may overlap; confirm the actual charges.",
+      "The course aims to prepare students for HSK 5; achieving that score is not guaranteed."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Language/16.Hechi university-Language-March-2027.docx"
+  },
+  {
+    "id": "b2d489c5-05b3-5121-b283-53de2845a6dd",
+    "university": "Tianjin Foreign Studies University",
+    "universityId": "tianjin-foreign-studies-university",
+    "location": "Tianjin",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "March 2027",
+    "language": "English / Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 6700,
+      "display": "CNY 6,700 / semester; CNY 13,400 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 50 / day, double room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester; CNY 800 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–60.",
+      "Written and oral placement tests determine class level."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "Passport valid beyond 15 February 2028",
+      "Bank statement above CNY 20,000"
+    ],
+    "notes": ["On-campus residence is generally required."],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-31",
+        "display": "2026-12-31"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/17.TFSU-Chinese language-2027-March intake.docx"
+  },
+  {
+    "id": "fcb89b22-0fc2-5ba7-b918-241da11aa02d",
+    "university": "Tongji University",
+    "universityId": "tongji-university",
+    "location": "Shanghai",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 8200,
+      "display": "CNY 8,200 / semester; CNY 16,400 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "About CNY 1,200–1,400 / month, double room; limited places"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester; CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–55 in the main offer; confirm any under-18 exception and guardian documents directly."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Study plan",
+      "Bank statement of at least USD 15,000"
+    ],
+    "notes": ["Off-campus housing may be necessary."],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-20",
+        "display": "2026-12-20"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/2.TONGJI university-Language-March -2027.docx"
+  },
+  {
+    "id": "49fdc09e-89bd-53cb-b914-fffa074f3992",
+    "university": "Shanghai University",
+    "universityId": "shanghai-university",
+    "location": "Shanghai",
+    "level": "language",
+    "title": "Chinese language semester",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester",
+    "tuition": {
+      "amount": 9900,
+      "display": "CNY 9,900 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 40 / 70 / 140 per day by room type; limited places"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester; CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": ["Age 18–60."],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Study plan",
+      "Bank statement of at least USD 15,000"
+    ],
+    "notes": ["Students may need to rent off campus."],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-15",
+        "display": "2027-01-15"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/3.Shanghai university-Language-March -2027.docx"
+  },
+  {
+    "id": "9014f4aa-faba-5c22-8542-494cd17b32d7",
+    "university": "Jiangsu Normal University",
+    "universityId": "jiangsu-normal-university",
+    "location": "Xuzhou, Jiangsu",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "Half a year or one year",
+    "tuition": {
+      "amount": 6250,
+      "display": "CNY 6,250 / semester; CNY 12,500 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 2,000 / academic year, four-bed room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester; CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "About CNY 500 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 800 / year; not listed for half-year course"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "No age limit is stated in the summary table; under-18 applicants need guardian documents.",
+      "At least 60% academic result; MOI accepted. Interview listed."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "English proficiency certificate",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [
+      "Accommodation is allocated by payment order and is not guaranteed. Full tuition is due by the pre-admission payment deadline."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-03",
+        "display": "2027-01-03"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/4.JSNU-Language-2027-March.docx"
+  },
+  {
+    "id": "c566ad95-0c9e-5439-a5e4-6ac23bbf1abe",
+    "university": "Hangzhou Normal University",
+    "universityId": "hangzhou-normal-university",
+    "location": "Hangzhou, Zhejiang",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "Half a year or one year",
+    "tuition": {
+      "amount": 7500,
+      "display": "CNY 7,500 / semester; CNY 15,000 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 75 / person / day double or CNY 60 triple"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Accommodation deposit",
+        "value": "CNY 300"
+      },
+      {
+        "label": "Bedding",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Visa fee",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–25 in the summary table; under-18 applicants are not accepted.",
+      "At least 60% academic result. On-campus residence is required."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "The course is Chinese language study, although its offer labels the teaching language as English. Confirm the classroom support language.",
+      "Spring applications are described as opening in mid-November and closing when full; no fixed closing date is supplied.",
+      "The housing description states that water and electricity are included; there is no shared kitchen."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": null,
+        "display": "Confirm the closing date with your counsellor"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Language/5.HZNU-Chinese Language-March 2027.docx"
+  },
+  {
+    "id": "40e7d50c-e686-55d0-83a1-c5140c21f5f3",
+    "university": "Zhejiang University of Science and Technology",
+    "universityId": "zhejiang-university-of-science-and-technology",
+    "location": "Hangzhou, Zhejiang",
+    "level": "language",
+    "title": "Chinese language semester",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "March–June 2027",
+    "tuition": {
+      "amount": 7500,
+      "display": "CNY 7,500 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 600 / month, double room; minimum one semester"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 500"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Under 35; applicants under 18 need legal guardian documents in China."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form"
+    ],
+    "notes": [
+      "A CNY 1,000 tuition prepayment is requested after admission to secure the place.",
+      "The supplied offer describes X2 study. Accommodation refunds are restricted after check-in."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-10",
+        "display": "2027-01-10"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/6.ZUST-Chinese Language-March-2027.docx"
+  },
+  {
+    "id": "f219ce59-b21c-564b-b821-68a54523f100",
+    "university": "Shenzhen University",
+    "universityId": "shenzhen-university",
+    "location": "Shenzhen, Guangdong",
+    "level": "language",
+    "title": "Chinese language program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 11000,
+      "display": "CNY 11,000 / semester; CNY 22,000 / year",
+      "period": "semester",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "No dormitory provided; arrange off-campus housing"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester; CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 700"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 800 / year for one-year study"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "Age 18–60; under-18 applicants are not accepted.",
+      "Attendance above 80% and satisfactory examination results are required."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Study plan",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [
+      "The university may close applications early when places are filled."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/7.Shenzhen University-Language-March 2027.docx"
+  },
+  {
+    "id": "8f2757ce-5f98-5fa8-97d3-053d1bf130d8",
+    "university": "Harbin Far East Institute of Technology",
+    "universityId": "harbin-far-east-institute-of-technology",
+    "location": "Harbin, Heilongjiang",
+    "level": "language",
+    "title": "One-year Chinese language — restricted offer",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One year",
+    "tuition": {
+      "amount": 7000,
+      "display": "CNY 7,000 / year after scholarship",
+      "period": "year",
+      "basis": "after-scholarship",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 6,000 / year, double room"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Reduced tuition in supplied offer",
+      "details": [
+        "The offer lists CNY 7,000 / year after scholarship; it does not establish availability for Bangladesh."
+      ],
+      "available": true
+    },
+    "majors": ["one year Chinese language"],
+    "requirements": [
+      "NOT OPEN TO BANGLADESHI APPLICANTS under the supplied country list.",
+      "Eligible regions / countries are Central Asia, Mongolia, Pakistan and Indonesia.",
+      "Age 16–25; Chinese guardian required for under-18 applicants. Students already in China and transfers are excluded."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Study plan",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [
+      "Listed for completeness. Ask for an eligible alternative.",
+      "Visa-extension and residence-permit charges need confirmation."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-15",
+        "display": "2026-12-15"
+      }
+    ],
+    "eligibility": "unavailable",
+    "sourceFile": "March 2027/Language/8.Harbin Far East Institute of Technology-Language-March 2027.docx"
+  },
+  {
+    "id": "c85d8d05-0ce0-52e6-804f-776f8d75bf60",
+    "university": "Shandong Normal University",
+    "universityId": "shandong-normal-university",
+    "location": "Jinan, Shandong",
+    "level": "language",
+    "title": "Chinese language scholarship program",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester or one year",
+    "tuition": {
+      "amount": 2000,
+      "display": "CNY 2,000 / semester; CNY 3,500 / year after scholarship",
+      "period": "semester",
+      "basis": "after-scholarship",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 1,500 / semester or CNY 3,000 / year, four-bed room"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Reduced language tuition",
+      "details": [
+        "After-scholarship tuition is CNY 2,000 for a semester or CNY 3,500 for a year. Accommodation and other listed fees are additional."
+      ],
+      "available": true
+    },
+    "majors": ["Chinese language"],
+    "requirements": [
+      "Age 18–30; under-18 applicants are not accepted.",
+      "Open to Central Asia, Mongolia, South Asia and Southeast Asia. Bangladesh falls within the listed South Asia region.",
+      "Students already in China and transfers cannot apply under the supplied offer."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Study plan",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [
+      "Visa-extension and residence-permit lines may overlap; confirm actual charges."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-15",
+        "display": "2026-12-15"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Language/9.SDNU-Language-March 2027.docx"
+  },
+  {
+    "id": "2e120d0e-851b-5a11-8654-d2ff0823884d",
+    "university": "Nanjing Institute of Technology",
+    "universityId": "nanjing-institute-of-technology",
+    "location": "Nanjing, Jiangsu",
+    "level": "master",
+    "title": "English-taught master’s programs",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "Three years",
+    "tuition": {
+      "amount": 24000,
+      "display": "CNY 24,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Accommodation before scholarship",
+        "value": "CNY 2,000 / year, four-person room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Insurance before scholarship",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Dormitory deposit",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Enrollment deposit",
+        "value": "CNY 5,000; credited to tuition, non-refundable"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition, housing, insurance and stipend",
+      "details": [
+        "Types A, B and C waive tuition, CNY 2,000 on-campus accommodation and insurance for one year.",
+        "Monthly stipends for 10 months: Type A CNY 1,000; Type B CNY 500; Type C CNY 300.",
+        "From year two, eligible students may apply for university / Jiangsu awards; continuation is not automatic.",
+        "Withdrawal or transfer for personal reasons requires repayment of scholarship subsidies received."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Mechanical Engineering",
+      "Materials and Chemical Engineering",
+      "Power Engineering",
+      "Electrical Engineering",
+      "Control Engineering",
+      "Electronic Information",
+      "Computer  Technology",
+      "Civil and  Hydraulic  Engineering",
+      "Transportation Engineering",
+      "Resources  and  Environment",
+      "Accounting",
+      "Library  and  Information  Science",
+      "Social  Work",
+      "Design"
+    ],
+    "requirements": [
+      "Age 18–35; bachelor qualification and at least 65% academic result.",
+      "IELTS 6.0, TOEFL iBT 80, Duolingo 100 or equivalent proof; MOI is indicated in the summary table. Confirm the accepted document for your course.",
+      "Interview required. Transfers are not accepted."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Study plan of about 800 words",
+      "Two recommendation letters",
+      "Freshman scholarship application"
+    ],
+    "notes": [
+      "The deadline can close earlier for individual majors when quotas are filled.",
+      "Students already in China should obtain university guidance on visa validity and re-entry requirements."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-15",
+        "display": "2026-12-15"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/Masters/NJIT--Master--English taught-March-2027.docx"
+  },
+  {
+    "id": "684c2eab-ea20-50e1-9e7e-347e2cc90a96",
+    "university": "Xi’an Jiaotong University",
+    "universityId": "xi-an-jiaotong-university",
+    "location": "Xi’an, Shaanxi",
+    "level": "bachelor",
+    "title": "Chinese-taught bachelor’s programs",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "Four years",
+    "tuition": {
+      "amount": 20000,
+      "display": "CNY 20,000–40,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition by category",
+        "value": "CNY 20,000 business / humanities; CNY 22,000 science / engineering; CNY 40,000 arts"
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 8,000–19,000 / year by room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 1,000 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 300–500"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "10%–100% tuition scholarship options",
+      "details": [
+        "Type A 100%; B 75%; C 50%; D 25%; E 10% tuition waiver.",
+        "Medical programs are excluded. Selection is competitive; applicants without an award may receive a self-funded offer."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Materials Science and Engineering — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Mechanical Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "Electrical Engineering and Automation — CSCA: STEM Chinese, Mathematics, Physics",
+      "Energy and Power Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "Environmental Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "Nuclear Engineering and Technology — CSCA: STEM Chinese, Mathematics, Physics",
+      "Energy Storage Science and Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "New Energy Science and Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "Computer Science and Technology — CSCA: STEM Chinese, Mathematics, Physics",
+      "Electronic Science and Technology — CSCA: STEM Chinese, Mathematics, Physics",
+      "Information Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "Software Engineering — CSCA: STEM Chinese, Mathematics, Physics",
+      "Measurement and Control Technology and Instrument — CSCA: STEM Chinese, Mathematics, Physics",
+      "Measurement and Control Technology and Instrument(Intelligent Sensing Engineering) — CSCA: STEM Chinese, Mathematics, Physics",
+      "Chemical Engineering and Technology — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Process Equipment and Control Engineering — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Biomedical Engineering — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Biotechnology — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Applied Chemistry — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Chemistry — CSCA: STEM Chinese, Mathematics, Chemistry",
+      "Science and Technology of Human Settlements(Big Data & Smart City) — CSCA: STEM Chinese, Mathematics, Physics",
+      "Science and Technology of Human Settlements(Structure & Geotechnique Engineering) — CSCA: STEM Chinese, Mathematics, Physics",
+      "Science and Technology of Human Settlements(Built Environment and Energy) — CSCA: STEM Chinese, Mathematics, Physics",
+      "Science and Technology of Human Settlements(Earth & Environment Sciences) — CSCA: STEM Chinese,  Mathematics,  Physics",
+      "Business Administration — CSCA: STEM Chinese,  Mathematics",
+      "Big Data Management and Application — CSCA: STEM Chinese,  Mathematics",
+      "International Economics and Trade — CSCA: STEM/Humanities Chinese, Mathematics (Choose either Humanities Chinese or STEM Chinese)",
+      "Trade Economics — CSCA: STEM/Humanities Chinese, Mathematics (Choose either Humanities Chinese or STEM Chinese)",
+      "Electronic Business — CSCA: STEM/Humanities Chinese, Mathematics (Choose either Humanities Chinese or STEM Chinese)",
+      "Economics — CSCA: STEM/Humanities Chinese, Mathematics (Choose either Humanities Chinese or STEM Chinese)",
+      "Finance — CSCA: STEM/Humanities Chinese, Mathematics (Choose either Humanities Chinese or STEM Chinese)",
+      "Public Finance — CSCA: STEM/Humanities Chinese, Mathematics (Choose either Humanities Chinese or STEM Chinese)",
+      "Public Administration — CSCA: Humanities Chinese, Mathematics",
+      "Law — CSCA: Humanities Chinese, Mathematics",
+      "English — CSCA: Humanities Chinese, Mathematics",
+      "Japanese — CSCA: Humanities Chinese, Mathematics",
+      "French — CSCA: Humanities Chinese, Mathematics",
+      "Network and New Media — CSCA: Humanities Chinese, Mathematics",
+      "Philosophy — CSCA: Humanities Chinese, Mathematics",
+      "Sociology — CSCA: Humanities Chinese, Mathematics",
+      "Chinese Language and Literature — CSCA: Humanities Chinese, Mathematics",
+      "Environmental Design — CSCA: Humanities Chinese, Mathematics",
+      "Calligraphy — CSCA: Humanities Chinese, Mathematics",
+      "Chinese Language (Business Chinese) — CSCA: Humanities Chinese, Mathematics"
+    ],
+    "requirements": [
+      "Under 25; guardian authorization required if under 18.",
+      "HSK 4 at least 180; interview listed.",
+      "CSCA required in Chinese. Subject combinations depend on the major; check the list below."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "CSCA score report",
+      "Teacher / headmaster recommendation",
+      "Study plan of at least 600 words",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [
+      "Applicants for Chinese Language (Business Chinese) or Chinese Language and Literature with HSK 4 at least 180 are described as exempt from the CSCA Humanities Chinese subject. Confirm the exemption for your chosen major."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Bachelor/Chinese Taught/3.XJTU-Bachelor-Chinese-September-2027(1).docx"
+  },
+  {
+    "id": "bc473b72-b81e-5723-a138-99f2b32b6057",
+    "university": "South China University of Technology",
+    "universityId": "south-china-university-of-technology",
+    "location": "Guangzhou, Guangdong",
+    "level": "bachelor",
+    "title": "English-taught bachelor’s programs",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Confirm duration for the selected major",
+    "tuition": {
+      "amount": 26000,
+      "display": "CNY 26,000 or 95,000 / year by major",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition: standard group",
+        "value": "CNY 26,000 / year: International Economics and Trade, Computer Science and Technology, Civil Engineering"
+      },
+      {
+        "label": "Tuition: other listed majors",
+        "value": "CNY 95,000 / year"
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 27 / day double or CNY 12 / day four-person room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 450"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400–500"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Guangdong provincial award",
+      "details": [
+        "CNY 10,000 award listed; selection and payment conditions require confirmation."
+      ],
+      "available": true
+    },
+    "majors": [
+      "International Economics and Trade — CNY 26,000 / year; CSCA: Mathematics",
+      "Computer Science and Technology — CNY 26,000 / year; CSCA: Mathematics, Physics",
+      "Biomedical Engineering — CNY 95,000 / year; CSCA: Mathematics, Physics, Chemistry",
+      "Civil Engineering — CNY 26,000 / year; CSCA: subjects not specified; confirm",
+      "Robot Engineering — CNY 95,000 / year; CSCA: Mathematics, Physics",
+      "Intelligent Manufacturing Engineering — CNY 95,000 / year; CSCA: Mathematics, Physics",
+      "Artificial Intelligence — CNY 95,000 / year; CSCA: Mathematics, Physics",
+      "Data Science — CNY 95,000 / year; CSCA: Mathematics, Physics",
+      "Soft Matter Science and Engineering — CNY 95,000 / year; CSCA: Mathematics, Physics, Chemistry"
+    ],
+    "requirements": [
+      "Age 16–25; at least 75% academic result.",
+      "IELTS 5.5, TOEFL iBT 68 or Duolingo 100. MOI is not accepted.",
+      "CSCA required; major-specific combinations are listed below."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "University application form",
+      "CSCA score report",
+      "Two recommendation letters",
+      "Authenticated / apostilled police clearance"
+    ],
+    "notes": [
+      "The supplied table leaves the Civil Engineering CSCA subject cell blank. Confirm its required subjects."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Bachelor/English Taught/1.SCUT- Bachelor-English-September-2027.docx"
+  },
+  {
+    "id": "c3b082a3-e417-5883-a2f7-4c7f85cf7a27",
+    "university": "Xi’an Jiaotong University",
+    "universityId": "xi-an-jiaotong-university",
+    "location": "Xi’an, Shaanxi",
+    "level": "bachelor",
+    "title": "English-taught engineering, MBBS and BDS",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Four years; MBBS and BDS six years",
+    "tuition": {
+      "amount": null,
+      "display": "Confirm tuition for the selected major",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "MBBS before scholarship",
+        "value": "CNY 60,000 / year in the supplied offer"
+      },
+      {
+        "label": "BDS before scholarship",
+        "value": "CNY 40,000 / year in the supplied offer"
+      },
+      {
+        "label": "Engineering before scholarship",
+        "value": "CNY 180,000 / year is quoted; verify before budgeting"
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 8,000–19,000 / year"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 1,000 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 300–500"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Engineering tuition waivers; medical courses excluded",
+      "details": [
+        "Engineering awards list 10%, 25%, 50%, 75% and full tuition waivers. Confirm the underlying fee and award conditions.",
+        "MBBS and BDS are excluded from the scholarship in this offer."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Intelligent Manufacturing Engineering (Mathematics,Physics)",
+      "Energy and Power Engineering (Mathematics,Physics)",
+      "Electrical Engineering and Automation (Mathematics,Physics)",
+      "Materials Science and Engineering (Mathematics,Chemistry)",
+      "MBBS(6 Years) (Mathematics,Chemistry)",
+      "BDS(6 Years) (Mathematics,Chemistry)"
+    ],
+    "requirements": [
+      "Under 25; guardian authorization required if under 18. Interview listed.",
+      "IELTS 6.0, TOEFL 80 or Duolingo 110 listed. MOI acceptance needs confirmation against the course requirements.",
+      "CSCA required in English; subject combinations depend on the major."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "CSCA score report",
+      "Teacher / headmaster recommendation",
+      "Study plan of at least 600 words",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [
+      "The engineering fee is unusually high. It remains unconfirmed and is not used as the headline price or a cost-calculator input."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "September 2027/Bachelor/English Taught/3.XJTU-Bachelor-English-September-2027(1).docx"
+  },
+  {
+    "id": "a1440b8b-1257-5647-adab-47db683b9263",
+    "university": "Huazhong University of Science and Technology",
+    "universityId": "huazhong-university-of-science-and-technology",
+    "location": "Wuhan, Hubei",
+    "level": "bachelor",
+    "title": "English-taught engineering, pharmacy and MBBS",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Four years; MBBS six years",
+    "tuition": {
+      "amount": 30000,
+      "display": "CNY 30,000–40,000 / year by major",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "MBBS",
+        "value": "CNY 40,000 / year"
+      },
+      {
+        "label": "Pharmacy",
+        "value": "CNY 35,000 / year"
+      },
+      {
+        "label": "Other listed majors",
+        "value": "CNY 30,000 / year"
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 1,200 / month single; CNY 700–900 double"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 1,000 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 300–500"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400"
+      }
+    ],
+    "scholarship": {
+      "summary": "Self-funded offer",
+      "details": [
+        "No scholarship is specified for this course in the supplied offer."
+      ],
+      "available": false
+    },
+    "majors": [
+      "Intelligent Manufacturing Engineering (Maths,Physics)",
+      "Telecommunications Engineering (Maths,Physics)",
+      "Software Engineering (Maths,Physics)",
+      "Pharmacy (Maths,Chemistry)",
+      "Biomedical Engineering (Maths,Chemistry)",
+      "Clinical Medicine (MBBS,6 years) (Maths,Chemistry)"
+    ],
+    "requirements": [
+      "Under 25; guardian documents required if under 18 on 1 September 2027.",
+      "IELTS 5.5, TOEFL 80 or Duolingo 110. The summary table also lists MOI; confirm whether your selected major accepts it.",
+      "CSCA required; Mathematics + Physics for listed engineering courses, Mathematics + Chemistry for Pharmacy, Biomedical Engineering and MBBS."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "CSCA score report",
+      "One- to two-minute self-introduction video",
+      "Bank statement of at least USD 5,000"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Bachelor/English Taught/4.Huazhong University of Science and Technology-Bachelor-English-September 2027.docx"
+  },
+  {
+    "id": "de126f1a-b7ef-5997-aa2a-0caf042d4e6e",
+    "university": "Beijing Normal University, Zhuhai Campus",
+    "universityId": "beijing-normal-university-zhuhai-campus",
+    "location": "Zhuhai, Guangdong",
+    "level": "master",
+    "title": "MBA and MPA — Belt and Road School",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Two years",
+    "tuition": {
+      "amount": null,
+      "display": "Tuition waived for scholarship recipients",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Application",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Accommodation if not covered",
+        "value": "CNY 7,500 / year, double room"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400, first year"
+      },
+      {
+        "label": "Visa fee",
+        "value": "CNY 400 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Full and partial Belt and Road School awards",
+      "details": [
+        "Full award: tuition, accommodation and insurance waived, plus CNY 2,000 / month stipend.",
+        "Partial award: tuition and insurance waived, plus CNY 1,000 / month stipend. Accommodation remains payable.",
+        "Confirm payment months and award continuation conditions. The offer does not specify a self-funded tuition price."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Master of Business Administration (MBA)",
+      "Master of Public Administration (MPA)"
+    ],
+    "requirements": [
+      "Under 50; bachelor degree or above. Interview required.",
+      "Work experience including internship required; one year or longer preferred.",
+      "IELTS Academic 6.0, TOEFL iBT 90 or a prior degree taught entirely in English."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "University application form",
+      "Proof of work / internship experience",
+      "Two professor / associate-professor recommendations",
+      "Study plan / research proposal",
+      "Degree authentication required after interview as directed by the university"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-03-10",
+        "display": "2027-03-10"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Masters/English/2.BNU-Masters-English-September-2027.docx"
+  },
+  {
+    "id": "f4ee9a8f-608d-5c79-bd4b-01551349c1ce",
+    "university": "South China University of Technology",
+    "universityId": "south-china-university-of-technology",
+    "location": "Guangzhou, Guangdong",
+    "level": "bachelor",
+    "title": "Chinese-taught bachelor’s programs",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "Architecture five years; confirm other majors",
+    "tuition": {
+      "amount": 18200,
+      "display": "CNY 18,200–25,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Accommodation",
+        "value": "CNY 27 / day double or CNY 12 / day four-person room"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 450, first year"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 400, first year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Full and partial tuition awards",
+      "details": [
+        "Type A full tuition for four years. Type B half tuition for four years. Type C half tuition for two years.",
+        "Guangdong provincial award lists CNY 10,000 / year. Do not assume awards can be combined.",
+        "Confirm how a four-year award applies to a five-year course."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Architecture（5 Years）",
+      "Business Administration",
+      "Financial Management",
+      "Software Engineering",
+      "Computer Science and Technology",
+      "Electrical Engineering and Automation",
+      "Energy and Power Engineering",
+      "Electronic Information Engineering",
+      "Urban‑Rural Planning",
+      "Accounting",
+      "Public Administration",
+      "Business English",
+      "Information Security",
+      "Economics",
+      "Finance",
+      "Financial Technology",
+      "Tourism Management",
+      "Big Data Management and Application",
+      "Journalism",
+      "Communication",
+      "Advertising",
+      "Law",
+      "Intellectual Property",
+      "Landscape Architecture",
+      "Automation Engineering",
+      "Applied Physics",
+      "Opto‑electronics Information Science and Engineering"
+    ],
+    "requirements": [
+      "HSK 5 with at least 180. CSCA transcript required.",
+      "The supplied offer does not state age and academic-result thresholds for this track; confirm with your counsellor."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "University application form",
+      "HSK score report",
+      "CSCA score report"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-06-30",
+        "display": "2027-06-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Bachelor/Chinese Taught/1.SCUT-Bachelor-Chinese-Sep-2027.doc"
+  },
+  {
+    "id": "445dd5ee-263b-5e45-85c3-42d85b359012",
+    "university": "Xiamen University",
+    "universityId": "xiamen-university",
+    "location": "Xiamen, Fujian",
+    "level": "bachelor",
+    "title": "Chinese-taught bachelor’s programs",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "Four years; Architecture and Preventive Medicine five years",
+    "tuition": {
+      "amount": 24000,
+      "display": "CNY 24,000–26,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition by category",
+        "value": "CNY 24,000 / year humanities / liberal arts; CNY 26,000 / year for the other categories listed in the offer"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Quoted in the supplied offer: Xiang’an CNY 400–1,200 / year and Zhangzhou CNY 120–1,100 / year, in two- to four-bed rooms. Siming CNY 35–65 / person / day, double room. Confirm the assigned campus, room rate and availability before budgeting."
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 600 / year as quoted"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition awards, with stipend option",
+      "details": [
+        "First class: tuition waived plus CNY 2,500 / month for 10 months.",
+        "Second class: tuition waived. Third class: 50% tuition waiver.",
+        "These are first-year awards. Later funding is subject to annual review and current university rules.",
+        "Accommodation is not included in the listed university scholarship benefits. Awards and places are competitive."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Chinese Language (Education) -- (Xiang'an Campus)",
+      "Chinese Language (Trade) -- (Xiang'an Campus)",
+      "Chinese Language (Culture and Media ) -- (Xiang'an Campus)",
+      "Chinese Language -- (Siming Campus)",
+      "Chinese Language and Literature -- (Siming Campus)",
+      "International Politics -- (Siming Campus)",
+      "Communication -- (Siming Campus)",
+      "Advertising -- (Siming Campus)",
+      "International Journalism and Communication -- (Siming Campus)",
+      "Journalism -- (Siming Campus)",
+      "Financial Management -- (Siming Campus)",
+      "Management Science -- (Siming Campus)",
+      "Accounting -- (Siming Campus)",
+      "Auditing -- (Siming Campus)",
+      "Business Administration -- (Siming Campus)",
+      "Human Resource Management -- (Siming Campus)",
+      "Marketing -- (Siming Campus)",
+      "Public Finance -- (Siming Campus)",
+      "Taxation -- (Siming Campus)",
+      "International Economics and Trade -- (Siming Campus)",
+      "Financial Engineering -- (Siming Campus)",
+      "Finance -- (Siming Campus)",
+      "Economics -- (Siming Campus)",
+      "Computer Science and Technology -- (Xiang'an Campus)",
+      "Artificial Intelligence -- (Xiang'an Campus)",
+      "Software Engineering -- (Xiang'an Campus)",
+      "Communication Engineering -- (Xiang'an Campus)",
+      "Urban and Rural Planning -- (Siming Campus)",
+      "Architecture (5 Years) -- (Siming Campus)",
+      "Civil Engineering -- (Siming Campus)",
+      "Chemical Engineering and Technology -- (Siming Campus)",
+      "Chemical Biology -- (Siming Campus)",
+      "Chemistry -- (Siming Campus)",
+      "Chemistry Metrology and Technology -- (Siming Campus)",
+      "Energy Chemistry -- (Siming Campus)",
+      "Art -- (Siming Campus)",
+      "Music Performance -- (Siming Campus)",
+      "Musicology -- (Siming Campus)",
+      "Materials Science and Engineering -- (Siming Campus)",
+      "Theater, Film, and Television Literature -- (Siming Campus)",
+      "Electronic Information Engineering -- (Xiang'an Campus)",
+      "Electronic Information Science and Technology -- (Xiang'an Campus)",
+      "Law -- (Siming Campus)",
+      "Administration Management -- (Siming Campus)",
+      "Politics and Administration -- (Siming Campus)",
+      "Medical Laboratory Technology -- (Xiang'an Campus)",
+      "Preventive Medicine (5 Years) -- (Xiang'an Campus)",
+      "Marine Science -- (Xiang'an Campus)",
+      "Marine Technology -- (Xiang'an Campus)",
+      "Automation -- (Xiang'an Campus)",
+      "Environmental Science -- (Xiang'an Campus)",
+      "Ecology -- (Xiang'an Campus)",
+      "Integrated Circuit Design and Integrated System -- (Xiang'an Campus)",
+      "Microelectronic Science and Technology -- (Xiang'an Campus)",
+      "Archaeology -- (Siming Campus)",
+      "History -- (Siming Campus)",
+      "Energy Storage Science and Engineering -- (Xiang'an Campus)",
+      "New Energy Science and Engineering -- (Xiang'an Campus)",
+      "Anthropology -- (Siming Campus)",
+      "Sociology -- (Siming Campus)",
+      "Biotechnology -- (Xiang'an Campus)",
+      "Biological Science -- (Xiang'an Campus)",
+      "Mathematics and Applied Mathematics -- (Siming Campus)",
+      "Information and Computational Science -- (Siming Campus)",
+      "French -- (Siming Campus)",
+      "Russian -- (Siming Campus)",
+      "German -- (Siming Campus)",
+      "Japanese -- (Siming Campus)",
+      "English -- (Siming Campus)",
+      "Astronomy -- (Siming Campus)",
+      "Physics -- (Siming Campus)",
+      "Pharmacy -- (Xiang'an Campus)",
+      "Philosophy -- (Siming Campus)",
+      "Mechanical Design and Manufacturing and Automation -- (Xiang'an Campus)",
+      "Measuring and Control Technology and Instruments -- (Xiang'an Campus)"
+    ],
+    "requirements": [
+      "Age 18–30; at least 75% academic result in the supplied criteria.",
+      "Interview listed; transfers are not accepted.",
+      "HSK 5 at least 210 for humanities, economics, management, law and arts; HSK 4 at least 210 for science, engineering and medicine. Confirm the major-specific threshold.",
+      "CSCA required. Mathematics is compulsory; additional subjects and the test language must be confirmed for the intended major."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "CSCA score report",
+      "Birth certificate and parents’ ID",
+      "Recommendation letter",
+      "Study plan of at least 800 words",
+      "Bank statement showing at least USD 5,000 and recent three-month transactions"
+    ],
+    "notes": [
+      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "On-campus accommodation is limited; off-campus housing may be necessary.",
+      "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
+      "The offer describes a Professional Chinese test exemption for undergraduate Chinese Language applicants with HSK 4 or higher. Confirm eligibility for the exemption.",
+      "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
+    ],
+    "deadlines": [
+      {
+        "label": "Scholarship application",
+        "date": "2027-04-30",
+        "display": "30 April 2027"
+      },
+      {
+        "label": "Self-funded application",
+        "date": "2027-05-31",
+        "display": "31 May 2027"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Bachelor/Chinese Taught/2.Xiamen University-Bachelor-Chinese-Sep-2027.doc"
+  },
+  {
+    "id": "34e8ccb4-646b-5967-b8dc-5d2aebcc8cdb",
+    "university": "Xiamen University",
+    "universityId": "xiamen-university",
+    "location": "Xiamen, Fujian",
+    "level": "bachelor",
+    "title": "English-taught bachelor’s programs",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Four years; MBBS six years",
+    "tuition": {
+      "amount": 38000,
+      "display": "CNY 38,000–90,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "MBBS / design tuition",
+        "value": "CNY 38,000 / year MBBS; CNY 90,000 / year for the three design majors"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Quoted in the supplied offer: Xiang’an CNY 400–1,200 / year and Zhangzhou CNY 120–1,100 / year, in two- to four-bed rooms. Confirm the assigned campus, room rate and availability before budgeting."
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 600 / year as quoted"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition awards, with stipend option",
+      "details": [
+        "First class: tuition waived plus CNY 2,500 / month for 10 months.",
+        "Second class: tuition waived. Third class: 50% tuition waiver.",
+        "These are first-year awards. Later funding is subject to annual review and current university rules.",
+        "Accommodation is not included in the listed university scholarship benefits. Awards and places are competitive."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Clinical Medicine (MBBS) - Xiang'an Campus",
+      "Environmental Design - Zhangzhou Campus",
+      "Visual Communication Design - Zhangzhou Campus",
+      "Digital Media Art - Zhangzhou Campus"
+    ],
+    "requirements": [
+      "Age 18–30; at least 75% academic result in the supplied criteria.",
+      "Interview listed; transfers are not accepted.",
+      "IELTS 6.0 or TOEFL iBT 80. Do not assume MOI is sufficient: the summary table and document list differ.",
+      "CSCA required. Mathematics is compulsory; additional subjects and the test language must be confirmed for the intended major."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "CSCA score report",
+      "Birth certificate and parents’ ID",
+      "Recommendation letter",
+      "Study plan of at least 800 words",
+      "Bank statement showing at least USD 5,000 and recent three-month transactions"
+    ],
+    "notes": [
+      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "On-campus accommodation is limited; off-campus housing may be necessary.",
+      "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
+      "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
+    ],
+    "deadlines": [
+      {
+        "label": "Scholarship application",
+        "date": "2027-04-30",
+        "display": "30 April 2027"
+      },
+      {
+        "label": "Self-funded application",
+        "date": "2027-05-31",
+        "display": "31 May 2027"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Bachelor/English Taught/2.Xiamen University-Bachelor-English-Sep-2027.doc"
+  },
+  {
+    "id": "501681a7-1384-5ac6-8dd7-480c11f30a92",
+    "university": "Xiamen University",
+    "universityId": "xiamen-university",
+    "location": "Xiamen, Fujian",
+    "level": "master",
+    "title": "Chinese-taught master’s programs",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "Two years in the supplied offer; confirm the chosen major",
+    "tuition": {
+      "amount": 26000,
+      "display": "CNY 26,000–30,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition by category",
+        "value": "CNY 26,000 / year humanities / liberal arts; CNY 30,000 / year for the other categories listed in the offer"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Quoted in the supplied offer: Xiang’an CNY 400–1,200 / year and Zhangzhou CNY 120–1,100 / year, in two- to four-bed rooms. Siming CNY 35–65 / person / day, double room. Confirm the assigned campus, room rate and availability before budgeting."
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 600 / year as quoted"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition awards, with stipend option",
+      "details": [
+        "First class: tuition waived plus CNY 3,000 / month for 10 months.",
+        "Second class: tuition waived. Third class: 50% tuition waiver.",
+        "These are first-year awards. Later funding is subject to annual review and current university rules.",
+        "Accommodation is not included in the listed university scholarship benefits. Awards and places are competitive."
+      ],
+      "available": true
+    },
+    "majors": [
+      "International Chinese Language Education -- (Xiang'an Campus)",
+      "Linguistics and Applied Linguistics -- (Xiang'an Campus)",
+      "Journalism and Communication (Academic Degree) -- (Siming Campus)",
+      "Journalism and Communication (Professional Degree) -- (Siming Campus)",
+      "Finance (Degree of Management) -- (Siming Campus)",
+      "Management Science and Engineering -- (Siming Campus)",
+      "Technology Economics and Management -- (Siming Campus)",
+      "Accounting -- (Siming Campus)",
+      "Auditing -- (Siming Campus)",
+      "Tourism Management -- (Siming Campus)",
+      "Entrepreneurship -- (Siming Campus)",
+      "Corporate Management -- (Siming Campus)",
+      "Marketing -- (Siming Campus)",
+      "Urban and Regional Planning -- (Siming Campus)",
+      "Architecture -- (Siming Campus)",
+      "Marine Engineering -- (Siming Campus)",
+      "Civil Engineering -- (Siming Campus)",
+      "Material Engineering -- (Siming Campus)",
+      "Materials Science and Engineering -- (Siming Campus)",
+      "Computer Science and Technology -- (Siming Campus)",
+      "Software Engineering -- (Siming Campus)",
+      "Drama Film and Television -- (Siming Campus)",
+      "Art Studies -- (Siming Campus)",
+      "Drama Film and Television (Chinese‑Foreign Cooperation) -- (Siming Campus)",
+      "Electronics Science and Technology -- (Xiang'an Campus)",
+      "Opto‑Electronic Information Engineering -- (Xiang'an Campus)",
+      "New‑generation Electronic Information Technology -- (Xiang'an Campus)",
+      "Fiscal and Tax Law -- (Siming Campus)",
+      "Juris Master (for B.Law Students) -- (Siming Campus)",
+      "Juris Master (for Non‑B.Law Students) -- (Siming Campus)",
+      "Legal History -- (Siming Campus)",
+      "Jurisprudence -- (Siming Campus)",
+      "International Law -- (Siming Campus)",
+      "Law of the Sea -- (Siming Campus)",
+      "Environment and Resources Protection Law -- (Siming Campus)",
+      "Economic Law -- (Siming Campus)",
+      "Civil and Commercial Law -- (Siming Campus)",
+      "Procedural Law -- (Siming Campus)",
+      "Constitutional Law and Administrative Law -- (Siming Campus)",
+      "Criminal Law -- (Siming Campus)",
+      "Public Administration -- (Siming Campus)",
+      "Political Science -- (Siming Campus)",
+      "Public Health -- (Xiang'an Campus)",
+      "Public Health and Preventive Medicine -- (Xiang'an Campus)",
+      "Clinical Laboratory Diagnostics -- (Xiang'an Campus)",
+      "Social Medicine and Health Management -- (Xiang'an Campus)",
+      "Biological and Pharmaceutical Engineering -- (Xiang'an Campus)",
+      "Intelligent Instrument and Equipment -- (Xiang'an Campus)",
+      "Translational Medicine -- (Xiang'an Campus)",
+      "Marine Geology -- (Xiang'an Campus)",
+      "Marine Chemistry -- (Xiang'an Campus)",
+      "Ocean Technology and Engineering -- (Xiang'an Campus)",
+      "Marine Biotechnology -- (Xiang'an Campus)",
+      "Marine Biology -- (Xiang'an Campus)",
+      "Marine Physics -- (Xiang'an Campus)",
+      "Environmental Engineering -- (Xiang'an Campus)",
+      "Response to climate change -- (Xiang'an Campus)",
+      "Physical Oceanography -- (Xiang'an Campus)",
+      "Aeronautical and Astronautical Science and Technology -- (Xiang'an Campus)",
+      "Chemical Engineering -- (Siming Campus)",
+      "Chemistry -- (Siming Campus)",
+      "Computer Technology -- (Xiang'an Campus)",
+      "Artificial Intelligence -- (Xiang'an Campus)",
+      "Communication Engineering -- (Xiang'an Campus)",
+      "Informatics and Communication Engineering -- (Xiang'an Campus)",
+      "Area Studies -- (Siming Campus)",
+      "Environmental Management -- (Xiang'an Campus)",
+      "Environmental Science -- (Xiang'an Campus)",
+      "Ecology -- (Xiang'an Campus)",
+      "Fine Art and Calligraphy -- (Siming Campus)",
+      "Design -- (Siming Campus)",
+      "Music -- (Siming Campus)",
+      "Integrated Circuit Engineering -- (Xiang'an Campus)",
+      "Integrated Circuit Science and Engineering -- (Xiang'an Campus)",
+      "Comparative Education -- (Siming Campus)",
+      "Higher Education -- (Siming Campus)",
+      "Educational Development and Governance -- (Siming Campus)",
+      "History of Education -- (Siming Campus)",
+      "Educational Psychology -- (Siming Campus)",
+      "Curriculum and Teaching Methodology -- (Siming Campus)",
+      "Archaeology -- (Siming Campus)",
+      "World History -- (Siming Campus)",
+      "Study of Cultural Relics -- (Siming Campus)",
+      "Chinese History -- (Siming Campus)",
+      "Theory of Marxism -- (Siming Campus)",
+      "Energy Storage -- (Xiang'an Campus)",
+      "Nuclear Engineering -- (Xiang'an Campus)",
+      "Clean Energy Technology -- (Xiang'an Campus)",
+      "Advanced Energy -- (Xiang'an Campus)",
+      "Cognitive Science and Technology -- (Siming Campus)",
+      "Opto‑Electronic Engineering -- (Xiang'an Campus)",
+      "Applied Chemistry -- (Xiang'an Campus)",
+      "Ethnology -- (Siming Campus)",
+      "Anthropology -- (Siming Campus)",
+      "Social Work -- (Siming Campus)",
+      "Demography -- (Siming Campus)",
+      "Sociology -- (Siming Campus)",
+      "Biology -- (Xiang'an Campus)",
+      "Mathematics -- (Siming Campus)",
+      "Statistics -- (Siming Campus)",
+      "Physical Education -- (Siming Campus)",
+      "Translation and Interpreting -- (Siming Campus)",
+      "Foreign Languages and Literatures -- (Siming Campus)",
+      "Astronomy -- (Siming Campus)",
+      "Microelectronics and Solid Electronics -- (Siming Campus)",
+      "Physics -- (Siming Campus)",
+      "Pharmacy -- (Xiang'an Campus)",
+      "Basic Medicine -- (Xiang'an Campus)",
+      "Data Science in Health and Intellectual Medicine -- (Xiang'an Campus)",
+      "Clinical Nursing -- (Xiang'an Campus)",
+      "Clinical Medicine* -- (Xiang'an Campus)",
+      "Neurosciences -- (Xiang'an Campus)",
+      "Pharmacology -- (Xiang'an Campus)",
+      "Integrated Traditional Chinese Medicine and Western Medicine -- (Xiang'an Campus)",
+      "Philosophy -- (Siming Campus)",
+      "Intellectual Property -- (Siming Campus)",
+      "Intellectual Property Law -- (Siming Campus)",
+      "Mechanical Engineering (MEng) -- (Siming Campus)",
+      "Mechanical Engineering -- (Siming Campus)",
+      "Control Engineering -- (Siming Campus)",
+      "Instrument and Meter Engineering -- (Siming Campus)",
+      "Intelligent Instrument -- (Siming Campus)",
+      "Comparative Literature and World Literature -- (Siming Campus)",
+      "Chinese Philology -- (Siming Campus)",
+      "Theory of Literature and Art -- (Siming Campus)",
+      "Ancient Chinese Literature -- (Siming Campus)",
+      "Study of Chinese Classical Text -- (Siming Campus)",
+      "Chinese Modern Contemporary Literature -- (Siming Campus)"
+    ],
+    "requirements": [
+      "Age under 40; at least 75% academic result in the supplied criteria.",
+      "Interview listed; transfers are not accepted.",
+      "HSK 5 at least 210 for humanities, economics, management, law and arts; HSK 4 at least 210 for science, engineering and medicine. Confirm the major-specific threshold."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Two professor / associate-professor recommendation letters",
+      "Study plan of at least 3,000 words as requested in this offer",
+      "Research publications / awards if available",
+      "Birth certificate and parents’ ID",
+      "Bank statement showing at least USD 5,000 and recent three-month transactions"
+    ],
+    "notes": [
+      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "On-campus accommodation is limited; off-campus housing may be necessary.",
+      "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
+      "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
+    ],
+    "deadlines": [
+      {
+        "label": "Scholarship application",
+        "date": "2027-04-30",
+        "display": "30 April 2027"
+      },
+      {
+        "label": "Self-funded application",
+        "date": "2027-05-31",
+        "display": "31 May 2027"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Masters/Chinese/1.Xiamen University-Master-Chinese-Sep-2027.doc"
+  },
+  {
+    "id": "23e7e44b-65b1-5c9a-9068-c73b57e83fe9",
+    "university": "Xiamen University",
+    "universityId": "xiamen-university",
+    "location": "Xiamen, Fujian",
+    "level": "master",
+    "title": "English-taught master’s programs",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Two years in the supplied offer; confirm the chosen major",
+    "tuition": {
+      "amount": 39000,
+      "display": "CNY 39,000–45,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition by category",
+        "value": "CNY 39,000 / year humanities / liberal arts; CNY 45,000 / year for the other categories listed in the offer"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Quoted in the supplied offer: Xiang’an CNY 400–1,200 / year and Zhangzhou CNY 120–1,100 / year, in two- to four-bed rooms. Siming CNY 35–65 / person / day, double room. Confirm the assigned campus, room rate and availability before budgeting."
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 600 / year as quoted"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition awards, with stipend option",
+      "details": [
+        "First class: tuition waived plus CNY 3,000 / month for 10 months.",
+        "Second class: tuition waived. Third class: 50% tuition waiver.",
+        "These are first-year awards. Later funding is subject to annual review and current university rules.",
+        "Accommodation is not included in the listed university scholarship benefits. Awards and places are competitive."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Applied Economics -- (Siming Campus)",
+      "Theoretical Economics -- (Siming Campus)",
+      "Fiscal and Tax Law -- (Siming Campus)",
+      "International Law -- (Siming Campus)",
+      "Civil and Commercial Law -- (Siming Campus)",
+      "Finance (Degree of Management) -- (Siming Campus)",
+      "Accounting -- (Siming Campus)",
+      "International Relations -- (Siming Campus)",
+      "Chemical Engineering and Technology -- (Siming Campus)",
+      "Chemistry -- (Siming Campus)",
+      "Urban and Regional Planning -- (Siming Campus)",
+      "Marine Affairs -- (Xiang'an Campus)",
+      "Environmental Management -- (Xiang'an Campus)",
+      "Biology -- (Xiang'an Campus)",
+      "Design -- (Zhangzhou Campus)"
+    ],
+    "requirements": [
+      "Age under 40; at least 75% academic result in the supplied criteria.",
+      "Interview listed; transfers are not accepted.",
+      "IELTS 6.0 or TOEFL iBT 80. Do not assume MOI is sufficient: the summary table and document list differ."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Two professor / associate-professor recommendation letters",
+      "Study plan of at least 3,000 words as requested in this offer",
+      "Research publications / awards if available",
+      "Birth certificate and parents’ ID",
+      "Bank statement showing at least USD 5,000 and recent three-month transactions"
+    ],
+    "notes": [
+      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "On-campus accommodation is limited; off-campus housing may be necessary.",
+      "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
+      "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
+    ],
+    "deadlines": [
+      {
+        "label": "Scholarship application",
+        "date": "2027-04-30",
+        "display": "30 April 2027"
+      },
+      {
+        "label": "Self-funded application",
+        "date": "2027-05-31",
+        "display": "31 May 2027"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/Masters/English/1.Xiamen University-Master-English-Sep-2027.doc"
+  },
+  {
+    "id": "a4271a42-5b57-58bf-9892-48f312dbd2f8",
+    "university": "Xiamen University",
+    "universityId": "xiamen-university",
+    "location": "Xiamen, Fujian",
+    "level": "phd",
+    "title": "Chinese-taught doctoral programs",
+    "intake": "September 2027",
+    "language": "Chinese",
+    "duration": "Four years",
+    "tuition": {
+      "amount": 30000,
+      "display": "CNY 30,000–34,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition by category",
+        "value": "CNY 30,000 / year humanities / liberal arts; CNY 34,000 / year for the other categories listed in the offer"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Quoted in the supplied offer: Xiang’an CNY 400–1,200 / year and Zhangzhou CNY 120–1,100 / year, in two- to four-bed rooms. Siming CNY 35–65 / person / day, double room. Confirm the assigned campus, room rate and availability before budgeting."
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 600 / year as quoted"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition awards, with stipend option",
+      "details": [
+        "First class: tuition waived plus CNY 3,500 / month for 10 months.",
+        "Second class: tuition waived. Third class: 50% tuition waiver.",
+        "These are first-year awards. Later funding is subject to annual review and current university rules.",
+        "Accommodation is not included in the listed university scholarship benefits. Awards and places are competitive."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Fiscal and Tax Law -- (Siming Campus)",
+      "Jurisprudence -- (Siming Campus)",
+      "International Law -- (Siming Campus)",
+      "Law of the Sea -- (Siming Campus)",
+      "Environment and Resources Protection Law -- (Siming Campus)",
+      "Economic Law -- (Siming Campus)",
+      "Civil and Commercial Law -- (Siming Campus)",
+      "Procedural Law -- (Siming Campus)",
+      "Constitutional Law and Administrative Law -- (Siming Campus)",
+      "Criminal Law -- (Siming Campus)",
+      "Finance (Degree of Management) -- (Siming Campus)",
+      "Management Science and Engineering -- (Siming Campus)",
+      "Technology Economics and Management -- (Siming Campus)",
+      "Accounting -- (Siming Campus)",
+      "Tourism Management -- (Siming Campus)",
+      "Entrepreneurship -- (Siming Campus)",
+      "Corporate Management -- (Siming Campus)",
+      "Marketing -- (Siming Campus)",
+      "Material Engineering -- (Siming Campus)",
+      "Chemical Engineering -- (Siming Campus)",
+      "Analytical Chemistry -- (Siming Campus)",
+      "Chemistry and Physics of Polymers -- (Siming Campus)",
+      "Chemical Biology -- (Siming Campus)",
+      "Nano‑materials Chemistry -- (Siming Campus)",
+      "Energy Chemistry -- (Siming Campus)",
+      "Inorganic Chemistry -- (Siming Campus)",
+      "Physical Chemistry -- (Siming Campus)",
+      "Organic Chemistry -- (Siming Campus)",
+      "Computer Technology -- (Xiang'an Campus)",
+      "Computer Science and Technology -- (Xiang'an Campus)",
+      "Artificial Intelligence -- (Xiang'an Campus)",
+      "Communication Engineering -- (Xiang'an Campus)",
+      "Informatics and Communication Engineering -- (Xiang'an Campus)",
+      "Comparative Education -- (Siming Campus)",
+      "Higher Education -- (Siming Campus)",
+      "Educational Development and Governance -- (Siming Campus)",
+      "History of Education -- (Siming Campus)",
+      "Curriculum and Teaching Methodology -- (Siming Campus)",
+      "French Language and Literature -- (Siming Campus)",
+      "German Language and Literature -- (Siming Campus)",
+      "Russian Language and Literature -- (Siming Campus)",
+      "Foreign Linguistics and Applied Linguistics -- (Siming Campus)",
+      "English Language and Literature -- (Siming Campus)",
+      "Comparative Literature and World Literature -- (Siming Campus)",
+      "Chinese Philology -- (Siming Campus)",
+      "Theory of Literature and Art -- (Siming Campus)",
+      "Linguistics and Applied Linguistics -- (Siming Campus)",
+      "Ancient Chinese Literature -- (Siming Campus)",
+      "Chinese Modern Contemporary Literature -- (Siming Campus)",
+      "Materials Science and Engineering -- (Siming Campus)",
+      "Drama Film and Television -- (Siming Campus)",
+      "Art Studies -- (Siming Campus)",
+      "Electronics Science and Technology -- (Xiang'an Campus)",
+      "Opto‑Electronic Information Engineering -- (Xiang'an Campus)",
+      "Social Security -- (Siming Campus)",
+      "Land Resource Management -- (Siming Campus)",
+      "Administration Management -- (Siming Campus)",
+      "Emergency Management -- (Siming Campus)",
+      "Political Theory -- (Siming Campus)",
+      "Maternal,Child and Adolescent Health -- (Xiang'an Campus)",
+      "Public Health -- (Xiang'an Campus)",
+      "Occupational and Environmental Health -- (Xiang'an Campus)",
+      "Clinical Laboratory Diagnostics -- (Xiang'an Campus)",
+      "Epidemiology and Health Statistics -- (Xiang'an Campus)",
+      "Biochemistry and Molecular Biology -- (Xiang'an Campus)",
+      "Biological and Pharmaceutical Engineering -- (Xiang'an Campus)",
+      "Hygiene Toxicology -- (Xiang'an Campus)",
+      "Intelligent Instrument and Equipment -- (Xiang'an Campus)",
+      "Translational Medicine -- (Xiang'an Campus)",
+      "Public Policy -- (Siming Campus)",
+      "Cognition and Public Service -- (Siming Campus)",
+      "Marine Geology -- (Xiang'an Campus)",
+      "Marine Chemistry -- (Xiang'an Campus)",
+      "Marine Biotechnology -- (Xiang'an Campus)",
+      "Marine Biology -- (Xiang'an Campus)",
+      "Marine Physics -- (Xiang'an Campus)",
+      "Response to climate change -- (Xiang'an Campus)",
+      "Physical Oceanography -- (Xiang'an Campus)",
+      "Aeronautical and Astronautical Science and Technology -- (Xiang'an Campus)",
+      "Environmental Engineering -- (Xiang'an Campus)",
+      "Environmental Management -- (Xiang'an Campus)",
+      "Environmental Science -- (Xiang'an Campus)",
+      "Ecology -- (Xiang'an Campus)",
+      "Integrated Circuit Engineering -- (Xiang'an Campus)",
+      "Integrated Circuit Science and Engineering -- (Xiang'an Campus)",
+      "Architecture -- (Siming Campus)",
+      "Structural Engineering and Disaster Mitigation -- (Siming Campus)",
+      "Archaeology -- (Siming Campus)",
+      "World History -- (Siming Campus)",
+      "Chinese History -- (Siming Campus)",
+      "Basic Principles of Marxism -- (Siming Campus)",
+      "Research on the Sinicization of Marxism -- (Siming Campus)",
+      "Education in Ideology and Politics -- (Siming Campus)",
+      "Research on Basic Issues in Chinese Modern History -- (Siming Campus)",
+      "Area Studies -- (Siming Campus)",
+      "Energy Storage -- (Xiang'an Campus)",
+      "Nuclear Engineering -- (Xiang'an Campus)",
+      "Clean Energy Technology -- (Xiang'an Campus)",
+      "Advanced Energy -- (Xiang'an Campus)",
+      "Cognitive Science and Technology -- (Siming Campus)",
+      "Opto‑Electronic Engineering -- (Xiang'an Campus)",
+      "Applied Chemistry -- (Xiang'an Campus)",
+      "Anthropology -- (Siming Campus)",
+      "Social Work -- (Siming Campus)",
+      "Demography -- (Siming Campus)",
+      "Sociology -- (Siming Campus)",
+      "Zoology -- (Xiang'an Campus)",
+      "Developmental Biology -- (Xiang'an Campus)",
+      "Microbiology -- (Xiang'an Campus)",
+      "Cell Biology -- (Xiang'an Campus)",
+      "Genetics -- (Xiang'an Campus)",
+      "Botany -- (Xiang'an Campus)",
+      "Probability Theory and Mathematical Statistics -- (Siming Campus)",
+      "Fundamental Mathematics -- (Siming Campus)",
+      "Computational Mathematics -- (Siming Campus)",
+      "Statistics -- (Siming Campus)",
+      "Applied Mathematics -- (Siming Campus)",
+      "Astrophysics and Cosmology -- (Siming Campus)",
+      "Optics -- (Siming Campus)",
+      "Theoretical Physics -- (Siming Campus)",
+      "Quantum Science and Technology -- (Siming Campus)",
+      "Condensed Matter Physics -- (Siming Campus)",
+      "Biophysics and Soft Condensed Matter -- (Siming Campus)",
+      "Microelectronics and Solid Electronics -- (Siming Campus)",
+      "Communication -- (Siming Campus)",
+      "Advertising -- (Siming Campus)",
+      "Journalism -- (Siming Campus)",
+      "Pharmacy -- (Xiang'an Campus)",
+      "Pediatrics -- (Xiang'an Campus)",
+      "Otorhinolaryngology -- (Xiang'an Campus)",
+      "Radiological Imaging -- (Xiang'an Campus)",
+      "Radiation Oncology -- (Xiang'an Campus)",
+      "Gynecology -- (Xiang'an Campus)",
+      "Nuclear Medicine -- (Xiang'an Campus)",
+      "Basic Medicine -- (Xiang'an Campus)",
+      "Emergency Medicine -- (Xiang'an Campus)",
+      "Data Science in Health and Intellectual Medicine -- (Xiang'an Campus)",
+      "Rehabilitation Medicine and Physical Therapy -- (Xiang'an Campus)",
+      "Anesthesiology -- (Xiang'an Campus)",
+      "Internal Medicine -- (Xiang'an Campus)",
+      "General Practice -- (Xiang'an Campus)",
+      "Neurology -- (Xiang'an Campus)",
+      "Surgery -- (Xiang'an Campus)",
+      "Ophthalmology -- (Xiang'an Campus)",
+      "Imagining and Nuclear Medicine -- (Xiang'an Campus)",
+      "Sports Medicine -- (Xiang'an Campus)",
+      "Oncology -- (Xiang'an Campus)",
+      "Critical Care Medicine -- (Xiang'an Campus)",
+      "Philosophy -- (Siming Campus)",
+      "Intellectual Property Law -- (Siming Campus)",
+      "Vehicle Engineering -- (Siming Campus)",
+      "Mechatronic Engineering -- (Siming Campus)",
+      "Mechanical Design and Theory -- (Siming Campus)",
+      "Mechanical Manufacture and Automation -- (Siming Campus)",
+      "Control Engineering -- (Siming Campus)",
+      "Intelligent Instrument -- (Siming Campus)"
+    ],
+    "requirements": [
+      "Age under 45; at least 75% academic result in the supplied criteria.",
+      "Interview listed; transfers are not accepted.",
+      "HSK 5 at least 210 for humanities, economics, management, law and arts; HSK 4 at least 210 for science, engineering and medicine. Confirm the major-specific threshold."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Two professor / associate-professor recommendation letters",
+      "Study plan of at least 3,000 words as requested in this offer",
+      "Research publications / awards if available",
+      "Birth certificate and parents’ ID",
+      "Supervisor acceptance letter if available",
+      "Bank statement showing at least USD 5,000 and recent three-month transactions"
+    ],
+    "notes": [
+      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "On-campus accommodation is limited; off-campus housing may be necessary.",
+      "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
+      "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
+    ],
+    "deadlines": [
+      {
+        "label": "Scholarship application",
+        "date": "2027-04-30",
+        "display": "30 April 2027"
+      },
+      {
+        "label": "Self-funded application",
+        "date": "2027-05-31",
+        "display": "31 May 2027"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/PhD/Chinese/1.Xiamen University-PhD-Chinese-Sep-2027.doc"
+  },
+  {
+    "id": "6f31dcb2-48e2-5598-a402-0ba015cdb1cd",
+    "university": "Xiamen University",
+    "universityId": "xiamen-university",
+    "location": "Xiamen, Fujian",
+    "level": "phd",
+    "title": "English-taught doctoral programs",
+    "intake": "September 2027",
+    "language": "English",
+    "duration": "Four years",
+    "tuition": {
+      "amount": 42000,
+      "display": "CNY 42,000–55,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition by category",
+        "value": "CNY 42,000 / year humanities / liberal arts; CNY 55,000 / year for the other categories listed in the offer"
+      },
+      {
+        "label": "Accommodation",
+        "value": "Quoted in the supplied offer: Xiang’an CNY 400–1,200 / year and Zhangzhou CNY 120–1,100 / year, in two- to four-bed rooms. Siming CNY 35–65 / person / day, double room. Confirm the assigned campus, room rate and availability before budgeting."
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 600 / year as quoted"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition awards, with stipend option",
+      "details": [
+        "First class: tuition waived plus CNY 3,500 / month for 10 months.",
+        "Second class: tuition waived. Third class: 50% tuition waiver.",
+        "These are first-year awards. Later funding is subject to annual review and current university rules.",
+        "Accommodation is not included in the listed university scholarship benefits. Awards and places are competitive."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Applied Economics -- (Siming Campus)",
+      "Theoretical Economics -- (Siming Campus)",
+      "Finance (Degree of Management) -- (Siming Campus)",
+      "Accounting -- (Siming Campus)",
+      "International Law -- (Siming Campus)",
+      "Marine Affairs -- (Xiang'an Campus)",
+      "Electronics Science and Technology -- (Xiang'an Campus)",
+      "Marine Geology -- (Xiang'an Campus)",
+      "Marine Chemistry -- (Xiang'an Campus)",
+      "Marine Biotechnology -- (Xiang'an Campus)",
+      "Marine Biology -- (Xiang'an Campus)",
+      "Marine Physics -- (Xiang'an Campus)",
+      "Response to climate change -- (Xiang'an Campus)",
+      "Physical Oceanography -- (Xiang'an Campus)",
+      "Chemical Engineering and Technology -- (Siming Campus)",
+      "Physical Chemistry -- (Siming Campus)",
+      "Environmental Engineering -- (Xiang'an Campus)",
+      "Environmental Management -- (Xiang'an Campus)",
+      "Environmental Science -- (Xiang'an Campus)",
+      "Ecology -- (Xiang'an Campus)",
+      "Higher Education -- (Siming Campus)",
+      "Zoology -- (Xiang'an Campus)",
+      "Biochemistry and Molecular Biology -- (Xiang'an Campus)",
+      "Cell Biology -- (Xiang'an Campus)",
+      "Genetics -- (Xiang'an Campus)",
+      "Probability Theory and Mathematical Statistics -- (Siming Campus)",
+      "Fundamental Mathematics -- (Siming Campus)",
+      "Computational Mathematics -- (Siming Campus)",
+      "Statistics -- (Siming Campus)",
+      "Applied Mathematics -- (Siming Campus)",
+      "Foreign Linguistics and Applied Linguistics -- (Siming Campus)",
+      "English Language and Literature -- (Siming Campus)",
+      "Intellectual Property Law -- (Siming Campus)"
+    ],
+    "requirements": [
+      "Age under 45; at least 75% academic result in the supplied criteria.",
+      "Interview listed; transfers are not accepted.",
+      "IELTS 6.0 or TOEFL iBT 80. Do not assume MOI is sufficient: the summary table and document list differ."
+    ],
+    "documents": [
+      "Passport and recent photograph",
+      "Highest academic certificate and transcript",
+      "Medical examination report",
+      "Police clearance / non-criminal record",
+      "Financial support evidence / bank statement",
+      "University application form",
+      "Two professor / associate-professor recommendation letters",
+      "Study plan of at least 3,000 words as requested in this offer",
+      "Research publications / awards if available",
+      "Birth certificate and parents’ ID",
+      "Supervisor acceptance letter if available",
+      "Bank statement showing at least USD 5,000 and recent three-month transactions"
+    ],
+    "notes": [
+      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "On-campus accommodation is limited; off-campus housing may be necessary.",
+      "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
+      "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
+    ],
+    "deadlines": [
+      {
+        "label": "Scholarship application",
+        "date": "2027-04-30",
+        "display": "30 April 2027"
+      },
+      {
+        "label": "Self-funded application",
+        "date": "2027-05-31",
+        "display": "31 May 2027"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "September 2027/PhD/English/1.Xiamen University-PhD-English-Sep-2027.doc"
+  }
+]

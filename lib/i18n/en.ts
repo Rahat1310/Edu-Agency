@@ -437,16 +437,16 @@ export const en = {
     china: {
       name: "China",
       adjective: "Chinese",
-      metaTitle: "Study in China from Bangladesh",
+      metaTitle:
+        "Study in China 2027 | Universities, Programs and Scholarships",
       metaDescription:
-        "Explore study options in China, including tuition, scholarships, entry requirements, and visa preparation for Bangladeshi students.",
-      ogTitle: "China: direct admissions and structured visa documentation",
+        "Explore March and September 2027 offers from 24 institutions in China. Compare programs, tuition, scholarships, campus life and requirements for Bangladeshi students.",
+      ogTitle: "Your next campus could be in China",
       ogDescription:
-        "Compare universities, scholarships, language requirements and X1/X2 visa preparation for study in China.",
-      tagline:
-        "Direct degree and medical pathways with clear document sequencing.",
+        "Explore universities and scholarship opportunities for March and September 2027. Find a route that fits your results, subject and budget.",
+      tagline: "Explore universities, scholarships and study routes for 2027.",
       overview:
-        "Explore Chinese universities for engineering, medicine, business, research and language study. We help you compare program requirements, teaching language, tuition and scholarship routes, then prepare an application around your academic background and budget.",
+        "Compare March and September 2027 language, foundation and degree offers in China. Explore campus life, entry requirements and scholarships, with clear information about tuition, accommodation and award conditions.",
       why: [
         "Competitive CSC, provincial and university scholarships, with coverage and eligibility that vary by program.",
         "Explore English-taught medicine and engineering programmes, with guidance on entry requirements and recognition.",
@@ -823,6 +823,8 @@ export const en = {
       phd: "PhD",
       language: "Language",
       diploma: "Diploma",
+      foundation: "Foundation",
+      foundation_bachelor: "Foundation + Bachelor",
     },
     categories: {
       tuition: "Tuition",

@@ -1,4 +1,8 @@
-import type { ProgramCountry, ProgramLevel, TuitionCurrency } from "@/db/schema";
+import type {
+  ProgramCountry,
+  ProgramLevel,
+  TuitionCurrency,
+} from "@/db/schema";
 import { intakeMonths } from "@/lib/schemas/program";
 
 export const programCountryLabels: Record<ProgramCountry, string> = {
@@ -14,6 +18,8 @@ export const programLevelLabels: Record<ProgramLevel, string> = {
   phd: "PhD",
   language: "Language",
   diploma: "Diploma",
+  foundation: "Foundation",
+  foundation_bachelor: "Foundation + Bachelor",
 };
 
 export const tuitionCurrencyLabels: Record<TuitionCurrency, string> = {

@@ -143,16 +143,22 @@ function CompareTable({
     {
       key: "tuition",
       label: dict.programs.tuitionLabel,
-      values: programs.map((program) => (
-        <TuitionCell
-          key={program.id}
-          locale={locale}
-          copy={copy}
-          amount={program.tuitionAmount}
-          currency={program.tuitionCurrency}
-          rates={rates}
-        />
-      )),
+      values: programs.map((program) =>
+        program.tuitionDisplay ? (
+          <span key={program.id} className="font-semibold">
+            {program.tuitionDisplay}
+          </span>
+        ) : (
+          <TuitionCell
+            key={program.id}
+            locale={locale}
+            copy={copy}
+            amount={program.tuitionAmount}
+            currency={program.tuitionCurrency}
+            rates={rates}
+          />
+        ),
+      ),
     },
     {
       key: "intake",
@@ -199,8 +205,8 @@ function CompareTable({
       {programs.some((program) => program.country === "china") && (
         <p className="mt-6 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm leading-6 text-slate-700">
           {locale === "bn"
-            ? "চীনের তালিকাভুক্ত ফি বার্ষিক পরিকল্পনার আনুমানিক হিসাব। নির্দিষ্ট ডিগ্রি, পাঠদানের ভাষা ও বৃত্তির শর্ত নিশ্চিত করুন। ইনটেকের মাস আবেদনের শেষ তারিখ নয়।"
-            : "China tuition figures are annual planning estimates. Confirm the exact degree, teaching language and scholarship conditions. Intake months are start dates, not application deadlines."}
+            ? "চীনের প্রতিটি অফারের ফি কোন মেয়াদের ও কী অন্তর্ভুক্ত তা দেখুন। নির্দিষ্ট ডিগ্রি, পাঠদানের ভাষা ও বৃত্তির শর্ত নিশ্চিত করুন। ইনটেকের মাস আবেদনের শেষ তারিখ নয়।"
+            : "Use the fee period and coverage shown for each China offer. Confirm the exact degree, teaching language and scholarship conditions. Intake months are start dates, not application deadlines."}
         </p>
       )}
 

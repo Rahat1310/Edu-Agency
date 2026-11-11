@@ -1,5 +1,14 @@
-import { and, asc, eq, ilike, inArray, sql } from "drizzle-orm";
+import { and, asc, eq, ilike, inArray, ne, or, sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
+import {
+  chinaOffers,
+  chinaInstitutions,
+  chinaOfferProgram,
+  filterChinaOffers,
+  getChinaOffer,
+  hasChinaOnlyFilters,
+  parseChinaOfferFilters,
+} from "@/lib/china-2027";
 
 import { db } from "@/db";
 import {
@@ -30,8 +39,11 @@ export type PublicProgramFilters = {
   country: ProgramCountry | "";
   level: ProgramLevel | "";
   field: string;
-  university?: string;
   page: number;
+  intake?: string;
+  university?: string;
+  language?: string;
+  scholarship?: boolean;
 };
 
 export type PublicProgramCard = {
@@ -43,6 +55,7 @@ export type PublicProgramCard = {
   tuitionAmount: string;
   tuitionCurrency: string;
   intakeMonths: string[] | null;
+  tuitionDisplay?: string;
 };
 
 export type PublicProgramDetail = PublicProgramCard & {
@@ -80,17 +93,27 @@ export function parsePublicProgramFilters(input: {
   country?: string;
   level?: string;
   field?: string;
-  university?: string;
   page?: string;
+  intake?: string;
+  university?: string;
+  language?: string;
+  scholarship?: string;
 }): PublicProgramFilters {
   const page = Number.parseInt(input.page ?? "1", 10);
+  const country = parsePublicCountry(input.country);
+  const university = (input.university ?? "").trim().slice(0, 200);
 
   return {
-    country: parsePublicCountry(input.country),
+    country,
     level: parsePublicLevel(input.level),
     field: (input.field ?? "").trim().slice(0, 200),
-    university: (input.university ?? "").trim().slice(0, 200),
     page: Number.isFinite(page) && page > 0 ? page : 1,
+    ...parseChinaOfferFilters({ ...input, country }),
+    university:
+      country !== "china" &&
+      chinaInstitutions.some((item) => item.id === university)
+        ? ""
+        : university,
   };
 }
 
@@ -110,7 +133,12 @@ function publishedWhere(filters: PublicProgramFilters) {
   }
 
   if (filters.field) {
-    conditions.push(ilike(programs.field, likePattern(filters.field)));
+    conditions.push(
+      or(
+        ilike(programs.field, likePattern(filters.field)),
+        ilike(programs.universityName, likePattern(filters.field)),
+      )!,
+    );
   }
 
   if (filters.university) {
@@ -136,30 +164,53 @@ const cardColumns = {
 async function queryPublishedProgramPage(
   filters: PublicProgramFilters,
 ): Promise<PublicProgramList> {
-  const where = publishedWhere(filters);
-  const offset = (filters.page - 1) * PUBLIC_PROGRAM_PAGE_SIZE;
-
-  const [rows, countRows] = await Promise.all([
-    db
-      .select(cardColumns)
-      .from(programs)
-      .where(where)
-      .orderBy(asc(programs.universityName), asc(programs.field))
-      .limit(PUBLIC_PROGRAM_PAGE_SIZE)
-      .offset(offset),
-    db
-      .select({ total: sql<number>`cast(count(*) as int)` })
-      .from(programs)
-      .where(where),
-  ]);
-
-  const total = countRows[0]?.total ?? 0;
+  const curated = filterChinaOffers(filters).map(chinaOfferProgram);
+  const curatedOnly =
+    filters.country === "china" || hasChinaOnlyFilters(filters);
+  const where = and(publishedWhere(filters), ne(programs.country, "china"));
+  const countRows = curatedOnly
+    ? [{ total: 0 }]
+    : await db
+        .select({ total: sql<number>`cast(count(*) as int)` })
+        .from(programs)
+        .where(where);
+  const total = (countRows[0]?.total ?? 0) + curated.length;
+  const pageCount = Math.max(1, Math.ceil(total / PUBLIC_PROGRAM_PAGE_SIZE));
+  const page = Math.min(filters.page, pageCount);
+  const needed = page * PUBLIC_PROGRAM_PAGE_SIZE;
+  const rows = curatedOnly
+    ? []
+    : await db
+        .select(cardColumns)
+        .from(programs)
+        .where(where)
+        .orderBy(
+          sql`${programs.universityName} COLLATE "C"`,
+          sql`${programs.field} COLLATE "C"`,
+          asc(programs.id),
+        )
+        .limit(needed);
+  const merged = [...rows, ...curated].sort((a, b) =>
+    a.universityName < b.universityName
+      ? -1
+      : a.universityName > b.universityName
+        ? 1
+        : a.field < b.field
+          ? -1
+          : a.field > b.field
+            ? 1
+            : a.id < b.id
+              ? -1
+              : a.id > b.id
+                ? 1
+                : 0,
+  );
 
   return {
-    rows,
+    rows: merged.slice((page - 1) * PUBLIC_PROGRAM_PAGE_SIZE, needed),
     total,
-    page: filters.page,
-    pageCount: Math.max(1, Math.ceil(total / PUBLIC_PROGRAM_PAGE_SIZE)),
+    page,
+    pageCount,
   };
 }
 
@@ -173,6 +224,9 @@ export function getPublishedProgramPage(filters: PublicProgramFilters) {
       filters.field,
       filters.university ?? "",
       String(filters.page),
+      filters.intake ?? "",
+      filters.language ?? "",
+      String(filters.scholarship ?? false),
     ],
     {
       tags: [PROGRAMS_CACHE_TAG],
@@ -184,6 +238,8 @@ export function getPublishedProgramPage(filters: PublicProgramFilters) {
 async function queryPublishedProgramDetail(
   id: string,
 ): Promise<PublicProgramDetail | null> {
+  const offer = getChinaOffer(id);
+  if (offer) return chinaOfferProgram(offer);
   const [row] = await db
     .select({
       ...cardColumns,
@@ -213,6 +269,14 @@ async function queryPublishedProgramsByUniversity(
   excludeId?: string,
   limit: number = 8,
 ): Promise<PublicProgramCard[]> {
+  const curated = chinaOffers.filter(
+    (offer) => offer.university === universityName && offer.id !== excludeId,
+  );
+  if (
+    curated.length ||
+    chinaOffers.some((offer) => offer.university === universityName)
+  )
+    return curated.slice(0, limit).map(chinaOfferProgram);
   const conditions = [
     eq(programs.universityName, universityName),
     eq(programs.isPublished, true),
@@ -257,16 +321,27 @@ async function queryPublishedProgramsByIds(
     return [];
   }
 
-  const rows = await db
-    .select({
-      ...cardColumns,
-      requirements: programs.requirements,
-      scholarshipInfo: programs.scholarshipInfo,
-    })
-    .from(programs)
-    .where(and(eq(programs.isPublished, true), inArray(programs.id, ids)));
+  const legacyIds = ids.filter((id) => !getChinaOffer(id));
+  const rows = legacyIds.length
+    ? await db
+        .select({
+          ...cardColumns,
+          requirements: programs.requirements,
+          scholarshipInfo: programs.scholarshipInfo,
+        })
+        .from(programs)
+        .where(
+          and(eq(programs.isPublished, true), inArray(programs.id, legacyIds)),
+        )
+    : [];
 
-  const byId = new Map(rows.map((row) => [row.id, row]));
+  const byId = new Map<string, PublicProgramDetail>(
+    rows.map((row) => [row.id, row]),
+  );
+  for (const id of ids) {
+    const offer = getChinaOffer(id);
+    if (offer) byId.set(id, chinaOfferProgram(offer));
+  }
   const ordered: PublicProgramDetail[] = [];
 
   for (const id of ids) {
@@ -298,9 +373,14 @@ export function listPublishedProgramIds() {
       const rows = await db
         .select({ id: programs.id })
         .from(programs)
-        .where(eq(programs.isPublished, true));
+        .where(
+          and(eq(programs.isPublished, true), ne(programs.country, "china")),
+        );
 
-      return rows.map((row) => row.id);
+      return [
+        ...rows.map((row) => row.id),
+        ...chinaOffers.map((offer) => offer.id),
+      ];
     },
     ["published-program-ids"],
     {
@@ -318,13 +398,22 @@ export type PublishedProgramSitemapRow = {
 export function listPublishedProgramsForSitemap() {
   return unstable_cache(
     async (): Promise<PublishedProgramSitemapRow[]> => {
-      return db
+      const rows = await db
         .select({
           id: programs.id,
           updatedAt: programs.updatedAt,
         })
         .from(programs)
-        .where(eq(programs.isPublished, true));
+        .where(
+          and(eq(programs.isPublished, true), ne(programs.country, "china")),
+        );
+      return [
+        ...rows,
+        ...chinaOffers.map((offer) => ({
+          id: offer.id,
+          updatedAt: new Date("2026-11-10T00:00:00Z"),
+        })),
+      ];
     },
     ["published-program-sitemap"],
     {
@@ -349,6 +438,23 @@ async function queryPublishedProgramsForCostCalculator(
   country: ProgramCountry,
   level: ProgramLevel | "",
 ): Promise<CostCalculatorProgramOption[]> {
+  if (country === "china") {
+    return chinaOffers
+      .filter(
+        (offer) =>
+          offer.eligibility === "eligible" &&
+          offer.tuition.period === "year" &&
+          offer.tuition.basis === "original" &&
+          offer.tuition.amount != null &&
+          offer.tuition.exact === true &&
+          (!level || offer.level === level),
+      )
+      .map((offer) => ({
+        ...chinaOfferProgram(offer),
+        tuitionCurrency: "CNY" as const,
+      }))
+      .slice(0, COST_CALCULATOR_PROGRAM_CAP);
+  }
   const where = publishedWhere({
     country,
     level,
