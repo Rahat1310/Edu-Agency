@@ -4,6 +4,7 @@ import type { AssessmentSection } from "@/lib/consultation/presentation";
 export type LeadListRow = {
   id: string;
   name: string;
+  source: string;
   phone: string;
   whatsapp: string | null;
   destinationInterest: LeadDestinationInterest;

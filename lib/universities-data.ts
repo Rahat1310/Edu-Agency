@@ -151,11 +151,14 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
     country: "china",
     countryLabel: { en: "China", bn: "চীন" },
     city: { en: "Hangzhou", bn: "হাংচৌ" },
-    rankingBadge: { en: "QS #44 · C9 League", bn: "কিউএস #৪৪ · সি৯ লীগ" },
+    rankingBadge: {
+      en: "Research university · Hangzhou",
+      bn: "গবেষণা বিশ্ববিদ্যালয় · হাংচৌ",
+    },
     has100PercentScholarship: true,
     scholarshipInfo: {
-      en: "100% CSC Govt. Full Scholarship (Tuition + Hostel)",
-      bn: "১০০% সিএসসি সরকারি পূর্ণ বৃত্তি (টিউশন + হোস্টেল ফ্রি)",
+      en: "Competitive scholarships; undergraduate CSC Type A is for Chinese-taught programs. English-taught awards have separate terms.",
+      bn: "প্রতিযোগিতামূলক স্কলারশিপ; স্নাতকের CSC Type A চীনা মাধ্যমের জন্য। ইংরেজি মাধ্যমের বৃত্তির শর্ত আলাদা।",
     },
     popularMajors: {
       en: [
@@ -170,8 +173,8 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
       ],
     },
     tuitionEst: {
-      en: "100% Free with CSC",
-      bn: "সিএসসি বৃত্তিতে সম্পূর্ণ ফ্রি",
+      en: "Program-specific fees; confirm your offer",
+      bn: "প্রোগ্রাম অনুযায়ী ফি; অফার মিলিয়ে নিন",
     },
     programsHrefCountry: "china",
   },
@@ -182,13 +185,13 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
     countryLabel: { en: "China", bn: "চীন" },
     city: { en: "Nanjing", bn: "নানচিং" },
     rankingBadge: {
-      en: "WHO & BMDC Listed",
-      bn: "ডব্লিউএইচও ও বিএমডিসি স্বীকৃত",
+      en: "English-taught MBBS · 6 years",
+      bn: "ইংরেজি মাধ্যমে এমবিবিএস · ৬ বছর",
     },
     has100PercentScholarship: false,
     scholarshipInfo: {
-      en: "Jiangsu Provincial Govt. Merit Grants",
-      bn: "চিয়াংসু প্রাদেশিক সরকারি মেধা অনুদান",
+      en: "University and government awards are competitive. Check current award terms and BMDC eligibility for your intake.",
+      bn: "বিশ্ববিদ্যালয় ও সরকারি বৃত্তি প্রতিযোগিতামূলক। বর্তমান শর্ত ও আপনার ইনটেকের BMDC যোগ্যতা যাচাই করুন।",
     },
     popularMajors: {
       en: ["Clinical Medicine (MBBS)", "Stomatology", "Pharmacy"],
@@ -202,23 +205,23 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
     name: "Harbin Institute of Technology (HIT)",
     country: "china",
     countryLabel: { en: "China", bn: "চীন" },
-    city: { en: "Harbin / Shenzhen", bn: "হারবিন / শেনচেন" },
+    city: { en: "Harbin", bn: "হারবিন" },
     rankingBadge: {
-      en: "Top 5 Global Engineering",
-      bn: "বিশ্বের শীর্ষ ৫ প্রকৌশল র‍্যাংক",
+      en: "Engineering & technology",
+      bn: "ইঞ্জিনিয়ারিং ও প্রযুক্তি",
     },
     has100PercentScholarship: true,
     scholarshipInfo: {
-      en: "100% CSC Full Scholarship + Living Stipend",
-      bn: "১০০% সিএসসি পূর্ণ বৃত্তি + মাসিক ভাতা",
+      en: "CSC Type A and competitive HIT tuition awards. Check the current major list, teaching language and scholarship deadline.",
+      bn: "CSC Type A ও প্রতিযোগিতামূলক HIT টিউশন বৃত্তি। বর্তমান বিষয়ের তালিকা, পাঠদানের ভাষা ও বৃত্তির সময়সীমা দেখুন।",
     },
     popularMajors: {
       en: ["Robotics & Automation", "Civil Engineering", "Aerospace"],
       bn: ["রোবোটিক্স ও অটোমেশন", "সিভিল ইঞ্জিনিয়ারিং", "এরোস্পেস"],
     },
     tuitionEst: {
-      en: "100% Free with CSC",
-      bn: "সিএসসি বৃত্তিতে সম্পূর্ণ ফ্রি",
+      en: "20,000–26,000 CNY/yr · by language",
+      bn: "২০,০০০–২৬,০০০ ইউয়ান/বছর · ভাষা অনুযায়ী",
     },
     programsHrefCountry: "china",
   },
@@ -231,8 +234,8 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
     rankingBadge: { en: "Double First-Class", bn: "ডাবল ফার্স্ট-ক্লাস জাতীয়" },
     has100PercentScholarship: false,
     scholarshipInfo: {
-      en: "Hubei Provincial & Friendship Grants",
-      bn: "হুবেই প্রাদেশিক ও বিশ্ববিদ্যালয় অনুদান",
+      en: "Confirm the current scholarship call, teaching language and program-specific tuition with the university.",
+      bn: "বিশ্ববিদ্যালয়ের বর্তমান স্কলারশিপ বিজ্ঞপ্তি, পাঠদানের ভাষা ও নির্দিষ্ট প্রোগ্রামের ফি নিশ্চিত করুন।",
     },
     popularMajors: {
       en: ["Materials Science", "Automotive Engineering", "Computer Science"],
@@ -242,7 +245,36 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
         "কম্পিউটার সায়েন্স",
       ],
     },
-    tuitionEst: { en: "~20,000 CNY/yr", bn: "~২০,০০০ ইউয়ান/বছর" },
+    tuitionEst: {
+      en: "Confirm current program fees",
+      bn: "বর্তমান প্রোগ্রামের ফি নিশ্চিত করুন",
+    },
+    programsHrefCountry: "china",
+  },
+
+  {
+    id: "nenu",
+    name: "Northeast Normal University (NENU)",
+    country: "china",
+    countryLabel: { en: "China", bn: "চীন" },
+    city: { en: "Changchun", bn: "চাংচুন" },
+    rankingBadge: {
+      en: "Chinese language study",
+      bn: "চীনা ভাষা শিক্ষা",
+    },
+    has100PercentScholarship: false,
+    scholarshipInfo: {
+      en: "Language study and degree scholarships have separate applications. Course completion does not guarantee degree admission or funding.",
+      bn: "ভাষা শিক্ষা ও ডিগ্রি বৃত্তির আবেদন আলাদা। কোর্স শেষ করলেই ডিগ্রিতে ভর্তি বা বৃত্তি নিশ্চিত হয় না।",
+    },
+    popularMajors: {
+      en: ["Chinese language", "Language preparation"],
+      bn: ["চীনা ভাষা", "ভাষার প্রস্তুতি"],
+    },
+    tuitionEst: {
+      en: "Confirm current language-course fees",
+      bn: "ভাষা কোর্সের বর্তমান ফি নিশ্চিত করুন",
+    },
     programsHrefCountry: "china",
   },
 

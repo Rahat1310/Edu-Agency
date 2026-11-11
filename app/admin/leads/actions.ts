@@ -134,6 +134,8 @@ export async function reviewLeadDocument(
   revalidatePath("/admin/pipeline");
   revalidatePath("/portal");
   revalidatePath("/portal/documents");
+  revalidatePath("/portal/application");
+  revalidatePath("/admin/applications", "layout");
 
   return result;
 }

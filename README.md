@@ -217,7 +217,7 @@ English marketing URLs have no locale prefix; Bengali equivalents use `/bn`.
 | `/admin/unlinked`, `/admin/unmatched-messages`       | Account/message reconciliation                      |
 | `/admin/performance`, `/admin/ai-usage`              | Staff and AI reports                                |
 
-The `/admin` entry redirects to `/admin/leads`.
+The `/admin` entry redirects to `/admin/leads`. The default list includes every lead source; assessment follow-ups use `/admin/leads?view=assessments`. Students complete their form at `/portal/application`, and staff review linked files at `/admin/applications`. See [Student applications](docs/student-applications.md) for the workflow, migrations, document requirements and validation.
 
 | API endpoint                       | Methods        | Purpose                                  |
 | ---------------------------------- | -------------- | ---------------------------------------- |

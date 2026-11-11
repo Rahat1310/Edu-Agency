@@ -28,6 +28,7 @@ export type { LeadActivityItem, LeadDetail, LeadListResult, LeadListRow };
 const listColumns = {
   id: leads.id,
   name: leads.name,
+  source: leads.source,
   phone: leads.phone,
   whatsapp: leads.whatsapp,
   destinationInterest: leads.destinationInterest,
@@ -77,6 +78,13 @@ function listWhere(query: LeadListQuery) {
 
   if (query.status) {
     filters.push(eq(leads.status, query.status));
+  }
+  if (query.source === "student-application") {
+    filters.push(
+      sql`exists (select 1 from applications a where a.lead_id = ${leads.id} and a.submitted_at is not null)`,
+    );
+  } else if (query.source) {
+    filters.push(eq(leads.source, query.source));
   }
 
   return filters.length > 0 ? and(...filters) : undefined;

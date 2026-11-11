@@ -1,6 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs/server";
+import { verifiedClerkContacts } from "@/lib/applications/identity";
 import { redirect } from "next/navigation";
 
 import { requireRole } from "@/lib/auth-helpers";
@@ -37,13 +39,14 @@ export async function submitPortalPhone(
   const result = await syncStudentApplicationLink({
     user,
     phone: parsed.data.phone,
+    ...verifiedClerkContacts(await currentUser()),
   });
 
   revalidatePath("/portal");
   revalidatePath("/portal/onboarding");
 
   if (result.status === "linked") {
-    redirect("/portal");
+    redirect("/portal/application");
   }
 
   return { ok: true };

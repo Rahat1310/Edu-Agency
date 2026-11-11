@@ -21,6 +21,16 @@ export const leadStatusLabels: Record<LeadStatus, string> = {
 
 export const leadDestinationOptions = leadDestinationInterests;
 export const leadStatusOptions = leadStatuses;
+export const leadSourceLabels: Record<string, string> = {
+  website: "Website",
+  contact: "Contact form",
+  "home-cta": "Homepage enquiry",
+  "eligibility-quiz": "Eligibility quiz",
+  chatbot: "Chatbot",
+  consultation: "Profile assessment",
+  "self-signup": "Student signup",
+  "student-application": "Submitted application",
+};
 
 export function daysSince(iso: string | null): number {
   if (!iso) {

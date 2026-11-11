@@ -1,4 +1,5 @@
 import { AssessmentDashboard } from "@/components/consultation/admin-dashboard";
+import Link from "next/link";
 
 import { Suspense } from "react";
 
@@ -16,7 +17,7 @@ type PageProps = {
 export default async function AdminLeadsPage({ searchParams }: PageProps) {
   const user = await requireDashboardAccess();
   const params = await searchParams;
-  if (params.view !== "legacy" && !params.lead)
+  if (params.view === "assessments" && !params.lead)
     return (
       <AssessmentDashboard params={params} canDelete={user.role === "admin"} />
     );
@@ -26,11 +27,20 @@ export default async function AdminLeadsPage({ searchParams }: PageProps) {
 
   return (
     <div>
-      <h1 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-ink)]">
-        Leads
-      </h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-ink)]">
+          All leads
+        </h1>
+        <Link
+          href="/admin/leads?view=assessments"
+          className="desk-focus text-sm underline"
+        >
+          Assessment follow-ups
+        </Link>
+      </div>
       <p className="mt-1 text-[0.75rem] text-[var(--desk-ink-muted)]">
-        Newest first. Open a row for the detail panel. Filters stay in the URL.
+        Every enquiry, assessment and student account in one place. The pipeline
+        tracks these same leads.
       </p>
       <div className="mt-4">
         <LeadsDesk

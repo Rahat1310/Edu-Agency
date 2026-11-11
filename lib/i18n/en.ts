@@ -442,31 +442,31 @@ export const en = {
         "Explore study options in China, including tuition, scholarships, entry requirements, and visa preparation for Bangladeshi students.",
       ogTitle: "China: direct admissions and structured visa documentation",
       ogDescription:
-        "MBBS, engineering, and HSK pathways. JW201/JW202 before the X1 or X2 interview.",
+        "Compare universities, scholarships, language requirements and X1/X2 visa preparation for study in China.",
       tagline:
         "Direct degree and medical pathways with clear document sequencing.",
       overview:
-        "China offers world-class infrastructure, globally accredited medical (MBBS) and engineering degrees, and generous Chinese Government (CSC) and provincial scholarships. Our team ensures your admission notice and JW201/JW202 documentation are in perfect order before embassy submission.",
+        "Explore Chinese universities for engineering, medicine, business, research and language study. We help you compare program requirements, teaching language, tuition and scholarship routes, then prepare an application around your academic background and budget.",
       why: [
-        "Generous CSC and university scholarship opportunities that significantly reduce tuition and accommodation expenses.",
+        "Competitive CSC, provincial and university scholarships, with coverage and eligibility that vary by program.",
         "Explore English-taught medicine and engineering programmes, with guidance on entry requirements and recognition.",
-        "A systematic visa process (X1/X2) with predictable timelines when supported by proper JW form documentation.",
+        "A choice of degree and language routes, with X1 or X2 visa preparation based on the length of study.",
       ],
       visaName: "X1 / X2 student visa",
       visaExplanation:
-        "Long-term degree study (X1) or short-term courses (X2), processed with official JW201/JW202 university approval.",
+        "X1 is for study longer than 180 days; X2 is for study of no more than 180 days. Document requirements differ.",
       visaSummary:
-        "Visa preparation includes checking your admission letter, JW201 or JW202 form, and the requirements for your length of study.",
+        "X1 applications require an admission letter and JW201/JW202 study documentation. X2 applications use short-term admission documents; check the Chinese Embassy in Bangladesh’s current checklist for your course.",
       visaSteps: [
         "Receive the university admission letter.",
-        "University issues JW201 or JW202.",
-        "Apply for X1 (long stay) or X2 (short stay) with that pair of documents.",
-        "After arrival on X1, convert to a residence permit within the stated window.",
+        "For X1, obtain the university’s JW201/JW202 documentation; for X2, confirm the short-term study documents required.",
+        "Apply using the current Bangladesh visa checklist for your study duration and visa category.",
+        "After entering on X1, apply for a residence permit within 30 days.",
       ],
       fields: [
         {
           name: "MBBS / clinical medicine",
-          note: "English-medium curricula with international accreditation.",
+          note: "Check the specific English-taught course, clinical language requirements and BMDC eligibility before applying.",
         },
         {
           name: "Engineering & technology",
@@ -474,7 +474,7 @@ export const en = {
         },
         {
           name: "Chinese language (HSK pathway)",
-          note: "1-year intensive foundation programs leading to HSK certification.",
+          note: "Language preparation for Chinese-taught study. HSK certification requires a separate exam; degree entry is assessed separately.",
         },
         {
           name: "Business & economics",
@@ -701,13 +701,13 @@ export const en = {
   programs: {
     metaTitle: "Programs directory",
     metaDescription:
-      "Explore accredited degree programs in China, India, Malaysia, and South Korea for students applying from Bangladesh.",
+      "Compare degree and language study options in China, India, Malaysia, and South Korea, with tuition estimates and entry requirements.",
     ogTitle: "Find University Degrees & Programs Abroad",
     ogDescription:
-      "Browse verified programs in China, India, Malaysia, and South Korea with tuition and entry requirements.",
+      "Compare programs in China, India, Malaysia, and South Korea with tuition estimates and entry requirements.",
     eyebrow: "Programs",
     title: "Programs & universities directory",
-    body: "Explore verified undergraduate, postgraduate, and language programs across our four core destinations.",
+    body: "Compare undergraduate, postgraduate, and language study options across our four destinations. Check the current course details with each university before applying.",
     filterLabel: "Selected country",
     noFilter: "Choose a country to browse its programmes.",
     countryLabel: "Country",

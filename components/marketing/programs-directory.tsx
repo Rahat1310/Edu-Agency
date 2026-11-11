@@ -34,7 +34,9 @@ export function ProgramsDirectory({
   list,
   selectedIds,
 }: ProgramsDirectoryProps) {
-  const hasFilters = Boolean(filters.country || filters.level || filters.field);
+  const hasFilters = Boolean(
+    filters.country || filters.level || filters.field || filters.university,
+  );
   const formAction = localizedHref("/programs", locale);
   return (
     <section className="py-10 sm:py-16">
@@ -48,6 +50,23 @@ export function ProgramsDirectory({
         <p className="mt-6 max-w-2xl text-lg leading-8 font-normal text-slate-600">
           {dict.programs.body}
         </p>
+        {filters.country === "china" && (
+          <div className="mt-6 rounded-2xl border border-orange-200 bg-orange-50 p-5 text-sm leading-7 text-slate-700">
+            <p>
+              {locale === "bn"
+                ? "চীনের বিষয়ভিত্তিক তালিকা তুলনা করুন। নির্দিষ্ট ডিগ্রি, পাঠদানের ভাষা, বর্তমান ফি ও স্কলারশিপ বিশ্ববিদ্যালয়ের নির্দেশিকা দিয়ে নিশ্চিত করুন। ইনটেকের মাস আবেদনের শেষ তারিখ নয়।"
+                : "Compare China subject listings. Confirm the exact degree, teaching language, current fees and scholarships in the university’s admissions guide. Intake months are start dates, not application deadlines."}
+            </p>
+            <Link
+              href={localizedHref("/destinations/china", locale)}
+              className="focus-ring mt-2 inline-flex min-h-11 items-center font-semibold text-orange-800 underline underline-offset-4"
+            >
+              {locale === "bn"
+                ? "চীনের বিশ্ববিদ্যালয় ও আবেদন গাইড"
+                : "China universities & application guide"}
+            </Link>
+          </div>
+        )}
 
         <ProgramCompareProvider
           locale={locale}
@@ -61,6 +80,13 @@ export function ProgramsDirectory({
             className="mt-10 grid gap-3 rounded-2xl border border-stone-200 bg-white p-4 shadow-2xs sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.2fr_auto]"
           >
             <ProgramCompareIdsField />
+            {filters.university && (
+              <input
+                type="hidden"
+                name="university"
+                value={filters.university}
+              />
+            )}
             <label className="text-xs font-bold tracking-[0.06em] text-slate-500 uppercase">
               {dict.programs.countryLabel}
               <select
@@ -121,6 +147,7 @@ export function ProgramsDirectory({
 
           <p className="mt-6 text-sm text-slate-500">
             {list.total} {dict.programs.resultCount}
+            {filters.university && <span> · {filters.university}</span>}
           </p>
 
           {list.rows.length === 0 ? (

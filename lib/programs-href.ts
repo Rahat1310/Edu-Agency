@@ -21,6 +21,10 @@ export function publicProgramsHref(
     params.set("field", filters.field);
   }
 
+  if (filters.university) {
+    params.set("university", filters.university);
+  }
+
   if (filters.page && filters.page > 1) {
     params.set("page", String(filters.page));
   }

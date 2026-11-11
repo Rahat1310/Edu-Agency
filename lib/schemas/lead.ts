@@ -13,6 +13,13 @@ export const leadSources = [
 ] as const;
 
 export const LEAD_SOURCE_SELF_SIGNUP = "self-signup";
+export const leadSourceFilters = [
+  "",
+  ...leadSources,
+  "consultation",
+  LEAD_SOURCE_SELF_SIGNUP,
+  "student-application",
+] as const;
 
 export const HONEYPOT_FIELD = "companyUrl";
 
@@ -104,6 +111,7 @@ export const leadListQuerySchema = z.object({
   q: z.string().trim().max(120).catch(""),
   destinationInterest: z.enum(destinationFilterValues).catch(""),
   status: z.enum(statusFilterValues).catch(""),
+  source: z.enum(leadSourceFilters).catch(""),
   sort: z.enum(leadListSortValues).catch("created"),
   page: z.coerce.number().int().min(1).catch(1),
   lead: z

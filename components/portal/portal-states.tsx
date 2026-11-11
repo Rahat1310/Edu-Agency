@@ -5,9 +5,10 @@ export function PortalPending() {
         We&apos;re matching your file by hand
       </h1>
       <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
-        More than one inquiry used this phone number, and we don&apos;t want to
-        mix two students up. Keep WhatsApp on — a counselor will message you
-        shortly. You don&apos;t need to fill anything else in.
+        We found an existing enquiry that needs an ownership check, or multiple
+        enquiries using this number. A counsellor will verify and link the
+        correct file. Your documents stay private while this is checked. Contact
+        the office if you need help continuing.
       </p>
     </div>
   );

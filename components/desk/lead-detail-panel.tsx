@@ -337,6 +337,14 @@ export function LeadDetailPanel({
           </dl>
 
           <QuizFields value={lead.quizAnswers} />
+          {hasLinkedApplication && (
+            <Link
+              href={`/admin/applications?lead=${lead.id}`}
+              className="desk-focus inline-flex min-h-11 items-center rounded-xl border border-[var(--desk-line)] px-4 text-sm font-semibold"
+            >
+              Open student application & documents
+            </Link>
+          )}
 
           {lead.assessmentSections.length > 0 && (
             <section

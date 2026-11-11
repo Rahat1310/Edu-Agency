@@ -17,6 +17,7 @@ export function parseLeadListQuery(
     q: first(raw, "q") ?? "",
     destinationInterest: first(raw, "destinationInterest") ?? "",
     status: first(raw, "status") ?? "",
+    source: first(raw, "source") ?? "",
     sort: first(raw, "sort") ?? "created",
     page: first(raw, "page") ?? "1",
     lead: first(raw, "lead") ?? "",
@@ -28,7 +29,8 @@ export function leadsListHref(
   overrides: Partial<LeadListQuery> = {},
 ): string {
   const next = { ...query, ...overrides };
-  const params = new URLSearchParams({ view: "legacy" });
+  const params = new URLSearchParams();
+  if (next.source) params.set("source", next.source);
 
   if (next.q) {
     params.set("q", next.q);
@@ -61,6 +63,7 @@ export function leadsListHref(
 export function leadListHasActiveFilters(query: LeadListQuery): boolean {
   return Boolean(
     query.q ||
+    query.source ||
     query.destinationInterest ||
     query.status ||
     query.sort !== "created",

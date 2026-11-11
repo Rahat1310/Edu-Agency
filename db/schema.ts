@@ -201,6 +201,38 @@ export const applications = pgTable(
     // Flexible matching inputs (education, destinations, scores, budget).
     // Not a rigid profile table — eligibility criteria scoring comes later.
     profile: jsonb("profile"),
+    applicationData:
+      jsonb("application_data").$type<
+        import("../lib/applications/schema").ApplicationData
+      >(),
+    formStatus: text("form_status", {
+      enum: ["draft", "submitted", "changes_requested"],
+    })
+      .notNull()
+      .default("draft"),
+    submittedAt: timestamp("submitted_at", { withTimezone: true }),
+    formUpdatedAt: timestamp("form_updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    revision: integer("revision").notNull().default(0),
+    requestedDocuments: jsonb("requested_documents")
+      .$type<string[]>()
+      .notNull()
+      .default([]),
+    reviewMessage: text("review_message"),
+    universityReview: text("university_review", {
+      enum: [
+        "reviewing",
+        "available",
+        "unavailable",
+        "alternative_suggested",
+        "agreed",
+      ],
+    })
+      .notNull()
+      .default("reviewing"),
+    proposedUniversity: text("proposed_university"),
+    universityNote: text("university_note"),
     createdAt: timestamp("created_at").defaultNow(),
   },
   (table) => [
@@ -208,6 +240,33 @@ export const applications = pgTable(
     uniqueIndex("applications_lead_id_idx").on(table.leadId),
   ],
 );
+
+// Immutable copies of each submitted form preserve the reviewed information after corrections.
+export const applicationSubmissions = pgTable(
+  "application_submissions",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    applicationId: uuid("application_id")
+      .notNull()
+      .references(() => applications.id, { onDelete: "cascade" }),
+    revision: integer("revision").notNull(),
+    data: jsonb("data")
+      .$type<import("../lib/applications/schema").ApplicationData>()
+      .notNull(),
+    documentIds: jsonb("document_ids").$type<string[]>().notNull(),
+    submittedAt: timestamp("submitted_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("application_submissions_revision_idx").on(
+      table.applicationId,
+      table.revision,
+    ),
+  ],
+).enableRLS();
 
 // Multi-match phone collisions wait here until a counselor links the account by hand.
 export const unlinkedAccounts = pgTable(

@@ -864,7 +864,11 @@ async function main() {
     `Seeding ${SEED_PROGRAMS.length} verified programs from seeder_info.txt across China, India, Malaysia, and South Korea...`
   );
 
-  await db.insert(programs).values(SEED_PROGRAMS);
+  const { CHINA_PROGRAM_CORRECTIONS } = await import("../lib/china-program-corrections");
+  await db.insert(programs).values(SEED_PROGRAMS.map((program) => {
+    const correction = program.country === "china" ? CHINA_PROGRAM_CORRECTIONS.find((item) => item.universityName === program.universityName && item.field === program.field) : undefined;
+    return correction ? { ...program, ...correction } : program;
+  }));
 
   const updatedRows = await db.select({ value: count() }).from(programs);
   const newCount = updatedRows[0]?.value ?? 0;

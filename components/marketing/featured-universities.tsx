@@ -112,8 +112,8 @@ export function FeaturedUniversities({
             <div className="text-left">
               <span className="block text-xs font-bold text-slate-900">
                 {locale === "bn"
-                  ? "৪০+ পার্টনার ক্যাম্পাস"
-                  : "40+ Partner Campuses"}
+                  ? "২০০+ পার্টনার বিশ্ববিদ্যালয়"
+                  : "200+ Partner Universities"}
               </span>
               <span className="block text-[0.68rem] font-medium text-slate-500">
                 {locale === "bn"
@@ -325,14 +325,26 @@ function UniversityCard({
               <>
                 <span className="inline-flex items-center gap-1 rounded-md bg-[#16704f] px-2 py-0.5 text-[0.68rem] font-semibold tracking-wide text-white uppercase shadow-2xs">
                   <Sparkles className="size-2.5" />
-                  {isBn ? "১০০% সম্পূর্ণ বৃত্তি" : "100% Scholarship Available"}
+                  {uni.country === "china"
+                    ? isBn
+                      ? "প্রতিযোগিতামূলক পূর্ণ বৃত্তি"
+                      : "Competitive Full Scholarships"
+                    : isBn
+                      ? "১০০% সম্পূর্ণ বৃত্তি"
+                      : "100% Scholarship Available"}
                 </span>
               </>
             ) : (
               <>
                 <span className="inline-flex items-center gap-1 rounded-md bg-slate-200 px-2 py-0.5 text-[0.68rem] font-bold text-slate-800 uppercase">
                   <CheckCircle2 className="size-2.5 text-slate-600" />
-                  {isBn ? "মেধা বৃত্তি সুবিধা" : "Merit Scholarship Available"}
+                  {uni.country === "china"
+                    ? isBn
+                      ? "বৃত্তির শর্ত যাচাই করুন"
+                      : "Check Scholarship Terms"
+                    : isBn
+                      ? "মেধা বৃত্তি সুবিধা"
+                      : "Merit Scholarship Available"}
                 </span>
               </>
             )}
@@ -374,7 +386,7 @@ function UniversityCard({
 
         <Link
           href={localizedHref(
-            `/programs?country=${uni.programsHrefCountry}`,
+            `/programs?country=${uni.programsHrefCountry}&university=${encodeURIComponent(uni.name.replace(/\s*\([^)]*\)$/, ""))}`,
             locale,
           )}
           className="focus-ring inline-flex items-center gap-1 text-xs font-bold text-orange-600 transition-colors group-hover:translate-x-0.5 hover:text-orange-700"

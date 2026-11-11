@@ -161,6 +161,8 @@ export async function POST(request: Request): Promise<Response> {
 
     revalidatePath("/portal");
     revalidatePath("/portal/documents");
+    revalidatePath("/portal/application");
+    revalidatePath("/admin/applications", "layout");
 
     return Response.json({ ok: true, document });
   } catch (error) {

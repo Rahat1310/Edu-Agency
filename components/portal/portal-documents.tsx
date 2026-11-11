@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { useDeskToast } from "@/components/desk/toast";
 import { PortalInfoDrawer } from "@/components/portal/info-drawer";
@@ -12,7 +13,7 @@ import {
   documentTypeLabels,
   documentTypeValues,
   isAllowedDocumentMime,
-  isGeneralDocumentType,
+  documentTypeLabel,
   mimeMatchesFilename,
   type DocumentMimeType,
 } from "@/lib/documents/constants";
@@ -28,6 +29,7 @@ import { documentHints } from "@/lib/portal/copy";
 import { cn } from "@/lib/utils";
 import { documentTypeAnchorId } from "@/lib/visa-requirements/checklist";
 import { getWhatsAppHref } from "@/lib/whatsapp";
+import type { ApplicationDocumentSlot } from "@/lib/applications/documents";
 export type VisaUploadSlot = {
   documentTypeKey: string;
   documentName: string;
@@ -40,6 +42,7 @@ type PortalDocumentsProps = {
   studentName: string;
   visaSlots?: VisaUploadSlot[];
   focusType?: string | null;
+  applicationSlots?: ApplicationDocumentSlot[];
 };
 type UploadPhase = "idle" | "start" | "put" | "save";
 export function PortalDocuments({
@@ -49,14 +52,28 @@ export function PortalDocuments({
   studentName,
   visaSlots = [],
   focusType = null,
+  applicationSlots,
 }: PortalDocumentsProps) {
   const hints = documentHints(destination);
   const whatsappHref = getWhatsAppHref(
     `Hi, I'm ${studentName}. I want to check which documents you need from me.`,
   );
   const rows = documents;
+  const slots =
+    applicationSlots ??
+    documentTypeValues.map((type) => ({
+      documentTypeKey: type,
+      documentName: documentTypeLabels[type],
+      description: "",
+      required: false,
+    }));
+  const shown = new Set(slots.map((slot) => slot.documentTypeKey));
   const extraSlots = visaSlots.filter(
-    (slot) => !isGeneralDocumentType(slot.documentTypeKey),
+    (slot) => !shown.has(slot.documentTypeKey),
+  );
+  for (const slot of extraSlots) shown.add(slot.documentTypeKey);
+  const previousTypes = [...new Set(rows.map((row) => row.type))].filter(
+    (type) => !shown.has(type),
   );
   useEffect(() => {
     if (!focusType) {
@@ -79,6 +96,20 @@ export function PortalDocuments({
           PDF, JPG, or PNG, under 10 MB. A counselor sees it after it lands here
           — don&apos;t send the same file on WhatsApp unless we ask.
         </p>
+        <Link
+          href="/portal/application"
+          className="desk-focus mt-4 inline-flex min-h-11 items-center text-sm font-semibold underline"
+        >
+          Return to application & submit
+        </Link>
+        {applicationSlots && (
+          <p className="mt-2 text-sm leading-7 text-[var(--desk-ink-muted)]">
+            This checklist follows your saved qualifications and your
+            counsellor’s requests. Save your application after changing academic
+            details. Multiple files can be uploaded for recommendation letters
+            or other supporting documents.
+          </p>
+        )}
 
         <div className="mt-4">
           <PortalInfoDrawer
@@ -125,14 +156,15 @@ export function PortalDocuments({
         ) : null}
 
         <div id="document-types" className="mt-8 scroll-mt-20 space-y-4">
-          {documentTypeValues.map((type) => (
+          {slots.map((slot) => (
             <TypeCard
-              key={type}
+              key={slot.documentTypeKey}
               applicationId={applicationId}
-              type={type}
-              label={documentTypeLabels[type]}
-              rows={rows.filter((row) => row.type === type)}
-              highlighted={focusType === type}
+              type={slot.documentTypeKey}
+              label={`${slot.documentName}${slot.required ? " · Required" : ""}`}
+              description={slot.description}
+              rows={rows.filter((row) => row.type === slot.documentTypeKey)}
+              highlighted={focusType === slot.documentTypeKey}
             />
           ))}
           {extraSlots.length > 0 ? (
@@ -156,6 +188,17 @@ export function PortalDocuments({
               description={slot.description}
               rows={rows.filter((row) => row.type === slot.documentTypeKey)}
               highlighted={focusType === slot.documentTypeKey}
+            />
+          ))}
+          {previousTypes.map((type) => (
+            <TypeCard
+              key={type}
+              applicationId={applicationId}
+              type={type}
+              label={documentTypeLabel(type)}
+              description="Previously uploaded documents stay attached to your file."
+              rows={rows.filter((row) => row.type === type)}
+              highlighted={focusType === type}
             />
           ))}
         </div>

@@ -585,7 +585,11 @@ export function SiteHeader({
             </Link>
 
             {/* Clerk Authentication / Sign-In */}
-            <HeaderAuth signInLabel={dict.chrome.signIn} />
+            <HeaderAuth
+              signInLabel={
+                locale === "bn" ? "আবেদন / সাইন ইন" : "Apply / sign in"
+              }
+            />
 
             {/* Mobile Drawer Trigger Button */}
             <button
@@ -795,7 +799,12 @@ export function SiteHeader({
 
             {/* Drawer Footer with Quick WhatsApp & Auth */}
             <div className="space-y-3 border-t border-stone-200/80 bg-stone-50/80 p-4">
-              <HeaderAuth mobile signInLabel={dict.chrome.signIn} />
+              <HeaderAuth
+                mobile
+                signInLabel={
+                  locale === "bn" ? "আবেদন / সাইন ইন" : "Apply / sign in"
+                }
+              />
 
               <a
                 href={whatsappHref}

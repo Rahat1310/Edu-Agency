@@ -17,6 +17,7 @@ const eslintConfig = tseslint.config(
     ignores: [
       "node_modules/**",
       ".next/**",
+      ".next-dev/**",
       "out/**",
       "build/**",
       "next-env.d.ts",

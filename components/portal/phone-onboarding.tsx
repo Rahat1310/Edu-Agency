@@ -90,7 +90,7 @@ export function PhoneOnboarding() {
           disabled={pending}
           className="desk-focus mt-5 inline-flex h-11 items-center justify-center rounded-full bg-[var(--brand-blue)] px-5 text-sm font-semibold text-white disabled:opacity-60"
         >
-          {pending ? "Looking up your file…" : "Find my file"}
+          {pending ? "Opening your file…" : "Continue to application"}
         </button>
       </form>
     </div>

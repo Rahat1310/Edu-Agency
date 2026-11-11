@@ -45,6 +45,7 @@ export default async function Programs({ params, searchParams }: PageProps) {
     country: first(raw.country),
     level: first(raw.level),
     field: first(raw.field),
+    university: first(raw.university),
     page: first(raw.page),
   });
   const list = await getPublishedProgramPage(filters);

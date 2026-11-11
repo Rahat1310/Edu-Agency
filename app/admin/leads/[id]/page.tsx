@@ -55,6 +55,9 @@ export default async function LeadDetails({
       <Link href="/admin/leads" className="underline">
         Back to leads
       </Link>
+      <Link href={`/admin/applications?lead=${id}`} className="ml-5 underline">
+        Student application & documents
+      </Link>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold">{lead.reference ?? lead.name}</h1>
         {user.role === "admin" && (

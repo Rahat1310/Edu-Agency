@@ -2,6 +2,9 @@ import { redirect } from "next/navigation";
 
 import { PortalDocuments } from "@/components/portal/portal-documents";
 import { getStudentApplication } from "@/lib/auth-helpers";
+import { loadApplicationCase } from "@/lib/applications/load";
+import { applicationDocumentChecklist } from "@/lib/applications/documents";
+import { isVisaPipelineStage } from "@/lib/visa-applications/stage";
 import { listDocumentsForApplication } from "@/lib/documents/list";
 import { isDocumentTypeKey } from "@/lib/documents/type-key";
 import type { ProgramCountry } from "@/db/schema";
@@ -28,14 +31,25 @@ export default async function PortalDocumentsPage({ searchParams }: PageProps) {
     application.lead.destinationInterest,
   );
 
-  const [documents, visaSlots] = await Promise.all([
+  const [documents, visaSlots, applicationCase] = await Promise.all([
     listDocumentsForApplication(application.application.id),
-    loadVisaSlots(country),
+    isVisaPipelineStage(application.lead.status)
+      ? loadVisaSlots(country)
+      : Promise.resolve([]),
+    loadApplicationCase(application.application.id),
   ]);
 
   return (
     <PortalDocuments
       applicationId={application.application.id}
+      applicationSlots={
+        applicationCase
+          ? applicationDocumentChecklist(
+              applicationCase.data,
+              applicationCase.requestedDocuments,
+            )
+          : undefined
+      }
       documents={documents}
       destination={application.lead.destinationInterest}
       studentName={firstName(application.user.fullName, application.user.email)}

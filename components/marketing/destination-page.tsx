@@ -1,4 +1,8 @@
 import Link from "next/link";
+import {
+  ChinaDestinationIntro,
+  ChinaStudyGuide,
+} from "@/components/marketing/china-study-guide";
 
 import { DestinationCard } from "@/components/marketing/destination-card";
 import { DestinationIntakeBlock } from "@/components/marketing/destination-intake-block";
@@ -39,31 +43,39 @@ export function DestinationPage({
 
   return (
     <>
-      <section className="ambient-glow-mesh relative overflow-hidden pt-10 pb-12 sm:pt-16 sm:pb-16">
-        <PageShell>
-          <div className="eyebrow-pill inline-flex items-center gap-2">
-            <span
-              className="size-2 rounded-full ring-2 ring-white"
-              style={{ backgroundColor: destination.color }}
-              aria-hidden="true"
+      {slug === "china" ? (
+        <ChinaDestinationIntro
+          locale={locale}
+          dict={dict}
+          countdown={countdown}
+        />
+      ) : (
+        <section className="ambient-glow-mesh relative overflow-hidden pt-10 pb-12 sm:pt-16 sm:pb-16">
+          <PageShell>
+            <div className="eyebrow-pill inline-flex items-center gap-2">
+              <span
+                className="size-2 rounded-full ring-2 ring-white"
+                style={{ backgroundColor: destination.color }}
+                aria-hidden="true"
+              />
+              <span>
+                {destination.code} · {copy.name}
+              </span>
+            </div>
+
+            <h1 className="font-heading mt-5 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
+              {copy.tagline}
+            </h1>
+
+            <DestinationIntakeBlock
+              className="mt-8"
+              countdown={countdown}
+              destinationName={copy.name}
+              dict={dict}
             />
-            <span>
-              {destination.code} · {copy.name}
-            </span>
-          </div>
-
-          <h1 className="font-heading mt-5 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.05]">
-            {copy.tagline}
-          </h1>
-
-          <DestinationIntakeBlock
-            className="mt-8"
-            countdown={countdown}
-            destinationName={copy.name}
-            dict={dict}
-          />
-        </PageShell>
-      </section>
+          </PageShell>
+        </section>
+      )}
 
       <section className="border-t border-stone-200 bg-[#f8f9fa] py-16 sm:py-24">
         <PageShell className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
@@ -132,6 +144,8 @@ export function DestinationPage({
           </aside>
         </PageShell>
       </section>
+
+      {slug === "china" && <ChinaStudyGuide locale={locale} />}
 
       <section className="bg-slate-50 py-16 sm:py-24">
         <PageShell>

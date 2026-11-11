@@ -1,10 +1,20 @@
 "use client";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import type { ApplicationCase } from "@/lib/applications/load";
+import {
+  formStatusLabels,
+  universityReviewLabels,
+} from "@/lib/applications/schema";
+import { leadStatuses } from "@/db/schema";
+import { leadStatusLabels } from "@/lib/leads/labels";
 import { MatchCard } from "@/components/portal/match-card";
 import { PortalInfoDrawer } from "@/components/portal/info-drawer";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import { VisaChecklistSection } from "@/components/portal/visa-checklist";
 import { VisaStatusSection } from "@/components/portal/visa-status-section";
+import { isVisaPipelineStage } from "@/lib/visa-applications/stage";
 import type { LeadDestinationInterest, LeadStatus } from "@/db/schema";
 import type { StudentActivityItem } from "@/lib/leads/activity-types";
 import { formatLeadDate } from "@/lib/leads/labels";
@@ -25,6 +35,7 @@ export function PortalDashboard({
   destination,
   status,
   activity,
+  applicationCase = null,
   forbidden = false,
   ranking = null,
   checklist,
@@ -36,6 +47,7 @@ export function PortalDashboard({
   destination: LeadDestinationInterest;
   status: LeadStatus;
   activity: StudentActivityItem[];
+  applicationCase?: ApplicationCase | null;
   forbidden?: boolean;
   ranking?: PortalMatchRanking | null;
   checklist: VisaChecklist;
@@ -43,6 +55,13 @@ export function PortalDashboard({
   visaLine?: string | null;
   visaStatusError?: boolean;
 }) {
+  const router = useRouter();
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      if (document.visibilityState === "visible") router.refresh();
+    }, 60000);
+    return () => window.clearInterval(timer);
+  }, [router]);
   const guide = portalGuideFor(status);
   const tasks = portalTasksFor(status);
   const preDepartureHref = preDepartureDashboardHref(destination, status);
@@ -67,6 +86,51 @@ export function PortalDashboard({
         <p className="font-utility text-[0.68rem] font-semibold tracking-[0.14em] text-[var(--brand-green)] uppercase">
           Dashboard
         </p>
+
+        {applicationCase && (
+          <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] p-5">
+            <div className="flex flex-wrap justify-between gap-3">
+              <h2 className="text-lg font-semibold">My application</h2>
+              <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-900">
+                {formStatusLabels[applicationCase.formStatus]}
+              </span>
+            </div>
+            <p className="mt-3 text-sm">
+              {applicationCase.data.preferredUniversity ||
+                "Tell us your preferred university"}
+              {applicationCase.data.course
+                ? ` · ${applicationCase.data.course}`
+                : ""}
+            </p>
+            <p className="mt-2 text-sm font-medium">
+              {universityReviewLabels[applicationCase.universityReview]}
+            </p>
+            {applicationCase.proposedUniversity && (
+              <p className="mt-2 text-sm">
+                Suggested / agreed university:{" "}
+                {applicationCase.proposedUniversity}
+              </p>
+            )}
+            {applicationCase.universityNote && (
+              <p className="mt-2 text-sm leading-7 whitespace-pre-wrap">
+                {applicationCase.universityNote}
+              </p>
+            )}
+            {applicationCase.reviewMessage && (
+              <p className="mt-3 rounded-lg bg-orange-50 p-3 text-sm leading-7 whitespace-pre-wrap text-slate-800">
+                {applicationCase.reviewMessage}
+              </p>
+            )}
+            <Link
+              href="/portal/application"
+              className="desk-focus mt-4 inline-flex min-h-11 items-center font-semibold underline"
+            >
+              {applicationCase.formStatus === "submitted"
+                ? "View application"
+                : "Complete your application"}
+            </Link>
+          </section>
+        )}
         <h1 className="font-display mt-2 text-3xl font-bold tracking-[-0.04em] text-[var(--desk-accent)]">
           Hi, {name}.
         </h1>
@@ -100,6 +164,24 @@ export function PortalDashboard({
               {visaLine ? <p>{visaLine}</p> : null}
             </PortalInfoDrawer>
           </div>
+          <ol
+            aria-label="Application processing stages"
+            className="mt-5 flex flex-wrap gap-2"
+          >
+            {leadStatuses.map((stage) => (
+              <li
+                key={stage}
+                aria-current={stage === status ? "step" : undefined}
+                className={`rounded-full border px-3 py-2 text-xs font-semibold ${stage === status ? "border-[var(--desk-accent)] bg-[var(--desk-accent)] text-white" : "border-[var(--desk-line)] text-[var(--desk-ink-muted)]"}`}
+              >
+                {leadStatusLabels[stage]}
+              </li>
+            ))}
+          </ol>
+          <p className="mt-3 text-xs text-[var(--desk-ink-muted)]">
+            Your admissions team updates this stage. This page refreshes every
+            minute while open.
+          </p>
         </section>
 
         <VisaStatusSection
@@ -131,11 +213,13 @@ export function PortalDashboard({
           </section>
         ) : null}
 
-        <VisaChecklistSection
-          checklist={checklist}
-          destination={destination}
-          loadError={checklistError}
-        />
+        {isVisaPipelineStage(status) && (
+          <VisaChecklistSection
+            checklist={checklist}
+            destination={destination}
+            loadError={checklistError}
+          />
+        )}
 
         <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
           <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">

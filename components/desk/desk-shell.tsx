@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/admin/leads", label: "Leads", icon: Users },
+  { href: "/admin/applications", label: "Applications", icon: ClipboardList },
   { href: "/admin/pipeline", label: "Pipeline Board", icon: Kanban },
   { href: "/admin/performance", label: "Performance", icon: BarChart3 },
   { href: "/admin/unlinked", label: "Unlinked accounts", icon: Link2Off },

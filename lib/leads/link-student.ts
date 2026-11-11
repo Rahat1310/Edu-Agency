@@ -12,6 +12,7 @@ import {
   type LeadStatus,
 } from "@/db/schema";
 import { phoneDigitVariants } from "@/lib/phone";
+import { canAutoLinkStudent } from "@/lib/applications/identity";
 import { LEAD_SOURCE_SELF_SIGNUP } from "@/lib/schemas/lead";
 import { ensureVisaApplicationForLead } from "@/lib/visa-applications/ensure";
 
@@ -55,6 +56,8 @@ export type LinkedStudentApplication = {
 export type StudentLinkInput = {
   user: { id: string; email: string; fullName: string | null };
   phone: string | null;
+  verifiedEmail?: string | null;
+  verifiedPhone?: string | null;
 };
 
 export type StudentLinkResult =
@@ -312,6 +315,17 @@ export async function syncStudentApplicationLink(
   }
 
   if (match) {
+    if (
+      !canAutoLinkStudent({
+        leadEmail: match.email,
+        leadPhone: match.phone,
+        verifiedEmail: input.verifiedEmail,
+        verifiedPhone: input.verifiedPhone,
+      })
+    ) {
+      await enqueueUnlinked(input.user.id, phone);
+      return { status: "pending" };
+    }
     const owner = owners.get(match.id);
 
     if (owner && owner !== input.user.id) {

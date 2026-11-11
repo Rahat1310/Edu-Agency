@@ -8,9 +8,9 @@ Next.js 15.5.23 App Router / React 19, Tailwind 4 and shared marketing layout; E
 
 - `/consultation`, `/bn/consultation`: four steps and explicit review; confirmation only in component memory (no public lookup or personal URL).
 - `POST /api/consultation`: bounded 24KB JSON, same-origin, server validation, honeypot, existing rate limiter and configured Turnstile verification. Opaque UUID retry key plus SHA-256 payload binding. The client cannot set assignment/reference/status.
-- `/admin/leads`: authenticated assessments with search, date/destination/status/counsellor filters, counts, pagination.
+- `/admin/leads`: unified lead list for all sources, with processing-stage and source/application filters. `/admin/leads?view=assessments` retains the assessment follow-up dashboard with date/destination/status/counsellor filters, counts and pagination.
 - `/admin/leads/[id]`: full assessment, private notes, status, reassignment, follow-up and outbox inspection/retry.
-- `/admin/leads?view=legacy`: existing enquiries/CRM; existing pipeline stages and student portal remain intact.
+- `/admin/leads?view=legacy`: backward-compatible alias of the unified lead list; the pipeline reads these same lead records. Student application forms and staff reviews are documented in `student-applications.md`.
 - Navbar desktop/mobile consultation buttons, homepage hero and consultation section, homepage/about profile assessment buttons and journey roadmap consultation CTA now use `/consultation`. Contact nav remains `/contact`; quiz remains separate. Contact page links to detailed assessment. Footer keeps existing general enquiry links.
 
 ## Database migration (additive; review before production)

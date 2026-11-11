@@ -1,4 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
+import { verifiedClerkContacts } from "@/lib/applications/identity";
 import { redirect } from "next/navigation";
 
 import { PhoneOnboarding } from "@/components/portal/phone-onboarding";
@@ -21,10 +22,11 @@ export default async function PortalOnboardingPage() {
   const result = await syncStudentApplicationLink({
     user,
     phone: phoneFromClerkUser(clerkUser),
+    ...verifiedClerkContacts(clerkUser),
   });
 
   if (result.status === "linked") {
-    redirect("/portal");
+    redirect("/portal/application");
   }
 
   return result.status === "pending" ? <PortalPending /> : <PhoneOnboarding />;

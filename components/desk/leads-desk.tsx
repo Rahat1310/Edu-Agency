@@ -13,6 +13,7 @@ import {
   leadDestinationOptions,
   leadStatusLabels,
   leadStatusOptions,
+  leadSourceLabels,
 } from "@/lib/leads/labels";
 import type { LeadListResult, LeadListRow } from "@/lib/leads/list-types";
 import {
@@ -21,6 +22,7 @@ import {
   type LeadListQuery,
 } from "@/lib/leads/list-query";
 import { cn } from "@/lib/utils";
+import { leadSourceFilters } from "@/lib/schemas/lead";
 const SEARCH_DEBOUNCE_MS = 300;
 type LeadsDeskProps = {
   query: LeadListQuery;
@@ -64,7 +66,7 @@ export function LeadsDesk({
   return (
     <div className="space-y-3">
       <form
-        className="grid gap-2 rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-surface)] p-3 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
+        className="grid gap-2 rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-surface)] p-3 md:grid-cols-2 xl:grid-cols-[1.4fr_1fr_1fr_1fr_auto]"
         onSubmit={(event) => {
           event.preventDefault();
           replaceQuery({ q: search, page: 1 });
@@ -104,7 +106,7 @@ export function LeadsDesk({
           </select>
         </label>
         <label className="text-[0.68rem] font-semibold tracking-[0.06em] text-[var(--desk-ink-muted)] uppercase">
-          Status
+          Processing stage
           <select
             name="status"
             value={query.status}
@@ -124,6 +126,25 @@ export function LeadsDesk({
             ))}
           </select>
         </label>
+        <label className="text-[0.68rem] font-semibold tracking-wide text-[var(--desk-ink-muted)] uppercase">
+          Source / application
+          <select
+            value={query.source}
+            onChange={(event) =>
+              replaceQuery({
+                source: event.target.value as LeadListQuery["source"],
+                page: 1,
+              })
+            }
+            className="desk-focus mt-1 h-8 w-full rounded border border-[var(--desk-line)] bg-[var(--desk-bg)] px-2 text-sm font-normal normal-case"
+          >
+            {leadSourceFilters.map((source) => (
+              <option key={source} value={source}>
+                {source ? (leadSourceLabels[source] ?? source) : "All sources"}
+              </option>
+            ))}
+          </select>
+        </label>
         <div className="flex items-end gap-2">
           <button
             type="submit"
@@ -137,6 +158,7 @@ export function LeadsDesk({
                 q: "",
                 destinationInterest: "",
                 status: "",
+                source: "",
                 sort: "created",
                 page: 1,
               })}
@@ -149,7 +171,7 @@ export function LeadsDesk({
       </form>
 
       {showLoading ? (
-        <DeskTableSkeleton columns={canDelete ? 6 : 5} rows={8} />
+        <DeskTableSkeleton columns={canDelete ? 7 : 6} rows={8} />
       ) : showEmpty ? (
         <DeskEmptyState
           title="No leads yet"
@@ -169,6 +191,11 @@ export function LeadsDesk({
             columns={[
               { id: "name", header: "Name", cell: (row) => row.name },
               {
+                id: "source",
+                header: "Source",
+                cell: (row) => leadSourceLabels[row.source] ?? row.source,
+              },
+              {
                 id: "phone",
                 header: "Phone / WhatsApp",
                 cell: (row) => <PhoneCell row={row} />,
@@ -184,7 +211,7 @@ export function LeadsDesk({
                   <SortHeader
                     href={leadsListHref(query, { sort: "status", page: 1 })}
                     active={query.sort === "status"}
-                    label="Status"
+                    label="Processing stage"
                   />
                 ),
                 cell: (row) => leadStatusLabels[row.status],

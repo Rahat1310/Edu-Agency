@@ -5,6 +5,7 @@ import {
   type DocumentType,
   type GeneralDocumentType,
 } from "@/db/schema";
+import { applicationDocumentLabels } from "@/lib/applications/documents";
 
 export const DOCUMENT_MAX_BYTES = 10 * 1024 * 1024;
 
@@ -39,6 +40,7 @@ export function isGeneralDocumentType(
 }
 
 export function documentTypeLabel(type: DocumentType): string {
+  if (applicationDocumentLabels[type]) return applicationDocumentLabels[type];
   if (isGeneralDocumentType(type)) {
     return documentTypeLabels[type];
   }

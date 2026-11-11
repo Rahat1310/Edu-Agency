@@ -712,7 +712,7 @@ function FloatingCard({
           </div>
 
           {/* Primary Title */}
-          <h4 className="font-heading mt-1 truncate text-[0.84rem] font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-slate-950">
+          <h4 className="font-heading mt-1 text-[0.84rem] leading-snug font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-slate-950">
             {title}
           </h4>
 
@@ -813,7 +813,9 @@ export function HeroFloatingArt({ locale }: HeroFloatingArtProps) {
         perk={
           isBn ? "✦ ডাইরেক্ট সরকারি স্বীকৃতি" : "✦ Direct MoE Accreditation"
         }
-        title={isBn ? "৪০+ পার্টনার বিশ্ববিদ্যালয়" : "40+ Partner Campuses"}
+        title={
+          isBn ? "২০০+ পার্টনার বিশ্ববিদ্যালয়" : "200+ Partner Universities"
+        }
         subtitle={
           isBn
             ? "চীন, মালয়েশিয়া, দক্ষিণ কোরিয়া ও ইউরোপ"

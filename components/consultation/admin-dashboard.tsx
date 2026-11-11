@@ -77,6 +77,7 @@ export async function AssessmentDashboard({
     Object.keys(params).forEach((k) => {
       if (get(k)) search.set(k, get(k));
     });
+    search.set("view", "assessments");
     search.set("page", String(p));
     return `/admin/leads?${search}`;
   };
@@ -86,8 +87,8 @@ export async function AssessmentDashboard({
     <div className="space-y-6">
       <div className="flex flex-wrap justify-between gap-3">
         <h1 className="text-2xl font-semibold">Student assessments</h1>
-        <Link href="/admin/leads?view=legacy" className="underline">
-          All enquiries & existing CRM
+        <Link href="/admin/leads" className="underline">
+          All leads
         </Link>
       </div>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-7">
@@ -106,6 +107,7 @@ export async function AssessmentDashboard({
         ))}
       </div>
       <form className="grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-3">
+        <input type="hidden" name="view" value="assessments" />
         <label>
           Search name, phone or reference
           <input name="q" defaultValue={q} className={input} />
@@ -158,7 +160,7 @@ export async function AssessmentDashboard({
         <button className="rounded bg-slate-900 p-2 text-white">
           Apply filters
         </button>
-        <Link href="/admin/leads" className="p-2 underline">
+        <Link href="/admin/leads?view=assessments" className="p-2 underline">
           Reset
         </Link>
       </form>

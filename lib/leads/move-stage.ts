@@ -1,9 +1,9 @@
 import "server-only";
 
-import { and, eq } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 
 import { db } from "@/db";
-import { leadActivity, leads, type LeadStatus } from "@/db/schema";
+import type { LeadStatus } from "@/db/schema";
 import { ensureVisaApplicationForLead } from "@/lib/visa-applications/ensure";
 
 export type PersistStageChangeResult =
@@ -19,35 +19,23 @@ export async function persistLeadStageChange(input: {
     return { ok: true };
   }
 
-  const [moved] = await db
-    .update(leads)
-    .set({ status: input.toStatus })
-    .where(and(eq(leads.id, input.leadId), eq(leads.status, input.fromStatus)))
-    .returning({ id: leads.id });
-
-  if (!moved) {
-    return {
-      ok: false,
-      message:
-        "This lead was already moved or no longer exists. Refresh the board and try again.",
-    };
-  }
-
   try {
-    await db.insert(leadActivity).values({
-      leadId: input.leadId,
-      actorUserId: input.actorUserId,
-      type: "stage_change",
-      content: null,
-      fromStatus: input.fromStatus,
-      toStatus: input.toStatus,
-    });
+    const moved = await db.execute(sql`
+      WITH changed AS (
+        UPDATE leads SET status=${input.toStatus}, updated_at=now()
+        WHERE id=${input.leadId}::uuid AND status=${input.fromStatus}
+        RETURNING id
+      )
+      INSERT INTO lead_activity (lead_id, actor_user_id, type, from_status, to_status, is_visible_to_student)
+      SELECT id, ${input.actorUserId}::uuid, 'stage_change', ${input.fromStatus}, ${input.toStatus}, true
+      FROM changed RETURNING id`);
+    if (!moved.rows.length)
+      return {
+        ok: false,
+        message:
+          "This lead was already moved or no longer exists. Refresh the board and try again.",
+      };
   } catch {
-    await db
-      .update(leads)
-      .set({ status: input.fromStatus })
-      .where(eq(leads.id, input.leadId));
-
     return {
       ok: false,
       message:

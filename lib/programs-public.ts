@@ -30,6 +30,7 @@ export type PublicProgramFilters = {
   country: ProgramCountry | "";
   level: ProgramLevel | "";
   field: string;
+  university?: string;
   page: number;
 };
 
@@ -79,6 +80,7 @@ export function parsePublicProgramFilters(input: {
   country?: string;
   level?: string;
   field?: string;
+  university?: string;
   page?: string;
 }): PublicProgramFilters {
   const page = Number.parseInt(input.page ?? "1", 10);
@@ -87,6 +89,7 @@ export function parsePublicProgramFilters(input: {
     country: parsePublicCountry(input.country),
     level: parsePublicLevel(input.level),
     field: (input.field ?? "").trim().slice(0, 200),
+    university: (input.university ?? "").trim().slice(0, 200),
     page: Number.isFinite(page) && page > 0 ? page : 1,
   };
 }
@@ -108,6 +111,12 @@ function publishedWhere(filters: PublicProgramFilters) {
 
   if (filters.field) {
     conditions.push(ilike(programs.field, likePattern(filters.field)));
+  }
+
+  if (filters.university) {
+    conditions.push(
+      ilike(programs.universityName, likePattern(filters.university)),
+    );
   }
 
   return and(...conditions);
@@ -162,6 +171,7 @@ export function getPublishedProgramPage(filters: PublicProgramFilters) {
       filters.country,
       filters.level,
       filters.field,
+      filters.university ?? "",
       String(filters.page),
     ],
     {

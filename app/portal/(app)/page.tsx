@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { PortalDashboard } from "@/components/portal/portal-dashboard";
+import { loadApplicationCase } from "@/lib/applications/load";
 import {
   getStudentApplication,
   type StudentApplication,
@@ -26,24 +27,36 @@ export default async function PortalHomePage({ searchParams }: PageProps) {
   }
 
   const params = await searchParams;
-  const [activity, ranking, checklistResult, visaStatusResult] =
-    await Promise.all([
-      listStudentVisibleActivity(application.lead.id),
-      loadDashboardMatches(application),
-      loadStudentVisaChecklist(
-        application.application.id,
-        application.lead.destinationInterest,
-      ),
-      isVisaPipelineStage(application.lead.status)
-        ? loadStudentVisaStatus(application.application.id)
-        : Promise.resolve({ status: null, error: false }),
-    ]);
+  const [
+    activity,
+    ranking,
+    checklistResult,
+    visaStatusResult,
+    applicationCase,
+  ] = await Promise.all([
+    listStudentVisibleActivity(application.lead.id),
+    loadDashboardMatches(application),
+    isVisaPipelineStage(application.lead.status)
+      ? loadStudentVisaChecklist(
+          application.application.id,
+          application.lead.destinationInterest,
+        )
+      : Promise.resolve({
+          checklist: { items: [], submittedCount: 0, total: 0 },
+          error: false,
+        }),
+    isVisaPipelineStage(application.lead.status)
+      ? loadStudentVisaStatus(application.application.id)
+      : Promise.resolve({ status: null, error: false }),
+    loadApplicationCase(application.application.id),
+  ]);
 
   return (
     <PortalDashboard
       name={firstName(application.user.fullName, application.user.email)}
       destination={application.lead.destinationInterest}
       status={application.lead.status}
+      applicationCase={applicationCase}
       activity={activity}
       forbidden={params.error === "forbidden"}
       ranking={ranking}

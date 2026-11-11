@@ -42,6 +42,13 @@ export function ProgramCard({ program, locale, dict }: ProgramCardProps) {
           <dd className="font-bold text-slate-900 tabular-nums">
             {program.tuitionAmount} {program.tuitionCurrency}
           </dd>
+          {program.country === "china" && (
+            <dd className="mt-1 text-xs leading-5 font-normal text-slate-500">
+              {locale === "bn"
+                ? "আনুমানিক বার্ষিক টিউশন · কোর্স ও ভাষা নিশ্চিত করুন"
+                : "Estimated annual tuition · confirm course & language"}
+            </dd>
+          )}
         </div>
         {intake.length > 0 ? (
           <div>

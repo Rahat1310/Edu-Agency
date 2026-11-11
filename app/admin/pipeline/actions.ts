@@ -38,6 +38,8 @@ export async function moveLeadStage(
     revalidatePath("/admin/leads");
     revalidatePath("/admin/performance");
     revalidatePath("/portal");
+    revalidatePath("/portal/application");
+    revalidatePath("/admin/applications", "layout");
   }
 
   return result;

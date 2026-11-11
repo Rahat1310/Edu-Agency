@@ -2,7 +2,14 @@
 
 import { SignOutButton } from "@clerk/nextjs";
 import { AnimatePresence, motion } from "framer-motion";
-import { Compass, FileText, LayoutDashboard, Menu, X } from "lucide-react";
+import {
+  Compass,
+  FileText,
+  ClipboardList,
+  LayoutDashboard,
+  Menu,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,6 +21,7 @@ import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/portal", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/portal/application", label: "My application", icon: ClipboardList },
   { href: "/portal/matches", label: "Matches", icon: Compass },
   { href: "/portal/documents", label: "Documents", icon: FileText },
 ] as const;

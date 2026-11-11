@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { documentTypes } from "@/db/schema";
+import { applicationDocumentKeys } from "@/lib/applications/documents";
 import {
   DOCUMENT_MAX_BYTES,
   DOCUMENT_REJECT_NOTE_MESSAGE,
@@ -14,7 +15,7 @@ import {
 export function allowedDocumentTypes(
   extraKeys: readonly string[] = [],
 ): Set<string> {
-  return new Set([...documentTypes, ...extraKeys]);
+  return new Set([...documentTypes, ...applicationDocumentKeys, ...extraKeys]);
 }
 
 export function documentTypeSchema(extraKeys: readonly string[] = []) {
