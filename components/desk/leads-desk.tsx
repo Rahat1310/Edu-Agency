@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
+import { moveLeadStage } from "@/app/admin/pipeline/actions";
+import type { LeadStatus } from "@/db/schema";
 import { LeadDeleteButton } from "@/components/admin/lead-delete-button";
 import type { DeskTableColumn } from "@/components/desk/data-table";
 import { DeskDataTable } from "@/components/desk/data-table";
@@ -106,7 +108,7 @@ export function LeadsDesk({
           </select>
         </label>
         <label className="text-[0.68rem] font-semibold tracking-[0.06em] text-[var(--desk-ink-muted)] uppercase">
-          Processing stage
+          Status
           <select
             name="status"
             value={query.status}
@@ -211,10 +213,10 @@ export function LeadsDesk({
                   <SortHeader
                     href={leadsListHref(query, { sort: "status", page: 1 })}
                     active={query.sort === "status"}
-                    label="Processing stage"
+                    label="Status"
                   />
                 ),
-                cell: (row) => leadStatusLabels[row.status],
+                cell: (row) => <LeadStatusSelect row={row} />,
               },
               {
                 id: "created",
@@ -293,6 +295,69 @@ export function LeadsDesk({
     </div>
   );
 }
+function LeadStatusSelect({ row }: { row: LeadListRow }) {
+  const router = useRouter();
+  const [status, setStatus] = useState(row.status);
+  const [pending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => setStatus(row.status), [row.status]);
+
+  function updateStatus(nextStatus: LeadStatus) {
+    if (pending || nextStatus === status) return;
+    const previousStatus = status;
+    setStatus(nextStatus);
+    setError(null);
+    startTransition(async () => {
+      try {
+        const result = await moveLeadStage({
+          leadId: row.id,
+          fromStatus: previousStatus,
+          toStatus: nextStatus,
+        });
+        if (!result.ok) {
+          setStatus(previousStatus);
+          setError(result.message);
+        }
+        router.refresh();
+      } catch {
+        setStatus(previousStatus);
+        setError("The status could not be saved. Please try again.");
+      }
+    });
+  }
+
+  return (
+    <div
+      onClick={(event) => event.stopPropagation()}
+      onKeyDown={(event) => event.stopPropagation()}
+    >
+      <select
+        aria-label={`Status for ${row.name}`}
+        aria-busy={pending}
+        disabled={pending}
+        value={status}
+        onChange={(event) => updateStatus(event.target.value as LeadStatus)}
+        className="desk-focus h-8 w-full min-w-28 rounded-[var(--desk-radius)] border border-[var(--desk-line)] bg-[var(--desk-bg)] px-2 text-sm text-[var(--desk-ink)] disabled:opacity-50"
+      >
+        {leadStatusOptions.map((option) => (
+          <option key={option} value={option}>
+            {leadStatusLabels[option]}
+          </option>
+        ))}
+      </select>
+      <span role="status" className="sr-only">
+        {pending ? "Saving status…" : ""}
+      </span>
+      {error ? (
+        <p role="alert" className="mt-1 text-xs text-[var(--destructive)]">
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 function PhoneCell({ row }: { row: LeadListRow }) {
   if (!row.whatsapp || row.whatsapp === row.phone) {
     return row.phone;
