@@ -8,6 +8,8 @@ import { programLevelLabels } from "@/lib/programs-labels";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 function Points({ items }: { items: string[] }) {
+  if (items.length === 0) return null;
+
   return (
     <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-7 text-slate-700">
       {items.map((item) => (
@@ -32,6 +34,13 @@ export function ChinaOfferDetail({
       other.universityId === offer.universityId && other.id !== offer.id,
   );
   const unavailable = offer.eligibility === "unavailable";
+  const dateFormat = new Intl.DateTimeFormat(bn ? "bn-BD" : "en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const reviewedOn = offer.reviewedOn ?? "2026-11-10";
   const majorList = (
     <ul className="mt-5 grid gap-3 sm:grid-cols-2">
       {offer.majors.map((major, i) => (
@@ -77,7 +86,7 @@ export function ChinaOfferDetail({
             {offer.location} ·{" "}
             {bn
               ? "অফারের তথ্য ইংরেজিতে দেওয়া হয়েছে"
-              : "Offer reviewed 10 November 2026"}
+              : `Offer reviewed ${dateFormat.format(new Date(`${reviewedOn}T00:00:00Z`))}`}
           </p>
           {ranking ? (
             <a
@@ -109,8 +118,8 @@ export function ChinaOfferDetail({
                   ? "অফারের দেশের তালিকায় বাংলাদেশ নেই। উপযুক্ত বিকল্প দেখতে অন্য অফার দেখুন।"
                   : "Bangladesh is excluded from the supplied country list. Explore an eligible alternative below."
                 : bn
-                  ? "যোগ্যতা, ভাষা বা ফি সম্পর্কে যেসব বিষয় নিশ্চিত করা দরকার, তা নিচের শর্তে দেওয়া আছে।"
-                  : "The conditions below identify eligibility, language or fee details that need confirmation with the university."}
+                  ? "আবেদনের সময়সীমা, যোগ্যতা, ফি ও অন্যান্য শর্তের যেসব তথ্য নিশ্চিত করা দরকার, তা নিচে দেওয়া আছে।"
+                  : "See the dates, eligibility and fee details below for the points that need university confirmation."}
             </p>
           </div>
         ) : null}
@@ -220,12 +229,22 @@ export function ChinaOfferDetail({
               <h2 className="text-2xl font-semibold text-slate-900">
                 {bn ? "আবেদনের ডকুমেন্ট" : "Application documents"}
               </h2>
-              <Points items={offer.documents} />
-              <p className="mt-5 text-xs leading-6 text-slate-500">
-                {bn
-                  ? "বিশ্ববিদ্যালয় অতিরিক্ত ডকুমেন্ট, অনুবাদ বা সত্যায়ন চাইতে পারে।"
-                  : "The university may request additional documents, translations or authentication after reviewing your application."}
-              </p>
+              {offer.documents.length > 0 ? (
+                <>
+                  <Points items={offer.documents} />
+                  <p className="mt-5 text-xs leading-6 text-slate-500">
+                    {bn
+                      ? "বিশ্ববিদ্যালয় অতিরিক্ত ডকুমেন্ট, অনুবাদ বা সত্যায়ন চাইতে পারে।"
+                      : "The university may request additional documents, translations or authentication after reviewing your application."}
+                  </p>
+                </>
+              ) : (
+                <p className="mt-4 text-sm leading-7 text-slate-600">
+                  {bn
+                    ? "এই অফারে আবেদনের ডকুমেন্টের তালিকা দেওয়া নেই। জমা দেওয়ার আগে বিশ্ববিদ্যালয়ের তালিকা নিশ্চিত করুন।"
+                    : "Confirm the university’s document checklist. The guide does not provide a list for this offer."}
+                </p>
+              )}
             </section>
           </div>
           <aside className="space-y-5 lg:sticky lg:top-24">
@@ -242,12 +261,7 @@ export function ChinaOfferDetail({
                     <dd className="mt-1 font-semibold text-slate-900">
                       {d.date ? (
                         <time dateTime={d.date}>
-                          {new Intl.DateTimeFormat(bn ? "bn-BD" : "en-GB", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                            timeZone: "UTC",
-                          }).format(new Date(`${d.date}T00:00:00Z`))}
+                          {dateFormat.format(new Date(`${d.date}T00:00:00Z`))}
                         </time>
                       ) : (
                         d.display
