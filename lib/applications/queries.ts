@@ -84,3 +84,23 @@ export function applicationReviewQuery(
       SELECT lead_id, ${actorId}::uuid, 'note', ${`Contact / student agreement: ${data.contactNote}`}, false FROM changed WHERE ${Boolean(data.contactNote)} RETURNING id
     ) SELECT id FROM changed`;
 }
+
+export function applicationTrackingUpdateQuery(input: {
+  id: string;
+  version: number;
+  tracking: import("@/lib/applications/tracking").ApplicationTracking;
+  actorId: string;
+  message: string;
+}) {
+  return sql`
+    WITH changed AS (
+      UPDATE applications SET tracking=${JSON.stringify(input.tracking)}::jsonb,
+        tracking_version=tracking_version+1, form_updated_at=now()
+      WHERE id=${input.id}::uuid AND tracking_version=${input.version} AND submitted_at IS NOT NULL
+      RETURNING id, lead_id
+    ), audit AS (
+      INSERT INTO lead_activity (lead_id, actor_user_id, type, content, is_visible_to_student)
+      SELECT lead_id, ${input.actorId}::uuid, 'system', ${input.message}, true
+      FROM changed RETURNING id
+    ) SELECT id FROM changed`;
+}

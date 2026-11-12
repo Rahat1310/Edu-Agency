@@ -221,6 +221,11 @@ export const applications = pgTable(
       .$type<string[]>()
       .notNull()
       .default([]),
+    tracking: jsonb("tracking")
+      .$type<import("../lib/applications/tracking").ApplicationTracking>()
+      .notNull()
+      .default({}),
+    trackingVersion: integer("tracking_version").notNull().default(0),
     reviewMessage: text("review_message"),
     universityReview: text("university_review", {
       enum: [

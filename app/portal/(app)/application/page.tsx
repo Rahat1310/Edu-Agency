@@ -1,3 +1,5 @@
+import { ApplicationTracker } from "@/components/portal/application-tracker";
+import { applicationReference } from "@/lib/applications/schema";
 import { redirect } from "next/navigation";
 import { getStudentApplication } from "@/lib/auth-helpers";
 import { loadApplicationCase } from "@/lib/applications/load";
@@ -18,6 +20,16 @@ export default async function ApplicationPage() {
     application.data.country = linked.lead.destinationInterest;
   }
   return (
-    <StudentApplicationForm application={application} documents={documents} />
+    <div className="mx-auto max-w-6xl space-y-8">
+      {application.submittedAt && (
+        <ApplicationTracker
+          live={application.formStatus === "submitted"}
+          tracking={application.tracking}
+          submittedAt={application.submittedAt}
+          reference={applicationReference(application.id)}
+        />
+      )}
+      <StudentApplicationForm application={application} documents={documents} />
+    </div>
   );
 }

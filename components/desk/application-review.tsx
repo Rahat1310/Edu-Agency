@@ -3,6 +3,7 @@ import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { reviewStudentApplication } from "@/app/admin/applications/actions";
 import { moveLeadStage } from "@/app/admin/pipeline/actions";
+import { ApplicationTrackingEditor } from "@/components/desk/application-tracking-editor";
 import { LeadDocuments } from "@/components/desk/lead-documents";
 import type { ApplicationCase } from "@/lib/applications/load";
 import type { StudentDocumentRow } from "@/lib/documents/types";
@@ -58,15 +59,16 @@ export function ApplicationReview({
   }
   return (
     <div className="space-y-6">
+      <ApplicationTrackingEditor application={application} />
       <section
         id="processing"
         className="scroll-mt-20 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] p-5"
       >
-        <h2 className="text-xl font-semibold">Processing tracker</h2>
+        <h2 className="text-xl font-semibold">Lead pipeline status</h2>
         <p className="mt-2 text-sm leading-7 text-[var(--desk-ink-muted)]">
-          This is the same stage used by the pipeline board and student tracker.
-          Select Applied only after recording the university submission in the
-          lead’s activity.
+          This status is shared with the lead list and pipeline board. Select
+          Applied only after recording the university submission in the lead’s
+          activity.
         </p>
         <form
           onSubmit={(event) => {
@@ -80,7 +82,7 @@ export function ApplicationReview({
                 });
                 setMessage(
                   result.ok
-                    ? "Processing stage updated in the pipeline and student tracker."
+                    ? "Lead status updated in the pipeline."
                     : result.message,
                 );
                 if (result.ok) router.refresh();
@@ -94,7 +96,7 @@ export function ApplicationReview({
           className="mt-4 flex flex-wrap items-end gap-3"
         >
           <label className="min-w-48 flex-1 text-sm">
-            Processing stage
+            Lead status
             <select
               value={stage}
               onChange={(e) => setStage(e.target.value as LeadStatus)}
@@ -111,7 +113,7 @@ export function ApplicationReview({
             disabled={pending || stage === application.stage}
             className={button}
           >
-            Update tracker
+            Update lead status
           </button>
         </form>
       </section>

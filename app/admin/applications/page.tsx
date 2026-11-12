@@ -1,3 +1,9 @@
+import {
+  applicationTrackingSteps,
+  readApplicationTracking,
+  trackingStatusLabels,
+  type ApplicationTracking,
+} from "@/lib/applications/tracking";
 import Link from "next/link";
 import { requireDashboardAccess } from "@/lib/auth-helpers";
 import { listApplicationCases } from "@/lib/applications/load";
@@ -32,8 +38,8 @@ export default async function ApplicationsPage({
         <div>
           <h1 className="text-2xl font-semibold">Student applications</h1>
           <p className="mt-2 text-sm leading-7 text-[var(--desk-ink-muted)]">
-            Application forms and documents linked to your leads. Processing
-            stages stay in sync with the pipeline.
+            Review student files and publish progress updates to their
+            application trackers.
           </p>
         </div>
         <Link
@@ -93,7 +99,8 @@ export default async function ApplicationsPage({
                 "Student",
                 "Preferred university / course",
                 "Form",
-                "Processing stage",
+                "Lead status",
+                "Student tracker",
                 "Last updated",
               ].map((h) => (
                 <th key={h} className="p-4">
@@ -127,6 +134,21 @@ export default async function ApplicationsPage({
                 </td>
                 <td className="p-4">{formStatusLabels[row.formStatus]}</td>
                 <td className="p-4">{leadStatusLabels[row.stage]}</td>
+                <td className="p-4">
+                  <TrackerSummary
+                    tracking={readApplicationTracking(
+                      row.tracking,
+                      row.submittedAt?.toISOString() ?? null,
+                    )}
+                    submitted={Boolean(row.submittedAt)}
+                  />
+                  <Link
+                    href={`/admin/applications/${row.id}#tracking`}
+                    className="desk-focus mt-2 block text-xs font-semibold underline"
+                  >
+                    Update tracker
+                  </Link>
+                </td>
                 <td className="p-4">
                   {formatLeadDate(row.updatedAt.toISOString())}
                 </td>
@@ -164,5 +186,41 @@ export default async function ApplicationsPage({
         )}
       </nav>
     </div>
+  );
+}
+
+function TrackerSummary({
+  tracking,
+  submitted,
+}: {
+  tracking: ApplicationTracking;
+  submitted: boolean;
+}) {
+  if (!submitted)
+    return (
+      <span className="text-[var(--desk-ink-muted)]">Awaiting submission</span>
+    );
+  const current =
+    applicationTrackingSteps.find(
+      (step) => tracking[step.id]?.status === "blocked",
+    ) ??
+    applicationTrackingSteps.find(
+      (step) => tracking[step.id]?.status === "in_progress",
+    ) ??
+    applicationTrackingSteps.find(
+      (step) => tracking[step.id]?.status !== "completed",
+    );
+  if (!current)
+    return <span className="text-emerald-700">All steps complete</span>;
+  const state = tracking[current.id]?.status ?? "pending";
+  return (
+    <span
+      className={
+        state === "blocked" ? "text-rose-700" : "text-[var(--desk-ink)]"
+      }
+    >
+      {current.label}
+      <span className="mt-1 block text-xs">{trackingStatusLabels[state]}</span>
+    </span>
   );
 }

@@ -1,14 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import type { ApplicationCase } from "@/lib/applications/load";
 import {
   formStatusLabels,
   universityReviewLabels,
 } from "@/lib/applications/schema";
-import { leadStatuses } from "@/db/schema";
-import { leadStatusLabels } from "@/lib/leads/labels";
+import { ApplicationTracker } from "@/components/portal/application-tracker";
+import { applicationReference } from "@/lib/applications/schema";
 import { MatchCard } from "@/components/portal/match-card";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import { VisaChecklistSection } from "@/components/portal/visa-checklist";
@@ -18,7 +16,6 @@ import type { LeadDestinationInterest, LeadStatus } from "@/db/schema";
 import type { StudentActivityItem } from "@/lib/leads/activity-types";
 import { formatLeadDate } from "@/lib/leads/labels";
 import type { PortalMatchRanking } from "@/lib/matching/types";
-import { destinationLine } from "@/lib/portal/copy";
 import { preDepartureDashboardHref } from "@/lib/pre-departure/dashboard-href";
 import { programCountryLabels } from "@/lib/programs-labels";
 import { programCountryFromLeadDestination } from "@/lib/visa-requirements/destination";
@@ -54,14 +51,6 @@ export function PortalDashboard({
   visaLine?: string | null;
   visaStatusError?: boolean;
 }) {
-  const router = useRouter();
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      if (document.visibilityState === "visible") router.refresh();
-    }, 60000);
-    return () => window.clearInterval(timer);
-  }, [router]);
-  const guide = portalGuideFor(status);
   const tasks = portalTasksFor(status);
   const preDepartureHref = preDepartureDashboardHref(destination, status);
   const lockedCountry = programCountryFromLeadDestination(destination);
@@ -91,6 +80,17 @@ export function PortalDashboard({
         <p className="mt-2 text-base leading-7 text-[var(--desk-ink-muted)]">
           Check your progress and see what’s next.
         </p>
+
+        {applicationCase && (
+          <div className="mt-6 lg:col-span-2">
+            <ApplicationTracker
+              live
+              tracking={applicationCase.tracking}
+              submittedAt={applicationCase.submittedAt}
+              reference={applicationReference(applicationCase.id)}
+            />
+          </div>
+        )}
 
         {applicationCase && (
           <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] p-5">
@@ -135,38 +135,6 @@ export function PortalDashboard({
             </Link>
           </section>
         )}
-        <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
-          <p className="font-utility text-[0.68rem] font-semibold tracking-[0.08em] text-[var(--desk-ink-muted)] uppercase">
-            Application status
-          </p>
-          <h2 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-            {guide.headline}
-          </h2>
-          <p className="mt-2 text-[0.95rem] leading-6 text-[var(--desk-ink)]">
-            {guide.summary}
-          </p>
-          <p className="mt-3 text-sm text-[var(--desk-ink-muted)]">
-            {destinationLine(destination)}
-          </p>
-          <ol
-            aria-label="Application processing stages"
-            className="mt-5 flex flex-wrap gap-2"
-          >
-            {leadStatuses.map((stage) => (
-              <li
-                key={stage}
-                aria-current={stage === status ? "step" : undefined}
-                className={`rounded-full border px-3 py-2 text-xs font-semibold ${stage === status ? "border-[var(--desk-accent)] bg-[var(--desk-accent)] text-white" : "border-[var(--desk-line)] text-[var(--desk-ink-muted)]"}`}
-              >
-                {leadStatusLabels[stage]}
-              </li>
-            ))}
-          </ol>
-          <p className="mt-3 text-xs text-[var(--desk-ink-muted)]">
-            Updated by your admissions team.
-          </p>
-        </section>
-
         <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
           <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
             Your next steps

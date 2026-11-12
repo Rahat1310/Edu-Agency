@@ -1,4 +1,5 @@
 import "server-only";
+import { readApplicationTracking } from "@/lib/applications/tracking";
 import { z } from "zod";
 import { and, desc, eq, getTableColumns, ilike, or, sql } from "drizzle-orm";
 import { db } from "@/db";
@@ -49,6 +50,11 @@ export async function loadApplicationCase(id: string) {
     submittedAt: row.submittedAt?.toISOString() ?? null,
     updatedAt: row.formUpdatedAt.toISOString(),
     requestedDocuments: row.requestedDocuments,
+    tracking: readApplicationTracking(
+      row.tracking,
+      row.submittedAt?.toISOString() ?? null,
+    ),
+    trackingVersion: row.trackingVersion,
     reviewMessage: row.reviewMessage,
     universityReview: row.universityReview,
     proposedUniversity: row.proposedUniversity,
@@ -109,6 +115,7 @@ export async function listApplicationCases(input: {
         name: leads.name,
         formStatus: applications.formStatus,
         stage: leads.status,
+        tracking: applications.tracking,
         data: applications.applicationData,
         submittedAt: applications.submittedAt,
         updatedAt: applications.formUpdatedAt,

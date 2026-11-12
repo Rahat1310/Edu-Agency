@@ -61,6 +61,7 @@ export default async function ApplicationDetail({
       </header>
       <nav aria-label="Student file sections" className="flex flex-wrap gap-2">
         {[
+          ["tracking", "Student tracker"],
           ["profile", "Application details"],
           ["review", "University & review"],
           ["documents", "Documents"],
