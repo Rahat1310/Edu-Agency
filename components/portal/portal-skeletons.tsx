@@ -4,7 +4,7 @@ import { documentTypeValues } from "@/lib/documents/constants";
 export function PortalDashboardSkeleton() {
   return (
     <div
-      className="mx-auto max-w-2xl space-y-4"
+      className="mx-auto max-w-6xl space-y-4"
       role="status"
       aria-live="polite"
       aria-label="Loading your file"
@@ -72,7 +72,7 @@ export function VisaChecklistSkeleton() {
 export function PortalDocumentsSkeleton() {
   return (
     <div
-      className="mx-auto max-w-2xl space-y-4"
+      className="mx-auto max-w-6xl space-y-4"
       role="status"
       aria-live="polite"
       aria-label="Loading your papers"
@@ -100,7 +100,7 @@ export function PortalDocumentsSkeleton() {
 export function PortalMatchesSkeleton() {
   return (
     <div
-      className="mx-auto max-w-2xl space-y-4"
+      className="mx-auto max-w-6xl space-y-4"
       role="status"
       aria-live="polite"
       aria-label="Loading your matches"

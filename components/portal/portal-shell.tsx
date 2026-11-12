@@ -4,6 +4,7 @@ import { SignOutButton } from "@clerk/nextjs";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Compass,
+  ArrowUpRight,
   FileText,
   ClipboardList,
   LayoutDashboard,
@@ -22,7 +23,7 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { href: "/portal", label: "Dashboard", icon: LayoutDashboard },
   { href: "/portal/application", label: "My application", icon: ClipboardList },
-  { href: "/portal/matches", label: "Matches", icon: Compass },
+  { href: "/portal/matches", label: "Find programmes", icon: Compass },
   { href: "/portal/documents", label: "Documents", icon: FileText },
 ] as const;
 
@@ -109,7 +110,7 @@ export function PortalShell({ studentName, children }: PortalShellProps) {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-[var(--desk-line)] bg-[var(--desk-surface)] px-4">
+        <header className="flex min-h-16 shrink-0 items-center justify-between gap-3 border-b border-[var(--desk-line)] bg-[var(--desk-surface)] px-4">
           <div className="flex min-w-0 items-center gap-2">
             <button
               ref={menuButtonRef}
@@ -123,11 +124,18 @@ export function PortalShell({ studentName, children }: PortalShellProps) {
               <span className="sr-only">Open menu</span>
             </button>
             <p className="truncate text-sm text-[var(--desk-ink-muted)]">
-              Your file
+              Student portal
             </p>
           </div>
-          <div className="flex min-w-0 items-center gap-3">
-            <p className="min-w-0 truncate text-right text-sm font-semibold text-[var(--desk-ink)]">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <Link
+              href="/"
+              className="desk-focus inline-flex min-h-9 shrink-0 items-center gap-1.5 rounded-full border border-[var(--desk-line)] px-3 text-sm font-medium text-[var(--desk-ink)] hover:bg-[var(--desk-surface-muted)]"
+            >
+              Main website
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </Link>
+            <p className="hidden min-w-0 truncate text-right text-sm font-semibold text-[var(--desk-ink)] sm:block">
               {studentName}
             </p>
             <SignOutButton redirectUrl="/">

@@ -22,179 +22,112 @@ export type PortalStageGuide = {
 
 export const portalStageGuides: Record<LeadStatus, PortalStageGuide> = {
   new: {
-    headline: "We've received your details.",
-    summary:
-      "Someone from this office will WhatsApp you — usually within a day or two. You don't need to chase unless it's been longer than that.",
+    headline: "We’ve received your details",
+    summary: "Your counsellor will contact you to discuss your plans.",
     tasks: [
-      {
-        id: "new-whatsapp",
-        title: "Keep WhatsApp notifications on",
-        detail:
-          "We'll message from this office. Save the number when it comes in so it doesn't look like spam.",
-      },
+      { id: "new-contact", title: "Check your phone for a message from us" },
       {
         id: "new-matches",
-        title: "See which published programs fit your file",
-        detail:
-          "We'll filter the directory first, then rank a short list. This is not an offer.",
+        title: "Explore suggested programmes",
         href: "/portal/matches",
       },
       {
         id: "new-passport",
-        title: "Have your passport and latest marksheet nearby",
-        detail: "The first call goes faster if those two are in reach.",
-      },
-      {
-        id: "new-family",
-        title: "Tell a parent or guardian we'll be in touch",
-        detail:
-          "So nobody is surprised when an unknown number calls about university.",
+        title: "Have your passport and latest marksheet ready",
       },
     ],
   },
   contacted: {
-    headline: "A counselor is talking with you.",
-    summary:
-      "We've already reached out, or tried to. If the chat went quiet, send a WhatsApp. Don't wait and wonder.",
+    headline: "You’re in touch with your counsellor",
+    summary: "We’ll help you choose a programme and prepare your application.",
     tasks: [
       {
         id: "contacted-reply",
-        title: "Reply to the counselor, even if it's just “got it”",
-        detail: "Silence looks like a wrong number on our side.",
+        title: "Reply to your counsellor’s latest message",
       },
       {
         id: "contacted-questions",
-        title: "Write down what your family wants to ask",
-        detail: "Budget, city, and degree are the three we hear most.",
+        title: "Discuss your budget and preferred course",
       },
       {
         id: "contacted-hold-files",
-        title: "Don't send a pile of PDFs until we ask",
-        detail: "We'll tell you the order. Random files in WhatsApp get lost.",
+        title: "Check which documents you need",
+        href: "/portal/documents",
       },
     ],
   },
   documents: {
-    headline: "We're reviewing your documents.",
+    headline: "Your documents are being reviewed",
     summary:
-      "Universities want a passport scan, transcripts, and language scores before they can move. We'll WhatsApp you if something is missing.",
+      "We’ll let you know if anything is missing or needs a clearer copy.",
     tasks: [
       {
         id: "documents-passport",
-        title: "Scan the photo page of your passport, in colour",
+        title: "Upload your passport photo page",
         href: "/portal/documents",
       },
       {
         id: "documents-transcripts",
-        title: "Scan transcripts and certificates",
-        detail: "Keep the originals. We need clear photos or PDFs.",
+        title: "Add your certificates and transcripts",
         href: "/portal/documents",
       },
       {
         id: "documents-language",
-        title: "Add language scores if you have them",
-        detail: "IELTS, TOEFL, HSK, or TOPIK — whichever you sat.",
-      },
-      {
-        id: "documents-wait",
-        title: "Upload here only when we name the file",
-        detail:
-          "Don't dump everything into WhatsApp hoping we sort it. Documents in this portal stay with your file.",
+        title: "Add language test results, if available",
         href: "/portal/documents",
       },
     ],
   },
   applied: {
-    headline: "Your application is with the university.",
-    summary:
-      "This wait is normal. We'll tell you as soon as they reply. You don't need to email them yourself.",
+    headline: "Your application is with the university",
+    summary: "We’ll share the university’s response here when it arrives.",
     tasks: [
-      {
-        id: "applied-wait",
-        title: "Let us handle the university email",
-        detail: "If they ask for something extra, we'll tell you the same day.",
-      },
+      { id: "applied-wait", title: "Check here for application updates" },
       {
         id: "applied-phone",
-        title: "Keep your phone on",
-        detail: "Extra document requests often have a short deadline.",
+        title: "Reply promptly if we request more documents",
       },
       {
         id: "applied-scam",
-        title: "Don't pay anyone who claims to be the university",
-        detail:
-          "If a payment is real, we will say so on WhatsApp and in this file.",
+        title: "Confirm payment requests with your counsellor",
       },
     ],
   },
   offer: {
-    headline: "There's an offer to read with your family.",
-    summary:
-      "Some offers have conditions — marks, a deposit, a language score. We'll go through the letter with you before you say yes.",
+    headline: "Your offer has arrived",
+    summary: "Review the conditions and deadline with your counsellor.",
     tasks: [
-      {
-        id: "offer-read",
-        title: "Read the offer letter together, including the deadline",
-        detail:
-          "Conditions hide in the small print. Ask us if a sentence is unclear.",
-      },
+      { id: "offer-read", title: "Read your offer letter and its conditions" },
       {
         id: "offer-deposit",
-        title: "Ask us before you pay a deposit",
-        detail:
-          "We'll confirm the account details so the money goes to the right place.",
+        title: "Confirm the deposit and payment details with us",
       },
-      {
-        id: "offer-compare",
-        title: "Tell us if a second offer arrives",
-        detail:
-          "We can sit with you and compare them — tuition, city, and conditions.",
-      },
+      { id: "offer-compare", title: "Let your counsellor know your decision" },
     ],
   },
   visa: {
-    headline: "We're lining up your visa papers.",
-    summary:
-      "Don't book flights yet. Each country has its own order, and sending the wrong form first costs weeks.",
+    headline: "Your visa is in progress",
+    summary: "Follow your visa checklist and check here for updates.",
     tasks: [
-      {
-        id: "visa-passport",
-        title: "Keep your passport free for this visa",
-        detail: "Don't start another visa trip in the middle of this one.",
-      },
-      {
-        id: "visa-flights",
-        title: "Don't book flights until we say so",
-        detail: "A cheap ticket is expensive if the visa isn't ready.",
-      },
+      { id: "visa-passport", title: "Keep your passport available" },
       {
         id: "visa-country",
-        title: "Wait for the country-specific list from your counselor",
-        detail:
-          "China needs JW201/JW202 after the offer. Malaysia's student pass is via EMGS, from outside the country. India starts on the SII portal. Korea is D-2 or D-4.",
+        title: "Upload any requested visa documents",
+        href: "/portal/documents",
       },
+      { id: "visa-flights", title: "Confirm your visa before booking flights" },
     ],
   },
   departed: {
-    headline: "You're on your way.",
-    summary:
-      "Message us when you land so we know you're safe. After that we can help with SIM, hostel, and the first week.",
+    headline: "Ready for your next chapter",
+    summary: "Your counsellor can help with arrival and settling in.",
     tasks: [
-      {
-        id: "departed-land",
-        title: "WhatsApp us when you land",
-        detail: "A short “I've arrived” is enough.",
-      },
+      { id: "departed-land", title: "Let us know when you arrive" },
       {
         id: "departed-photos",
-        title: "Keep a photo of your passport and offer letter on your phone",
-        detail: "Airport and hostel desks ask for these more than once.",
+        title: "Keep copies of your passport and offer letter handy",
       },
-      {
-        id: "departed-week",
-        title: "Ask us about SIM, hostel, and the first-week checklist",
-        detail: "We'd rather you ask twice than get stuck at a kiosk.",
-      },
+      { id: "departed-week", title: "Confirm your housing and airport pickup" },
     ],
   },
 };

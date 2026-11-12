@@ -34,9 +34,9 @@ export function PortalMatches({
   const visibleRanking = ranking;
   return (
     <div className="space-y-3">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-6xl">
         <p className="font-utility text-[0.68rem] font-semibold tracking-[0.14em] text-[var(--brand-green)] uppercase">
-          Matches
+          Find programmes
         </p>
         <h1 className="font-display mt-2 text-3xl font-bold tracking-[-0.04em] text-[var(--desk-accent)]">
           Suggested programmes
@@ -49,7 +49,7 @@ export function PortalMatches({
 
         <section className="mt-8 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
           <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-            Your matching details
+            Your preferences
           </h2>
           <p className="mt-2 text-sm leading-6 text-[var(--desk-ink-muted)]">
             Update your education, preferred destinations, test scores, and
@@ -75,7 +75,7 @@ export function PortalMatches({
                 id="ranked-matches-heading"
                 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]"
               >
-                Ranked for you
+                Programmes for you
               </h2>
               <button
                 type="button"
@@ -93,7 +93,7 @@ export function PortalMatches({
                   });
                 }}
               >
-                {rankingPending ? "Ranking…" : "Refresh matches"}
+                {rankingPending ? "Finding programmes…" : "Refresh suggestions"}
               </button>
             </div>
             {refreshError ? (
@@ -118,7 +118,7 @@ export function PortalMatches({
           <div className="mt-6">
             <PortalEmptyState
               title="Save your education, destination, and budget first"
-              body="Once those three are on the file, we can filter the directory and rank a short list. Scores help, but they are optional."
+              body="We’ll suggest programmes using these details. Test scores are optional."
             />
           </div>
         )}

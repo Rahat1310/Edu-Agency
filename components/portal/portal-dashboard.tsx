@@ -10,7 +10,6 @@ import {
 import { leadStatuses } from "@/db/schema";
 import { leadStatusLabels } from "@/lib/leads/labels";
 import { MatchCard } from "@/components/portal/match-card";
-import { PortalInfoDrawer } from "@/components/portal/info-drawer";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import { VisaChecklistSection } from "@/components/portal/visa-checklist";
 import { VisaStatusSection } from "@/components/portal/visa-status-section";
@@ -72,19 +71,25 @@ export function PortalDashboard({
   const feed = activity;
   return (
     <div className="space-y-3">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto grid max-w-6xl gap-x-6 lg:grid-cols-2 [&>h1]:lg:col-span-2 [&>p]:lg:col-span-2">
         {forbidden ? (
           <p
             role="alert"
             className="mb-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-4 py-3 text-sm text-[var(--desk-ink)]"
           >
-            That page is for counselors. You&apos;re in the right place here —
-            this is your file.
+            That page is for staff. You can manage your application here.
           </p>
         ) : null}
 
         <p className="font-utility text-[0.68rem] font-semibold tracking-[0.14em] text-[var(--brand-green)] uppercase">
           Dashboard
+        </p>
+
+        <h1 className="font-display mt-2 text-3xl font-bold tracking-[-0.04em] text-[var(--desk-accent)]">
+          Hi, {name}.
+        </h1>
+        <p className="mt-2 text-base leading-7 text-[var(--desk-ink-muted)]">
+          Check your progress and see what’s next.
         </p>
 
         {applicationCase && (
@@ -107,8 +112,7 @@ export function PortalDashboard({
             </p>
             {applicationCase.proposedUniversity && (
               <p className="mt-2 text-sm">
-                Suggested / agreed university:{" "}
-                {applicationCase.proposedUniversity}
+                University: {applicationCase.proposedUniversity}
               </p>
             )}
             {applicationCase.universityNote && (
@@ -131,17 +135,9 @@ export function PortalDashboard({
             </Link>
           </section>
         )}
-        <h1 className="font-display mt-2 text-3xl font-bold tracking-[-0.04em] text-[var(--desk-accent)]">
-          Hi, {name}.
-        </h1>
-        <p className="mt-2 text-base leading-7 text-[var(--desk-ink-muted)]">
-          This is your study-abroad file. We&apos;ll keep it in one place so you
-          and your family can see where things stand.
-        </p>
-
-        <section className="mt-8 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
+        <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
           <p className="font-utility text-[0.68rem] font-semibold tracking-[0.08em] text-[var(--desk-ink-muted)] uppercase">
-            Where you are
+            Application status
           </p>
           <h2 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
             {guide.headline}
@@ -152,18 +148,6 @@ export function PortalDashboard({
           <p className="mt-3 text-sm text-[var(--desk-ink-muted)]">
             {destinationLine(destination)}
           </p>
-          <div className="mt-5">
-            <PortalInfoDrawer
-              triggerLabel="What this stage means"
-              title="Where you are right now"
-            >
-              <p>{guide.summary}</p>
-              <p className="text-[var(--desk-ink-muted)]">
-                {destinationLine(destination)}
-              </p>
-              {visaLine ? <p>{visaLine}</p> : null}
-            </PortalInfoDrawer>
-          </div>
           <ol
             aria-label="Application processing stages"
             className="mt-5 flex flex-wrap gap-2"
@@ -179,9 +163,19 @@ export function PortalDashboard({
             ))}
           </ol>
           <p className="mt-3 text-xs text-[var(--desk-ink-muted)]">
-            Your admissions team updates this stage. This page refreshes every
-            minute while open.
+            Updated by your admissions team.
           </p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
+          <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
+            Your next steps
+          </h2>
+          <ol className="mt-4 space-y-4">
+            {tasks.map((task, index) => (
+              <TaskRow key={task.id} task={task} index={index} />
+            ))}
+          </ol>
         </section>
 
         <VisaStatusSection
@@ -199,10 +193,8 @@ export function PortalDashboard({
               Pre-departure notes for {programCountryLabels[lockedCountry]}
             </h2>
             <p className="mt-2 text-[0.95rem] leading-6 text-[var(--desk-ink)]">
-              Review essential arrival notes for student housing, airport
-              pickup, SIM setup, and campus orientation. Always confirm flight
-              dates and arrival arrangements with your counselor before making
-              travel bookings.
+              Plan your arrival, housing and airport pickup with your
+              counsellor.
             </p>
             <Link
               href={preDepartureHref}
@@ -223,48 +215,37 @@ export function PortalDashboard({
 
         <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
           <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-            Programs that fit this file
+            Suggested programmes
           </h2>
           <p className="mt-2 text-[0.95rem] leading-6 text-[var(--desk-ink)]">
-            We filter the directory first, then rank a short list. This is not
-            an offer, and it is not a scholarship score.
+            Suggestions based on your education, destination and budget. Your
+            counsellor can help you choose.
           </p>
           <DashboardMatches ranking={ranking} />
           <Link
             href="/portal/matches"
             className="desk-focus desk-press mt-4 inline-flex min-h-11 items-center rounded-full border border-[var(--desk-line)] bg-[var(--desk-bg)] px-4 text-sm font-semibold text-[var(--desk-ink)]"
           >
-            {ranking?.matches.length ? "See all matches" : "See your matches"}
+            {ranking?.matches.length ? "View programmes" : "Find programmes"}
           </Link>
-        </section>
-
-        <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
-          <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-            What to do now
-          </h2>
-          <ol className="mt-4 space-y-4">
-            {tasks.map((task, index) => (
-              <TaskRow key={task.id} task={task} index={index} />
-            ))}
-          </ol>
         </section>
 
         <section className="mt-6">
           <h2 className="px-1 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-            Updates from your counselor
+            Latest updates
           </h2>
           {feed.length === 0 ? (
             <div className="mt-4">
               <PortalEmptyState
-                title="Nothing from your counselor yet — that's normal"
-                body="Send your first scan, or WhatsApp us if you already have a question. When someone here writes you on purpose, it shows up here."
+                title="No updates yet"
+                body="Updates from your counsellor will appear here."
                 action={
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/portal/documents"
                       className="desk-focus desk-press inline-flex min-h-11 items-center rounded-full border border-[var(--desk-line)] bg-[var(--desk-bg)] px-4 text-sm font-semibold text-[var(--desk-ink)]"
                     >
-                      Send a document
+                      Upload documents
                     </Link>
                     <a
                       href={whatsappHref}
@@ -290,7 +271,7 @@ export function PortalDashboard({
         </section>
 
         <p className="mt-6 text-sm leading-6 text-[var(--desk-ink-muted)]">
-          Questions in the evening?{" "}
+          Have a question?{" "}
           <a
             href={whatsappHref}
             target="_blank"
@@ -299,7 +280,7 @@ export function PortalDashboard({
           >
             WhatsApp us
           </a>
-          . A counselor reads that chat — you won&apos;t get a bot.
+          .
         </p>
       </div>
     </div>
@@ -309,7 +290,7 @@ function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
   if (!ranking) {
     return (
       <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
-        Save your education, destination, and budget on the matches page first.
+        Add your education, destination and budget to see suggestions.
       </p>
     );
   }
@@ -323,8 +304,8 @@ function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
   if (ranking.emptyShortlist || ranking.matches.length === 0) {
     return (
       <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
-        Nothing published passed the destination, level, and tuition filters
-        yet.
+        No programmes match your preferences yet. Try updating your destination
+        or budget.
       </p>
     );
   }

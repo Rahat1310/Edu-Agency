@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { useDeskToast } from "@/components/desk/toast";
 import { PortalInfoDrawer } from "@/components/portal/info-drawer";
-import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import type { LeadDestinationInterest } from "@/db/schema";
 import type { StudentDocumentRow } from "@/lib/documents/types";
 import {
@@ -85,40 +84,37 @@ export function PortalDocuments({
   }, [focusType]);
   return (
     <div className="space-y-3">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-6xl">
         <p className="font-utility text-[0.68rem] font-semibold tracking-[0.14em] text-[var(--brand-green)] uppercase">
           Documents
         </p>
         <h1 className="font-display mt-2 text-3xl font-bold tracking-[-0.04em] text-[var(--desk-accent)]">
-          Your papers, one file at a time
+          Your documents
         </h1>
         <p className="mt-2 text-base leading-7 text-[var(--desk-ink-muted)]">
-          PDF, JPG, or PNG, under 10 MB. A counselor sees it after it lands here
-          — don&apos;t send the same file on WhatsApp unless we ask.
+          Upload clear scans or photos. PDF, JPG or PNG, up to 10 MB each.
         </p>
         <Link
           href="/portal/application"
           className="desk-focus mt-4 inline-flex min-h-11 items-center text-sm font-semibold underline"
         >
-          Return to application & submit
+          Back to my application
         </Link>
         {applicationSlots && (
           <p className="mt-2 text-sm leading-7 text-[var(--desk-ink-muted)]">
-            This checklist follows your saved qualifications and your
-            counsellor’s requests. Save your application after changing academic
-            details. Multiple files can be uploaded for recommendation letters
-            or other supporting documents.
+            Your list is based on your saved application. You can add more than
+            one file per document.
           </p>
         )}
 
         <div className="mt-4">
           <PortalInfoDrawer
-            triggerLabel="What families usually get ready"
-            title="Start gathering these"
+            triggerLabel="What should I upload?"
+            title="Document guide"
           >
             <p>
-              These are the papers almost every file needs. Country-specific
-              visa forms come later — after an offer, not before.
+              Start with your passport and academic documents. Your counsellor
+              will let you know what else is needed.
             </p>
             <ul className="list-disc space-y-2 pl-5">
               {hints.map((hint) => (
@@ -128,54 +124,57 @@ export function PortalDocuments({
           </PortalInfoDrawer>
         </div>
 
-        {rows.length === 0 ? (
-          <div className="mt-8">
-            <PortalEmptyState
-              title="Your file is empty — start with one scan"
-              body="A passport photo page or your latest marksheet is enough for a first look. Pick a type below and upload. We'll tell you if we need a different page."
-              action={
-                <div className="flex flex-wrap gap-2">
-                  <a
-                    href="#document-types"
-                    className="desk-focus desk-press inline-flex min-h-11 items-center rounded-full border border-[var(--desk-line)] bg-[var(--desk-bg)] px-4 text-sm font-semibold text-[var(--desk-ink)]"
-                  >
-                    Choose a type to upload
-                  </a>
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="desk-focus desk-press inline-flex min-h-11 items-center rounded-full border border-[var(--desk-line)] px-4 text-sm font-semibold text-[var(--desk-ink)]"
-                  >
-                    Ask on WhatsApp
-                  </a>
-                </div>
-              }
-            />
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-4">
+          <div>
+            <p className="text-sm font-semibold text-[var(--desk-ink)]">
+              {
+                slots.filter((slot) =>
+                  rows.some(
+                    (row) =>
+                      row.type === slot.documentTypeKey &&
+                      row.status !== "rejected",
+                  ),
+                ).length
+              }{" "}
+              of {slots.length} documents uploaded
+            </p>
+            <p className="mt-1 text-sm text-[var(--desk-ink-muted)]">
+              Required documents are marked below.
+            </p>
           </div>
-        ) : null}
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+            className="desk-focus text-sm font-semibold text-[var(--desk-accent)] underline underline-offset-4"
+          >
+            Need help? WhatsApp us
+          </a>
+        </div>
 
-        <div id="document-types" className="mt-8 scroll-mt-20 space-y-4">
+        <div
+          id="document-types"
+          className="mt-5 grid scroll-mt-20 items-start gap-4 xl:grid-cols-2"
+        >
           {slots.map((slot) => (
             <TypeCard
               key={slot.documentTypeKey}
               applicationId={applicationId}
               type={slot.documentTypeKey}
-              label={`${slot.documentName}${slot.required ? " · Required" : ""}`}
-              description={slot.description}
+              label={slot.documentName}
+              required={slot.required}
+              description={applicationSlots ? undefined : slot.description}
               rows={rows.filter((row) => row.type === slot.documentTypeKey)}
               highlighted={focusType === slot.documentTypeKey}
             />
           ))}
           {extraSlots.length > 0 ? (
-            <div className="pt-2">
+            <div className="pt-4 xl:col-span-2">
               <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-                Visa papers for this route
+                Visa documents
               </h2>
               <p className="mt-1 text-sm leading-6 text-[var(--desk-ink-muted)]">
-                These are the country-specific files from your visa checklist.
-                Upload the one you opened this page for, or any other you
-                already have.
+                Upload the documents needed for your destination.
               </p>
             </div>
           ) : null}
@@ -196,7 +195,7 @@ export function PortalDocuments({
               applicationId={applicationId}
               type={type}
               label={documentTypeLabel(type)}
-              description="Previously uploaded documents stay attached to your file."
+              description="Previously uploaded"
               rows={rows.filter((row) => row.type === type)}
               highlighted={focusType === type}
             />
@@ -213,6 +212,7 @@ function TypeCard({
   description,
   rows,
   highlighted = false,
+  required,
 }: {
   applicationId: string;
   type: string;
@@ -220,6 +220,7 @@ function TypeCard({
   description?: string | null;
   rows: StudentDocumentRow[];
   highlighted?: boolean;
+  required?: boolean;
 }) {
   const router = useRouter();
   const { toast } = useDeskToast();
@@ -368,11 +369,11 @@ function TypeCard({
   }
   const progressLabel =
     phase === "start"
-      ? "Getting a place to send it…"
+      ? "Preparing upload…"
       : phase === "put"
-        ? `Sending… ${percent}%`
+        ? `Uploading… ${percent}%`
         : phase === "save"
-          ? "Saving to your file…"
+          ? "Saving…"
           : "";
   return (
     <section
@@ -388,18 +389,30 @@ function TypeCard({
         <div>
           {highlighted ? (
             <p className="mb-1 text-xs font-semibold tracking-[0.08em] text-[var(--desk-accent)] uppercase">
-              From your visa checklist
+              Selected document
             </p>
           ) : null}
           <h2 className="text-base font-semibold text-[var(--desk-accent)]">
             {label}
           </h2>
+          {required !== undefined ? (
+            <span
+              className={cn(
+                "mt-2 inline-flex rounded-md px-2 py-1 text-xs font-medium",
+                required
+                  ? "bg-[var(--desk-surface-muted)] text-[var(--desk-accent)]"
+                  : "text-[var(--desk-ink-muted)]",
+              )}
+            >
+              {required ? "Required" : "Optional"}
+            </span>
+          ) : null}
           {description ? (
             <p className="mt-1 text-sm leading-6 text-[var(--desk-ink-muted)]">
               {description}
             </p>
           ) : null}
-          <p id={hintId} className="mt-1 text-sm text-[var(--desk-ink-muted)]">
+          <p id={hintId} className="sr-only">
             PDF, JPG, or PNG · 10 MB max
           </p>
         </div>
@@ -459,8 +472,7 @@ function TypeCard({
 
       {rows.length === 0 ? (
         <p className="mt-4 text-sm text-[var(--desk-ink-muted)]">
-          No {label.toLowerCase()} here yet. Upload a PDF, JPG, or PNG when you
-          have it.
+          Not uploaded
         </p>
       ) : (
         <ul className="mt-4 space-y-2">
