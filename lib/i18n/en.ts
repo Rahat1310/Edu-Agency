@@ -440,7 +440,7 @@ export const en = {
       metaTitle:
         "Study in China 2027 | Universities, Programs and Scholarships",
       metaDescription:
-        "Explore March and September 2027 offers from 24 institutions in China. Compare programs, tuition, scholarships, campus life and requirements for Bangladeshi students.",
+        "Explore March and September 2027 university offers in China. Compare programs, tuition, scholarships, campus life and requirements for Bangladeshi students.",
       ogTitle: "Your next campus could be in China",
       ogDescription:
         "Explore universities and scholarship opportunities for March and September 2027. Find a route that fits your results, subject and budget.",
