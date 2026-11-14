@@ -3,7 +3,6 @@
 import { SignOutButton } from "@clerk/nextjs";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Compass,
   ArrowUpRight,
   FileText,
   ClipboardList,
@@ -23,7 +22,6 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { href: "/portal", label: "Dashboard", icon: LayoutDashboard },
   { href: "/portal/application", label: "My application", icon: ClipboardList },
-  { href: "/portal/matches", label: "Find programmes", icon: Compass },
   { href: "/portal/documents", label: "Documents", icon: FileText },
 ] as const;
 

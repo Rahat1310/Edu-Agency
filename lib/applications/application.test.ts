@@ -18,6 +18,8 @@ import {
 import { applicationReviewSchema } from "@/lib/applications/review-schema";
 import { createDocumentUploadIntentSchema } from "@/lib/schemas/document";
 import { parseLeadListQuery, leadsListHref } from "@/lib/leads/list-query";
+import { PgDialect } from "drizzle-orm/pg-core";
+import { studentApplicationSaveQuery } from "@/lib/applications/queries";
 
 function complete() {
   return {
@@ -79,7 +81,51 @@ test("academic qualifications cannot be duplicated at submission", () => {
     false,
   );
 });
-test("diploma checklist includes eight semesters and adds sensitive documents only when requested", () => {
+test("the full document checklist is available before filling in the application", () => {
+  const checklist = applicationDocumentChecklist();
+  const types = new Set(checklist.map((slot) => slot.documentTypeKey));
+  for (const type of [
+    "passport",
+    "hsc_certificate",
+    "diploma_certificate",
+    "alim_certificate",
+    "ssc_certificate",
+    "dakhil_certificate",
+    "hsc_transcript",
+    "alim_transcript",
+    "ssc_transcript",
+    "dakhil_transcript",
+    "english_proficiency",
+    "hsk",
+    "medical",
+    "non_criminal",
+    "bank_statement",
+    "photo",
+    "recommendation_letter",
+    "study_plan",
+    "work_certificate",
+    "award_certificate",
+    "parent_id",
+    "salary_certificate",
+    "resume",
+  ])
+    assert.ok(types.has(type), `${type} is available to upload`);
+  assert.equal(types.size, checklist.length);
+  for (const type of [
+    "english_proficiency",
+    "hsk",
+    "recommendation_letter",
+    "study_plan",
+    "work_certificate",
+    "award_certificate",
+    "salary_certificate",
+  ])
+    assert.equal(
+      checklist.find((slot) => slot.documentTypeKey === type)?.required,
+      false,
+    );
+});
+test("diploma checklist includes eight semesters and marks recorded qualifications and staff requests", () => {
   const data = { ...complete(), education: [emptyEducation("diploma")] };
   const types = applicationDocumentChecklist(data).map(
     (s) => s.documentTypeKey,
@@ -88,18 +134,22 @@ test("diploma checklist includes eight semesters and adds sensitive documents on
     types.filter((key) => key.startsWith("diploma_transcript_")).length,
     8,
   );
-  assert.equal(types.includes("medical"), false);
-  assert.equal(types.includes("parent_id"), false);
+  assert.equal(types.includes("medical"), true);
+  assert.equal(types.includes("parent_id"), true);
+  const diplomaSlots = applicationDocumentChecklist(data).filter((slot) =>
+    slot.documentTypeKey.startsWith("diploma_transcript_"),
+  );
+  assert.ok(diplomaSlots.every((slot) => slot.required));
   const requested = applicationDocumentChecklist(data, [
-    "medical",
-    "parent_id",
+    "recommendation_letter",
   ]);
   assert.equal(
-    requested.find((s) => s.documentTypeKey === "medical")?.required,
+    requested.find((s) => s.documentTypeKey === "recommendation_letter")
+      ?.required,
     true,
   );
 });
-test("pending files permit review submission; rejected files require replacement", () => {
+test("document checklist counts pending files and flags rejected files for replacement", () => {
   const data = complete();
   const files = applicationDocumentChecklist(data).map((slot) => ({
     type: slot.documentTypeKey,
@@ -112,8 +162,24 @@ test("pending files permit review submission; rejected files require replacement
       [],
       files.map((f) => ({ ...f, status: "rejected" })),
     ).length,
-    files.length,
+    applicationDocumentChecklist(data).filter((slot) => slot.required).length,
   );
+});
+test("submission keeps ownership and revision guards without requiring uploaded documents", () => {
+  const query = new PgDialect().sqlToQuery(
+    studentApplicationSaveQuery({
+      applicationId: "11111111-1111-4111-8111-111111111111",
+      userId: "22222222-2222-4222-8222-222222222222",
+      revision: 0,
+      mode: "submit",
+      data: complete(),
+      requestedDocuments: ["medical", "recommendation_letter"],
+    }),
+  );
+  assert.match(query.sql, /a\.user_id=\$\d+::uuid AND a\.revision=\$\d+/);
+  assert.match(query.sql, /a\.form_status IN \('draft','changes_requested'\)/);
+  assert.doesNotMatch(query.sql, /needed\.type|jsonb_array_elements_text/);
+  assert.match(query.sql, /coalesce\(jsonb_agg\(d.id\), '\[\]'::jsonb\)/);
 });
 test("new document categories pass the upload gate and unknown categories remain blocked", () => {
   const upload = {
@@ -127,6 +193,16 @@ test("new document categories pass the upload gate and unknown categories remain
     createDocumentUploadIntentSchema().safeParse(upload).success,
     true,
   );
+  for (const slot of applicationDocumentChecklist()) {
+    assert.equal(
+      createDocumentUploadIntentSchema().safeParse({
+        ...upload,
+        type: slot.documentTypeKey,
+      }).success,
+      true,
+      `${slot.documentName} passes upload validation`,
+    );
+  }
   assert.equal(
     createDocumentUploadIntentSchema().safeParse({
       ...upload,

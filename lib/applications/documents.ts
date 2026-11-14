@@ -44,31 +44,36 @@ export type ApplicationDocumentSlot = {
   required: boolean;
 };
 export function applicationDocumentChecklist(
-  data: ApplicationData,
+  data?: ApplicationData,
   requested: readonly string[] = [],
 ): ApplicationDocumentSlot[] {
-  const core = new Set(["passport", "photo"]);
-  for (const { qualification } of data.education) {
+  const core = new Set([
+    "passport",
+    "photo",
+    "medical",
+    "non_criminal",
+    "bank_statement",
+    "parent_id",
+    "resume",
+  ]);
+  for (const { qualification } of data?.education ?? []) {
     core.add(`${qualification}_certificate`);
     if (qualification === "diploma")
       for (let i = 1; i <= 8; i++) core.add(`diploma_transcript_${i}`);
     else core.add(`${qualification}_transcript`);
   }
-  const types = new Set([...core, ...requested]);
-  if (data.englishQualification) types.add("english_proficiency");
-  if (data.hskQualification) types.add("hsk");
-  return [...types]
-    .filter((type) => applicationDocumentLabels[type])
-    .map((type) => ({
-      documentTypeKey: type,
-      documentName: applicationDocumentLabels[type]!,
-      required: core.has(type) || requested.includes(type),
-      description: core.has(type)
-        ? "Core application document. Upload a clear copy; staff approval can follow submission."
-        : requested.includes(type)
-          ? "Requested by your admissions team for your application."
-          : "Upload this if you have the qualification recorded in your form.",
-    }));
+  if (data?.englishQualification) core.add("english_proficiency");
+  if (data?.hskQualification) core.add("hsk");
+  return applicationDocumentKeys.map((type) => ({
+    documentTypeKey: type,
+    documentName: applicationDocumentLabels[type]!,
+    required: core.has(type) || requested.includes(type),
+    description: requested.includes(type)
+      ? "Requested by your admissions team. Upload it when available; you can submit your form first."
+      : core.has(type)
+        ? "Required document for your application. Upload it when available; you can submit your form first."
+        : "Upload this only if needed for your application and you have it available.",
+  }));
 }
 export function missingApplicationDocuments(
   data: ApplicationData,

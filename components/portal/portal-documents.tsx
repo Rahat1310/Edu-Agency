@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { useDeskToast } from "@/components/desk/toast";
 import { PortalInfoDrawer } from "@/components/portal/info-drawer";
+import { DocumentUploadStatus } from "@/components/portal/document-upload-status";
 import type { LeadDestinationInterest } from "@/db/schema";
 import type { StudentDocumentRow } from "@/lib/documents/types";
 import {
@@ -28,7 +29,10 @@ import { documentHints } from "@/lib/portal/copy";
 import { cn } from "@/lib/utils";
 import { documentTypeAnchorId } from "@/lib/visa-requirements/checklist";
 import { getWhatsAppHref } from "@/lib/whatsapp";
-import type { ApplicationDocumentSlot } from "@/lib/applications/documents";
+import {
+  applicationDocumentChecklist,
+  type ApplicationDocumentSlot,
+} from "@/lib/applications/documents";
 export type VisaUploadSlot = {
   documentTypeKey: string;
   documentName: string;
@@ -57,15 +61,35 @@ export function PortalDocuments({
   const whatsappHref = getWhatsAppHref(
     `Hi, I'm ${studentName}. I want to check which documents you need from me.`,
   );
-  const rows = documents;
-  const slots =
-    applicationSlots ??
-    documentTypeValues.map((type) => ({
-      documentTypeKey: type,
-      documentName: documentTypeLabels[type],
-      description: "",
-      required: false,
-    }));
+  const [recentUploads, setRecentUploads] = useState<StudentDocumentRow[]>([]);
+  const rows = [
+    ...documents,
+    ...recentUploads.filter(
+      (upload) => !documents.some((row) => row.id === upload.id),
+    ),
+  ];
+  const applicationChecklist =
+    applicationSlots ?? applicationDocumentChecklist();
+  const slots = [
+    ...applicationChecklist,
+    ...documentTypeValues
+      .filter(
+        (type) =>
+          !applicationChecklist.some((slot) => slot.documentTypeKey === type),
+      )
+      .map((type) => ({
+        documentTypeKey: type,
+        documentName: documentTypeLabels[type],
+        description: "",
+        required: false,
+      })),
+  ];
+  function onUploaded(document: StudentDocumentRow) {
+    setRecentUploads((previous) => [
+      document,
+      ...previous.filter((row) => row.id !== document.id),
+    ]);
+  }
   const shown = new Set(slots.map((slot) => slot.documentTypeKey));
   const extraSlots = visaSlots.filter(
     (slot) => !shown.has(slot.documentTypeKey),
@@ -92,7 +116,9 @@ export function PortalDocuments({
           Your documents
         </h1>
         <p className="mt-2 text-base leading-7 text-[var(--desk-ink-muted)]">
-          Upload clear scans or photos. PDF, JPG or PNG, up to 10 MB each.
+          Upload only the documents you have. You can submit your application
+          with some or no files and add more later. PDF, JPG or PNG, up to 10 MB
+          each.
         </p>
         <Link
           href="/portal/application"
@@ -100,12 +126,11 @@ export function PortalDocuments({
         >
           Back to my application
         </Link>
-        {applicationSlots && (
-          <p className="mt-2 text-sm leading-7 text-[var(--desk-ink-muted)]">
-            Your list is based on your saved application. You can add more than
-            one file per document.
-          </p>
-        )}
+        <p className="mt-2 text-sm leading-7 text-[var(--desk-ink-muted)]">
+          Required documents are marked for your reference. Documents marked “If
+          needed” apply only to some applications. You can add more than one
+          file per document, including all eight diploma semester transcripts.
+        </p>
 
         <div className="mt-4">
           <PortalInfoDrawer
@@ -139,7 +164,8 @@ export function PortalDocuments({
               of {slots.length} documents uploaded
             </p>
             <p className="mt-1 text-sm text-[var(--desk-ink-muted)]">
-              Required documents are marked below.
+              A green tick means uploaded. A red cross means not uploaded or a
+              replacement is needed. Missing files do not block submission.
             </p>
           </div>
           <a
@@ -163,9 +189,10 @@ export function PortalDocuments({
               type={slot.documentTypeKey}
               label={slot.documentName}
               required={slot.required}
-              description={applicationSlots ? undefined : slot.description}
+              description={slot.description}
               rows={rows.filter((row) => row.type === slot.documentTypeKey)}
               highlighted={focusType === slot.documentTypeKey}
+              onUploaded={onUploaded}
             />
           ))}
           {extraSlots.length > 0 ? (
@@ -187,6 +214,7 @@ export function PortalDocuments({
               description={slot.description}
               rows={rows.filter((row) => row.type === slot.documentTypeKey)}
               highlighted={focusType === slot.documentTypeKey}
+              onUploaded={onUploaded}
             />
           ))}
           {previousTypes.map((type) => (
@@ -198,6 +226,7 @@ export function PortalDocuments({
               description="Previously uploaded"
               rows={rows.filter((row) => row.type === type)}
               highlighted={focusType === type}
+              onUploaded={onUploaded}
             />
           ))}
         </div>
@@ -213,6 +242,7 @@ function TypeCard({
   rows,
   highlighted = false,
   required,
+  onUploaded,
 }: {
   applicationId: string;
   type: string;
@@ -221,6 +251,7 @@ function TypeCard({
   rows: StudentDocumentRow[];
   highlighted?: boolean;
   required?: boolean;
+  onUploaded: (document: StudentDocumentRow) => void;
 }) {
   const router = useRouter();
   const { toast } = useDeskToast();
@@ -333,6 +364,7 @@ function TypeCard({
       const complete = (await readJson(completeResponse)) as {
         ok?: boolean;
         message?: string;
+        document?: StudentDocumentRow;
       };
       if (!completeResponse.ok || !complete.ok) {
         const mapped = explainUploadProblem({
@@ -344,6 +376,7 @@ function TypeCard({
         return;
       }
       setPercent(100);
+      if (complete.document) onUploaded(complete.document);
       const success =
         "It's in your file. A counselor will look at it. Status starts as waiting.";
       announce(success);
@@ -395,6 +428,9 @@ function TypeCard({
           <h2 className="text-base font-semibold text-[var(--desk-accent)]">
             {label}
           </h2>
+          <div className="mt-2">
+            <DocumentUploadStatus documents={rows} />
+          </div>
           {required !== undefined ? (
             <span
               className={cn(
@@ -404,7 +440,9 @@ function TypeCard({
                   : "text-[var(--desk-ink-muted)]",
               )}
             >
-              {required ? "Required" : "Optional"}
+              {required
+                ? "Required document · Upload when available"
+                : "If needed"}
             </span>
           ) : null}
           {description ? (

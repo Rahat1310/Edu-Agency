@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { saveStudentApplication } from "@/app/portal/application/actions";
+import { DocumentUploadStatus } from "@/components/portal/document-upload-status";
 import { applicationDocumentChecklist } from "@/lib/applications/documents";
 import {
   applicationReference,
@@ -481,18 +482,16 @@ export function StudentApplicationForm({
                 ))}
               </dl>
               <p className="text-sm leading-7 text-[var(--desk-ink-muted)]">
-                Upload the core documents below before submitting. Pending files
-                can be reviewed after submission; rejected files need a
-                replacement. Your team will request medical, financial or other
-                supporting papers when needed.
+                Upload the documents you have available. This checklist shows
+                required documents and those needed only if applicable. You can
+                submit your application with some or no documents and add the
+                remaining files later.
               </p>
               <ul className="divide-y divide-[var(--desk-line)]">
                 {checklist.map((slot) => {
                   const files = documents.filter(
                     (d) => d.type === slot.documentTypeKey,
                   );
-                  const approved = files.some((d) => d.status === "approved");
-                  const pendingFile = files.some((d) => d.status === "pending");
                   return (
                     <li
                       key={slot.documentTypeKey}
@@ -500,25 +499,11 @@ export function StudentApplicationForm({
                     >
                       <span>
                         {slot.documentName}
-                        {slot.required ? " · Required" : " · If available"}
+                        {slot.required
+                          ? " · Required document"
+                          : " · If needed"}
                       </span>
-                      <span
-                        className={
-                          approved
-                            ? "text-emerald-700"
-                            : pendingFile
-                              ? "text-[var(--desk-ink-muted)]"
-                              : "text-orange-800"
-                        }
-                      >
-                        {approved
-                          ? "Approved"
-                          : pendingFile
-                            ? "Under review"
-                            : files.length
-                              ? "Correction needed"
-                              : "Not uploaded"}
-                      </span>
+                      <DocumentUploadStatus documents={files} />
                     </li>
                   );
                 })}

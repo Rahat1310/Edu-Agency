@@ -7,7 +7,6 @@ import {
 } from "@/lib/applications/schema";
 import { ApplicationTracker } from "@/components/portal/application-tracker";
 import { applicationReference } from "@/lib/applications/schema";
-import { MatchCard } from "@/components/portal/match-card";
 import { PortalEmptyState } from "@/components/portal/portal-empty-state";
 import { VisaChecklistSection } from "@/components/portal/visa-checklist";
 import { VisaStatusSection } from "@/components/portal/visa-status-section";
@@ -15,7 +14,6 @@ import { isVisaPipelineStage } from "@/lib/visa-applications/stage";
 import type { LeadDestinationInterest, LeadStatus } from "@/db/schema";
 import type { StudentActivityItem } from "@/lib/leads/activity-types";
 import { formatLeadDate } from "@/lib/leads/labels";
-import type { PortalMatchRanking } from "@/lib/matching/types";
 import { preDepartureDashboardHref } from "@/lib/pre-departure/dashboard-href";
 import { programCountryLabels } from "@/lib/programs-labels";
 import { programCountryFromLeadDestination } from "@/lib/visa-requirements/destination";
@@ -33,7 +31,6 @@ export function PortalDashboard({
   activity,
   applicationCase = null,
   forbidden = false,
-  ranking = null,
   checklist,
   checklistError = false,
   visaLine = null,
@@ -45,7 +42,6 @@ export function PortalDashboard({
   activity: StudentActivityItem[];
   applicationCase?: ApplicationCase | null;
   forbidden?: boolean;
-  ranking?: PortalMatchRanking | null;
   checklist: VisaChecklist;
   checklistError?: boolean;
   visaLine?: string | null;
@@ -181,23 +177,6 @@ export function PortalDashboard({
           />
         )}
 
-        <section className="mt-6 rounded-2xl border border-[var(--desk-line)] bg-[var(--desk-surface)] px-5 py-5">
-          <h2 className="text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
-            Suggested programmes
-          </h2>
-          <p className="mt-2 text-[0.95rem] leading-6 text-[var(--desk-ink)]">
-            Suggestions based on your education, destination and budget. Your
-            counsellor can help you choose.
-          </p>
-          <DashboardMatches ranking={ranking} />
-          <Link
-            href="/portal/matches"
-            className="desk-focus desk-press mt-4 inline-flex min-h-11 items-center rounded-full border border-[var(--desk-line)] bg-[var(--desk-bg)] px-4 text-sm font-semibold text-[var(--desk-ink)]"
-          >
-            {ranking?.matches.length ? "View programmes" : "Find programmes"}
-          </Link>
-        </section>
-
         <section className="mt-6">
           <h2 className="px-1 text-lg font-semibold tracking-[-0.02em] text-[var(--desk-accent)]">
             Latest updates
@@ -252,39 +231,6 @@ export function PortalDashboard({
         </p>
       </div>
     </div>
-  );
-}
-function DashboardMatches({ ranking }: { ranking: PortalMatchRanking | null }) {
-  if (!ranking) {
-    return (
-      <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
-        Add your education, destination and budget to see suggestions.
-      </p>
-    );
-  }
-  if (ranking.error) {
-    return (
-      <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
-        {ranking.error}
-      </p>
-    );
-  }
-  if (ranking.emptyShortlist || ranking.matches.length === 0) {
-    return (
-      <p className="mt-3 text-sm leading-6 text-[var(--desk-ink-muted)]">
-        No programmes match your preferences yet. Try updating your destination
-        or budget.
-      </p>
-    );
-  }
-  return (
-    <ol className="mt-4 list-none space-y-3">
-      {ranking.matches.map((match) => (
-        <li key={match.id}>
-          <MatchCard match={match} />
-        </li>
-      ))}
-    </ol>
   );
 }
 function TaskRow({ task, index }: { task: PortalTask; index: number }) {

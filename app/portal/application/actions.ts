@@ -10,8 +10,6 @@ import {
   submittedApplicationSchema,
 } from "@/lib/applications/schema";
 import { loadApplicationCase } from "@/lib/applications/load";
-import { missingApplicationDocuments } from "@/lib/applications/documents";
-import { listDocumentsForApplication } from "@/lib/documents/list";
 import { rateLimit } from "@/lib/rate-limit";
 
 export type SaveApplicationResult =
@@ -57,17 +55,6 @@ export async function saveStudentApplication(
         fields: Object.fromEntries(
           completed.error.issues.map((i) => [i.path.join("."), i.message]),
         ),
-      };
-    const files = await listDocumentsForApplication(current.id);
-    const missing = missingApplicationDocuments(
-      data,
-      current.requestedDocuments,
-      files,
-    );
-    if (missing.length)
-      return {
-        ok: false,
-        message: `Upload the missing documents first: ${missing.map((s) => s.documentName).join(", ")}. Save your draft before opening Documents.`,
       };
   }
   try {

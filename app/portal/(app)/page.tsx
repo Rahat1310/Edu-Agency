@@ -2,13 +2,8 @@ import { redirect } from "next/navigation";
 
 import { PortalDashboard } from "@/components/portal/portal-dashboard";
 import { loadApplicationCase } from "@/lib/applications/load";
-import {
-  getStudentApplication,
-  type StudentApplication,
-} from "@/lib/auth-helpers";
+import { getStudentApplication } from "@/lib/auth-helpers";
 import { listStudentVisibleActivity } from "@/lib/leads/activity";
-import { profileFromLeadContext } from "@/lib/matching/profile";
-import { rankingForProfile } from "@/lib/matching/student-ranking";
 import { firstName } from "@/lib/portal/copy";
 import { visaApplicationStudentLine } from "@/lib/visa-applications/copy";
 import { loadStudentVisaStatus } from "@/lib/visa-applications/load";
@@ -27,29 +22,23 @@ export default async function PortalHomePage({ searchParams }: PageProps) {
   }
 
   const params = await searchParams;
-  const [
-    activity,
-    ranking,
-    checklistResult,
-    visaStatusResult,
-    applicationCase,
-  ] = await Promise.all([
-    listStudentVisibleActivity(application.lead.id),
-    loadDashboardMatches(application),
-    isVisaPipelineStage(application.lead.status)
-      ? loadStudentVisaChecklist(
-          application.application.id,
-          application.lead.destinationInterest,
-        )
-      : Promise.resolve({
-          checklist: { items: [], submittedCount: 0, total: 0 },
-          error: false,
-        }),
-    isVisaPipelineStage(application.lead.status)
-      ? loadStudentVisaStatus(application.application.id)
-      : Promise.resolve({ status: null, error: false }),
-    loadApplicationCase(application.application.id),
-  ]);
+  const [activity, checklistResult, visaStatusResult, applicationCase] =
+    await Promise.all([
+      listStudentVisibleActivity(application.lead.id),
+      isVisaPipelineStage(application.lead.status)
+        ? loadStudentVisaChecklist(
+            application.application.id,
+            application.lead.destinationInterest,
+          )
+        : Promise.resolve({
+            checklist: { items: [], submittedCount: 0, total: 0 },
+            error: false,
+          }),
+      isVisaPipelineStage(application.lead.status)
+        ? loadStudentVisaStatus(application.application.id)
+        : Promise.resolve({ status: null, error: false }),
+      loadApplicationCase(application.application.id),
+    ]);
 
   return (
     <PortalDashboard
@@ -59,7 +48,6 @@ export default async function PortalHomePage({ searchParams }: PageProps) {
       applicationCase={applicationCase}
       activity={activity}
       forbidden={params.error === "forbidden"}
-      ranking={ranking}
       checklist={checklistResult.checklist}
       checklistError={checklistResult.error}
       visaLine={
@@ -70,18 +58,4 @@ export default async function PortalHomePage({ searchParams }: PageProps) {
       visaStatusError={visaStatusResult.error}
     />
   );
-}
-
-async function loadDashboardMatches(application: StudentApplication) {
-  const profile = profileFromLeadContext({
-    savedProfile: application.application.profile,
-    quizAnswers: application.lead.quizAnswers,
-    destinationInterest: application.lead.destinationInterest,
-  });
-
-  if (!profile) {
-    return null;
-  }
-
-  return rankingForProfile(profile);
 }

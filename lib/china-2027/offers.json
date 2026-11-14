@@ -39,11 +39,11 @@
       }
     ],
     "scholarship": {
-      "summary": "Self-funded offer",
+      "summary": "Partial Scholarship",
       "details": [
-        "No scholarship is specified for this course in the supplied offer."
+        "Confirm partial scholarship coverage, eligibility and award conditions with the university."
       ],
-      "available": false
+      "available": true
     },
     "majors": [
       "English",
@@ -121,11 +121,11 @@
       }
     ],
     "scholarship": {
-      "summary": "Self-funded offer",
+      "summary": "Partial Scholarship",
       "details": [
-        "No scholarship is specified for this course in the supplied offer."
+        "Confirm partial scholarship coverage, eligibility and award conditions with the university."
       ],
-      "available": false
+      "available": true
     },
     "majors": [
       "Mathematics",
@@ -202,11 +202,11 @@
       }
     ],
     "scholarship": {
-      "summary": "Self-funded offer",
+      "summary": "Partial Scholarship",
       "details": [
-        "No scholarship is specified for this course in the supplied offer."
+        "Confirm partial scholarship coverage, eligibility and award conditions with the university."
       ],
-      "available": false
+      "available": true
     },
     "majors": [
       "Mathematics",
@@ -460,11 +460,11 @@
       }
     ],
     "scholarship": {
-      "summary": "Self-funded offer",
+      "summary": "Partial Scholarship",
       "details": [
-        "No scholarship is specified for this course in the supplied offer."
+        "Confirm partial scholarship coverage, eligibility and award conditions with the university."
       ],
-      "available": false
+      "available": true
     },
     "majors": [
       "Chinese Language and Literature (Business Chinese)",
@@ -545,11 +545,11 @@
       }
     ],
     "scholarship": {
-      "summary": "Self-funded offer",
+      "summary": "Partial Scholarship",
       "details": [
-        "No scholarship is specified for this course in the supplied offer."
+        "Confirm partial scholarship coverage, eligibility and award conditions with the university."
       ],
-      "available": false
+      "available": true
     },
     "majors": [
       "Mechanical Design,Manufacturing, and Automation",
@@ -2186,7 +2186,7 @@
       "summary": "10%–100% tuition scholarship options",
       "details": [
         "Type A 100%; B 75%; C 50%; D 25%; E 10% tuition waiver.",
-        "Medical programs are excluded. Selection is competitive; applicants without an award may receive a self-funded offer."
+        "Medical programs are excluded. Selection for full or partial scholarships is competitive."
       ],
       "available": true
     },
@@ -2516,11 +2516,11 @@
       }
     ],
     "scholarship": {
-      "summary": "Self-funded offer",
+      "summary": "Partial Scholarship",
       "details": [
-        "No scholarship is specified for this course in the supplied offer."
+        "Confirm partial scholarship coverage, eligibility and award conditions with the university."
       ],
-      "available": false
+      "available": true
     },
     "majors": [
       "Intelligent Manufacturing Engineering (Maths,Physics)",
@@ -2597,7 +2597,7 @@
       "details": [
         "Full award: tuition, accommodation and insurance waived, plus CNY 2,000 / month stipend.",
         "Partial award: tuition and insurance waived, plus CNY 1,000 / month stipend. Accommodation remains payable.",
-        "Confirm payment months and award continuation conditions. The offer does not specify a self-funded tuition price."
+        "Confirm payment months and award continuation conditions. The offer does not specify a tuition price before scholarship."
       ],
       "available": true
     },
@@ -2883,7 +2883,7 @@
       "Bank statement showing at least USD 5,000 and recent three-month transactions"
     ],
     "notes": [
-      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "Partial scholarship admission is subject to eligibility and the university’s award decision.",
       "On-campus accommodation is limited; off-campus housing may be necessary.",
       "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
       "The offer describes a Professional Chinese test exemption for undergraduate Chinese Language applicants with HSK 4 or higher. Confirm eligibility for the exemption.",
@@ -2896,7 +2896,7 @@
         "display": "30 April 2027"
       },
       {
-        "label": "Self-funded application",
+        "label": "Partial scholarship application",
         "date": "2027-05-31",
         "display": "31 May 2027"
       }
@@ -2983,7 +2983,7 @@
       "Bank statement showing at least USD 5,000 and recent three-month transactions"
     ],
     "notes": [
-      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "Partial scholarship admission is subject to eligibility and the university’s award decision.",
       "On-campus accommodation is limited; off-campus housing may be necessary.",
       "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
       "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
@@ -2995,7 +2995,7 @@
         "display": "30 April 2027"
       },
       {
-        "label": "Self-funded application",
+        "label": "Partial scholarship application",
         "date": "2027-05-31",
         "display": "31 May 2027"
       }
@@ -3205,7 +3205,7 @@
       "Bank statement showing at least USD 5,000 and recent three-month transactions"
     ],
     "notes": [
-      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "Partial scholarship admission is subject to eligibility and the university’s award decision.",
       "On-campus accommodation is limited; off-campus housing may be necessary.",
       "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
       "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
@@ -3217,7 +3217,7 @@
         "display": "30 April 2027"
       },
       {
-        "label": "Self-funded application",
+        "label": "Partial scholarship application",
         "date": "2027-05-31",
         "display": "31 May 2027"
       }
@@ -3314,7 +3314,7 @@
       "Bank statement showing at least USD 5,000 and recent three-month transactions"
     ],
     "notes": [
-      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "Partial scholarship admission is subject to eligibility and the university’s award decision.",
       "On-campus accommodation is limited; off-campus housing may be necessary.",
       "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
       "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
@@ -3326,7 +3326,7 @@
         "display": "30 April 2027"
       },
       {
-        "label": "Self-funded application",
+        "label": "Partial scholarship application",
         "date": "2027-05-31",
         "display": "31 May 2027"
       }
@@ -3565,7 +3565,7 @@
       "Bank statement showing at least USD 5,000 and recent three-month transactions"
     ],
     "notes": [
-      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "Partial scholarship admission is subject to eligibility and the university’s award decision.",
       "On-campus accommodation is limited; off-campus housing may be necessary.",
       "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
       "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
@@ -3577,7 +3577,7 @@
         "display": "30 April 2027"
       },
       {
-        "label": "Self-funded application",
+        "label": "Partial scholarship application",
         "date": "2027-05-31",
         "display": "31 May 2027"
       }
@@ -3693,7 +3693,7 @@
       "Bank statement showing at least USD 5,000 and recent three-month transactions"
     ],
     "notes": [
-      "A self-funded admission may be offered if admission criteria are met but no scholarship is awarded.",
+      "Partial scholarship admission is subject to eligibility and the university’s award decision.",
       "On-campus accommodation is limited; off-campus housing may be necessary.",
       "Majors below retain their campus names from the supplied offer. Confirm the final campus allocation.",
       "Accommodation ranges are reproduced from the offer with their endpoints ordered from low to high; the university must confirm the final room quote. A quoted rate does not guarantee an available bed."
@@ -3705,7 +3705,7 @@
         "display": "30 April 2027"
       },
       {
-        "label": "Self-funded application",
+        "label": "Partial scholarship application",
         "date": "2027-05-31",
         "display": "31 May 2027"
       }

@@ -1,11 +1,11 @@
 import { sql } from "drizzle-orm";
 import type { ApplicationData } from "@/lib/applications/schema";
-import { applicationDocumentChecklist } from "@/lib/applications/documents";
 import { applicationDocumentLabels } from "@/lib/applications/documents";
 import { universityReviewLabels } from "@/lib/applications/schema";
 import type { ApplicationReviewInput } from "@/lib/applications/review-schema";
 
-// Ownership, revision, required files, stage and audit writes are checked in the same SQL statement.
+// Ownership, revision, stage and audit writes are checked in the same SQL statement.
+// Documents can be uploaded before or after submission.
 export function studentApplicationSaveQuery(input: {
   applicationId: string;
   userId: string;
@@ -16,9 +16,6 @@ export function studentApplicationSaveQuery(input: {
 }) {
   const { data } = input;
   const submit = input.mode === "submit";
-  const required = applicationDocumentChecklist(data, input.requestedDocuments)
-    .filter((s) => s.required)
-    .map((s) => s.documentTypeKey);
   return sql`
     WITH changed AS (
       UPDATE applications a SET application_data=${JSON.stringify(data)}::jsonb,
@@ -29,10 +26,6 @@ export function studentApplicationSaveQuery(input: {
         AND a.form_status IN ('draft','changes_requested')
         AND EXISTS (SELECT 1 FROM leads l WHERE l.id=a.lead_id
           AND (l.status IN ('new','contacted','documents') OR l.destination_interest=${data.country}))
-        AND (NOT ${submit} OR NOT EXISTS (
-          SELECT 1 FROM jsonb_array_elements_text(${JSON.stringify(required)}::jsonb) AS needed(type)
-          WHERE NOT EXISTS (SELECT 1 FROM documents d WHERE d.application_id=a.id AND d.type=needed.type AND d.status IN ('pending','approved'))
-        ))
       RETURNING a.id, a.lead_id, a.revision
     ), lead_updated AS (
       UPDATE leads l SET name=${data.fullName}, phone=${data.phone}, destination_interest=${data.country}, updated_at=now()

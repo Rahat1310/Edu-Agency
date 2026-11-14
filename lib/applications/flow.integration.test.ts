@@ -7,7 +7,6 @@ import {
   studentApplicationSaveQuery,
   applicationReviewQuery,
 } from "@/lib/applications/queries";
-import { applicationDocumentChecklist } from "@/lib/applications/documents";
 import {
   emptyApplicationData,
   emptyEducation,
@@ -88,9 +87,7 @@ test(
           userId,
         ),
       );
-    const types = applicationDocumentChecklist(data)
-      .filter((s) => s.required)
-      .map((s) => s.documentTypeKey);
+    const types = ["passport", "photo"];
     // All fixtures are created and removed within ONE transaction. Failure rolls back the transaction.
     // No R2 objects, notifications or existing student records are touched.
     const result = await client.transaction([
@@ -105,14 +102,17 @@ test(
       save(1, "submit"),
       save(2, "draft"),
       review(2, ["medical"]),
-      save(3, "submit", { requestedDocuments: ["medical"] }),
+      save(3, "submit", {
+        data: { ...data, fullName: "Corrected fixture name" },
+        requestedDocuments: ["medical"],
+      }),
       client`INSERT INTO documents (application_id, type, filename, r2_key) VALUES (${applicationId}::uuid, 'medical', 'fixture.pdf', ${`test-only/${applicationId}/medical`}) RETURNING id`,
       save(3, "submit", {
         data: { ...data, fullName: "Corrected fixture name" },
         requestedDocuments: ["medical"],
       }),
       client`SELECT count(*)::int AS total, count(*) FILTER (WHERE is_visible_to_student AND content LIKE '%PRIVATE_CONTACT_RECORD%')::int AS leaked FROM lead_activity WHERE lead_id=${leadId}::uuid`,
-      client`SELECT count(*)::int AS total, (array_agg(data->>'fullName' ORDER BY revision))[1] AS original_name FROM application_submissions WHERE application_id=${applicationId}::uuid`,
+      client`SELECT count(*)::int AS total, (array_agg(data->>'fullName' ORDER BY revision))[1] AS original_name, jsonb_array_length((array_agg(document_ids ORDER BY revision))[1]) AS original_document_count, jsonb_array_length((array_agg(document_ids ORDER BY revision))[2]) AS resubmitted_document_count FROM application_submissions WHERE application_id=${applicationId}::uuid`,
       client`SELECT name, source, status FROM leads WHERE id=${leadId}::uuid`,
       client`UPDATE leads SET status='applied' WHERE id=${leadId}::uuid RETURNING id`,
       review(4, ["medical"]),
@@ -125,18 +125,22 @@ test(
       client`SELECT count(*)::int AS remaining FROM application_submissions WHERE application_id=${applicationId}::uuid`,
     ]);
     assert.equal(result[3]?.[0]?.revision, 1, "draft saved");
-    for (const index of [4, 5, 6, 9, 11, 19])
+    for (const index of [4, 5, 8, 9, 13, 19])
       assert.equal(
         result[index]?.length,
         0,
         `guard ${index} blocked the write`,
       );
-    assert.equal(result[8]?.[0]?.revision, 2, "complete application submitted");
+    assert.equal(
+      result[6]?.[0]?.revision,
+      2,
+      "application submitted without documents",
+    );
     assert.equal(result[10]?.length, 1, "staff review reopened the form");
     assert.equal(
-      result[13]?.[0]?.revision,
+      result[11]?.[0]?.revision,
       4,
-      "corrected application resubmitted",
+      "application resubmitted with partial documents and missing staff-requested medical",
     );
     assert.equal(
       result[14]?.[0]?.leaked,
@@ -144,6 +148,8 @@ test(
       "staff contact notes stayed private",
     );
     assert.equal(result[15]?.[0]?.total, 2, "both submitted copies retained");
+    assert.equal(result[15]?.[0]?.original_document_count, 0);
+    assert.equal(result[15]?.[0]?.resubmitted_document_count, 2);
     assert.equal(
       result[15]?.[0]?.original_name,
       data.fullName,
