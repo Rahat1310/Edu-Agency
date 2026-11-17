@@ -1,0 +1,649 @@
+.explorer {
+  position: relative;
+  width: 100%;
+  margin: 16px auto 0;
+  --globe-paper: #fafafa;
+}
+.stage {
+  position: relative;
+  height: 470px;
+  isolation: isolate;
+  overflow: hidden;
+}
+.ambient {
+  position: absolute;
+  inset: 35px 8% -80px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 36% 42%, #ffead343, transparent 55%),
+    radial-gradient(ellipse at 67% 60%, #d9e8f181, transparent 63%);
+  filter: blur(25px);
+}
+.orbitGraphic {
+  position: absolute;
+  width: 75%;
+  height: 70%;
+  left: 12.5%;
+  top: 27%;
+  border: 1px dashed #b3bdc533;
+  border-radius: 50%;
+  transform: rotate(-14deg);
+}
+.stageHeading {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  right: 32px;
+  display: inline-grid;
+  padding: 6px 0 6px 12px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, #fafafae8 12px);
+  color: #64748b;
+  font: 500 12px/1.8 var(--font-utility);
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+.taglineSizer {
+  grid-area: 1 / 1;
+  padding-right: 3px;
+  visibility: hidden;
+  white-space: nowrap;
+}
+.typewriterText {
+  grid-area: 1 / 1;
+  justify-self: start;
+  width: 0;
+  overflow: hidden;
+  border-right: 1px solid currentColor;
+  white-space: nowrap;
+  animation:
+    typewriterReveal 7s steps(24, end) infinite,
+    cursorBlink 800ms step-end infinite;
+}
+.stage[data-paused="true"] .typewriterText {
+  animation-play-state: paused;
+}
+@keyframes typewriterReveal {
+  0%,
+  8%,
+  100% {
+    width: 0;
+  }
+  43%,
+  78% {
+    width: 100%;
+  }
+  95% {
+    width: 0;
+  }
+}
+@keyframes cursorBlink {
+  0%,
+  100% {
+    border-right-color: currentColor;
+  }
+  50% {
+    border-right-color: transparent;
+  }
+}
+.interactionHint,
+.navCaption,
+.routeOverline {
+  font-family: var(--font-utility);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: #72808e;
+}
+.interactionHint {
+  position: absolute;
+  z-index: 4;
+  right: 32px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.01em;
+  font-size: 10px;
+  pointer-events: none;
+}
+.mouseGesture {
+  position: relative;
+  display: block;
+  width: 15px;
+  height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  animation: mouseDrag 3s ease-in-out infinite;
+}
+.mouseWheel {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 2px;
+  height: 5px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+.stage[data-paused="true"] .mouseGesture {
+  animation-play-state: paused;
+}
+@keyframes mouseDrag {
+  0%,
+  15%,
+  85%,
+  100% {
+    transform: translate(-2px, 1px);
+  }
+  45%,
+  55% {
+    transform: translate(2px, -1px);
+  }
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: none;
+  transition: opacity 800ms ease;
+}
+.canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.leaders {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.leaders path {
+  fill: none;
+  stroke: #acc7d5;
+  stroke-width: 1;
+}
+.labels {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.mapLabel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 5px 10px 5px 5px;
+  border: 1px solid #dce4e9;
+  border-radius: 8px;
+  background: #fffffff5;
+  box-shadow: 0 3px 14px #14253e0d;
+  color: #334155;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    background 180ms,
+    border-color 180ms,
+    color 180ms;
+  will-change: transform;
+}
+.mapLabel[data-active="true"] {
+  background: #fff7ee;
+  border-color: #eeaa75;
+  color: #9d440e;
+}
+.mapLabel:hover {
+  border-color: #f29a5a;
+}
+.mapLabel:focus-visible,
+.canvas:focus-visible,
+.destinationButton:focus-visible,
+.controls button:focus-visible,
+.exploreLink:focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 4px;
+}
+.labelCode {
+  display: grid;
+  place-items: center;
+  height: 21px;
+  min-width: 25px;
+  border-radius: 4px;
+  background: #edf3f7;
+  color: #557087;
+  font-family: var(--font-utility);
+  font-size: 9px;
+}
+.mapLabel[data-active="true"] .labelCode {
+  background: #f9e4d1;
+  color: #a24c16;
+}
+.originLabel {
+  background: #142c3fed;
+  border-color: #a9c5d540;
+  color: #fff;
+  padding: 7px 11px;
+  pointer-events: none;
+}
+.originDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffb36b;
+  box-shadow: 0 0 0 3px #ffb36b26;
+}
+.originNote {
+  position: absolute;
+  z-index: 2;
+  bottom: 92px;
+  left: 32px;
+  text-align: left;
+  white-space: pre-line;
+  font: 11px/1.8 var(--font-sans);
+  color: #657486;
+}
+.controls {
+  position: absolute;
+  z-index: 4;
+  bottom: 73px;
+  right: 32px;
+  display: flex;
+  gap: 6px;
+}
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #dce4e9;
+  border-radius: 50%;
+  background: #ffffffe6;
+  color: #64748b;
+  cursor: pointer;
+  transition:
+    background 180ms,
+    color 180ms;
+}
+.controls button:hover {
+  background: #fff1e5;
+  color: #c65c21;
+}
+.fade {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  height: 125px;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, var(--globe-paper) 92%);
+}
+.destinationNav {
+  position: relative;
+  z-index: 5;
+  margin: -18px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+}
+.navCaption {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-right: 8px;
+  font-size: 9px;
+}
+.destinationButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 7px 13px 7px 8px;
+  border: 1px solid #e2e7eb;
+  border-radius: 10px;
+  background: #ffffffbd;
+  color: #576578;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 180ms,
+    background 180ms,
+    color 180ms,
+    box-shadow 180ms;
+}
+.countryCode {
+  display: grid;
+  place-items: center;
+  min-width: 27px;
+  height: 25px;
+  border-radius: 5px;
+  background: #f0f3f6;
+  color: #7a8998;
+  font: 10px var(--font-utility);
+}
+.destinationButton:hover {
+  border-color: #edb38a;
+  color: #a94b16;
+}
+.destinationButton[aria-pressed="true"] {
+  border-color: #edb38a;
+  background: #fff6ed;
+  color: #9c4314;
+  box-shadow: 0 2px 7px #a54a1006;
+}
+.destinationButton[aria-pressed="true"] .countryCode {
+  background: #f8e5d3;
+  color: #9c4314;
+}
+.selectionDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c6cdd4;
+  margin-left: 3px;
+}
+.destinationButton[aria-pressed="true"] .selectionDot {
+  background: #e47c38;
+}
+.routeCard {
+  margin: 16px auto 0;
+  max-width: 880px;
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 22px;
+  text-align: left;
+  border: 1px solid #e3e7eb;
+  border-radius: 14px;
+  background: linear-gradient(105deg, #fff, #fffdfb);
+  box-shadow: 0 5px 20px #1e293b03;
+}
+.routeIdentity {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+  color: #b77240;
+}
+.routeIdentity > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.routeOverline {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+}
+.routeCity {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #1e3447;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.routeCity > span {
+  font: 9px var(--font-utility);
+  letter-spacing: 0.03em;
+  color: #8c98a5;
+}
+.routeDescription {
+  border-left: 1px solid #e5e9ec;
+  padding-left: 24px;
+  flex: 1;
+}
+.routeDescription p {
+  margin: 0 0 4px;
+  color: #35475a;
+  font-size: 12px;
+  font-weight: 600;
+}
+.routeDescription > span {
+  display: block;
+  max-width: 310px;
+  color: #7c8794;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.exploreLink {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 8px;
+  align-items: center;
+  color: #b85622;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  padding-block: 12px;
+}
+.exploreLink:hover {
+  color: #e96b23;
+}
+.fallback {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  max-width: 95%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 84px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-image:
+    radial-gradient(circle at 28% 25%, transparent 20%, #071a32b0 85%),
+    url("/textures/earth/earth_blue_marble.jpg");
+  background-size:
+    cover,
+    auto 100%;
+  background-position:
+    center,
+    75% center;
+  box-shadow:
+    inset -25px -20px 65px #07182e,
+    inset 5px 3px 15px #99d8f3,
+    0 -2px 16px #8fb8d733;
+}
+.fallbackLabel {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border: 1px solid #ffffff30;
+  background: #12283dde;
+  border-radius: 8px;
+  padding: 9px 14px;
+  color: #fff;
+  font-size: 12px;
+}
+.stage[data-status="fallback"] .leaders,
+.stage[data-status="fallback"] .labels,
+.stage[data-status="fallback"] .controls,
+.stage[data-status="fallback"] .interactionHint {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .stage {
+    height: 500px;
+  }
+}
+@media (max-width: 850px) {
+  .navCaption {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 3px;
+  }
+  .routeCard {
+    gap: 18px;
+    padding: 17px;
+  }
+  .routeDescription {
+    padding-left: 18px;
+  }
+  .originNote {
+    left: 16px;
+  }
+  .stageHeading {
+    right: 16px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 639px) {
+  .explorer {
+    margin-top: 12px;
+  }
+  .stage {
+    height: 330px;
+    margin-inline: -16px;
+  }
+  .stageHeading {
+    right: 19px;
+    font-size: 9px;
+  }
+  .originNote {
+    display: none;
+  }
+  .interactionHint {
+    right: 19px;
+    bottom: 9px;
+    gap: 8px;
+    font-size: 8px;
+  }
+  .mouseGesture {
+    width: 11px;
+    height: 16px;
+  }
+  .mouseWheel {
+    top: 3px;
+    height: 4px;
+  }
+  .orbitGraphic {
+    width: 100%;
+    left: 0;
+  }
+  .mapLabel {
+    min-height: 29px;
+    border-radius: 7px;
+    padding: 3px 5px;
+    gap: 0;
+  }
+  .labelName {
+    display: none;
+  }
+  .labelCode {
+    height: 21px;
+    font-size: 9px;
+  }
+  .originLabel {
+    gap: 7px;
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+  .controls {
+    bottom: 37px;
+    right: 19px;
+    gap: 5px;
+  }
+  .controls button {
+    width: 34px;
+    height: 34px;
+  }
+  .fade {
+    height: 75px;
+  }
+  .destinationNav {
+    margin-top: 0;
+    gap: 7px;
+  }
+  .navCaption {
+    margin-bottom: 2px;
+    font-size: 8px;
+  }
+  .destinationButton {
+    gap: 6px;
+    min-height: 41px;
+    padding: 6px 9px 6px 6px;
+    font-size: 10px;
+  }
+  .countryCode {
+    height: 22px;
+    min-width: 23px;
+    font-size: 9px;
+  }
+  .selectionDot {
+    display: none;
+  }
+  .routeCard {
+    margin-top: 14px;
+    flex-wrap: wrap;
+    gap: 13px 15px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .routeIdentity {
+    width: 100%;
+  }
+  .routeIdentity > div {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  .routeOverline {
+    font-size: 7px;
+  }
+  .routeCity {
+    font-size: 15px;
+  }
+  .routeDescription {
+    padding-left: 0;
+    border-left: none;
+    min-width: 0;
+  }
+  .routeDescription p {
+    font-size: 11px;
+  }
+  .routeDescription > span {
+    font-size: 10px;
+  }
+  .exploreLink {
+    font-size: 10px;
+    gap: 4px;
+  }
+  .fallback {
+    top: 55px;
+    width: 340px;
+    height: 340px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .typewriterText {
+    width: 100%;
+    border-right: 0;
+    animation: none;
+  }
+  .mouseGesture {
+    animation: none;
+  }
+  .canvas,
+  .mapLabel,
+  .destinationButton,
+  .controls button {
+    transition: none;
+  }
+}

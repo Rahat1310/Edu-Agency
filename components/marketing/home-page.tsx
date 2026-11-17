@@ -193,7 +193,7 @@ export function HomePage({
             }}
             className="relative mx-auto -mb-4 w-full max-w-6xl select-none"
           >
-            <HeroGlobe />
+            <HeroGlobe locale={locale} />
           </motion.div>
 
           {/* Features / Why Choose Us Strip */}

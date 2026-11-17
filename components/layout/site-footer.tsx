@@ -405,6 +405,34 @@ export function SiteFooter({
             </p>
           </div>
         </div>
+        <p className="mt-4 text-[10px] text-slate-500">
+          {isBn ? "পৃথিবীর মেঘচিত্র: " : "Globe cloud imagery: "}
+          <a
+            href="https://www.solarsystemscope.com/textures/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2 hover:text-slate-300"
+          >
+            Solar System Scope
+          </a>{" "}
+          (
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            className="underline underline-offset-2 hover:text-slate-300"
+          >
+            CC BY 4.0
+          </a>
+          )
+          {" · "}
+          <a
+            href="https://www.naturalearthdata.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2 hover:text-slate-300"
+          >
+            Natural Earth
+          </a>
+        </p>
       </PageShell>
     </footer>
   );

@@ -9,7 +9,12 @@ import {
 } from "@/lib/i18n/paths";
 import { applySecurityHeaders } from "@/lib/security-headers";
 
-const PUBLIC_EXACT_ROUTES = new Set(["/", "/en", "/bn"]);
+const PUBLIC_EXACT_ROUTES = new Set([
+  "/",
+  "/en",
+  "/bn",
+  "/data/globe-destinations.geojson",
+]);
 
 const PUBLIC_PREFIXES = [
   "/en",

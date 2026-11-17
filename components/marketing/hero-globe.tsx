@@ -1,1320 +1,1047 @@
 "use client";
+
+import { Pause, Play, RotateCcw, ZoomIn, ZoomOut } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import * as THREE from "three";
-/**
- * ============================================================================
- * 1. DATA STRUCTURES & COORDINATES
- * ============================================================================
- * Photorealistic 3D Satellite Globe for Global Education Agency
- */
-export interface GlobeNode {
+import { LineMaterial } from "three/addons/lines/LineMaterial.js";
+import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
+import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js";
+
+import type { Locale } from "@/lib/i18n/config";
+import { localizedHref } from "@/lib/i18n/paths";
+import styles from "./hero-globe.module.css";
+
+type GlobeDestination = {
   id: string;
-  name: string;
   country: string;
+  countryBn: string;
   city: string;
+  cityBn: string;
+  code: string;
   lat: number;
   lng: number;
-  color: string;
-  glowColor: string;
-  url?: string;
-  tag: string;
-  intake?: string;
-  isOrigin?: boolean;
-  scholarship?: string;
-  topPrograms?: string[];
-  partnerCount?: string;
-  visaRate?: string;
-}
-export interface GlobeArc {
-  id: string;
-  from: string;
-  to: string;
-  startLat: number;
-  startLng: number;
-  endLat: number;
-  endLng: number;
-  startColor: string; // Origin color: ocean blue (#1682b5)
-  endColor: string; // Destination color: violet / Country accent
-  altitude: number; // Arc height factor
-  speed: number; // Speed multiplier for traveling shooting star
-  trailLength: number; // Number of trailing comet photon particles
-  destUrl?: string;
-  destName: string;
-}
-// Origin Point: Dhaka, Bangladesh (Bay of Bengal / Ganges Delta)
-export const ORIGIN_NODE: GlobeNode = {
-  id: "dhaka",
-  name: "Bangladesh Central Advisory Desk",
-  country: "Bangladesh",
-  city: "Dhaka",
-  lat: 23.8103,
-  lng: 90.4125,
-  color: "#1682b5", // Ocean blue
-  glowColor: "rgba(0, 242, 254, 0.95)",
-  tag: "BD",
-  isOrigin: true,
-  scholarship: "Free Initial Profile Assessment & Scholarship Matching",
-  topPrograms: [
-    "University Selection",
-    "SOP & Visa Filing",
-    "Bangladesh Bank Student File",
-  ],
-  partnerCount: "40+ Direct Global Partner Universities",
-  visaRate: "Central Advisory Desk",
+  offset: [number, number];
+  description: string;
+  descriptionBn: string;
 };
-// Destination Points with Academic Intel
-export const DESTINATION_NODES: GlobeNode[] = [
+
+// Only destinations with an existing destination page appear on the globe.
+const DESTINATIONS: GlobeDestination[] = [
   {
     id: "china",
-    name: "China (Beijing & Zhejiang)",
     country: "China",
+    countryBn: "চীন",
     city: "Beijing",
+    cityBn: "বেইজিং",
+    code: "CN",
     lat: 39.9042,
     lng: 116.4074,
-    color: "#d14848", // Crimson
-    glowColor: "rgba(255, 42, 85, 0.9)",
-    tag: "CN",
-    url: "/destinations/china",
-    intake: "Spring 2027",
-    scholarship: "100% CSC & Presidential Full Tuition + Monthly Stipend",
-    topPrograms: [
-      "MBBS (English)",
-      "Computer Science & AI",
-      "Civil & Mechanical Eng",
-    ],
-    partnerCount: "25+ MoE Ranked Campuses",
-    visaRate: "99.2% JW202 Visa Success",
+    offset: [-42, -48],
+    description:
+      "Discover opportunities in medicine, engineering and technology.",
+    descriptionBn:
+      "মেডিসিন, ইঞ্জিনিয়ারিং ও প্রযুক্তিতে উচ্চশিক্ষার সুযোগ খুঁজুন।",
   },
   {
     id: "malaysia",
-    name: "Malaysia (Kuala Lumpur)",
     country: "Malaysia",
+    countryBn: "মালয়েশিয়া",
     city: "Kuala Lumpur",
+    cityBn: "কুয়ালালামপুর",
+    code: "MY",
     lat: 3.139,
     lng: 101.6869,
-    color: "#1682b5", // Ocean blue
-    glowColor: "rgba(0, 242, 254, 0.9)",
-    tag: "MY",
-    url: "/destinations/malaysia",
-    intake: "Feb 2027",
-    scholarship: "Up to 50% Merit Waivers · UK/Australian Dual Degrees",
-    topPrograms: [
-      "Software Engineering",
-      "Business & Fintech",
-      "Biotechnology",
-    ],
-    partnerCount: "18+ QS Top 200 Campuses",
-    visaRate: "98.7% Fast EMGS Approval",
+    offset: [65, 30],
+    description: "Explore a global education in the heart of Southeast Asia.",
+    descriptionBn:
+      "দক্ষিণ-পূর্ব এশিয়ার প্রাণকেন্দ্রে আন্তর্জাতিক শিক্ষার সুযোগ জানুন।",
   },
   {
     id: "south-korea",
-    name: "South Korea (Seoul)",
     country: "South Korea",
+    countryBn: "দক্ষিণ কোরিয়া",
     city: "Seoul",
+    cityBn: "সিউল",
+    code: "KR",
     lat: 37.5665,
     lng: 126.978,
-    color: "#7860bc", // Violet
-    glowColor: "rgba(168, 85, 247, 0.9)",
-    tag: "KR",
-    url: "/destinations/south-korea",
-    intake: "March 2027",
-    scholarship: "GKS Government Scholarship · 30–100% University Waivers",
-    topPrograms: [
-      "AI & Robotics",
-      "Global Business & Media",
-      "Korean Language",
-    ],
-    partnerCount: "15+ Top National & Private Univs",
-    visaRate: "97.5% Embassy Approval",
+    offset: [75, -14],
+    description: "Find your path in innovation, research and Korean culture.",
+    descriptionBn: "উদ্ভাবন, গবেষণা ও কোরিয়ান সংস্কৃতিতে আপনার পথ খুঁজে নিন।",
   },
   {
     id: "india",
-    name: "India (Delhi & Bangalore)",
     country: "India",
+    countryBn: "ভারত",
     city: "New Delhi",
+    cityBn: "নয়াদিল্লি",
+    code: "IN",
     lat: 28.6139,
     lng: 77.209,
-    color: "#d69a24", // Amber Gold
-    glowColor: "rgba(251, 191, 36, 0.9)",
-    tag: "IN",
-    url: "/destinations/india",
-    intake: "Spring 2027",
-    scholarship: "Up to 100% Study in India (SII) Scholarships",
-    topPrograms: ["B.Tech Computer Science", "Pharmacy & Nursing", "BBA & MBA"],
-    partnerCount: "30+ NAAC A++ Campuses",
-    visaRate: "99.5% Visa Success",
-  },
-  {
-    id: "europe",
-    name: "Europe (Frankfurt / Germany)",
-    country: "Europe",
-    city: "Frankfurt",
-    lat: 50.1109,
-    lng: 8.6821,
-    color: "#1682b5", // Sky Blue
-    glowColor: "rgba(56, 189, 248, 0.9)",
-    tag: "EU",
-    url: "/destinations",
-    intake: "Fall 2027",
-    scholarship: "Tuition-Free Public Univs · 50% Private Waivers",
-    topPrograms: [
-      "Data Science",
-      "Automotive & Mechanical",
-      "International Mgmt",
-    ],
-    partnerCount: "12+ German & EU Campuses",
-    visaRate: "98.1% Blocked Account Visa Support",
-  },
-  {
-    id: "japan",
-    name: "Japan (Tokyo)",
-    country: "Japan",
-    city: "Tokyo",
-    lat: 35.6762,
-    lng: 139.6503,
-    color: "#e8365d", // Crimson Rose
-    glowColor: "rgba(232, 54, 93, 0.9)",
-    tag: "JP",
-    url: "/destinations/japan",
-    intake: "April 2027",
-    scholarship: "MEXT Government Scholarship · 70% University Waivers",
-    topPrograms: [
-      "Engineering & Robotics",
-      "Anime & Design Arts",
-      "Business & Japanese",
-    ],
-    partnerCount: "20+ MEXT Approved Campuses",
-    visaRate: "98.3% Student Visa Approval",
+    offset: [-70, -12],
+    description: "A world of academic possibilities, closer to home.",
+    descriptionBn: "ঘরের কাছেই উচ্চশিক্ষার বিস্তৃত সম্ভাবনা খুঁজে নিন।",
   },
 ];
-// All nodes combined
-export const ALL_NODES: GlobeNode[] = [ORIGIN_NODE, ...DESTINATION_NODES];
-/**
- * Arcs mapping from Dhaka to all destination hubs.
- */
-export const ARCS_DATA: GlobeArc[] = DESTINATION_NODES.map((dest, idx) => ({
-  id: `arc-dhaka-${dest.id}`,
-  from: ORIGIN_NODE.name,
-  to: dest.name,
-  startLat: ORIGIN_NODE.lat,
-  startLng: ORIGIN_NODE.lng,
-  endLat: dest.lat,
-  endLng: dest.lng,
-  startColor: "#1682b5", // Ocean blue
-  endColor: dest.color || "#7860bc", // Destination color
-  altitude: 0.24 + idx * 0.03, // Parabolic 3D loop height
-  speed: 0.0036 + idx * 0.0005, // Dynamic, visible cruising flight speed (4-5s flight duration)
-  trailLength: 26, // Trailing student flight contrail particles
-  destUrl: dest.url,
-  destName: dest.name,
-}));
-/**
- * ============================================================================
- * 2. GEOGRAPHIC COORDINATE CONVERTER
- * Converts (latitude, longitude) on a sphere into 3D Cartesian Vector (x, y, z)
- * Perfectly calibrated with Three.js SphereGeometry equirectangular UV layout.
- * ============================================================================
- */
-function latLngToVector3(
-  lat: number,
-  lng: number,
-  radius: number,
-): THREE.Vector3 {
-  const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lng + 180) * (Math.PI / 180);
-  const x = -(radius * Math.sin(phi) * Math.cos(theta));
-  const z = radius * Math.sin(phi) * Math.sin(theta);
-  const y = radius * Math.cos(phi);
-  return new THREE.Vector3(x, y, z);
-}
-/**
- * Creates an ultra-crisp retina canvas sprite badge for 3D billboard labels
- */
-function createCountryBadgeTexture(
-  tag: string,
-  color: string,
-  isOrigin?: boolean,
-): THREE.CanvasTexture {
-  const canvas = document.createElement("canvas");
-  canvas.width = isOrigin ? 400 : 340;
-  canvas.height = 130;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return new THREE.CanvasTexture(canvas);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const padX = 14;
-  const padY = 14;
-  const w = canvas.width - padX * 2;
-  const h = canvas.height - padY * 2;
-  const r = h / 2;
-  const x = padX;
-  const y = padY;
-  // 1. Soft cyber glow behind the badge
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 0;
-  ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 0;
-  // 2. Dark glassmorphic pill background
-  ctx.fillStyle = isOrigin ? "rgba(2, 14, 32, 0.96)" : "rgba(3, 9, 26, 0.94)";
-  ctx.beginPath();
-  ctx.roundRect(x, y, w, h, r);
-  ctx.fill();
-  // 3. Crisp glowing neon border
-  ctx.lineWidth = 4.0;
-  ctx.strokeStyle = color;
-  ctx.stroke();
-  // Reset shadow for crisp text & icon
-  ctx.shadowBlur = 0;
-  // 4. Academic Insignia / Origin Indicator
-  if (isOrigin) {
-    // Central Hub Compass Pin
-    const pinX = x + 38;
-    const pinY = y + h / 2;
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(pinX, pinY, 11, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(pinX, pinY, 4.5, 0, Math.PI * 2);
-    ctx.fill();
-    // Origin Tag
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "900 38px Inter, system-ui, -apple-system, sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillText("BANGLADESH", pinX + 22, pinY + 1);
-  } else {
-    // Bold Academic Graduation Cap (Mortarboard) vector insignia
-    const capX = x + 44;
-    const capY = y + h / 2;
-    // Top Diamond Rhombus Mortarboard
-    ctx.fillStyle = "#d69a24"; // Radiant Gold Cap
-    ctx.beginPath();
-    ctx.moveTo(capX, capY - 14);
-    ctx.lineTo(capX + 22, capY - 4);
-    ctx.lineTo(capX, capY + 6);
-    ctx.lineTo(capX - 22, capY - 4);
-    ctx.closePath();
-    ctx.fill();
-    // Thin bright border on mortarboard
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 2.0;
-    ctx.stroke();
-    // Cap Skullcap underneath
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.moveTo(capX - 12, capY - 2);
-    ctx.quadraticCurveTo(capX, capY + 12, capX + 12, capY - 2);
-    ctx.fill();
-    // Hanging Gold Tassel with Bead
-    ctx.strokeStyle = "#d69a24";
-    ctx.lineWidth = 2.8;
-    ctx.beginPath();
-    ctx.moveTo(capX, capY - 4);
-    ctx.lineTo(capX + 22, capY + 2);
-    ctx.lineTo(capX + 22, capY + 12);
-    ctx.stroke();
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(capX + 22, capY + 13, 2.5, 0, Math.PI * 2);
-    ctx.fill();
-    // Country Tag Text (e.g. CN, MY, KR, IN, EU)
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "900 46px Inter, system-ui, -apple-system, sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillText(tag, capX + 34, capY + 1);
-  }
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.minFilter = THREE.LinearFilter;
-  texture.magFilter = THREE.LinearFilter;
-  return texture;
-}
-/**
- * ============================================================================
- * 3. ATMOSPHERIC RAYLEIGH SCATTERING SHADER
- * Produces an authentic cyan-to-azure limb glow as seen from satellite orbit
- * ============================================================================
- */
-const AtmosphereShader = {
-  vertexShader: `
-    varying vec3 vNormal;
-    void main() {
-      vNormal = normalize(normalMatrix * normal);
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    varying vec3 vNormal;
-    void main() {
-      // Smooth atmospheric horizon limb falloff hugging the planet curvature
-      float rim = 1.0 - clamp(dot(vNormal, vec3(0.0, 0.0, 1.0)), 0.0, 1.0);
-      float alpha = pow(rim, 3.6) * 0.75;
-
-      // Sunward direction: Sun light comes from top-left and top-right
-      float sunFactor = clamp((-vNormal.x * 0.5 + vNormal.y * 0.7), 0.0, 1.0);
-
-      // Blend from website sunset amber on sunward rim to soft atmospheric azure on shadow rim
-      vec3 sunsetAtmosphere = vec3(1.0, 0.65, 0.30); // #FFA64D Sunset Amber
-      vec3 skyAtmosphere = vec3(0.24, 0.70, 0.98);    // #3DB3FA Soft Sky Cyan
-      vec3 atmosphereColor = mix(skyAtmosphere, sunsetAtmosphere, sunFactor * 0.65);
-
-      gl_FragColor = vec4(atmosphereColor, alpha);
-    }
-  `,
+const ORIGIN = {
+  id: "dhaka",
+  lat: 23.8103,
+  lng: 90.4125,
+  offset: [-18, 49] as [number, number],
 };
-/**
- * ============================================================================
- * 4. 3D INTERACTIVE PHOTOREALISTIC SATELLITE GLOBE
- * ============================================================================
- */
-export function HeroGlobe() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  const [activeDest, setActiveDest] = useState<string | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<GlobeNode | null>(null);
-  // Synchronous refs to prevent re-initializing Three.js on hover/selection
-  const routerRef = useRef(router);
-  routerRef.current = router;
-  const activeDestRef = useRef(activeDest);
-  activeDestRef.current = activeDest;
-  const hoveredNodeRef = useRef(hoveredNode);
-  hoveredNodeRef.current = hoveredNode;
+const NODES = [ORIGIN, ...DESTINATIONS];
+const RADIUS = 3;
+
+type CountryFeature = {
+  properties: { id: string; name: string };
+  geometry:
+    | { type: "Polygon"; coordinates: [number, number][][] }
+    | { type: "MultiPolygon"; coordinates: [number, number][][][] };
+};
+
+function coordinates(lat: number, lng: number, radius: number) {
+  const phi = THREE.MathUtils.degToRad(90 - lat);
+  const theta = THREE.MathUtils.degToRad(lng + 180);
+  return new THREE.Vector3(
+    -radius * Math.sin(phi) * Math.cos(theta),
+    radius * Math.cos(phi),
+    radius * Math.sin(phi) * Math.sin(theta),
+  );
+}
+
+const globeVertexShader = `
+  varying vec2 vUv;
+  varying vec3 vWorldNormal;
+  varying vec3 vWorldPosition;
+  void main() {
+    vUv = uv;
+    vWorldNormal = normalize(mat3(modelMatrix) * normal);
+    vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+    vWorldPosition = worldPosition.xyz;
+    gl_Position = projectionMatrix * viewMatrix * worldPosition;
+  }
+`;
+
+const earthFragmentShader = `
+  uniform sampler2D dayMap;
+  uniform sampler2D nightMap;
+  uniform sampler2D oceanMap;
+  uniform sampler2D countryMap;
+  uniform sampler2D heightMap;
+  uniform sampler2D cloudMap;
+  uniform float cloudOffset;
+  uniform vec3 sunDirection;
+  varying vec2 vUv;
+  varying vec3 vWorldNormal;
+  varying vec3 vWorldPosition;
+  void main() {
+    vec3 normal = normalize(vWorldNormal);
+    // Surface relief follows the geographic height map, including at the poles.
+    float elevation = texture2D(heightMap, vUv).r;
+    vec3 surfaceGradient = cross(dFdy(vWorldPosition), normal) * dFdx(elevation)
+      + cross(normal, dFdx(vWorldPosition)) * dFdy(elevation);
+    normal = normalize(normal - surfaceGradient * 0.22);
+    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
+    float sunlight = dot(normal, sunDirection);
+    float day = smoothstep(-0.18, 0.58, sunlight);
+    vec3 surface = texture2D(dayMap, vUv).rgb;
+    vec3 cities = texture2D(nightMap, vUv).rgb;
+    vec3 color = surface * mix(0.075, 1.18, day);
+    float cloudShadow = texture2D(cloudMap, vec2(fract(vUv.x + cloudOffset + 0.0015), vUv.y - 0.001)).r;
+    color *= 1.0 - cloudShadow * day * 0.18;
+    color += cities * vec3(1.0, 0.72, 0.38) * (1.0 - smoothstep(-0.1, 0.38, sunlight)) * 1.6;
+    vec2 countries = texture2D(countryMap, vUv).rg;
+    color = mix(color, vec3(0.22, 0.65, 0.77), countries.r * 0.11);
+    color = mix(color, vec3(1.0, 0.48, 0.16), countries.g * 0.24);
+    vec3 halfDirection = normalize(sunDirection + viewDirection);
+    float specular = pow(max(dot(normal, halfDirection), 0.0), 65.0);
+    color += vec3(0.8, 0.89, 1.0) * specular * texture2D(oceanMap, vUv).r * 0.32;
+    float fresnel = pow(1.0 - max(dot(normal, viewDirection), 0.0), 3.0);
+    color += vec3(0.04, 0.24, 0.46) * fresnel * day * 0.5;
+    gl_FragColor = vec4(color, 1.0);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+  }
+`;
+
+const atmosphereFragmentShader = `
+  uniform vec3 sunDirection;
+  varying vec3 vWorldNormal;
+  varying vec3 vWorldPosition;
+  void main() {
+    vec3 normal = normalize(vWorldNormal);
+    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
+    float rim = pow(1.0 - max(dot(normal, viewDirection), 0.0), 3.8);
+    float warmth = pow(max(dot(normal, sunDirection), 0.0), 2.0);
+    vec3 color = mix(vec3(0.22, 0.57, 1.0), vec3(1.0, 0.72, 0.4), warmth * 0.7);
+    gl_FragColor = vec4(color, rim * 0.62);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+  }
+`;
+
+export function HeroGlobe({ locale = "en" }: { locale?: Locale }) {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const labelRefs = useRef(
+    new Map<string, HTMLButtonElement | HTMLDivElement>(),
+  );
+  const leaderRefs = useRef(new Map<string, SVGPathElement>());
+  const [selected, setSelected] = useState("malaysia");
+  const [paused, setPaused] = useState(false);
+  const [status, setStatus] = useState<"loading" | "ready" | "fallback">(
+    "loading",
+  );
+  const selectedRef = useRef(selected);
+  const pausedRef = useRef(paused);
+  const resetRef = useRef<(() => void) | null>(null);
+  const zoomRef = useRef<((factor: number) => void) | null>(null);
+  const focusRef = useRef<((id: string) => void) | null>(null);
+  const bn = locale === "bn";
+  const tagline = bn ? "সম্ভাবনার এক পৃথিবী" : "A world of possibilities";
+  const destination =
+    DESTINATIONS.find((item) => item.id === selected) ?? DESTINATIONS[1]!;
+  const selectDestination = (id: string) => {
+    setSelected(id);
+    focusRef.current?.(id);
+  };
+
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    let animationFrameId: number;
-    const width = container.clientWidth || 1000;
-    const height = container.clientHeight || 520;
-    // --- 1. Scene, Camera, Renderer (Elevated Floating Horizon Perspective) ---
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1500);
-    camera.position.set(0, 14, 228);
-    camera.lookAt(0, -12, 0);
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: "high-performance",
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0); // 100% transparent background
+    selectedRef.current = selected;
+  }, [selected]);
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    const container = canvasRef.current;
+    if (!stage || !container) return;
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: "low-power",
+      });
+    } catch {
+      setStatus("fallback");
+      return;
+    }
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
-    container.replaceChildren(renderer.domElement);
-    const GLOBE_RADIUS = 112;
-    const GLOBE_CENTER_Y = -60;
-    // --- 2. Master Globe Group (Rotated so Bangladesh, India & Asia face camera) ---
-    const globeGroup = new THREE.Group();
-    // 180 degrees (Math.PI) brings 90° E (Dhaka/South Asia) directly to the front
-    globeGroup.rotation.y = Math.PI;
-    globeGroup.rotation.x = -0.22; // Axis tilted so Bangladesh/Dhaka hub sits prominent and higher up ("upside") on the dome
-    globeGroup.position.set(0, GLOBE_CENTER_Y, 0);
-    scene.add(globeGroup);
-    // --- 3. High-Definition Photorealistic Satellite Earth ---
-    const textureLoader = new THREE.TextureLoader();
-    const loadedTextures: THREE.Texture[] = [];
-    const loadTexture = (
-      url: string,
-      onLoad?: (t: THREE.Texture) => void,
-    ): THREE.Texture => {
-      const tex = textureLoader.load(url, (t) => {
-        if (onLoad) onLoad(t);
-      });
-      loadedTextures.push(tex);
-      return tex;
+    renderer.toneMappingExposure = 1.12;
+    renderer.domElement.setAttribute("aria-hidden", "true");
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 50);
+    const globe = new THREE.Group();
+    globe.position.y = -1.6;
+    globe.rotation.set(-0.2, Math.PI, 0);
+    scene.add(globe);
+    const sunDirection = new THREE.Vector3(-1.1, 0.8, 1.2).normalize();
+    const geometries: THREE.BufferGeometry[] = [];
+    const materials: THREE.Material[] = [];
+    const textures: THREE.Texture[] = [];
+    let disposed = false;
+    let textureFailed = false;
+    const loader = new THREE.TextureLoader();
+    const texture = (path: string, color = false) => {
+      const map = loader.load(
+        path,
+        (loaded) => {
+          if (disposed) {
+            loaded.dispose();
+            return;
+          }
+          if (path.includes("blue_marble") && !textureFailed)
+            setStatus("ready");
+        },
+        undefined,
+        () => {
+          if (!disposed && path.includes("blue_marble")) {
+            textureFailed = true;
+            setStatus("fallback");
+          }
+        },
+      );
+      if (color) map.colorSpace = THREE.SRGBColorSpace;
+      map.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
+      textures.push(map);
+      return map;
     };
-    const earthGeometry = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
-    const earthMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0x0a1c30), // Rich deep oceanic base
-      roughness: 0.48,
-      metalness: 0.02,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.16,
-      bumpScale: 1.1,
-      emissive: new THREE.Color(0xffcf70),
-      emissiveIntensity: 0.25,
+    const sphere = new THREE.SphereGeometry(RADIUS, 80, 64);
+    geometries.push(sphere);
+    const countryCanvas = document.createElement("canvas");
+    countryCanvas.width = 4096;
+    countryCanvas.height = 2048;
+    const countryContext = countryCanvas.getContext("2d");
+    const countryMap = new THREE.CanvasTexture(countryCanvas);
+    textures.push(countryMap);
+    const cloudMap = texture("/textures/earth/earth_clouds.jpg");
+    cloudMap.wrapS = THREE.RepeatWrapping;
+    const earthMaterial = new THREE.ShaderMaterial({
+      vertexShader: globeVertexShader,
+      fragmentShader: earthFragmentShader,
+      uniforms: {
+        dayMap: {
+          value: texture("/textures/earth/earth_blue_marble.jpg", true),
+        },
+        nightMap: { value: texture("/textures/earth/earth_lights.png", true) },
+        oceanMap: { value: texture("/textures/earth/earth_specular.jpg") },
+        heightMap: { value: texture("/textures/earth/earth_topology.png") },
+        cloudMap: { value: cloudMap },
+        cloudOffset: { value: 0 },
+        countryMap: { value: countryMap },
+        sunDirection: { value: sunDirection },
+      },
     });
-    // A. NASA Blue Marble True Satellite Map (Sharp, Full Resolution with 16x Anisotropy)
-    loadTexture("/textures/earth/earth_blue_marble.jpg", (tex) => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.generateMipmaps = true;
-      tex.minFilter = THREE.LinearMipmapLinearFilter;
-      tex.magFilter = THREE.LinearFilter;
-      tex.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 16);
-      earthMaterial.map = tex;
-      earthMaterial.color.set(0xffffff); // Full satellite color transmission once texture is ready
-      earthMaterial.needsUpdate = true;
-    });
-    // B. Elevation & Mountain Relief Bump Map
-    loadTexture("/textures/earth/earth_topology.png", (tex) => {
-      tex.generateMipmaps = true;
-      tex.anisotropy = 4;
-      earthMaterial.bumpMap = tex;
-      earthMaterial.bumpScale = 1.1;
-      earthMaterial.needsUpdate = true;
-    });
-    // C. Specular Ocean vs Matte Continents Map
-    loadTexture("/textures/earth/earth_specular.jpg", (tex) => {
-      tex.generateMipmaps = true;
-      earthMaterial.roughnessMap = tex;
-      earthMaterial.needsUpdate = true;
-    });
-    // D. Night City Lights Emissive Glow (Vibrant Sparkling Amber Cities)
-    loadTexture("/textures/earth/earth_lights.png", (tex) => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.generateMipmaps = true;
-      earthMaterial.emissive = new THREE.Color(0xffcf70);
-      earthMaterial.emissiveMap = tex;
-      earthMaterial.emissiveIntensity = 0.25;
-      earthMaterial.needsUpdate = true;
-    });
-    const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-    globeGroup.add(earthMesh);
-    // --- 4. Floating Atmospheric Cloud Layer (Clearly Visible Luminous Cloud Formations) ---
-    const cloudsGeometry = new THREE.SphereGeometry(
-      GLOBE_RADIUS * 1.014,
-      64,
-      64,
-    );
-    const cloudsMaterial = new THREE.MeshStandardMaterial({
+    materials.push(earthMaterial);
+    globe.add(new THREE.Mesh(sphere, earthMaterial));
+
+    const cloudMaterial = new THREE.MeshPhongMaterial({
+      color: 0xeaf4ff,
+      alphaMap: cloudMap,
       transparent: true,
-      opacity: 0,
-      blending: THREE.AdditiveBlending,
+      opacity: 0.65,
       depthWrite: false,
     });
-    loadTexture("/textures/earth/earth_clouds.png", (tex) => {
-      tex.generateMipmaps = true;
-      tex.anisotropy = 4;
-      cloudsMaterial.map = tex;
-      cloudsMaterial.opacity = 0.35; // Luminous, clearly visible clouds drifting across continents
-      cloudsMaterial.needsUpdate = true;
-    });
-    const cloudsMesh = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
-    globeGroup.add(cloudsMesh);
-    // --- 5. Outer Rayleigh Atmospheric Horizon Glow (Close exosphere hugging limb) ---
-    const atmosphereGeometry = new THREE.SphereGeometry(
-      GLOBE_RADIUS * 1.028,
-      64,
-      64,
-    );
+    const clouds = new THREE.Mesh(sphere, cloudMaterial);
+    clouds.scale.setScalar(1.012);
+    globe.add(clouds);
+    materials.push(cloudMaterial);
+    const sunlight = new THREE.DirectionalLight(0xfff4e6, 2.1);
+    sunlight.position.copy(sunDirection).multiplyScalar(10);
+    scene.add(sunlight, new THREE.AmbientLight(0x7b9dbd, 0.65));
     const atmosphereMaterial = new THREE.ShaderMaterial({
-      vertexShader: AtmosphereShader.vertexShader,
-      fragmentShader: AtmosphereShader.fragmentShader,
-      blending: THREE.AdditiveBlending,
-      side: THREE.BackSide,
+      vertexShader: globeVertexShader,
+      fragmentShader: atmosphereFragmentShader,
+      uniforms: { sunDirection: { value: sunDirection } },
       transparent: true,
       depthWrite: false,
+      blending: THREE.NormalBlending,
     });
-    const atmosphereMesh = new THREE.Mesh(
-      atmosphereGeometry,
-      atmosphereMaterial,
-    );
-    atmosphereMesh.position.set(0, GLOBE_CENTER_Y, 0);
-    // Keep the globe silhouette clean without a decorative halo.
-    // --- 6. Solar, Ambient & Balanced Studio Daylight Lighting ---
-    // Primary Daylight Sun: illuminates South Asia, Middle East & Europe
-    const sunLight = new THREE.DirectionalLight(0xfff5ea, 2.2);
-    sunLight.position.set(-105, 90, 160);
-    scene.add(sunLight);
-    // Secondary Daylight Sun: illuminates East Asia, China, Malaysia, Korea & Pacific
-    const eastSunLight = new THREE.DirectionalLight(0xe8f2ff, 1.8);
-    eastSunLight.position.set(105, 75, 140);
-    scene.add(eastSunLight);
-    // Luminous Ambient Fill: Deepens ocean blues and lets city lights and topography shine
-    const ambientLight = new THREE.AmbientLight(0x4a6582, 0.9);
-    scene.add(ambientLight);
-    // Warm Sunset Rim Light (accents the golden horizon)
-    const sunsetRimLight = new THREE.DirectionalLight(0xf0e8df, 0.4);
-    sunsetRimLight.position.set(-140, 35, -25);
-    scene.add(sunsetRimLight);
-    // Soft Atmospheric Sky Rim Light
-    const skyRimLight = new THREE.DirectionalLight(0xdbe5ee, 0.4);
-    skyRimLight.position.set(130, 25, -30);
-    scene.add(skyRimLight);
-    // --- 7. Orbital Micro-Particle Field (Warm Amber & Atmospheric Cyan) ---
-    const dustCount = 350;
-    const dustGeometry = new THREE.BufferGeometry();
-    const dustPositions = new Float32Array(dustCount * 3);
-    const dustColors = new Float32Array(dustCount * 3);
-    for (let i = 0; i < dustCount; i++) {
-      const r = GLOBE_RADIUS * (1.03 + Math.random() * 0.75);
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      dustPositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      dustPositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      dustPositions[i * 3 + 2] = r * Math.cos(phi);
-      const isWarm = Math.random() > 0.45;
-      dustColors[i * 3] = isWarm ? 1.0 : 0.22;
-      dustColors[i * 3 + 1] = isWarm ? 0.72 : 0.74;
-      dustColors[i * 3 + 2] = isWarm ? 0.24 : 0.98;
-    }
-    dustGeometry.setAttribute(
-      "position",
-      new THREE.BufferAttribute(dustPositions, 3),
-    );
-    dustGeometry.setAttribute(
-      "color",
-      new THREE.BufferAttribute(dustColors, 3),
-    );
-    const dustMaterial = new THREE.PointsMaterial({
-      size: 0.9,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.4,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    const dustParticles = new THREE.Points(dustGeometry, dustMaterial);
-    dustParticles.position.set(0, GLOBE_CENTER_Y, 0);
-    scene.add(dustParticles);
-    // --- 8. Unique 3D Sci-Fi Holographic Beacons & Country Badges ---
-    interface BeaconObject {
-      node: GlobeNode;
-      normal: THREE.Vector3;
-      basePos: THREE.Vector3;
-      tipPos: THREE.Vector3;
-      beamHeight: number;
-      diamond: THREE.Mesh;
-      innerCore: THREE.Mesh;
-      gimbalRing: THREE.Mesh;
-      badgeSprite: THREE.Sprite;
-      baseScale: THREE.Vector3;
-      hitTarget: THREE.Mesh;
-      rippleRings: {
-        mesh: THREE.Mesh;
-        phase: number;
-        maxScale: number;
-        speed: number;
-      }[];
-    }
-    const beaconObjects: BeaconObject[] = [];
-    const nodeHitTargets: {
-      mesh: THREE.Mesh;
-      node: GlobeNode;
-      beacon: BeaconObject;
-    }[] = [];
-    const beaconDisposables: (
-      THREE.BufferGeometry | THREE.Material | THREE.Texture
-    )[] = [];
-    ALL_NODES.forEach((node) => {
-      const normal = latLngToVector3(node.lat, node.lng, 1.0).normalize();
-      const basePos = normal.clone().multiplyScalar(GLOBE_RADIUS * 1.002);
-      const beamHeight = node.isOrigin ? 7.2 : 5.6;
-      const beamCenter = basePos
-        .clone()
-        .addScaledVector(normal, beamHeight / 2);
-      const tipPos = basePos.clone().addScaledVector(normal, beamHeight);
-      // A. Ground Reticle Anchor Disc
-      const groundDiscGeo = new THREE.RingGeometry(
-        0.12,
-        node.isOrigin ? 1.6 : 1.2,
-        32,
-      );
-      const groundDiscMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(node.color),
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.85,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
-      const groundDisc = new THREE.Mesh(groundDiscGeo, groundDiscMat);
-      groundDisc.position.copy(basePos.clone().addScaledVector(normal, 0.04));
-      groundDisc.lookAt(basePos.clone().addScaledVector(normal, 10));
-      globeGroup.add(groundDisc);
-      beaconDisposables.push(groundDiscGeo, groundDiscMat);
-      // B. Ground Dual Staggered Radar Sonar Ripples
-      const rippleRings: {
-        mesh: THREE.Mesh;
-        phase: number;
-        maxScale: number;
-        speed: number;
-      }[] = [];
-      const rippleGeo = new THREE.RingGeometry(
-        node.isOrigin ? 0.9 : 0.7,
-        node.isOrigin ? 1.2 : 0.95,
-        32,
-      );
-      beaconDisposables.push(rippleGeo);
-      [0.0, 0.5].forEach((initialPhase) => {
-        const rippleMat = new THREE.MeshBasicMaterial({
-          color: new THREE.Color(node.color),
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.8,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false,
+    const atmosphere = new THREE.Mesh(sphere, atmosphereMaterial);
+    atmosphere.scale.setScalar(1.022);
+    globe.add(atmosphere);
+    materials.push(atmosphereMaterial);
+
+    // Real country polygons stay registered to the satellite texture as Earth turns.
+    let countries: CountryFeature[] = [];
+    let countrySelection = "";
+    const countryBorders: { id: string; material: LineMaterial }[] = [];
+    const updateCountries = () => {
+      if (countrySelection === selectedRef.current || !countries.length) return;
+      countrySelection = selectedRef.current;
+      if (countryContext) {
+        countryContext.fillStyle = "black";
+        countryContext.fillRect(
+          0,
+          0,
+          countryCanvas.width,
+          countryCanvas.height,
+        );
+        countries.forEach((feature) => {
+          countryContext.fillStyle =
+            feature.properties.id === countrySelection ? "#ffff00" : "#ff0000";
+          const polygons =
+            feature.geometry.type === "Polygon"
+              ? [feature.geometry.coordinates]
+              : feature.geometry.coordinates;
+          polygons.forEach((polygon) => {
+            countryContext.beginPath();
+            polygon.forEach((ring) => {
+              ring.forEach(([lng, lat], index) => {
+                const x = ((lng + 180) / 360) * countryCanvas.width;
+                const y = ((90 - lat) / 180) * countryCanvas.height;
+                if (index === 0) countryContext.moveTo(x, y);
+                else countryContext.lineTo(x, y);
+              });
+              countryContext.closePath();
+            });
+            countryContext.fill("evenodd");
+          });
         });
-        const rippleMesh = new THREE.Mesh(rippleGeo, rippleMat);
-        rippleMesh.position.copy(basePos.clone().addScaledVector(normal, 0.05));
-        rippleMesh.lookAt(basePos.clone().addScaledVector(normal, 10));
-        globeGroup.add(rippleMesh);
-        beaconDisposables.push(rippleMat);
-        rippleRings.push({
-          mesh: rippleMesh,
-          phase: initialPhase,
-          maxScale: node.isOrigin ? 3.4 : 2.8,
-          speed: node.isOrigin ? 0.0036 : 0.0028,
-        });
-      });
-      // C. Tapered Holographic Light Pillar (Shooting up from surface)
-      const beamGeo = new THREE.CylinderGeometry(
-        0.22,
-        0.95,
-        beamHeight,
-        16,
-        4,
-        true,
-      );
-      const beamPosAttr = beamGeo.getAttribute("position");
-      const beamColors = new Float32Array(beamPosAttr.count * 3);
-      const baseC = new THREE.Color(node.color);
-      const tipC = new THREE.Color(0xffffff);
-      for (let i = 0; i < beamPosAttr.count; i++) {
-        const y = beamPosAttr.getY(i);
-        const t = (y + beamHeight / 2) / beamHeight;
-        const c = baseC.clone().lerp(tipC, t * 0.7);
-        beamColors[i * 3] = c.r;
-        beamColors[i * 3 + 1] = c.g;
-        beamColors[i * 3 + 2] = c.b;
+        countryMap.needsUpdate = true;
       }
-      beamGeo.setAttribute("color", new THREE.BufferAttribute(beamColors, 3));
-      const beamMat = new THREE.MeshBasicMaterial({
-        vertexColors: true,
+      countryBorders.forEach(({ id, material }) => {
+        const active = id === countrySelection;
+        material.color.set(active ? 0xffb36b : 0x83d5ed);
+        material.linewidth = active ? 2.5 : 1.7;
+        material.opacity = active ? 1 : 0.9;
+      });
+    };
+    const countryRequest = new AbortController();
+    void fetch("/data/globe-destinations.geojson", {
+      signal: countryRequest.signal,
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Country boundaries unavailable");
+        return response.json() as Promise<{ features: CountryFeature[] }>;
+      })
+      .then((data) => {
+        if (disposed) return;
+        countries = data.features;
+        countries.forEach((feature) => {
+          const points: THREE.Vector3[] = [];
+          const polygons =
+            feature.geometry.type === "Polygon"
+              ? [feature.geometry.coordinates]
+              : feature.geometry.coordinates;
+          polygons.forEach((polygon) => {
+            polygon.forEach((ring) => {
+              for (let i = 1; i < ring.length; i++) {
+                const [lng, lat] = ring[i - 1]!;
+                const [nextLng, nextLat] = ring[i]!;
+                // Subdivide long borders so line segments never cut into the sphere.
+                const steps = Math.ceil(
+                  Math.max(Math.abs(nextLng - lng), Math.abs(nextLat - lat)) /
+                    0.5,
+                );
+                for (let step = 0; step < steps; step++) {
+                  for (const t of [step / steps, (step + 1) / steps]) {
+                    points.push(
+                      coordinates(
+                        THREE.MathUtils.lerp(lat, nextLat, t),
+                        THREE.MathUtils.lerp(lng, nextLng, t),
+                        RADIUS * 1.004,
+                      ),
+                    );
+                  }
+                }
+              }
+            });
+          });
+          // Screen-space widths keep country borders legible on phones and when zooming.
+          const geometry = new LineSegmentsGeometry().setPositions(
+            points.flatMap((point) => [point.x, point.y, point.z]),
+          );
+          const material = new LineMaterial({
+            transparent: true,
+            depthWrite: false,
+            toneMapped: false,
+          });
+          const border = new LineSegments2(geometry, material);
+          border.renderOrder = 2;
+          globe.add(border);
+          geometries.push(geometry);
+          materials.push(material);
+          countryBorders.push({ id: feature.properties.id, material });
+        });
+        updateCountries();
+      })
+      .catch((error: unknown) => {
+        if (!disposed)
+          console.warn("Unable to load globe country outlines", error);
+      });
+
+    // Fine cartographic lines give the satellite imagery a quietly technical finish.
+    const gridPoints: THREE.Vector3[] = [];
+    for (let lat = -60; lat <= 60; lat += 30) {
+      for (let lng = -180; lng < 180; lng += 3) {
+        gridPoints.push(
+          coordinates(lat, lng, RADIUS * 1.003),
+          coordinates(lat, lng + 3, RADIUS * 1.003),
+        );
+      }
+    }
+    for (let lng = -180; lng < 180; lng += 30) {
+      for (let lat = -90; lat < 90; lat += 3) {
+        gridPoints.push(
+          coordinates(lat, lng, RADIUS * 1.003),
+          coordinates(lat + 3, lng, RADIUS * 1.003),
+        );
+      }
+    }
+    const gridGeometry = new THREE.BufferGeometry().setFromPoints(gridPoints);
+    const gridMaterial = new THREE.LineBasicMaterial({
+      color: 0xb6dbed,
+      transparent: true,
+      opacity: 0.035,
+    });
+    globe.add(new THREE.LineSegments(gridGeometry, gridMaterial));
+    geometries.push(gridGeometry);
+    materials.push(gridMaterial);
+
+    const pinGeometry = new THREE.SphereGeometry(0.033, 12, 12);
+    const ringGeometry = new THREE.RingGeometry(0.065, 0.079, 40);
+    geometries.push(pinGeometry, ringGeometry);
+    const beacons = NODES.map((node) => {
+      const origin = node.id === "dhaka";
+      const position = coordinates(node.lat, node.lng, RADIUS * 1.016);
+      const normal = position.clone().normalize();
+      const pinMaterial = new THREE.MeshBasicMaterial({
+        color: origin ? 0xffa861 : 0xe5f5ff,
+      });
+      const pin = new THREE.Mesh(pinGeometry, pinMaterial);
+      pin.position.copy(position);
+      globe.add(pin);
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: origin ? 0xff934e : 0x9cd9fb,
         transparent: true,
-        opacity: node.isOrigin ? 0.65 : 0.48,
-        blending: THREE.AdditiveBlending,
+        opacity: 0.75,
         side: THREE.DoubleSide,
         depthWrite: false,
       });
-      const beamMesh = new THREE.Mesh(beamGeo, beamMat);
-      beamMesh.position.copy(beamCenter);
-      beamMesh.quaternion.setFromUnitVectors(
-        new THREE.Vector3(0, 1, 0),
-        normal,
-      );
-      globeGroup.add(beamMesh);
-      beaconDisposables.push(beamGeo, beamMat);
-      // D. Floating Luminous Diamond Crystal
-      const diamondRadius = node.isOrigin ? 1.18 : 0.92;
-      const diamondGeo = new THREE.OctahedronGeometry(diamondRadius, 0);
-      const diamondMat = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color(node.color),
-        emissive: new THREE.Color(node.color),
-        emissiveIntensity: 0.35,
-        roughness: 0.15,
-        metalness: 0.25,
-        clearcoat: 0.9,
+      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+      ring.position.copy(position);
+      ring.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal);
+      globe.add(ring);
+      materials.push(pinMaterial, ringMaterial);
+      return { node, position, pin, ring, normal };
+    });
+
+    const start = coordinates(ORIGIN.lat, ORIGIN.lng, RADIUS * 1.022);
+    const packetGeometry = new THREE.SphereGeometry(0.025, 10, 10);
+    geometries.push(packetGeometry);
+    const routes = DESTINATIONS.map((node, index) => {
+      const end = coordinates(node.lat, node.lng, RADIUS * 1.022);
+      const angle = start.angleTo(end);
+      const points = Array.from({ length: 81 }, (_, i) => {
+        const t = i / 80;
+        // Spherical interpolation keeps even short routes above Earth's surface.
+        const point = start
+          .clone()
+          .multiplyScalar(Math.sin((1 - t) * angle) / Math.sin(angle))
+          .addScaledVector(end, Math.sin(t * angle) / Math.sin(angle))
+          .normalize();
+        return point.multiplyScalar(
+          RADIUS * 1.022 + Math.sin(Math.PI * t) * (0.22 + angle * 0.6),
+        );
+      });
+      const curve = new THREE.CatmullRomCurve3(points);
+      const geometry = new THREE.TubeGeometry(curve, 80, 0.009, 5, false);
+      const material = new THREE.MeshBasicMaterial({
+        color: 0xffa261,
         transparent: true,
-        opacity: 0.95,
+        opacity: 0.65,
       });
-      const diamondMesh = new THREE.Mesh(diamondGeo, diamondMat);
-      diamondMesh.position.copy(tipPos);
-      globeGroup.add(diamondMesh);
-      beaconDisposables.push(diamondGeo, diamondMat);
-      // E. Radiant White Energy Core
-      const coreGeo = new THREE.SphereGeometry(
-        node.isOrigin ? 0.42 : 0.32,
-        16,
-        16,
+      globe.add(new THREE.Mesh(geometry, material));
+      const packetMaterial = new THREE.MeshBasicMaterial({
+        color: 0xfff1ce,
+        transparent: true,
+      });
+      const packet = new THREE.Mesh(packetGeometry, packetMaterial);
+      globe.add(packet);
+      const trailGeometry = new THREE.BufferGeometry().setFromPoints(
+        curve.getPoints(24),
       );
-      const coreMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(0xffffff),
-      });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      coreMesh.position.copy(tipPos);
-      globeGroup.add(coreMesh);
-      beaconDisposables.push(coreGeo, coreMat);
-      // F. Orbiting Gyro Gimbal Ring
-      const ringRadius = node.isOrigin ? 1.8 : 1.45;
-      const ringTube = 0.045;
-      const gimbalGeo = new THREE.TorusGeometry(ringRadius, ringTube, 8, 32);
-      const gimbalMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(node.color),
+      const trailMaterial = new THREE.LineBasicMaterial({
+        color: 0xffe2b0,
         transparent: true,
         opacity: 0.8,
-        blending: THREE.AdditiveBlending,
       });
-      const gimbalMesh = new THREE.Mesh(gimbalGeo, gimbalMat);
-      gimbalMesh.position.copy(tipPos);
-      globeGroup.add(gimbalMesh);
-      beaconDisposables.push(gimbalGeo, gimbalMat);
-      // G. Crisp Country Insignia Sprite Billboard
-      const badgeTex = createCountryBadgeTexture(
-        node.tag,
-        node.color,
-        node.isOrigin,
-      );
-      loadedTextures.push(badgeTex);
-      beaconDisposables.push(badgeTex);
-      const badgeMat = new THREE.SpriteMaterial({
-        map: badgeTex,
-        transparent: true,
-        depthTest: false,
-      });
-      const badgeSprite = new THREE.Sprite(badgeMat);
-      badgeSprite.position.copy(tipPos.clone().addScaledVector(normal, 2.2));
-      const baseScale = node.isOrigin
-        ? new THREE.Vector3(10.6, 3.45, 1)
-        : new THREE.Vector3(8.0, 3.0, 1);
-      badgeSprite.scale.copy(baseScale);
-      globeGroup.add(badgeSprite);
-      beaconDisposables.push(badgeMat);
-      // H. Responsive Interactive Hit Target Sphere
-      const hitGeo = new THREE.SphereGeometry(3.2, 8, 8);
-      const hitMat = new THREE.MeshBasicMaterial({ visible: false });
-      const hitMesh = new THREE.Mesh(hitGeo, hitMat);
-      hitMesh.position.copy(tipPos);
-      globeGroup.add(hitMesh);
-      beaconDisposables.push(hitGeo, hitMat);
-      const beaconObj: BeaconObject = {
-        node,
-        normal,
-        basePos,
-        tipPos,
-        beamHeight,
-        diamond: diamondMesh,
-        innerCore: coreMesh,
-        gimbalRing: gimbalMesh,
-        badgeSprite,
-        baseScale,
-        hitTarget: hitMesh,
-        rippleRings,
-      };
-      beaconObjects.push(beaconObj);
-      nodeHitTargets.push({ mesh: hitMesh, node, beacon: beaconObj });
-    });
-    // --- 9. Glowing 3D Curved Arcs Linking Elevated Beacons ---
-    interface ArcObject {
-      curve: THREE.QuadraticBezierCurve3;
-      tubeMesh: THREE.Mesh;
-      packetMesh: THREE.Group | THREE.Mesh;
-      packetTrail: THREE.Points;
-      trailPositions: Float32Array;
-      trailLength: number;
-      progress: number;
-      speed: number;
-    }
-    const arcObjects: ArcObject[] = [];
-    ARCS_DATA.forEach((arc) => {
-      const originBeacon = beaconObjects.find((b) => b.node.isOrigin);
-      const destBeacon = beaconObjects.find(
-        (b) => b.node.name === arc.destName,
-      );
-      const startVec = originBeacon
-        ? originBeacon.tipPos.clone()
-        : latLngToVector3(arc.startLat, arc.startLng, GLOBE_RADIUS + 7.2);
-      const endVec = destBeacon
-        ? destBeacon.tipPos.clone()
-        : latLngToVector3(arc.endLat, arc.endLng, GLOBE_RADIUS + 5.6);
-      // Elevated midpoint for smooth parabolic curve between floating diamonds
-      const midVec = new THREE.Vector3()
-        .addVectors(startVec, endVec)
-        .multiplyScalar(0.5);
-      const distance = startVec.distanceTo(endVec);
-      const altitude =
-        GLOBE_RADIUS * (1.1 + arc.altitude * (distance / GLOBE_RADIUS));
-      midVec.normalize().multiplyScalar(altitude);
-      const curve = new THREE.QuadraticBezierCurve3(startVec, midVec, endVec);
-      // A. Static Fiber-Optic Arc Tube
-      const curvePoints = curve.getPoints(50);
-      const tubeGeo = new THREE.TubeGeometry(
-        new THREE.CatmullRomCurve3(curvePoints),
-        44,
-        0.16,
-        8,
-        false,
-      );
-      const posAttr = tubeGeo.getAttribute("position");
-      const count = posAttr ? posAttr.count : 0;
-      const colors = new Float32Array(count * 3);
-      const startC = new THREE.Color(arc.startColor);
-      const endC = new THREE.Color(arc.endColor);
-      for (let i = 0; i < count; i++) {
-        const t = i / count;
-        const c = startC.clone().lerp(endC, t);
-        colors[i * 3] = c.r;
-        colors[i * 3 + 1] = c.g;
-        colors[i * 3 + 2] = c.b;
-      }
-      tubeGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-      const tubeMat = new THREE.MeshBasicMaterial({
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.42,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
-      const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
-      globeGroup.add(tubeMesh);
-      beaconDisposables.push(tubeGeo, tubeMat);
-      // B. Animated Supersonic Student Flight Jetliner
-      const gliderGroup = new THREE.Group();
-      gliderGroup.scale.set(0.8, 0.8, 0.8);
-      // 1. Fuselage Body (Gleaming white passenger airliner cabin)
-      const fuselageGeo = new THREE.CylinderGeometry(0.85, 0.85, 3.8, 8);
-      fuselageGeo.rotateX(Math.PI / 2); // Orient along +Z
-      const fuselageMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(0xffffff),
-      });
-      const fuselageMesh = new THREE.Mesh(fuselageGeo, fuselageMat);
-      gliderGroup.add(fuselageMesh);
-      // Aerodynamic Nose Cone
-      const noseGeo = new THREE.ConeGeometry(0.85, 2.2, 8);
-      noseGeo.rotateX(Math.PI / 2);
-      noseGeo.translate(0, 0, 2.9);
-      const noseMesh = new THREE.Mesh(noseGeo, fuselageMat);
-      gliderGroup.add(noseMesh);
-      // 2. Swept Passenger Wings & Tail Fin (Wingspan: 7.2 units!)
-      const wingGeo = new THREE.BufferGeometry();
-      const wingVertices = new Float32Array([
-        // Left Wing
-        0, 0, 1.2, -3.6, 0, -1.8, 0, 0, -1.0,
-        // Right Wing
-        0, 0, 1.2, 0, 0, -1.0, 3.6, 0, -1.8,
-        // Vertical Tail Fin
-        0, 0, -1.0, 0, 2.0, -2.4, 0, 0, -2.2,
-      ]);
-      wingGeo.setAttribute(
-        "position",
-        new THREE.BufferAttribute(wingVertices, 3),
-      );
-      const wingMat = new THREE.MeshBasicMaterial({
-        color: endC,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.95,
-        blending: THREE.AdditiveBlending,
-      });
-      const wingMesh = new THREE.Mesh(wingGeo, wingMat);
-      gliderGroup.add(wingMesh);
-      // 3. Twin Jet Engine Thrusters under wings
-      const engineGeo = new THREE.CylinderGeometry(0.42, 0.52, 1.8, 8);
-      engineGeo.rotateX(Math.PI / 2);
-      const engineMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(0x00f2fe),
-      });
-      const leftEngine = new THREE.Mesh(engineGeo, engineMat);
-      leftEngine.position.set(-1.4, -0.45, -0.2);
-      gliderGroup.add(leftEngine);
-      const rightEngine = new THREE.Mesh(engineGeo, engineMat);
-      rightEngine.position.set(1.4, -0.45, -0.2);
-      gliderGroup.add(rightEngine);
-      // 4. Luminous Nose Headlight & Cockpit Beacon
-      const glowGeo = new THREE.SphereGeometry(0.75, 8, 8);
-      const glowMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(0xffffff),
-      });
-      const glowMesh = new THREE.Mesh(glowGeo, glowMat);
-      glowMesh.position.set(0, 0, 3.8);
-      gliderGroup.add(glowMesh);
-      globeGroup.add(gliderGroup);
-      beaconDisposables.push(
-        fuselageGeo,
-        fuselageMat,
-        noseGeo,
-        wingGeo,
-        wingMat,
-        engineGeo,
-        engineMat,
-        glowGeo,
-        glowMat,
-      );
-      // C. Animated Trailing Particle Comet Tail
-      const trailLength = arc.trailLength;
-      const trailPositions = new Float32Array(trailLength * 3);
-      const trailColors = new Float32Array(trailLength * 3);
-      for (let i = 0; i < trailLength; i++) {
-        const ratio = i / trailLength;
-        const color = startC.clone().lerp(endC, ratio);
-        trailColors[i * 3] = color.r;
-        trailColors[i * 3 + 1] = color.g;
-        trailColors[i * 3 + 2] = color.b;
-      }
-      const trailGeo = new THREE.BufferGeometry();
-      trailGeo.setAttribute(
-        "position",
-        new THREE.BufferAttribute(trailPositions, 3),
-      );
-      trailGeo.setAttribute("color", new THREE.BufferAttribute(trailColors, 3));
-      const trailMat = new THREE.PointsMaterial({
-        size: 2.8,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.9,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
-      const packetTrail = new THREE.Points(trailGeo, trailMat);
-      globeGroup.add(packetTrail);
-      beaconDisposables.push(trailGeo, trailMat);
-      arcObjects.push({
+      const trail = new THREE.Line(trailGeometry, trailMaterial);
+      globe.add(trail);
+      geometries.push(geometry, trailGeometry);
+      materials.push(material, packetMaterial, trailMaterial);
+      return {
+        id: node.id,
         curve,
-        tubeMesh,
-        packetMesh: gliderGroup,
-        packetTrail,
-        trailPositions,
-        trailLength,
-        progress: Math.random(),
-        speed: arc.speed,
-      });
+        material,
+        packet,
+        trail,
+        trailMaterial,
+        progress: index * 0.24,
+      };
     });
-    // --- 10. Mouse & Touch Interaction & Controls ---
-    const DEFAULT_ROT_X = -0.22;
-    let dragRotY = 0;
-    let dragRotX = DEFAULT_ROT_X;
-    let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-    let autoRotate = true;
-    let idleTimeoutId: NodeJS.Timeout | null = null;
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2(-1000, -1000);
-    const onMouseDown = (e: MouseEvent) => {
-      isDragging = true;
-      autoRotate = false;
-      if (idleTimeoutId) clearTimeout(idleTimeoutId);
-      previousMousePosition = { x: e.clientX, y: e.clientY };
-    };
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-      if (isDragging) {
-        const deltaX = e.clientX - previousMousePosition.x;
-        const deltaY = e.clientY - previousMousePosition.y;
-        dragRotY += deltaX * 0.0035;
-        dragRotX = Math.max(-0.44, Math.min(0.04, dragRotX + deltaY * 0.003));
-        previousMousePosition = { x: e.clientX, y: e.clientY };
-      }
-      // Raycast for hover detection on nodes
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(
-        nodeHitTargets.map((n) => n.mesh),
+
+    // An inclined orbit sits in real 3D space, so the Earth naturally occludes its far side.
+    const orbit = new THREE.Group();
+    orbit.position.copy(globe.position);
+    orbit.rotation.set(1.05, 0.1, -0.3);
+    scene.add(orbit);
+    const orbitPoints = Array.from({ length: 181 }, (_, i) => {
+      const angle = (i / 180) * Math.PI * 2;
+      return new THREE.Vector3(
+        Math.cos(angle) * 3.52,
+        Math.sin(angle) * 3.52,
+        0,
       );
-      if (intersects.length > 0 && intersects[0]) {
-        const hit = nodeHitTargets.find(
-          (n) => n.mesh === intersects[0]?.object,
-        );
-        if (hit) {
-          if (hoveredNodeRef.current?.id !== hit.node.id) {
-            hoveredNodeRef.current = hit.node;
-            setHoveredNode(hit.node);
-          }
-          container.style.cursor = "pointer";
-          return;
-        }
-      }
-      if (hoveredNodeRef.current !== null) {
-        hoveredNodeRef.current = null;
-        setHoveredNode(null);
-      }
-      container.style.cursor = isDragging ? "grabbing" : "grab";
+    });
+    const orbitGeometry = new THREE.BufferGeometry().setFromPoints(orbitPoints);
+    const orbitMaterial = new THREE.LineBasicMaterial({
+      color: 0xca9a76,
+      transparent: true,
+      opacity: 0.24,
+    });
+    orbit.add(new THREE.LineLoop(orbitGeometry, orbitMaterial));
+    geometries.push(orbitGeometry);
+    materials.push(orbitMaterial);
+
+    let width = 1;
+    let height = 1;
+    let zoom = 1;
+    const resize = () => {
+      width = stage.clientWidth;
+      height = stage.clientHeight;
+      camera.aspect = width / height;
+      camera.position.set(0, 0.15, width < 640 ? 10.1 : 7.8);
+      camera.lookAt(0, -0.35, 0);
+      camera.zoom = zoom;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
     };
-    const onMouseUp = () => {
-      isDragging = false;
-      if (idleTimeoutId) clearTimeout(idleTimeoutId);
-      // Smoothly re-center towards Bangladesh after 3.2s of idle
-      idleTimeoutId = setTimeout(() => {
-        if (!isDragging) autoRotate = true;
-      }, 3200);
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(stage);
+    resize();
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let reducedMotion = motionQuery.matches;
+    const onMotionChange = () => {
+      reducedMotion = motionQuery.matches;
     };
-    const onTouchStart = (e: TouchEvent) => {
-      if (e.touches.length > 0 && e.touches[0]) {
-        isDragging = true;
-        autoRotate = false;
-        if (idleTimeoutId) clearTimeout(idleTimeoutId);
-        previousMousePosition = {
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        };
-      }
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      if (isDragging && e.touches.length > 0 && e.touches[0]) {
-        const deltaX = e.touches[0].clientX - previousMousePosition.x;
-        const deltaY = e.touches[0].clientY - previousMousePosition.y;
-        dragRotY += deltaX * 0.0035;
-        dragRotX = Math.max(-0.44, Math.min(0.04, dragRotX + deltaY * 0.003));
-        previousMousePosition = {
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-        };
-      }
-    };
-    const onTouchEnd = () => {
-      isDragging = false;
-      if (idleTimeoutId) clearTimeout(idleTimeoutId);
-      idleTimeoutId = setTimeout(() => {
-        if (!isDragging) autoRotate = true;
-      }, 3200);
-    };
-    const onClick = () => {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(
-        nodeHitTargets.map((n) => n.mesh),
+    motionQuery.addEventListener("change", onMotionChange);
+    let inView = true;
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry?.isIntersecting ?? true;
+      },
+      { rootMargin: "80px" },
+    );
+    intersectionObserver.observe(stage);
+
+    const orientationFor = (id: string) => {
+      const destination = DESTINATIONS.find((node) => node.id === id);
+      return new THREE.Quaternion().setFromEuler(
+        new THREE.Euler(
+          -0.2,
+          Math.PI - THREE.MathUtils.degToRad((destination?.lng ?? 90) - 90),
+          0,
+        ),
       );
-      if (intersects.length > 0 && intersects[0]) {
-        const hit = nodeHitTargets.find(
-          (n) => n.mesh === intersects[0]?.object,
-        );
-        if (hit && hit.node.url) {
-          routerRef.current.push(hit.node.url);
-        }
+    };
+    const targetOrientation = orientationFor(selectedRef.current);
+    globe.quaternion.copy(targetOrientation);
+    let lastInteraction = -Infinity;
+    const dragAxis = new THREE.Vector3();
+    const dragRotation = new THREE.Quaternion();
+    const spinAxis = new THREE.Vector3(0, 1, 0);
+    const spinRotation = new THREE.Quaternion();
+    const rotate = (dx: number, dy: number) => {
+      const distance = Math.hypot(dx, dy);
+      if (!distance) return;
+      dragAxis
+        .set(dy / distance, dx / distance, 0)
+        .applyQuaternion(camera.quaternion);
+      dragRotation.setFromAxisAngle(dragAxis, distance * 0.006);
+      targetOrientation.premultiply(dragRotation).normalize();
+      lastInteraction = performance.now();
+    };
+    const changeZoom = (factor: number) => {
+      zoom = THREE.MathUtils.clamp(zoom * factor, 0.78, 1.4);
+      camera.zoom = zoom;
+      camera.updateProjectionMatrix();
+      lastInteraction = performance.now();
+    };
+    zoomRef.current = changeZoom;
+    focusRef.current = (id) => {
+      targetOrientation.copy(orientationFor(id));
+      lastInteraction = performance.now();
+    };
+    const pointers = new Map<number, { x: number; y: number }>();
+    const pinchDistance = () => {
+      const [first, second] = [...pointers.values()];
+      return first && second
+        ? Math.hypot(first.x - second.x, first.y - second.y)
+        : 0;
+    };
+    const pointerDown = (event: PointerEvent) => {
+      if (event.button !== 0) return;
+      lastInteraction = performance.now();
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      container.setPointerCapture(event.pointerId);
+      container.style.cursor = "grabbing";
+    };
+    const pointerMove = (event: PointerEvent) => {
+      const previous = pointers.get(event.pointerId);
+      if (!previous) return;
+      const oldDistance = pinchDistance();
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pointers.size === 1) {
+        rotate(event.clientX - previous.x, event.clientY - previous.y);
+      } else if (oldDistance > 0) {
+        changeZoom(pinchDistance() / oldDistance);
       }
     };
-    container.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-    container.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchend", onTouchEnd, { passive: true });
-    container.addEventListener("click", onClick);
-    // --- 11. Animation Loop ---
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      // A. Ambient slow sway centered on Bangladesh (Math.PI)
-      // Keeps Dhaka Hub prominently centered and "upside" while providing dynamic 3D presence
-      const time = performance.now() * 0.001;
-      if (autoRotate) {
-        if (Math.abs(dragRotY) > 0.001) {
-          dragRotY = THREE.MathUtils.lerp(dragRotY, 0, 0.035);
-        }
-        if (Math.abs(dragRotX - DEFAULT_ROT_X) > 0.001) {
-          dragRotX = THREE.MathUtils.lerp(dragRotX, DEFAULT_ROT_X, 0.035);
-        }
-        const ambientSway = Math.sin(time * 0.3) * 0.1;
-        globeGroup.rotation.y = Math.PI + dragRotY + ambientSway;
-        globeGroup.rotation.x = dragRotX + Math.cos(time * 0.25) * 0.01;
-      } else {
-        globeGroup.rotation.y = Math.PI + dragRotY;
-        globeGroup.rotation.x = dragRotX;
+    const pointerUp = (event: PointerEvent) => {
+      pointers.delete(event.pointerId);
+      lastInteraction = performance.now();
+      if (container.hasPointerCapture(event.pointerId))
+        container.releasePointerCapture(event.pointerId);
+      container.style.cursor = pointers.size ? "grabbing" : "grab";
+    };
+    resetRef.current = () => {
+      targetOrientation.copy(orientationFor(selectedRef.current));
+      zoom = 1;
+      changeZoom(1);
+    };
+    const keyDown = (event: KeyboardEvent) => {
+      const moves: Record<string, [number, number]> = {
+        ArrowLeft: [-24, 0],
+        ArrowRight: [24, 0],
+        ArrowUp: [0, -24],
+        ArrowDown: [0, 24],
+      };
+      const movement = moves[event.key];
+      if (movement) rotate(...movement);
+      else if (event.key === "+" || event.key === "=") changeZoom(1.1);
+      else if (event.key === "-" || event.key === "_") changeZoom(1 / 1.1);
+      else if (event.key === "Home") resetRef.current?.();
+      else return;
+      event.preventDefault();
+    };
+    container.addEventListener("pointerdown", pointerDown);
+    container.addEventListener("pointermove", pointerMove);
+    container.addEventListener("pointerup", pointerUp);
+    container.addEventListener("pointercancel", pointerUp);
+    container.addEventListener("lostpointercapture", pointerUp);
+    container.addEventListener("keydown", keyDown);
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      setStatus("fallback");
+    };
+    renderer.domElement.addEventListener("webglcontextlost", onContextLost);
+
+    const worldPosition = new THREE.Vector3();
+    const projected = new THREE.Vector3();
+    const viewDirection = new THREE.Vector3();
+    const worldNormal = new THREE.Vector3();
+    const trailPoint = new THREE.Vector3();
+    let frameId = 0;
+    let previousTime = performance.now();
+    let elapsed = 0;
+    const render = (now: number) => {
+      frameId = requestAnimationFrame(render);
+      const delta = Math.min((now - previousTime) / 1000, 0.05);
+      previousTime = now;
+      if (!inView || document.hidden) return;
+      const moving = !pausedRef.current && !reducedMotion;
+      if (moving) elapsed += delta;
+      if (moving && !pointers.size && now - lastInteraction > 6000) {
+        // One gentle revolution in about five minutes, with time to inspect a destination.
+        spinRotation.setFromAxisAngle(spinAxis, delta * 0.02);
+        targetOrientation.multiply(spinRotation).normalize();
       }
-      // B. Slow atmospheric cloud drift relative to Earth surface
-      cloudsMesh.rotation.y += 0.00032;
-      // C. Rotate cosmic dust particle field slowly
-      dustParticles.rotation.y -= 0.0004;
-      dustParticles.rotation.x += 0.00015;
-      // D. Animate 3D Holographic Beacons: Serene Drift, Slow Spin & Relaxed Sonar Waves
-      beaconObjects.forEach((b, idx) => {
-        // Slow, gentle vertical levitation
-        const bob = Math.sin(time * 1.2 + idx * 0.9) * 0.22;
-        const currentTip = b.tipPos.clone().addScaledVector(b.normal, bob);
-        b.diamond.position.copy(currentTip);
-        b.innerCore.position.copy(currentTip);
-        b.gimbalRing.position.copy(currentTip);
-        b.hitTarget.position.copy(currentTip);
-        b.badgeSprite.position.copy(currentTip).addScaledVector(b.normal, 2.5);
-        // Smooth, relaxed rotation without rapid glinting
-        b.diamond.rotation.y += 0.006;
-        b.gimbalRing.rotation.x += 0.007;
-        b.gimbalRing.rotation.y += 0.005;
-        // Hover scale and glow reaction
-        const isHovered =
-          hoveredNodeRef.current?.id === b.node.id ||
-          activeDestRef.current === b.node.id;
-        const targetScaleMult = isHovered ? 1.28 : 1.0;
-        b.badgeSprite.scale.lerp(
-          b.baseScale.clone().multiplyScalar(targetScaleMult),
-          0.12,
+      const smoothing = reducedMotion ? 1 : 1 - Math.exp(-delta * 5);
+      globe.quaternion.slerp(targetOrientation, pointers.size ? 1 : smoothing);
+      clouds.rotation.y = elapsed * 0.008;
+      earthMaterial.uniforms.cloudOffset!.value =
+        -clouds.rotation.y / (Math.PI * 2);
+      updateCountries();
+      globe.updateMatrixWorld(true);
+
+      beacons.forEach(({ node, position, pin, ring, normal }, index) => {
+        const active = node.id === selectedRef.current || node.id === "dhaka";
+        const pulse = moving
+          ? 1 + (Math.sin(elapsed * 2 - index) * 0.5 + 0.5) * 0.8
+          : 1.3;
+        ring.scale.setScalar(active ? pulse : 1);
+        ring.material.opacity = active ? 0.8 - (pulse - 1) * 0.5 : 0.35;
+        pin.scale.setScalar(active ? 1.4 : 1);
+        worldPosition.copy(position).applyMatrix4(globe.matrixWorld);
+        worldNormal.copy(normal).transformDirection(globe.matrixWorld);
+        viewDirection.copy(camera.position).sub(worldPosition).normalize();
+        projected.copy(worldPosition).project(camera);
+        const x = (projected.x * 0.5 + 0.5) * width;
+        const y = (-projected.y * 0.5 + 0.5) * height;
+        const visible =
+          worldNormal.dot(viewDirection) > 0.08 && y > 20 && y < height - 22;
+        const offsetScale = width < 640 ? 0.67 : 1;
+        const labelX = THREE.MathUtils.clamp(
+          x + node.offset[0] * offsetScale,
+          width < 640 ? 38 : 70,
+          width - (width < 640 ? 38 : 70),
         );
-        const dMat = b.diamond.material as THREE.MeshPhysicalMaterial;
-        dMat.emissiveIntensity = THREE.MathUtils.lerp(
-          dMat.emissiveIntensity,
-          isHovered ? 0.65 : 0.35,
-          0.15,
-        );
-        // Animate slow, graceful radar sonar ripples with smooth sinusoidal falloff
-        b.rippleRings.forEach((r) => {
-          r.phase = (r.phase + r.speed) % 1.0;
-          const s = 1.0 + r.phase * (r.maxScale - 1.0);
-          r.mesh.scale.set(s, s, s);
-          const rMat = r.mesh.material as THREE.MeshBasicMaterial;
-          const fade = Math.sin((1.0 - r.phase) * Math.PI * 0.5);
-          rMat.opacity = Math.max(0, fade * (b.node.isOrigin ? 0.65 : 0.5));
-        });
+        const labelY = y + node.offset[1] * offsetScale;
+        const label = labelRefs.current.get(node.id);
+        const leader = leaderRefs.current.get(node.id);
+        if (label) {
+          label.style.transform = `translate3d(${labelX}px, ${labelY}px, 0) translate(-50%, -50%)`;
+          label.style.opacity = visible ? "1" : "0";
+          label.style.visibility = visible ? "visible" : "hidden";
+        }
+        if (leader) {
+          leader.setAttribute("d", `M ${x} ${y} L ${labelX} ${labelY}`);
+          leader.style.opacity = visible ? (active ? "0.65" : "0.3") : "0";
+        }
       });
-      // E. Animate supersonic student flight gliders traveling across arcs from Dhaka
-      arcObjects.forEach((arc) => {
-        arc.progress = (arc.progress + arc.speed) % 1.0;
-        const currentPos = arc.curve.getPoint(arc.progress);
-        const tangent = arc.curve.getTangent(arc.progress);
-        arc.packetMesh.position.copy(currentPos);
-        arc.packetMesh.quaternion.setFromUnitVectors(
-          new THREE.Vector3(0, 0, 1),
-          tangent,
+      routes.forEach((route) => {
+        const active = route.id === selectedRef.current;
+        route.material.opacity = THREE.MathUtils.lerp(
+          route.material.opacity,
+          active ? 0.95 : 0.18,
+          smoothing,
         );
-        // Update trailing comet tail
-        const positions = arc.trailPositions;
-        for (let i = 0; i < arc.trailLength; i++) {
-          const trailT = Math.max(0, arc.progress - i * 0.011);
-          const p = arc.curve.getPoint(trailT);
-          positions[i * 3] = p.x;
-          positions[i * 3 + 1] = p.y;
-          positions[i * 3 + 2] = p.z;
+        route.material.color.set(active ? 0xffa364 : 0xb2daec);
+        if (moving)
+          route.progress =
+            (route.progress + delta * (active ? 0.16 : 0.09)) % 1;
+        route.curve.getPointAt(route.progress, route.packet.position);
+        route.packet.scale.setScalar(active ? 1.5 : 0.7);
+        route.packet.material.opacity = active ? 1 : 0.4;
+        route.trailMaterial.opacity = active ? 0.95 : 0.12;
+        const attribute = route.trail.geometry.getAttribute("position");
+        for (let i = 0; i < attribute.count; i++) {
+          route.curve.getPointAt(
+            Math.max(0, route.progress - (i / (attribute.count - 1)) * 0.13),
+            trailPoint,
+          );
+          attribute.setXYZ(i, trailPoint.x, trailPoint.y, trailPoint.z);
         }
-        const trailPosAttr = arc.packetTrail.geometry.getAttribute("position");
-        if (trailPosAttr) {
-          trailPosAttr.needsUpdate = true;
-        }
+        attribute.needsUpdate = true;
       });
       renderer.render(scene, camera);
     };
-    animate();
-    // --- 12. Handle Window Resize ---
-    const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth || 1000;
-      const h = container.clientHeight || 520;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    };
-    window.addEventListener("resize", handleResize);
-    // --- 13. Comprehensive Cleanup on Unmount ---
+    frameId = requestAnimationFrame(render);
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", handleResize);
-      if (idleTimeoutId) clearTimeout(idleTimeoutId);
-      container.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-      container.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
-      container.removeEventListener("click", onClick);
+      disposed = true;
+      countryRequest.abort();
+      cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+      motionQuery.removeEventListener("change", onMotionChange);
+      container.removeEventListener("pointerdown", pointerDown);
+      container.removeEventListener("pointermove", pointerMove);
+      container.removeEventListener("pointerup", pointerUp);
+      container.removeEventListener("pointercancel", pointerUp);
+      container.removeEventListener("lostpointercapture", pointerUp);
+      container.removeEventListener("keydown", keyDown);
+      renderer.domElement.removeEventListener(
+        "webglcontextlost",
+        onContextLost,
+      );
+      geometries.forEach((geometry) => geometry.dispose());
+      materials.forEach((material) => material.dispose());
+      textures.forEach((map) => map.dispose());
       renderer.dispose();
-      earthGeometry.dispose();
-      earthMaterial.dispose();
-      cloudsGeometry.dispose();
-      cloudsMaterial.dispose();
-      atmosphereGeometry.dispose();
-      atmosphereMaterial.dispose();
-      dustGeometry.dispose();
-      dustMaterial.dispose();
-      loadedTextures.forEach((tex) => tex.dispose());
-      beaconDisposables.forEach((d) => d.dispose());
+      renderer.domElement.remove();
+      resetRef.current = null;
+      zoomRef.current = null;
+      focusRef.current = null;
     };
   }, []);
+
   return (
-    <div className="relative mx-auto flex w-full max-w-[1100px] flex-col items-center justify-center select-none">
-      {/* Three.js WebGL Canvas Container: Purely floating underneath texts and hero */}
+    <div
+      className={styles.explorer}
+      role="group"
+      aria-label={
+        bn
+          ? "বিশ্বজুড়ে উচ্চশিক্ষার গন্তব্য"
+          : "Explore your study destinations"
+      }
+    >
       <div
-        ref={containerRef}
-        className="relative flex h-[360px] w-full cursor-grab items-center justify-center [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)] active:cursor-grabbing sm:h-[420px] md:h-[470px] lg:h-[500px]"
-      />
-
-      {/* Active Node Floating Academic Intel Card (Unified Light Frosted Glass) */}
-      {hoveredNode && (
-        <div className="animate-fade-in pointer-events-none absolute top-4 left-1/2 z-30 w-[92%] max-w-[360px] -translate-x-1/2">
-          <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-3.5 text-slate-900 shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur-2xl">
-            {/* Header: Indicator, Destination Name, Intake tag */}
-            <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="size-2.5 rounded-full shadow-sm"
-                  style={{
-                    backgroundColor: hoveredNode.color,
-                    boxShadow: `0 0 10px ${hoveredNode.color}`,
-                  }}
-                />
-                <span className="font-display text-xs font-black tracking-wide text-slate-900 uppercase">
-                  {hoveredNode.name}
-                </span>
-              </div>
-              {hoveredNode.intake && (
-                <span className="rounded-full border border-orange-200/90 bg-orange-50 px-2 py-0.5 font-mono text-[0.65rem] font-bold text-orange-700">
-                  {hoveredNode.intake}
-                </span>
-              )}
-            </div>
-
-            {/* Scholarship Callout */}
-            {hoveredNode.scholarship && (
-              <div className="mt-2.5 flex items-start gap-2 rounded-xl border border-amber-200/80 bg-amber-50/80 p-2">
-                <span className="mt-0.5 text-xs text-amber-600">🎓</span>
-                <div>
-                  <span className="font-display block text-[0.66rem] font-bold tracking-wider text-amber-800 uppercase">
-                    Scholarship Coverage
-                  </span>
-                  <span className="text-[0.7rem] leading-tight font-medium text-slate-700">
-                    {hoveredNode.scholarship}
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* Top In-Demand Programs */}
-            {hoveredNode.topPrograms && (
-              <div className="mt-2">
-                <span className="font-mono text-[0.62rem] font-semibold tracking-wider text-slate-500 uppercase">
-                  Featured Programs:
-                </span>
-                <div className="mt-1 flex flex-wrap gap-1">
-                  {hoveredNode.topPrograms.map((prog, pIdx) => (
-                    <span
-                      key={pIdx}
-                      className="rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[0.64rem] font-medium text-slate-700"
-                    >
-                      {prog}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Trust Footer */}
-            <div className="mt-2.5 flex items-center justify-between border-t border-slate-100 pt-2 text-[0.66rem]">
-              <span className="flex items-center gap-1 font-mono font-semibold text-emerald-700">
-                <span className="size-1.5 animate-pulse rounded-full bg-emerald-600" />
-                {hoveredNode.visaRate || "98.5% Visa Rate"}
-              </span>
-              {hoveredNode.url && (
-                <span className="font-mono font-bold text-orange-600">
-                  Explore Programs →
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Interactive Destination Legend Bar positioned cleanly across the bottom */}
-      <div
-        className="pointer-events-auto relative z-20 -mt-6 flex w-full flex-wrap justify-center gap-2 px-2 pb-2 sm:-mt-8"
-        role="navigation"
-        aria-label="Connected destinations"
+        className={styles.stage}
+        ref={stageRef}
+        data-status={status}
+        data-paused={paused}
       >
-        {DESTINATION_NODES.map((d) => (
-          <button
-            key={d.id}
-            type="button"
-            onClick={() => {
-              if (d.url) router.push(d.url);
-            }}
-            onMouseEnter={() => setActiveDest(d.id)}
-            onMouseLeave={() => setActiveDest(null)}
-            className={`group inline-flex cursor-pointer items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold backdrop-blur-md transition-all duration-300 ${
-              activeDest === d.id
-                ? "border-slate-700 bg-slate-700 text-white"
-                : "border-transparent bg-white/80 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-            }`}
+        <div className={styles.ambient} aria-hidden="true" />
+        <div className={styles.orbitGraphic} aria-hidden="true" />
+        <div className={styles.stageHeading}>
+          <span className={styles.taglineSizer} aria-hidden="true">
+            {tagline}
+          </span>
+          <span className={styles.typewriterText}>{tagline}</span>
+        </div>
+        {status !== "ready" && (
+          <div
+            className={styles.fallback}
+            role="img"
+            aria-label={bn ? "পৃথিবীর উপগ্রহচিত্র" : "Satellite view of Earth"}
           >
-            <span
-              className="size-2 rounded-full shadow-sm"
-              style={{
-                backgroundColor: d.color,
-                boxShadow: `0 0 8px ${d.color}66`,
+            <span className={styles.fallbackLabel}>
+              {bn ? "ঢাকা থেকে বিশ্বজুড়ে" : "From Dhaka to the world"}
+            </span>
+          </div>
+        )}
+        <div
+          ref={canvasRef}
+          className={styles.canvas}
+          style={{ opacity: status === "ready" ? 1 : 0 }}
+          role="group"
+          tabIndex={status === "ready" ? 0 : -1}
+          aria-label={
+            bn
+              ? "পৃথিবী ঘোরাতে টানুন বা তীরচিহ্নের কী ব্যবহার করুন। জুম করতে প্লাস বা মাইনাস, রিসেট করতে হোম চাপুন।"
+              : "Drag or use arrow keys to rotate Earth. Use plus or minus to zoom, and Home to reset."
+          }
+        />
+        <svg
+          className={styles.leaders}
+          aria-hidden="true"
+          width="100%"
+          height="100%"
+        >
+          {NODES.map((node) => (
+            <path
+              key={node.id}
+              ref={(element) => {
+                if (element) leaderRefs.current.set(node.id, element);
+                else leaderRefs.current.delete(node.id);
               }}
             />
-            <span className="font-display tracking-wide">🎓 {d.country}</span>
-            <span className="font-mono text-[0.68rem] text-slate-400 transition-colors group-hover:text-orange-600">
-              {d.tag}
-            </span>
+          ))}
+        </svg>
+        <div
+          className={styles.labels}
+          style={{ visibility: status === "ready" ? "visible" : "hidden" }}
+        >
+          <div
+            className={`${styles.mapLabel} ${styles.originLabel}`}
+            ref={(element) => {
+              if (element) labelRefs.current.set("dhaka", element);
+              else labelRefs.current.delete("dhaka");
+            }}
+          >
+            <span className={styles.originDot} />
+            <span>{bn ? "ঢাকা, বাংলাদেশ" : "Dhaka, Bangladesh"}</span>
+          </div>
+          {DESTINATIONS.map((item) => (
+            <button
+              key={item.id}
+              ref={(element) => {
+                if (element) labelRefs.current.set(item.id, element);
+                else labelRefs.current.delete(item.id);
+              }}
+              type="button"
+              className={styles.mapLabel}
+              data-active={selected === item.id}
+              tabIndex={status === "ready" ? 0 : -1}
+              aria-pressed={selected === item.id}
+              aria-label={
+                bn ? `${item.countryBn} দেখুন` : `Explore ${item.country}`
+              }
+              onClick={() => selectDestination(item.id)}
+            >
+              <span className={styles.labelCode}>{item.code}</span>
+              <span className={styles.labelName}>
+                {bn ? item.countryBn : item.country}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className={styles.originNote} aria-hidden="true">
+          {bn
+            ? "শুরু হোক এখান থেকেই।"
+            : "Every great journey\nstarts somewhere."}
+        </div>
+        <div className={styles.controls}>
+          <button
+            type="button"
+            onClick={() => zoomRef.current?.(1.1)}
+            aria-label={bn ? "পৃথিবী কাছে আনুন" : "Zoom in on globe"}
+            title={bn ? "জুম ইন" : "Zoom in"}
+          >
+            <ZoomIn size={14} />
+          </button>
+          <button
+            type="button"
+            onClick={() => zoomRef.current?.(1 / 1.1)}
+            aria-label={bn ? "পৃথিবী দূরে নিন" : "Zoom out on globe"}
+            title={bn ? "জুম আউট" : "Zoom out"}
+          >
+            <ZoomOut size={14} />
+          </button>
+          <button
+            type="button"
+            onClick={() => resetRef.current?.()}
+            aria-label={bn ? "পৃথিবীর দৃশ্য রিসেট করুন" : "Reset globe view"}
+            title={bn ? "রিসেট" : "Reset view"}
+          >
+            <RotateCcw size={14} />
+          </button>
+          <button
+            type="button"
+            onClick={() => setPaused((value) => !value)}
+            aria-label={
+              bn
+                ? paused
+                  ? "অ্যানিমেশন চালু করুন"
+                  : "অ্যানিমেশন থামান"
+                : paused
+                  ? "Play globe animation"
+                  : "Pause globe animation"
+            }
+            aria-pressed={paused}
+            title={
+              bn ? "অ্যানিমেশন" : paused ? "Play animation" : "Pause animation"
+            }
+          >
+            {paused ? <Play size={14} /> : <Pause size={14} />}
+          </button>
+        </div>
+        <div className={styles.interactionHint}>
+          <span className={styles.mouseGesture} aria-hidden="true">
+            <span className={styles.mouseWheel} />
+          </span>
+          <span>{bn ? "যেকোনো দিকে ঘোরান" : "Drag in any direction"}</span>
+        </div>
+        <div className={styles.fade} aria-hidden="true" />
+      </div>
+
+      <div
+        className={styles.destinationNav}
+        aria-label={bn ? "একটি গন্তব্য বেছে নিন" : "Choose a destination"}
+        role="group"
+      >
+        <span className={styles.navCaption}>
+          {bn ? "আপনার পরবর্তী অধ্যায়" : "YOUR NEXT CHAPTER"}
+        </span>
+        {DESTINATIONS.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => selectDestination(item.id)}
+            aria-pressed={selected === item.id}
+            aria-controls="globe-destination-details"
+            className={styles.destinationButton}
+          >
+            <span className={styles.countryCode}>{item.code}</span>
+            {bn ? item.countryBn : item.country}
+            <span className={styles.selectionDot} />
           </button>
         ))}
+      </div>
+
+      <div className={styles.routeCard} id="globe-destination-details">
+        <div className={styles.routeIdentity} aria-hidden="true">
+          <div>
+            <span className={styles.routeOverline}>
+              {bn ? "ঢাকা থেকে" : "FROM DHAKA TO"}
+            </span>
+            <span className={styles.routeCity}>
+              {bn ? destination.cityBn : destination.city}
+              <span>{destination.code}</span>
+            </span>
+          </div>
+        </div>
+        <div
+          className={styles.routeDescription}
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <p>
+            {bn
+              ? `${destination.countryBn} পড়তে যান`
+              : `Your future in ${destination.country}`}
+          </p>
+          <span>
+            {bn ? destination.descriptionBn : destination.description}
+          </span>
+        </div>
+        <Link
+          className={styles.exploreLink}
+          href={localizedHref(`/destinations/${destination.id}`, locale)}
+        >
+          {bn ? "গন্তব্য দেখুন" : "Explore destination"}
+        </Link>
       </div>
     </div>
   );
