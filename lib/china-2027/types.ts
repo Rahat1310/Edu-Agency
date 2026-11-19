@@ -14,13 +14,13 @@ export type ChinaOffer = {
   level: ChinaOfferLevel;
   title: string;
   intake: "March 2027" | "September 2027";
-  language: "English" | "Chinese" | "English / Chinese";
+  language: "English" | "Chinese" | "English / Chinese" | "Not specified";
   duration: string;
   tuition: {
     amount: number | null;
     exact?: boolean;
     display: string;
-    period: "semester" | "year" | "program";
+    period: "semester" | "year" | "program" | "unspecified";
     basis: "original" | "after-scholarship" | "combined";
   };
   fees: { label: string; value: string }[];
@@ -32,4 +32,6 @@ export type ChinaOffer = {
   deadlines: { label: string; date: string | null; display: string }[];
   eligibility: "eligible" | "confirm" | "unavailable";
   sourceFile: string;
+  supplementalSource?: string;
+  reviewedOn?: string;
 };

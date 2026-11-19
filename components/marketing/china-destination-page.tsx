@@ -96,7 +96,7 @@ export function ChinaDestinationPage({ locale }: { locale: Locale }) {
         routes: "আপনার জন্য কোন ইনটেক?",
         spring: "March 2027",
         springBody:
-          "Chinese Language, Foundation, ভাষা থেকে Bachelor’s-এ যাওয়ার শর্তযুক্ত পথ এবং একটি Master’s অফার দেখুন।",
+          "Chinese Language, Foundation ও ডিগ্রির প্রস্তুতি কোর্সের পাশাপাশি সরাসরি Bachelor’s, Master’s ও PhD অফার দেখুন। প্রস্তুতি কোর্স থেকে ডিগ্রিতে যাওয়ার শর্ত প্রতিটি অফারে দেওয়া আছে।",
         autumn: "September 2027",
         autumnBody:
           "ইংরেজি ও চীনা মাধ্যমে Bachelor’s, Master’s ও PhD অফার দেখুন। বিষয়ভেদে CSCA, HSK বা English proficiency লাগতে পারে।",
@@ -196,7 +196,7 @@ export function ChinaDestinationPage({ locale }: { locale: Locale }) {
         routes: "Choose the intake that fits your next step.",
         spring: "March 2027",
         springBody:
-          "Explore Chinese language courses, foundation study, conditional language-to-bachelor routes and a master’s offer. These preparation routes are distinct from direct bachelor entry.",
+          "Explore Chinese language and foundation courses, pathways to later degree study, and direct bachelor’s, master’s and PhD offers. Check the start date and progression requirements for each programme.",
         autumn: "September 2027",
         autumnBody:
           "Explore English- and Chinese-taught bachelor’s, master’s and doctoral offers. Check the subject list, scholarship deadlines, CSCA and language requirements.",

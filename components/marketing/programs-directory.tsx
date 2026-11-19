@@ -71,8 +71,8 @@ export function ProgramsDirectory({
           <div className="mt-6 rounded-2xl border border-orange-200 bg-orange-50 p-5 text-sm leading-7 text-slate-700">
             <p>
               {locale === "bn"
-                ? "চীনের বিষয়ভিত্তিক তালিকা তুলনা করুন। নির্দিষ্ট ডিগ্রি, পাঠদানের ভাষা, বর্তমান ফি ও স্কলারশিপ বিশ্ববিদ্যালয়ের নির্দেশিকা দিয়ে নিশ্চিত করুন। ইনটেকের মাস আবেদনের শেষ তারিখ নয়।"
-                : "Compare China subject listings. Confirm the exact degree, teaching language, current fees and scholarships in the university’s admissions guide. Intake months are start dates, not application deadlines."}
+                ? "চীনের বিষয়ভিত্তিক তালিকা তুলনা করুন। নির্দিষ্ট ডিগ্রি, পাঠদানের ভাষা, বর্তমান ফি ও স্কলারশিপ বিশ্ববিদ্যালয়ের নির্দেশিকা দিয়ে নিশ্চিত করুন। ক্লাস শুরুর সময় ও আবেদনের শেষ তারিখ প্রতিটি অফারে দেখুন।"
+                : "Compare China subject listings. Confirm the exact degree, teaching language, current fees and scholarships in the university’s admissions guide. Check the study dates and application deadline on each offer."}
             </p>
             <Link
               href={localizedHref("/destinations/china", locale)}

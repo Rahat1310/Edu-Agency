@@ -249,10 +249,10 @@
     "universityId": "hangzhou-dianzi-university",
     "location": "Hangzhou, Zhejiang",
     "level": "foundation",
-    "title": "English foundation program",
+    "title": "English- or Chinese-taught foundation programme",
     "intake": "March 2027",
-    "language": "English",
-    "duration": "One semester",
+    "language": "English / Chinese",
+    "duration": "One semester for either teaching language",
     "tuition": {
       "amount": 6300,
       "display": "CNY 6,300 / semester",
@@ -262,19 +262,23 @@
     },
     "fees": [
       {
-        "label": "Accommodation",
-        "value": "CNY 2,700 / semester, two-person room"
+        "label": "Tuition",
+        "value": "CNY 6,300 / semester"
       },
       {
-        "label": "Registration",
-        "value": "CNY 600"
+        "label": "Accommodation",
+        "value": "CNY 2,700 / semester. The earlier English offer specifies a two-person room."
       },
       {
         "label": "Insurance",
         "value": "CNY 400 / semester"
       },
       {
-        "label": "Visa extension",
+        "label": "Registration",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Visa extension, earlier English offer",
         "value": "CNY 400 / year"
       }
     ],
@@ -286,12 +290,16 @@
       "available": true
     },
     "majors": [
-      "One-semester English-taught foundation program; subject timetable to be confirmed"
+      "English-taught foundation — one semester",
+      "Chinese-taught foundation — one semester"
     ],
     "requirements": [
-      "Age 18–24. Bangladesh is included in the offer’s eligible countries.",
-      "IELTS 5.0, TOEFL 70, Duolingo 90 or EF SET B1 as listed in the offer.",
-      "An interview may be required. Attendance must exceed 95%, and all course examinations must be passed."
+      "The March guide lists no CSCA requirement for foundation entry.",
+      "Chinese-taught foundation: HSK 3 with a score of at least 180.",
+      "The foundation programme may require an interview.",
+      "The earlier English offer lists an age limit of 18–24 and includes Bangladesh in its eligible countries.",
+      "The earlier English offer lists IELTS 5.0, TOEFL 70, Duolingo 90 or EF SET B1.",
+      "For progression in the earlier English offer, attendance must exceed 95% and students must pass all course examinations."
     ],
     "documents": [
       "Passport and recent photograph",
@@ -302,18 +310,27 @@
       "University application form"
     ],
     "notes": [
-      "Progression to September 2027 bachelor study is conditional on meeting all entry and completion requirements.",
-      "Chinese-taught bachelor applicants must also meet HSK 4 with at least 180."
+      "The earlier English offer describes progression to September 2027 bachelor study after meeting all entry and completion requirements.",
+      "For later Chinese-taught bachelor study, the earlier English offer lists HSK 4 with at least 180. The Chinese-taught foundation option lists HSK 3 with at least 180 for foundation entry.",
+      "The March guide prints 30 December 2027, after the March intake. The earlier English offer lists 15 December 2026. Confirm the applicable deadline and year for the chosen teaching language.",
+      "The documents below come from the earlier English offer. Confirm the checklist for the Chinese-taught option."
     ],
     "deadlines": [
       {
-        "label": "Application deadline",
-        "date": "2026-12-15",
-        "display": "2026-12-15"
+        "label": "March guide deadline, year requires confirmation",
+        "date": null,
+        "display": "30 December 2027 (printed date)"
+      },
+      {
+        "label": "Earlier English offer deadline, confirm",
+        "date": null,
+        "display": "15 December 2026"
       }
     ],
-    "eligibility": "eligible",
-    "sourceFile": "March 2027/Foundation/4.HDU-Foundation Program-March 2027.doc"
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Foundation/4.HDU-Foundation Program-March 2027.doc",
+    "supplementalSource": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=20",
+    "reviewedOn": "2026-11-12"
   },
   {
     "id": "81e308a7-25f8-5ba7-8fba-a47f5d2d8f02",
@@ -676,24 +693,28 @@
     },
     "fees": [
       {
+        "label": "Tuition",
+        "value": "CNY 8,500 for half a year or CNY 16,200 for one year"
+      },
+      {
         "label": "Accommodation",
-        "value": "Off-campus housing; cost not specified"
+        "value": "The March guide lists CNY 8,000 / year for a three-person room, subject to apartment availability. The earlier offer describes off-campus housing with no price specified."
       },
       {
         "label": "Application",
         "value": "CNY 450"
       },
       {
-        "label": "Medical examination",
+        "label": "Health check-up",
         "value": "CNY 400–500"
       },
       {
-        "label": "Insurance",
-        "value": "CNY 800 / year"
+        "label": "Residence permit / visa extension",
+        "value": "CNY 400"
       },
       {
-        "label": "Residence permit",
-        "value": "CNY 400"
+        "label": "Insurance",
+        "value": "CNY 800 in the March guide. The earlier offer specifies CNY 800 / year."
       }
     ],
     "scholarship": {
@@ -705,7 +726,8 @@
     },
     "majors": ["Chinese Language"],
     "requirements": [
-      "Age 18–45. MOI accepted as English-proficiency evidence."
+      "The earlier offer lists ages 18–45 and accepts MOI as English proficiency evidence. Confirm the criteria for this intake.",
+      "CSCA: The March guide says “Yes”. Confirm whether a score is needed for this language course."
     ],
     "documents": [
       "Passport and recent photograph",
@@ -715,17 +737,26 @@
       "University application form"
     ],
     "notes": [
-      "Authenticated / apostilled police clearance hard copy requested after pre-admission."
+      "Authenticated / apostilled police clearance hard copy requested after pre-admission.",
+      "The March guide gives 10 February 2027. The earlier offer and SCUT’s general spring admissions FAQ give 31 December. Confirm whether the February date applies to this March offer.",
+      "The document list comes from the earlier offer. Confirm the current checklist for this intake."
     ],
     "deadlines": [
       {
-        "label": "Application deadline",
-        "date": "2026-12-31",
-        "display": "2026-12-31"
+        "label": "March guide deadline, confirm",
+        "date": null,
+        "display": "10 February 2027"
+      },
+      {
+        "label": "Earlier offer deadline, confirm",
+        "date": null,
+        "display": "31 December 2026"
       }
     ],
-    "eligibility": "eligible",
-    "sourceFile": "March 2027/Language/1.SCUT-Chinese Language-March-2027.docx"
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/Language/1.SCUT-Chinese Language-March-2027.docx",
+    "supplementalSource": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=14",
+    "reviewedOn": "2026-11-12"
   },
   {
     "id": "02ad7794-23fb-5e61-9118-b175bd70d722",
@@ -1313,55 +1344,89 @@
     "title": "Chinese language and HSK preparation",
     "intake": "March 2027",
     "language": "English / Chinese",
-    "duration": "1.5 years, March 2027–June 2028",
+    "duration": "The March guide lists one year. The earlier offer describes a 1.5-year route from March 2027 to June 2028. Confirm which route is available.",
     "tuition": {
-      "amount": 9000,
-      "display": "CNY 9,000 / 1.5-year program",
-      "period": "program",
+      "amount": null,
+      "display": "CNY 6,000 / year or CNY 9,000 / 1.5-year route, depending on the offer",
+      "period": "unspecified",
       "basis": "original",
       "exact": false
     },
     "fees": [
       {
-        "label": "Accommodation",
-        "value": "CNY 3,000 / 1.5 years, four-bed room"
+        "label": "One-year tuition",
+        "value": "CNY 6,000 / year"
       },
       {
-        "label": "Insurance",
-        "value": "CNY 1,380 / 1.5 years"
+        "label": "One-year accommodation",
+        "value": "CNY 2,000 / year, four-bed room"
       },
       {
-        "label": "Textbooks",
-        "value": "CNY 900 / 1.5 years"
-      },
-      {
-        "label": "Registration",
+        "label": "One-year registration",
         "value": "CNY 500"
       },
       {
-        "label": "Medical examination",
-        "value": "CNY 350"
+        "label": "One-year textbooks",
+        "value": "CNY 600, based on actual conditions"
       },
       {
-        "label": "Visa extension",
+        "label": "One-year physical examination",
+        "value": "About CNY 300–400, based on actual conditions"
+      },
+      {
+        "label": "One-year insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "One-year residence permit / visa",
         "value": "CNY 400 / year"
       },
       {
-        "label": "Residence permit",
+        "label": "1.5-year tuition",
+        "value": "CNY 9,000 for the programme"
+      },
+      {
+        "label": "1.5-year route: Accommodation",
+        "value": "CNY 3,000 / 1.5 years, four-bed room"
+      },
+      {
+        "label": "1.5-year route: Insurance",
+        "value": "CNY 1,380 / 1.5 years"
+      },
+      {
+        "label": "1.5-year route: Textbooks",
+        "value": "CNY 900 / 1.5 years"
+      },
+      {
+        "label": "1.5-year route: Registration",
+        "value": "CNY 500"
+      },
+      {
+        "label": "1.5-year route: Medical examination",
+        "value": "CNY 350"
+      },
+      {
+        "label": "1.5-year route: Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "1.5-year route: Residence permit",
         "value": "CNY 400 / year"
       }
     ],
     "scholarship": {
-      "summary": "Zhiyuan award after enrollment",
+      "summary": "CNY 1,000 annual award listed",
       "details": [
-        "Students with results above 80% may apply for CNY 1,000 / year after one semester and payment of all fees. The university decides application timing and selection."
+        "Earlier 1.5-year route, Zhiyuan award: Students with results above 80% may apply for CNY 1,000 / year after one semester and payment of all fees. The university decides application timing and selection.",
+        "For the one-year route, the March guide lists CNY 1,000 per year for students with transcript results above 80%. Applications can be made after one semester."
       ],
       "available": true
     },
     "majors": ["Chinese Language"],
     "requirements": [
-      "Age 18–25; beginners accepted.",
-      "Country restrictions are indicated but not specified; confirm Bangladesh eligibility."
+      "Earlier 1.5-year offer: Age 18–25; beginners accepted.",
+      "Earlier 1.5-year offer: Country restrictions are indicated but not specified; confirm Bangladesh eligibility.",
+      "One-year route: the March guide lists no CSCA requirement. Confirm country eligibility for the route you choose."
     ],
     "documents": [
       "Passport and recent photograph",
@@ -1373,17 +1438,26 @@
     ],
     "notes": [
       "Visa extension and residence-permit lines may overlap; confirm the actual charges.",
-      "The course aims to prepare students for HSK 5; achieving that score is not guaranteed."
+      "The course aims to prepare students for HSK 5; achieving that score is not guaranteed.",
+      "The earlier offer lists English and Chinese as teaching languages. The March guide does not specify the teaching medium of the one-year route.",
+      "The documents listed below come from the earlier offer. Confirm the checklist for the one-year route."
     ],
     "deadlines": [
       {
-        "label": "Application deadline",
+        "label": "One-year route, March guide",
+        "date": "2026-12-31",
+        "display": "2026-12-31"
+      },
+      {
+        "label": "1.5-year route, earlier offer",
         "date": "2026-12-30",
         "display": "2026-12-30"
       }
     ],
     "eligibility": "confirm",
-    "sourceFile": "March 2027/Language/16.Hechi university-Language-March-2027.docx"
+    "sourceFile": "March 2027/Language/16.Hechi university-Language-March-2027.docx",
+    "supplementalSource": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=9",
+    "reviewedOn": "2026-11-12"
   },
   {
     "id": "b2d489c5-05b3-5121-b283-53de2845a6dd",
@@ -3712,5 +3786,1371 @@
     ],
     "eligibility": "eligible",
     "sourceFile": "September 2027/PhD/English/1.Xiamen University-PhD-English-Sep-2027.doc"
+  },
+  {
+    "id": "02c83f79-0576-5636-9903-d9d13e8fcbce",
+    "university": "Shenyang Urban Construction University",
+    "universityId": "shenyang-urban-construction-university",
+    "location": "Shenyang, Liaoning",
+    "level": "bachelor",
+    "title": "English-taught bachelor programmes",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "Four years for Business Administration, Computer Science and Technology, and Civil Engineering. Five years for Architecture.",
+    "tuition": {
+      "amount": 10000,
+      "display": "CNY 10,000 (fee period not specified)",
+      "period": "unspecified",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "CNY 10,000. Confirm the billing period."
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 2,700 / year for a four-bed room or CNY 5,400 / year for a two-bed room."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Residence permit / visa extension",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800, non-refundable"
+      },
+      {
+        "label": "Dormitory deposit",
+        "value": "CNY 115"
+      }
+    ],
+    "scholarship": {
+      "summary": "Scholarship details not specified",
+      "details": [],
+      "available": false
+    },
+    "majors": [
+      "Business Administration — 4 years",
+      "Computer Science and Technology — 4 years",
+      "Civil Engineering — 4 years",
+      "Architecture — 5 years"
+    ],
+    "requirements": [
+      "CSCA: The March guide says “No”. Confirm whether an exemption applies to this bachelor offer, as official guidance lists CSCA for undergraduate applicants."
+    ],
+    "documents": [],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline, subject to seat availability",
+        "date": "2027-02-15",
+        "display": "2027-02-15"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=2",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "30a8626e-4149-57c9-9b6c-134d3adeb4ad",
+    "university": "Shenyang Urban Construction University",
+    "universityId": "shenyang-urban-construction-university",
+    "location": "Shenyang, Liaoning",
+    "level": "language",
+    "title": "Chinese language programme (April–August 2027)",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "April 2027 to August 2027",
+    "tuition": {
+      "amount": 5000,
+      "display": "CNY 5,000 (fee period not specified)",
+      "period": "unspecified",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "CNY 5,000. The guide does not specify a billing period."
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 225 / month for a four-bed room, CNY 450 / month for a two-bed room, or CNY 900 / month for a single room."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800, non-refundable"
+      },
+      {
+        "label": "Dormitory deposit",
+        "value": "CNY 115"
+      }
+    ],
+    "scholarship": {
+      "summary": "Scholarship details not specified",
+      "details": [],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": ["CSCA: No, as listed for this entry in the March guide."],
+    "documents": [],
+    "notes": [
+      "The guide places this course in the March intake catalogue and states that classes run from April to August 2027."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline, subject to seat availability",
+        "date": "2027-01-30",
+        "display": "2027-01-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=3",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "f489cbb8-d26a-5b60-82f4-c68e94e0f4cf",
+    "university": "Wuhan Institute of Technology",
+    "universityId": "wuhan-institute-of-technology",
+    "location": "Wuhan, Hubei",
+    "level": "bachelor",
+    "title": "English-taught Pharmaceutical Engineering",
+    "intake": "March 2027",
+    "language": "English",
+    "duration": "Not specified in the guide",
+    "tuition": {
+      "amount": null,
+      "display": "Tuition waiver listed. Payment at registration required.",
+      "period": "unspecified",
+      "basis": "after-scholarship",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition and accommodation",
+        "value": "Listed as free for tuition and a four-bed room. Both fees must be paid at registration even when a scholarship is awarded."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 340"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Accommodation deposit",
+        "value": "CNY 100"
+      },
+      {
+        "label": "Textbooks",
+        "value": "CNY 500 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Tuition, four-bed accommodation and stipend listed",
+      "details": [
+        "The guide lists free tuition and free accommodation in a four-bed room, plus CNY 400 / month for 10 months per year.",
+        "From year two, First Class waives CNY 14,000 for science or CNY 12,000 for arts, with CNY 400 / month.",
+        "From year two, Second Class waives CNY 7,000 for science or CNY 6,000 for arts, with CNY 200 / month.",
+        "From year two, Third Class waives CNY 4,700 for science or CNY 4,000 for arts, with CNY 100 / month.",
+        "All three later-year stipends are paid for 10 months per year."
+      ],
+      "available": true
+    },
+    "majors": ["Pharmaceutical Engineering"],
+    "requirements": [
+      "CSCA: The March guide says “No”. Confirm whether an exemption applies to this bachelor offer, as official guidance lists CSCA for undergraduate applicants."
+    ],
+    "documents": [],
+    "notes": [
+      "Confirm the tuition and accommodation amounts payable at registration and how the listed waiver is applied."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-30",
+        "display": "2027-01-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=4",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "2abbc9cb-f6c8-54cb-b746-e3e63090d0a6",
+    "university": "Wuhan Institute of Technology",
+    "universityId": "wuhan-institute-of-technology",
+    "location": "Wuhan, Hubei",
+    "level": "master",
+    "title": "Master’s in Chemical Engineering",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "Three years",
+    "tuition": {
+      "amount": 22000,
+      "display": "CNY 22,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "Original CNY 22,000 / year. Waived with the first-year scholarship."
+      },
+      {
+        "label": "Accommodation",
+        "value": "Original CNY 2,000 / year for a four-bed room or CNY 4,000 / year for a two-bed room. The first-year scholarship covers a four-bed room."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year under both schedules"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 340 under both schedules"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 / year on the original schedule. CNY 400 on the first-year scholarship schedule."
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 500 on the original schedule. No registration amount listed on the first-year scholarship schedule."
+      },
+      {
+        "label": "Application",
+        "value": "No amount listed on the original schedule. CNY 500 on the first-year scholarship schedule."
+      },
+      {
+        "label": "Accommodation deposit",
+        "value": "CNY 100 under both schedules"
+      },
+      {
+        "label": "Textbooks",
+        "value": "CNY 500 / year under both schedules"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition and four-bed accommodation waiver with stipend",
+      "details": [
+        "The first-year award covers tuition and a four-bed room with a stipend of CNY 1,500 / month for up to 10 months. The original fee schedule lists no stipend.",
+        "First-year scholarship applicants need IELTS 5.5, Duolingo 90 or TOEFL 75, and a bachelor’s GPA higher than 75/100 or 3.0/4.0. Both language and GPA conditions must be met. Otherwise, original fees apply.",
+        "From year two, First Class waives CNY 24,000 for science or CNY 22,000 for arts, with CNY 1,500 / month.",
+        "From year two, Second Class waives CNY 12,000 for science or CNY 11,000 for arts, with CNY 750 / month.",
+        "From year two, Third Class waives CNY 8,000 for science or CNY 7,400 for arts, with CNY 500 / month.",
+        "The later-year stipends are paid for 10 months per year."
+      ],
+      "available": true
+    },
+    "majors": ["Chemical Engineering — 3 years"],
+    "requirements": ["CSCA: No, as listed for this entry in the March guide."],
+    "documents": [],
+    "notes": [
+      "Tuition and accommodation must be paid in advance as a deposit every year.",
+      "The listed later-year First Class science waiver is CNY 24,000, while the original tuition table lists CNY 22,000 per year. Confirm how the year-two fee and award are calculated."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-30",
+        "display": "2027-01-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=5-6",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "f41a6e91-0d1a-579b-98b0-e128d25c91c1",
+    "university": "Wuhan Institute of Technology",
+    "universityId": "wuhan-institute-of-technology",
+    "location": "Wuhan, Hubei",
+    "level": "phd",
+    "title": "PhD in Materialogy or Chemical Engineering",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "Not specified in the guide",
+    "tuition": {
+      "amount": 28000,
+      "display": "CNY 28,000 / year before scholarship",
+      "period": "year",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "Original CNY 28,000 / year. Waived with the first-year scholarship."
+      },
+      {
+        "label": "Accommodation",
+        "value": "Original CNY 2,000 / year for a four-bed room or CNY 4,000 / year for a two-bed room. The first-year scholarship covers a four-bed room."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year under both schedules"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 340 under both schedules"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400 under both schedules"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500 under both schedules"
+      },
+      {
+        "label": "Accommodation deposit",
+        "value": "CNY 100 under both schedules"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year tuition and four-bed accommodation waiver with stipend",
+      "details": [
+        "The first-year award covers tuition and a four-bed room with a stipend of CNY 3,000 / month for up to 10 months. The original fee schedule lists no stipend.",
+        "First-year scholarship applicants need IELTS 5.5, Duolingo 90 or TOEFL 75, and a master’s GPA higher than 75/100 or 3.0/4.0. Both language and GPA conditions must be met. Otherwise, original fees apply.",
+        "From year two, First Class lists a CNY 30,000 waiver and CNY 3,000 / month. Second Class lists a CNY 30,000 waiver and CNY 1,500 / month. Third Class lists a CNY 30,000 waiver and CNY 1,000 / month.",
+        "Later-year stipends are paid for up to 10 months per year."
+      ],
+      "available": true
+    },
+    "majors": ["Materialogy", "Chemical Engineering"],
+    "requirements": ["CSCA: No, as listed for this entry in the March guide."],
+    "documents": [],
+    "notes": [
+      "Tuition and accommodation must be paid at registration even when a scholarship is awarded.",
+      "The CNY 30,000 later-year waivers differ from the CNY 28,000 yearly original tuition in the guide. Confirm how the university applies each award."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-30",
+        "display": "2027-01-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=7-8",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "a234dc50-17e3-5eb9-afea-6ac6879e8cdc",
+    "university": "Hebei Academy of Fine Arts",
+    "universityId": "hebei-academy-of-fine-arts",
+    "location": "Hebei",
+    "level": "language",
+    "title": "Chinese language and arts programme",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "Not specified in the guide",
+    "tuition": {
+      "amount": 7500,
+      "display": "CNY 7,500 / year after scholarship (original CNY 30,000)",
+      "period": "year",
+      "basis": "after-scholarship",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "CNY 30,000 / year before scholarship or CNY 7,500 / year after scholarship."
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 3,000 / year for a two-bed room or CNY 2,000 / year for a three-bed room, before and after scholarship."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year before and after scholarship"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 402 before and after scholarship"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 800 / year before and after scholarship"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500, payable when applying and non-refundable, before and after scholarship"
+      }
+    ],
+    "scholarship": {
+      "summary": "CNY 7,500 yearly tuition after scholarship",
+      "details": [
+        "Original tuition is CNY 30,000 per year. The guide lists CNY 7,500 per year after scholarship. The other fees shown are the same under both schedules."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Chinese language — 80% of the programme",
+      "Sketching and design basics — 20% of the programme"
+    ],
+    "requirements": ["CSCA: No, as listed for this entry in the March guide."],
+    "documents": [],
+    "notes": [
+      "Summer and winter holidays are excluded from the listed accommodation fees."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=10",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "fe6a8afd-db81-59d9-a291-7469b733c2c9",
+    "university": "Hebei Academy of Fine Arts",
+    "universityId": "hebei-academy-of-fine-arts",
+    "location": "Hebei",
+    "level": "bachelor",
+    "title": "Chinese-taught bachelor programmes in arts and design",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "Not specified in the guide",
+    "tuition": {
+      "amount": 7500,
+      "display": "CNY 7,500 / year after scholarship (original CNY 30,000)",
+      "period": "year",
+      "basis": "after-scholarship",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "CNY 30,000 / year before scholarship or CNY 7,500 / year after scholarship."
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 3,000 / year for a two-bed room or CNY 2,000 / year for a three-bed room, before and after scholarship."
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year before and after scholarship"
+      },
+      {
+        "label": "Medical examination",
+        "value": "CNY 402 before and after scholarship"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 800 / year before and after scholarship"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500, payable when applying and non-refundable, before and after scholarship"
+      }
+    ],
+    "scholarship": {
+      "summary": "CNY 7,500 yearly tuition after scholarship",
+      "details": [
+        "Original tuition is CNY 30,000 per year. The guide lists CNY 7,500 per year after scholarship. The other fees shown are the same under both schedules."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Architecture",
+      "Apparel and Accessories Design",
+      "Product Design",
+      "Digital Media Art",
+      "Art Education",
+      "Animation",
+      "Film and TV Photography and Production",
+      "Drawing Painting",
+      "Jewelry and Accessory Design"
+    ],
+    "requirements": [
+      "CSCA: The March guide says “No”. Confirm whether an exemption applies to this bachelor offer, as official guidance lists CSCA for undergraduate applicants."
+    ],
+    "documents": [],
+    "notes": [
+      "Summer and winter holidays are excluded from the listed accommodation fees."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline, subject to seat availability",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=11",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "aad07a77-5a38-5ebf-a1af-939824c3a244",
+    "university": "Henan University of Technology",
+    "universityId": "henan-university-of-technology",
+    "location": "Zhengzhou, Henan",
+    "level": "language",
+    "title": "Chinese language programme",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One year",
+    "tuition": {
+      "amount": 10000,
+      "display": "CNY 10,000 / year including four-bed accommodation",
+      "period": "year",
+      "basis": "combined",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Tuition and accommodation package",
+        "value": "CNY 10,000 / year including a four-bed room"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 400 per person in the first year"
+      },
+      {
+        "label": "Residence permit",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Medical check-up",
+        "value": "CNY 450"
+      },
+      {
+        "label": "Deposit",
+        "value": "CNY 2,000 within one week of receiving the pre-admission letter to receive the formal admission letter and JW202."
+      }
+    ],
+    "scholarship": {
+      "summary": "Separate scholarship amount not specified",
+      "details": [],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "CSCA: The March guide says “Yes”. Confirm whether a score is needed for this language course."
+    ],
+    "documents": [],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=12",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "f94bced3-57b9-551a-b4fb-ffab52459d08",
+    "university": "Harbin Institute of Technology",
+    "universityId": "harbin-institute-of-technology",
+    "location": "Harbin, Heilongjiang",
+    "level": "language",
+    "title": "Chinese language programme",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "Half a year or one year",
+    "tuition": {
+      "amount": 7300,
+      "display": "CNY 7,300 / half-year or CNY 14,600 / year",
+      "period": "program",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "CNY 7,300 for half a year or CNY 14,600 for one year"
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 800 / month, two-person room"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Health check-up",
+        "value": "CNY 400–500"
+      },
+      {
+        "label": "Residence permit / visa extension",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Registration",
+        "value": "CNY 800"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800"
+      }
+    ],
+    "scholarship": {
+      "summary": "Scholarship details not specified",
+      "details": [],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "CSCA: The March guide says “Yes”. Confirm whether a score is needed for this language course."
+    ],
+    "documents": [],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline, subject to seat availability",
+        "date": "2027-01-31",
+        "display": "2027-01-31"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=13",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "1bcdbebf-dba9-534e-98ae-6deb49f432b0",
+    "university": "Zhejiang University of Technology",
+    "universityId": "zhejiang-university-of-technology",
+    "location": "Hangzhou, Zhejiang",
+    "level": "language",
+    "title": "Chinese language programme at Zhaohui Campus",
+    "intake": "March 2027",
+    "language": "Chinese",
+    "duration": "One semester",
+    "tuition": {
+      "amount": 9000,
+      "display": "CNY 9,000 / semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Tuition",
+        "value": "CNY 9,000 / semester"
+      },
+      {
+        "label": "Accommodation",
+        "value": "CNY 600 / month for a three-bed room at Zhaohui Campus"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Health check-up",
+        "value": "About CNY 500"
+      },
+      {
+        "label": "Residence permit / visa extension",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 400 / semester"
+      }
+    ],
+    "scholarship": {
+      "summary": "Scholarship details not specified",
+      "details": [],
+      "available": false
+    },
+    "majors": ["Chinese Language"],
+    "requirements": [
+      "CSCA: The March guide says “Yes”. Confirm whether a score is needed for this language course."
+    ],
+    "documents": [],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2026-12-30",
+        "display": "2026-12-30"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=15",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "dcb2af3f-b762-57e7-b37e-cedaf54f8875",
+    "university": "Beihang University",
+    "universityId": "beihang-university",
+    "location": "Beijing",
+    "level": "foundation_bachelor",
+    "title": "Foundation and bachelor pathway",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "Not specified in the guide",
+    "tuition": {
+      "amount": 6000,
+      "display": "CNY 6,000 foundation tuition (fee period not specified)",
+      "period": "unspecified",
+      "basis": "original",
+      "exact": false
+    },
+    "fees": [
+      {
+        "label": "Foundation tuition",
+        "value": "CNY 6,000"
+      },
+      {
+        "label": "Foundation accommodation",
+        "value": "CNY 2,000 for a double room"
+      },
+      {
+        "label": "Foundation medical examination",
+        "value": "CNY 400–500"
+      },
+      {
+        "label": "Foundation insurance",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Foundation visa extension",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Foundation application",
+        "value": "CNY 400, payable during application"
+      },
+      {
+        "label": "Normal bachelor tuition",
+        "value": "CNY 30,000 / year"
+      },
+      {
+        "label": "Normal bachelor accommodation",
+        "value": "CNY 2,000–2,500 / year"
+      },
+      {
+        "label": "Bachelor medical examination",
+        "value": "CNY 400–500, first year only"
+      },
+      {
+        "label": "Bachelor insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Bachelor visa extension",
+        "value": "CNY 400 / year"
+      },
+      {
+        "label": "Pre-admission payment",
+        "value": "CNY 8,000 to the university after pre-admission"
+      }
+    ],
+    "scholarship": {
+      "summary": "Five bachelor scholarship tiers",
+      "details": [
+        "Type A covers tuition and accommodation, with a CNY 2,500 monthly stipend.",
+        "Type B waives full tuition.",
+        "Type C waives 80% of tuition.",
+        "Type D waives 50% of tuition.",
+        "Type E waives 20% of tuition."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Computer Science and Technology",
+      "International Trade and Economics",
+      "Biomedical Engineering"
+    ],
+    "requirements": [
+      "CSCA: Yes, as listed in the March guide.",
+      "Age 18–22 years.",
+      "Interview required."
+    ],
+    "documents": [],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-02-20",
+        "display": "2027-02-20"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=16-17",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "875ae44a-a3a1-5029-a58f-f76081ffd44f",
+    "university": "Fujian Medical University",
+    "universityId": "fujian-medical-university",
+    "location": "Fuzhou, Fujian",
+    "level": "foundation_bachelor",
+    "title": "Preparatory and medical bachelor pathway",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "One preparatory semester, with MBBS listed at six years and Dental Surgery at five years.",
+    "tuition": {
+      "amount": 9000,
+      "display": "CNY 9,000 / preparatory semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Preparatory tuition",
+        "value": "CNY 9,000 / semester"
+      },
+      {
+        "label": "Preparatory accommodation",
+        "value": "CNY 2,000 / semester, two-bed room"
+      },
+      {
+        "label": "Preparatory insurance",
+        "value": "CNY 300 / semester, payable at registration"
+      },
+      {
+        "label": "Major study tuition",
+        "value": "CNY 35,000 / year"
+      },
+      {
+        "label": "Major study accommodation",
+        "value": "CNY 4,000 / year, two-bed room"
+      },
+      {
+        "label": "Major study insurance",
+        "value": "CNY 600 / year"
+      },
+      {
+        "label": "Major study medical examination",
+        "value": "CNY 550, payable at registration"
+      },
+      {
+        "label": "Major study visa extension",
+        "value": "CNY 400 / year, payable at registration"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      }
+    ],
+    "scholarship": {
+      "summary": "Provincial and outstanding student scholarship options",
+      "details": [
+        "Fujian Provincial Government Scholarship: CNY 35,000 / academic year. The guide lists it for 15% of self-funded freshman candidates. Applications are annual and the number of places depends on provincial government policy.",
+        "Scholarship for Outstanding International Students per academic year: Level 1 CNY 35,000, Level 2 CNY 15,000, Level 3 CNY 10,000, Level 4 CNY 5,000.",
+        "First-year students are ranked by combined admission scores, with 30% from the pre-education stage and 70% from the entrance exam.",
+        "The outstanding-student scholarship notes list the top 35% of self-funded freshman candidates and annual applications."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Preparatory programme — one semester",
+      "MBBS — 6 years",
+      "Dental Surgery — 5 years"
+    ],
+    "requirements": ["CSCA: Yes, as listed in the March guide."],
+    "documents": [],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-10",
+        "display": "2027-01-10"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=18-19",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "acb3aaed-afed-5cef-8bf5-08ef345e1884",
+    "university": "Jinzhou Medical University",
+    "universityId": "jinzhou-medical-university",
+    "location": "Jinzhou, Liaoning",
+    "level": "foundation_bachelor",
+    "title": "Foundation and medical bachelor pathway",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "Half a year of foundation, followed by 4 years in Pharmacy, 5 years in Dentistry or 6 years in Clinical Medicine (MBBS).",
+    "tuition": {
+      "amount": 10000,
+      "display": "CNY 10,000 / foundation semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Foundation tuition",
+        "value": "CNY 10,000 / semester"
+      },
+      {
+        "label": "Bachelor tuition, Pharmacy",
+        "value": "CNY 22,000 / year"
+      },
+      {
+        "label": "Bachelor tuition, Dentistry or Clinical Medicine",
+        "value": "CNY 38,000 / year"
+      },
+      {
+        "label": "Foundation accommodation",
+        "value": "CNY 1,000 / semester, triple room"
+      },
+      {
+        "label": "Bachelor accommodation",
+        "value": "CNY 3,000–3,500 / year, double room"
+      },
+      {
+        "label": "Insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800, payable before submission"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400–800 / year"
+      }
+    ],
+    "scholarship": {
+      "summary": "Pharmacy and medical bachelor awards",
+      "details": [
+        "Pharmacy: CNY 11,000 / year for four years. Students without violations can receive the same award each year.",
+        "Clinical Medicine or Dentistry: a CNY 6,000 freshman scholarship for one year. Students pay full tuition before travelling and receive the scholarship at the university.",
+        "From the second year, CNY 10,000, CNY 8,000 or CNY 6,000 awards are listed for 75% of students. Assessment includes overall performance and academic results."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Pharmacy — 0.5 + 4 years",
+      "Dentistry — 0.5 + 5 years",
+      "Clinical Medicine (MBBS) — 0.5 + 6 years"
+    ],
+    "requirements": [
+      "CSCA: Yes, as listed in the March guide.",
+      "Interview required."
+    ],
+    "documents": [],
+    "notes": [
+      "Students who complete preparation and continue undergraduate study at Jinzhou Medical University receive a CNY 5,000 refund, equal to half the foundation tuition."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline, may close when the quota fills",
+        "date": "2027-01-25",
+        "display": "2027-01-25"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=21-22",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "d6705062-a9d5-5c80-a319-93f313bd246d",
+    "university": "Nantong University",
+    "universityId": "nantong-university",
+    "location": "Nantong, Jiangsu",
+    "level": "foundation_bachelor",
+    "title": "Foundation and bachelor pathway",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "One foundation semester. Clinical Medicine is six years and Dental Surgery is five years. Other major durations are not specified.",
+    "tuition": {
+      "amount": 6000,
+      "display": "CNY 6,000 / foundation semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Foundation tuition",
+        "value": "CNY 6,000 / semester"
+      },
+      {
+        "label": "Foundation accommodation",
+        "value": "CNY 1,400, off-campus apartment, four-bed room"
+      },
+      {
+        "label": "Foundation insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Foundation application",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Foundation textbooks",
+        "value": "CNY 600 / semester"
+      },
+      {
+        "label": "Bachelor tuition, other listed majors",
+        "value": "CNY 16,000 / year for International Economics and Trade, Computer Science and Technology, or Pharmacy."
+      },
+      {
+        "label": "Bachelor tuition, Clinical Medicine or Dental Surgery",
+        "value": "CNY 26,000 / year, self-funded with no scholarship"
+      },
+      {
+        "label": "Bachelor accommodation",
+        "value": "CNY 2,800 / year, off-campus apartment, four-bed room"
+      },
+      {
+        "label": "Bachelor insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Bachelor medical examination",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Bachelor visa extension",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Bachelor textbooks",
+        "value": "CNY 1,200 / year"
+      },
+      {
+        "label": "Bachelor application",
+        "value": "CNY 600, first year only"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-class bachelor tuition and accommodation waiver",
+      "details": [
+        "First Class covers tuition and a four-bed room in an off-campus apartment.",
+        "Clinical Medicine and Dental Surgery are excluded and are fully self-funded.",
+        "The university sets scholarship class based on overall performance. Students without a scholarship pay the full original fees."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Foundation class — one semester",
+      "International Economics and Trade",
+      "Computer Science and Technology",
+      "Pharmacy",
+      "Clinical Medicine — 6 years",
+      "Dental Surgery — 5 years"
+    ],
+    "requirements": [
+      "CSCA: Yes. The Mathematics subject test is required.",
+      "Pass all examinations during foundation study and all subject examinations. Attendance must be higher than 95%.",
+      "Only students who meet the examination and attendance requirements and follow school regulations can enter the September 2027 bachelor intake."
+    ],
+    "documents": [],
+    "notes": [
+      "After the pre-admission letter, pay CNY 7,600 in advance for tuition, application, insurance and textbooks before further processing.",
+      "University accommodation must be reserved in advance. The housing notes say students pay the fees even though the scholarship lists free accommodation. Confirm how payment and the award work together.",
+      "The listed accommodation has a private bathroom. There is no shared kitchen and cooking is prohibited."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline, subject to seat availability",
+        "date": "2027-01-11",
+        "display": "2027-01-11"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=23-24",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "90c32943-b0da-5179-a618-7a697a08bc4f",
+    "university": "Nantong University",
+    "universityId": "nantong-university",
+    "location": "Nantong, Jiangsu",
+    "level": "master",
+    "title": "Chinese language and master’s pathway",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "One semester of Chinese language study. Master’s duration and progression intake require confirmation.",
+    "tuition": {
+      "amount": 6000,
+      "display": "CNY 6,000 / Chinese language semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Language foundation tuition",
+        "value": "CNY 6,000 / semester"
+      },
+      {
+        "label": "Language foundation accommodation",
+        "value": "CNY 1,400, off-campus apartment, four-bed room"
+      },
+      {
+        "label": "Language foundation insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Language foundation application",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Language foundation textbooks",
+        "value": "CNY 600 / semester"
+      },
+      {
+        "label": "Master’s tuition, science, humanities and engineering",
+        "value": "CNY 25,000. Fee period not specified in the guide."
+      },
+      {
+        "label": "Master’s tuition, medicine",
+        "value": "CNY 30,000 / year"
+      },
+      {
+        "label": "Master’s accommodation",
+        "value": "CNY 2,800 / year, off-campus apartment, four-bed room"
+      },
+      {
+        "label": "Master’s insurance",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Master’s medical examination",
+        "value": "CNY 500"
+      },
+      {
+        "label": "Master’s visa extension",
+        "value": "CNY 800 / year"
+      },
+      {
+        "label": "Master’s textbooks",
+        "value": "CNY 1,200 / year"
+      },
+      {
+        "label": "Master’s application",
+        "value": "CNY 600, first year only"
+      }
+    ],
+    "scholarship": {
+      "summary": "First-year master’s award with stipend",
+      "details": [
+        "First year only: free tuition and free accommodation in a four-bed off-campus apartment, with CNY 500 / month for 10 months only.",
+        "The university determines scholarship class based on overall performance. Students without a scholarship pay the full original fees."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Business Administration",
+      "Civil Engineering",
+      "Information and Communication Engineering",
+      "Surgery",
+      "Medical Informatics",
+      "Library and Information Science"
+    ],
+    "requirements": [
+      "CSCA: The March guide says “Yes”. Confirm the requirement for this language and master’s pathway.",
+      "Pass all examinations during Chinese language study and all subject examinations. Attendance must be higher than 95%."
+    ],
+    "documents": [],
+    "notes": [
+      "After the pre-admission letter, pay CNY 7,600 in advance for tuition, application, insurance and textbooks before further processing.",
+      "University accommodation must be reserved in advance. The housing notes say students pay the fees even though the scholarship lists free accommodation. Confirm how payment and the award work together.",
+      "The listed accommodation has a private bathroom. There is no shared kitchen and cooking is prohibited.",
+      "The progression note refers to September 2027 bachelor admission, while the entry describes a master’s pathway. The intended degree and progression intake require university confirmation."
+    ],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-11",
+        "display": "2027-01-11"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=25-26",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "232eb743-0b16-52d4-8074-d88cf76720ea",
+    "university": "Xi’an Jiaotong University",
+    "universityId": "xi-an-jiaotong-university",
+    "location": "Xi’an, Shaanxi",
+    "level": "foundation_bachelor",
+    "title": "International foundation and foundation-bachelor pathways",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "The guide quotes foundation fees per semester and lists MBBS at six years. Other durations are not specified.",
+    "tuition": {
+      "amount": 25000,
+      "display": "CNY 25,000 / semester including double-room accommodation",
+      "period": "semester",
+      "basis": "combined",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Foundation tuition and accommodation",
+        "value": "CNY 25,000 / semester, including a double room"
+      },
+      {
+        "label": "Foundation insurance",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Foundation medical check-up",
+        "value": "About CNY 500"
+      },
+      {
+        "label": "Foundation visa",
+        "value": "CNY 400 / semester"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 500"
+      }
+    ],
+    "scholarship": {
+      "summary": "Scholarship details not specified",
+      "details": [],
+      "available": false
+    },
+    "majors": [
+      "International Foundation Program (IFP)",
+      "Foundation-Bachelor Program",
+      "Materials Science and Engineering",
+      "Electrical Engineering and Automation",
+      "Intelligent Manufacturing Engineering",
+      "Energy and Power Engineering",
+      "MBBS — 6 years"
+    ],
+    "requirements": [
+      "CSCA: Yes. Subjects depend on the major. Obtain the subject list referenced as Attachment 1 before applying.",
+      "High school average for International Foundation Program: 60%.",
+      "High school average for Foundation-Bachelor Program: 70%.",
+      "Foundation-Bachelor applicants undergo a comprehensive undergraduate eligibility review when applying for foundation.",
+      "Students must complete foundation with passing grades and submit a valid CSCA score report to qualify for direct undergraduate admission.",
+      "Eligible applicants require no additional review or interview."
+    ],
+    "documents": [
+      "Valid CSCA score report for Foundation-Bachelor progression"
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": null,
+        "display": "Not specified in the guide"
+      }
+    ],
+    "eligibility": "eligible",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=27-28",
+    "reviewedOn": "2026-11-12"
+  },
+  {
+    "id": "2430919c-3799-5e7e-a6c9-f60b109d190b",
+    "university": "Zhengzhou University",
+    "universityId": "zhengzhou-university",
+    "location": "Zhengzhou, Henan",
+    "level": "foundation_bachelor",
+    "title": "Foundation and bachelor pathway",
+    "intake": "March 2027",
+    "language": "Not specified",
+    "duration": "Not specified in the guide",
+    "tuition": {
+      "amount": 5000,
+      "display": "CNY 5,000 / foundation semester",
+      "period": "semester",
+      "basis": "original",
+      "exact": true
+    },
+    "fees": [
+      {
+        "label": "Foundation tuition",
+        "value": "CNY 5,000 / semester"
+      },
+      {
+        "label": "Foundation accommodation",
+        "value": "CNY 15 / day, double room, or CNY 30 / day, single room"
+      },
+      {
+        "label": "Foundation insurance",
+        "value": "CNY 500 / semester"
+      },
+      {
+        "label": "Medical check-up",
+        "value": "CNY 600"
+      },
+      {
+        "label": "Visa extension",
+        "value": "CNY 400"
+      },
+      {
+        "label": "Application",
+        "value": "CNY 800"
+      }
+    ],
+    "scholarship": {
+      "summary": "Two bachelor scholarship options",
+      "details": [
+        "Type A waives tuition for Civil Engineering, Tourism Management, Architecture, and Urban and Rural Planning.",
+        "Type B sets tuition at CNY 5,000 per year for Software Engineering, International Economy and Trade, Civil Engineering, Tourism Management, Architecture, and Urban and Rural Planning.",
+        "Foundation students with good final examination results may receive a bachelor scholarship."
+      ],
+      "available": true
+    },
+    "majors": [
+      "Science and Engineering — Software Engineering",
+      "Science and Engineering — Civil Engineering",
+      "Science and Engineering — Architecture",
+      "Science and Engineering — Urban and Rural Planning",
+      "Business and Management — International Economy and Trade",
+      "Business and Management — Tourism Management"
+    ],
+    "requirements": [
+      "CSCA: Yes, as listed in the March guide.",
+      "Final examinations are held in July 2027. The assessment panel uses the results to decide entry to the bachelor programme.",
+      "Students must select majors within their chosen foundation stream.",
+      "Undergraduate admission gives preference to foundation programme students.",
+      "Applicants already in China are accepted and must provide their visa page and residence documents. The guide’s residence-document description is incomplete."
+    ],
+    "documents": [
+      "Visa page and residence documents for applicants already in China. Confirm which residence documents the university requires."
+    ],
+    "notes": [],
+    "deadlines": [
+      {
+        "label": "Application deadline",
+        "date": "2027-01-10",
+        "display": "2027-01-10"
+      }
+    ],
+    "eligibility": "confirm",
+    "sourceFile": "March 2027/China_March_Intake_2027_University_Offer.pdf#pages=29-30",
+    "reviewedOn": "2026-11-12"
   }
 ]

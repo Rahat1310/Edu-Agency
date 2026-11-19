@@ -411,7 +411,7 @@ export function listPublishedProgramsForSitemap() {
         ...rows,
         ...chinaOffers.map((offer) => ({
           id: offer.id,
-          updatedAt: new Date("2026-11-10T00:00:00Z"),
+          updatedAt: new Date(`${offer.reviewedOn ?? "2026-11-10"}T00:00:00Z`),
         })),
       ];
     },
