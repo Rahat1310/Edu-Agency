@@ -1,528 +1,780 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowUpRight,
   BookOpen,
-  Building2,
+  Check,
   GraduationCap,
-  Landmark,
   Languages,
-  Microscope,
+  MapPin,
+  MessageCircle,
+  Plus,
+  Wallet,
 } from "lucide-react";
 import { PageShell } from "@/components/layout/page-shell";
+import { ChinaReveal } from "@/components/marketing/china-reveal";
 import {
   chinaOffers,
   chinaInstitutions,
   chinaRankingExamples,
+  chinaRankingEdition,
+  chinaRankingsCheckedOn,
 } from "@/lib/china-2027";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
+import styles from "./china-destination-page.module.css";
+
+const photographs = [
+  {
+    src: "/images/china-xiamen-campus.webp",
+    location: "Xiamen University, Fujian",
+    alt: "The Jiageng buildings and tree-lined Furong Lake at Xiamen University",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Xiamen_University_07076-Xiamen_(48814339602).jpg",
+    author: "xiquinhosilva",
+    license: "https://creativecommons.org/licenses/by/2.0/",
+    licenseName: "CC BY 2.0",
+  },
+  {
+    src: "/images/china-chengdu-street.webp",
+    location: "Jinli Street, Chengdu",
+    alt: "People exploring Jinli Street beneath red lanterns and traditional roofs in Chengdu",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Jinli_Street_35208-Chengdu_(49067632943).jpg",
+    author: "xiquinhosilva",
+    license: "https://creativecommons.org/licenses/by/2.0/",
+    licenseName: "CC BY 2.0",
+  },
+  {
+    src: "/images/china-shanghai-skyline.webp",
+    location: "Shanghai, after sunset",
+    alt: "Shanghai’s illuminated Pudong skyline across the Huangpu River at night",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Shanghai_skyline_at_night.jpg",
+    author: "Ernest Jourdier",
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    licenseName: "CC BY 4.0",
+  },
+] as const;
 
 export function ChinaDestinationPage({ locale }: { locale: Locale }) {
   const bn = locale === "bn";
   const href = (path: string) => localizedHref(path, locale);
   const explore = href("/programs?country=china");
+  const assessment = href("/consultation?destination=china");
+  const number = (value: number) =>
+    new Intl.NumberFormat(bn ? "bn-BD" : "en-GB", {
+      useGrouping: false,
+    }).format(value);
+  const checked = new Intl.DateTimeFormat(bn ? "bn-BD" : "en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(chinaRankingsCheckedOn));
   const c = bn
     ? {
-        eyebrow: "চীনে উচ্চশিক্ষা · ২০২৭ ইনটেক",
-        title: "আপনার পরবর্তী ক্যাম্পাস হতে পারে চীনে।",
-        body: "আন্তর্জাতিক মানের গবেষণা, আধুনিক ক্যাম্পাস এবং স্কলারশিপের সুযোগ—নিজের ফলাফল, পছন্দের বিষয় ও বাজেট অনুযায়ী চীনে পড়াশোনার পথ খুঁজুন।",
-        explore: "বিশ্ববিদ্যালয় ও প্রোগ্রাম দেখুন",
-        assessment: "ফ্রি প্রোফাইল অ্যাসেসমেন্ট",
-        offers: "প্রোগ্রাম অফার",
+        eyebrow: "আপনার আগামী দিনের ক্যাম্পাস",
+        title: "চীনে পড়াশোনা।",
+        accent: "নতুন সম্ভাবনার শুরু।",
+        intro:
+          "বিশ্ববিদ্যালয় বেছে নেওয়া আপনার ও আপনার পরিবারের জন্য বড় একটি সিদ্ধান্ত। চলুন, আপনার পছন্দের বিষয়, ক্যাম্পাস আর বাজেট মিলিয়ে পথ খুঁজি।",
+        explore: "বিশ্ববিদ্যালয় ও অফার দেখুন",
+        assessment: "কাউন্সেলরের সঙ্গে কথা বলুন",
+        reassurance: "বিনামূল্যে প্রোফাইল মূল্যায়ন · বাংলাদেশ থেকে পাশে আছি",
+        note: "প্রথমে আপনার স্বপ্নের কথা বলুন। বাকি পরিকল্পনা একসঙ্গে করি।",
+        noteBody:
+          "বিষয় ঠিক করেছেন, নাকি এখনো ভাবছেন? দুই অবস্থাতেই শুরু করতে পারেন।",
+        offers: "তুলনা করার মতো অফার",
         institutions: "শিক্ষাপ্রতিষ্ঠান",
-        intakes: "ইনটেক",
-        caption: "Huazhong University of Science and Technology · Wuhan",
-        why: "চীনকে কেন বিবেচনা করবেন?",
+        year: "আসন্ন ইনটেকের বছর",
+        nav: [
+          "কেন চীন",
+          "ক্যাম্পাস জীবন",
+          "বিশ্ববিদ্যালয়",
+          "স্কলারশিপ",
+          "ইনটেক",
+        ],
+        whyEyebrow: "কেন চীনে পড়াশোনা",
+        whyTitle: "আপনার লক্ষ্যকে ঘিরেই হোক সিদ্ধান্ত।",
         whyBody:
-          "শুধু বিশ্ববিদ্যালয়ের নাম নয়—আপনি কী শিখবেন, কোথায় থাকবেন এবং পুরো খরচ কত হবে, সেগুলো মিলিয়েই বেছে নিন।",
+          "কারও কাছে স্বপ্নটা ল্যাবে নতুন কিছু তৈরি করা। কারও কাছে চিকিৎসক হওয়া, ব্যবসা শেখা কিংবা নতুন ভাষায় কথা বলা। আপনার শুরুর গল্প যেটাই হোক, সঠিক প্রোগ্রাম দিয়ে শুরু করুন।",
         reasons: [
           [
-            "পছন্দের বিষয় ও পড়ার মাধ্যম",
-            "Engineering, Computer Science, Business, Medicine ও অন্যান্য বিষয়ে ইংরেজি ও চীনা মাধ্যমে পড়ার বিকল্প রয়েছে। প্রতিটি কোর্সের ভাষার শর্ত আলাদা।",
+            "নিজের পছন্দের বিষয় নিয়ে এগিয়ে যান",
+            "Engineering, Computer Science, Business বা Medicine—আপনার আগ্রহ ও আগের পড়াশোনার সঙ্গে যে বিষয়টি মেলে, সেটিই বেছে নিন।",
           ],
           [
-            "বিভিন্ন বাজেটের জন্য বিকল্প",
-            "টিউশন ছাড়, আংশিক স্কলারশিপ ও কিছু অফারে আবাসন বা স্টাইপেন্ডের সুবিধা রয়েছে। কোন খরচ নিজের বহন করতে হবে, তা অফার খুলেই দেখুন।",
+            "পরিবারের বাজেট মাথায় রাখুন",
+            "টিউশন, থাকার খরচ ও স্কলারশিপ মিলিয়ে পুরো হিসাব দেখুন। আমরা কী অন্তর্ভুক্ত আর কোন খরচ নিজের, তা বুঝতে সাহায্য করব।",
           ],
           [
-            "ক্যাম্পাসের বাইরেও শেখা",
-            "Mandarin শেখা, নতুন সংস্কৃতির সঙ্গে পরিচয় এবং আন্তর্জাতিক সহপাঠীদের সঙ্গে পড়াশোনা আপনার অভিজ্ঞতা সমৃদ্ধ করতে পারে।",
+            "আপনার জন্য মানানসই পথ বেছে নিন",
+            "সরাসরি ডিগ্রি, ভাষা কোর্স বা foundation—আপনার প্রস্তুতি অনুযায়ী পথ রয়েছে। পড়ার মাধ্যম ও পরের ধাপে যাওয়ার শর্ত জেনে নিন।",
           ],
         ],
-        facilities: "ক্লাসরুম থেকে ক্যাম্পাস জীবন",
-        facilitiesBody:
-          "প্রতিষ্ঠান ও ক্যাম্পাসভেদে সুবিধা আলাদা। আপনার অফারের আবাসন, রুমের ধরন ও অতিরিক্ত খরচ মিলিয়ে দেখুন।",
-        facilityCards: [
+        lifeEyebrow: "ক্লাসের বাইরেও একটি নতুন জীবন",
+        lifeTitle: "নিজেকে এখানে ভাবতে পারেন?",
+        lifeBody:
+          "সকালের ক্যাম্পাস, বন্ধুদের সঙ্গে নতুন শহর চেনা, একটু একটু করে Mandarin শেখা। বিশ্ববিদ্যালয় বেছে নেওয়ার সময় এই দৈনন্দিন জীবনটাও ভাবুন।",
+        lifeLabels: [
+          "ক্যাম্পাসে একটু বিরতি",
+          "নতুন শহর, নতুন অভিজ্ঞতা",
+          "দিন শেষে অন্য এক দৃশ্য",
+        ],
+        practicalTitle: "ছোট ছোট প্রশ্ন। স্বস্তির বড় কারণ।",
+        practical: [
           [
-            "পড়াশোনা ও গবেষণা",
-            "লাইব্রেরি, ল্যাব ও গবেষণার পরিবেশ সম্পর্কে আপনার বিভাগভিত্তিক তথ্য জেনে নিন।",
+            "কোথায় থাকবেন?",
+            "ডরমিটরির রুম, বুকিং ও খরচ অফারভেদে আলাদা। কিছু প্রোগ্রামে নিজের বাসা খুঁজতে হয়।",
           ],
           [
-            "আবাসনের বিকল্প",
-            "কিছু অফারে দুই বা চারজনের ডরমিটরি রয়েছে; অন্যগুলোতে বাইরে বাসা নিতে হবে।",
+            "খাবারের ব্যবস্থা কী?",
+            "HUST-এ Muslim dining-এর তথ্য রয়েছে। আপনার ক্যাম্পাসে খাবার ও আশপাশের সুবিধা আগে জেনে নিন।",
           ],
           [
-            "খাবার ও দৈনন্দিন জীবন",
-            "HUST-এর মতো ক্যাম্পাসে ক্যান্টিন ও মুসলিম ডাইনিংয়ের সুবিধা রয়েছে। প্রতিটি ক্যাম্পাসের খাবারের ব্যবস্থা আলাদাভাবে যাচাই করুন।",
-          ],
-          [
-            "ক্লাব ও খেলাধুলা",
-            "একাডেমিক ক্লাব, সাংস্কৃতিক কার্যক্রম ও খেলাধুলায় অংশ নেওয়ার সুযোগ সম্পর্কে জানুন।",
+            "নতুন পরিবেশে মানিয়ে নেওয়া?",
+            "ক্লাসের ভাষা, ক্যাম্পাসের কার্যক্রম ও যাতায়াত সম্পর্কে জানুন। নিজের দৈনন্দিন খরচও বাজেটে রাখুন।",
           ],
         ],
-        ranks: "আপনার তালিকায় বিশ্ব র‍্যাঙ্কিংয়ের বিশ্ববিদ্যালয়",
+        ranksEyebrow: "বিশ্ববিদ্যালয় খুঁজে দেখুন",
+        ranksTitle: "আপনার তালিকার শুরু এখান থেকেই।",
         ranksBody:
-          "নিচের সব প্রতিষ্ঠানই আমাদের বর্তমান অফারের তালিকায় রয়েছে। র‍্যাঙ্কিং দিয়ে বিষয়, খরচ ও যোগ্যতার পুরো চিত্র বোঝা যায় না।",
-        rankSource:
-          "QS World University Rankings 2027 · যাচাই: ১০ নভেম্বর ২০২৬",
-        funding: "স্কলারশিপে কোন খরচ অন্তর্ভুক্ত?",
+          "আমাদের অফারে থাকা কয়েকটি বিশ্ববিদ্যালয়। র‍্যাঙ্কিংয়ের পাশাপাশি আপনার বিষয়, ভর্তি যোগ্যতা ও মোট খরচ মিলিয়ে দেখুন।",
+        worldRank: "বিশ্ব র‍্যাঙ্কিং",
+        tied: "যৌথ অবস্থান",
+        viewOffers: "প্রোগ্রাম দেখুন",
+        rankSource: "QS-এর তথ্য",
+        allUniversities: "সব শিক্ষাপ্রতিষ্ঠান দেখুন",
+        fundingEyebrow: "আপনার বাজেটের পরিকল্পনা",
+        fundingTitle: "স্কলারশিপ বুঝে নিন। নিশ্চিন্তে পরিকল্পনা করুন।",
         fundingBody:
-          "100% tuition scholarship মানে শুধু টিউশন ফি মওকুফ। আবাসন, খাবার ও অন্যান্য খরচ অন্তর্ভুক্ত কি না, তা আলাদা করে দেখুন।",
+          "স্কলারশিপ পড়াশোনার খরচ কমাতে পারে। কোন ফি মওকুফ, কত বছরের জন্য আর পরের বছর কী শর্ত—সেগুলো আগে পরিষ্কার করে নিই।",
         awards: [
           [
-            "টিউশন স্কলারশিপ",
-            "নির্বাচিত ডিগ্রি অফারে পূর্ণ বা আংশিক টিউশন ছাড় রয়েছে। পরবর্তী বছরের জন্য ফলাফল ও রিভিউয়ের শর্ত থাকতে পারে।",
+            "টিউশন ফি",
+            "কিছু অফারে পূর্ণ বা আংশিক টিউশন ছাড় রয়েছে। ১০০% tuition waiver মানেই সব খরচ অন্তর্ভুক্ত নয়।",
           ],
           [
-            "আবাসন ও স্টাইপেন্ডসহ অফার",
-            "NJIT-এর প্রথম বছরের অফার ও BNU Zhuhai-এর নির্বাচিত অ্যাওয়ার্ডে অতিরিক্ত সুবিধা আছে। পরিমাণ ও মেয়াদ অফারভেদে আলাদা।",
+            "থাকা ও মাসিক ভাতা",
+            "নির্বাচিত অ্যাওয়ার্ডে আবাসন বা stipend থাকে। পরিমাণ, প্রদানের মাস ও মেয়াদ আলাদা করে দেখুন।",
           ],
           [
-            "Chinese Government Scholarship",
-            "যোগ্য প্রোগ্রামে পূর্ণ CSC অ্যাওয়ার্ডে টিউশন, আবাসন বা ভাতা, মাসিক স্টাইপেন্ড ও মেডিকেল ইনস্যুরেন্স থাকতে পারে। প্রতিটি তালিকাভুক্ত প্রোগ্রামে এই সুবিধা প্রযোজ্য নয়।",
+            "পরের বছরের শর্ত",
+            "কিছু অ্যাওয়ার্ড শুধু প্রথম বছরের। পরের বছরে ফলাফল, উপস্থিতি ও নতুন আবেদনের শর্ত থাকতে পারে।",
           ],
         ],
-        routes: "আপনার জন্য কোন ইনটেক?",
-        spring: "March 2027",
+        fundingCta: "স্কলারশিপসহ অফার দেখুন",
+        costCta: "মোট খরচ হিসাব করুন",
+        fundingNote:
+          "লিখিত অ্যাওয়ার্ড পাওয়ার আগে সম্পূর্ণ ফি ধরে বাজেট করুন। ভর্তি ও স্কলারশিপের সিদ্ধান্ত আলাদা হতে পারে।",
+        routesEyebrow: "আপনার পরবর্তী ধাপ",
+        routesTitle: "কখন শুরু করতে চান?",
+        routesBody:
+          "প্রথম ক্লাস কবে শুরু হবে, সেটিই entry intake। মার্চের ভাষা বা foundation থেকে সেপ্টেম্বরে ডিগ্রি শুরু হতে পারে—দুটি তারিখ আলাদা।",
+        springLabel: "মার্চে শুরু",
+        autumnLabel: "সেপ্টেম্বরে শুরু",
         springBody:
-          "Chinese Language, Foundation, ভাষা থেকে Bachelor’s-এ যাওয়ার শর্তযুক্ত পথ এবং একটি Master’s অফার দেখুন।",
-        autumn: "September 2027",
+          "ভাষা, foundation, নির্বাচিত সরাসরি ডিগ্রি ও postgraduate অফার দেখুন। পরের ধাপে যেতে পরীক্ষা বা ভাষার শর্ত থাকতে পারে।",
         autumnBody:
-          "ইংরেজি ও চীনা মাধ্যমে Bachelor’s, Master’s ও PhD অফার দেখুন। বিষয়ভেদে CSCA, HSK বা English proficiency লাগতে পারে।",
-        browse: "অফার দেখুন",
-        csca: "Bachelor’s-এর আগে CSCA ও ভাষার শর্ত দেখুন",
+          "ইংরেজি ও চীনা মাধ্যমে bachelor's, master's ও PhD বিকল্প দেখুন। বিষয় ও স্কলারশিপভেদে আবেদনের সময় আলাদা।",
+        intakeCta: "এই ইনটেকের অফার দেখুন",
+        pending:
+          "সময় এখনো ঠিক করেননি? চলমান ভর্তি ও অনিশ্চিত শুরুর তারিখও আলাদা করে দেখতে পারেন।",
+        rolling: "চলমান ভর্তি",
+        unconfirmed: "তারিখ নিশ্চিত করা বাকি",
+        csca: "CSCA ও ভাষার শর্ত নিয়ে সাহায্য চান?",
         cscaBody:
-          "Foundation বা ভাষা কোর্সে ভর্তি হলেই Bachelor’s নিশ্চিত হয় না। CSCA, পরীক্ষার বিষয়, HSK ও progression-এর শর্ত প্রতিটি অফারে দেখুন।",
-        support: "আপনার ফলাফল ও বাজেট দিয়ে শুরু করুন।",
-        supportBody:
-          "ফর্মে আপনার শিক্ষাগত তথ্য ও পছন্দ জানান। প্রোফাইল দেখার পর কাউন্সেলর উপযুক্ত বিকল্প, স্কলারশিপের শর্ত, ডকুমেন্ট ও পরবর্তী ধাপ নিয়ে যোগাযোগ করবেন।",
-        faq: "আপনার প্রশ্ন",
+          "কোন বিষয়ে পরীক্ষা, HSK বা English proficiency লাগবে, তা আপনার নির্বাচিত প্রোগ্রামের সঙ্গে মিলিয়ে দেখব। Foundation শেষ করা নিজে থেকেই ডিগ্রি ভর্তি নিশ্চিত করে না।",
+        faqEyebrow: "আপনার মনে হয়তো এই প্রশ্নগুলো আছে",
+        faqTitle: "জেনে-বুঝে এগিয়ে যান।",
         questions: [
           [
-            "IELTS ছাড়া আবেদন করা যাবে?",
-            "কিছু অফারে MOI বা বিকল্প প্রমাণ গ্রহণের কথা আছে। অন্যগুলোতে IELTS, TOEFL, Duolingo বা HSK বাধ্যতামূলক। নিজের নির্বাচিত অফারের শর্ত দেখুন।",
+            "IELTS না থাকলে কোথা থেকে শুরু করব?",
+            "আপনার পছন্দের কোর্স দিয়ে শুরু করুন। কিছু অফারে MOI বা বিকল্প প্রমাণ গ্রহণ করা হয়; অন্যগুলোতে IELTS, TOEFL, Duolingo বা HSK দরকার। আপনার জন্য কোনটি প্রযোজ্য, তা মিলিয়ে দেব।",
           ],
           [
-            "স্কলারশিপ কি নিশ্চিত?",
-            "না। যোগ্যতা, মূল্যায়ন, আসন ও বিশ্ববিদ্যালয়ের সিদ্ধান্ত অনুযায়ী স্কলারশিপ হয়। ভর্তি ও স্কলারশিপ আলাদা সিদ্ধান্ত হতে পারে।",
+            "স্কলারশিপ কি আগে থেকেই নিশ্চিত?",
+            "না। যোগ্যতা, মূল্যায়ন, আসন ও বিশ্ববিদ্যালয়ের সিদ্ধান্তের ওপর অ্যাওয়ার্ড নির্ভর করে। লিখিত সিদ্ধান্ত পাওয়ার আগে নিশ্চিত ধরে পরিকল্পনা করবেন না।",
           ],
           [
-            "ডরমিটরিতে থাকা যাবে?",
-            "সব অফারে নয়। কিছু প্রতিষ্ঠানে জায়গা সীমিত, আবার কিছু অফারে বাইরে বাসা নিতে হয়। বুকিং ও খরচ নিশ্চিত করুন।",
+            "ক্যাম্পাসে থাকার জায়গা পাব?",
+            "কিছু অফারে আবাসন আছে, কিছুতে আলাদা ফি দিতে হয়, আবার কিছুতে বাইরে থাকতে হয়। রুমের ধরন, প্রাপ্যতা ও বুকিংয়ের সময় আগে নিশ্চিত করতে হবে।",
+          ],
+          [
+            "আমার জন্য সঠিক বিশ্ববিদ্যালয় কোনটি?",
+            "আপনার ফলাফল, আগ্রহ, ভাষার প্রস্তুতি ও পরিবারের বাজেট জানালে আমরা একটি উপযুক্ত তালিকা দিয়ে শুরু করতে পারি। প্রোফাইল মূল্যায়ন বিনামূল্যে।",
           ],
         ],
+        supportEyebrow: "প্রথম ধাপটা সহজ করি",
+        supportTitle: "আপনার গল্প শুনতে চাই।",
+        supportBody:
+          "আপনার ফলাফল, আগ্রহ আর বাজেট নিয়ে বলুন। কোন বিশ্ববিদ্যালয় বা কোন স্কলারশিপ দিয়ে শুরু করবেন, আমরা একসঙ্গে বুঝে নেব।",
+        photoCredits: "ছবির কৃতিত্ব",
+        photoNote: "ছবিগুলো ওয়েবের জন্য ছোট করা হয়েছে; লেআউটে ক্রপ হতে পারে।",
       }
     : {
-        eyebrow: "STUDY IN CHINA · 2027 INTAKES",
-        title: "Your next campus could be in China.",
-        body: "Explore ambitious universities, well-equipped campuses and scholarship opportunities. Find a study route that fits your results, your subject and your family’s budget.",
-        explore: "Explore universities & programs",
-        assessment: "Free profile assessment",
-        offers: "program offers",
-        institutions: "institutions",
-        intakes: "intakes",
-        caption: "Huazhong University of Science and Technology · Wuhan",
-        why: "A lot to learn. More to discover.",
+        eyebrow: "YOUR NEXT CAMPUS, YOUR NEXT CHAPTER",
+        title: "Study in China.",
+        accent: "See what’s possible.",
+        intro:
+          "Choosing a university is a big decision, for you and your family. Let’s find a subject you love, a campus you can picture yourself in, and a budget that makes sense.",
+        explore: "Explore universities & offers",
+        assessment: "Talk to a counsellor",
+        reassurance: "Free profile assessment · Guidance from Bangladesh",
+        note: "Bring your ambition. We’ll help you make a plan.",
+        noteBody:
+          "Already have a subject in mind? Still figuring it out? Either is a good place to start.",
+        offers: "offers to compare",
+        institutions: "institutions to explore",
+        year: "upcoming entry year",
+        nav: [
+          "Why China",
+          "Campus life",
+          "Universities",
+          "Scholarships",
+          "Intakes",
+        ],
+        whyEyebrow: "WHY STUDY IN CHINA",
+        whyTitle: "Make room for your ambitions.",
         whyBody:
-          "Look beyond a university name. Consider what you will study, how you will live and what your full budget needs to cover.",
+          "Maybe you want to build something in a lab. Care for people. Understand business. Or learn a language that opens up a new part of the world. Start with what matters to you.",
         reasons: [
           [
-            "Study the subject that interests you",
-            "Explore engineering, computer science, business, medicine and other fields. English- and Chinese-taught options have different entry and language requirements.",
+            "A subject you want to spend time with",
+            "Explore engineering, computing, business, medicine and more. We’ll help you match your interests and academic background with the right program.",
           ],
           [
-            "Find a route that fits your budget",
-            "Compare original tuition with partial and full tuition awards. Selected offers also include housing or a stipend, with the exact coverage shown on each offer.",
+            "A plan your family can understand",
+            "Look at tuition, living costs and scholarship conditions together. Know what is covered and what you’ll need to budget for yourself.",
           ],
           [
-            "Build experience in a new setting",
-            "Learn Mandarin, discover Chinese culture and study alongside international classmates. A language or foundation course can help you prepare for your next academic step.",
+            "A starting point that suits you",
+            "Direct degrees, language courses and foundation pathways offer different ways in. Choose your teaching language and check what it takes to progress.",
           ],
         ],
-        facilities: "Picture your everyday campus life.",
-        facilitiesBody:
-          "Facilities vary by university and campus. Check the room type, availability and costs for the offer you choose.",
-        facilityCards: [
+        lifeEyebrow: "A LITTLE OF LIFE BETWEEN LECTURES",
+        lifeTitle: "Can you picture yourself here?",
+        lifeBody:
+          "A morning walk to class. A new neighbourhood to explore with friends. Your first conversation in Mandarin. Think about the everyday life you want, as well as the degree.",
+        lifeLabels: [
+          "A pause on campus",
+          "A new city to get to know",
+          "A different view after class",
+        ],
+        practicalTitle: "The little details help you feel at home.",
+        practical: [
           [
-            "Space to study and research",
-            "Explore libraries, laboratories and academic facilities relevant to your department. HUST’s campus information includes its library and student learning environment.",
+            "Where will you live?",
+            "Check your room type, booking arrangements and costs. Some programs offer dormitories; others need you to arrange your own home.",
           ],
           [
-            "A place to live",
-            "Several offers list double or four-person dormitories. Some require off-campus housing; a room is only confirmed after the university accepts your booking.",
+            "What about food?",
+            "HUST lists Muslim dining options. Ask about food, daily essentials and nearby services at the campus you choose.",
           ],
           [
-            "Food and daily essentials",
-            "Campuses such as HUST list canteens and Muslim dining options. Check the food arrangements and nearby services at your own campus.",
-          ],
-          [
-            "Life beyond lectures",
-            "Academic societies, cultural activities and sports can help you meet people and settle in. Ask what is available at your assigned campus.",
+            "How will you settle in?",
+            "Find out about the language of your classes, campus activities and getting around. Make space in your budget for daily life, too.",
           ],
         ],
-        ranks: "Globally ranked universities. Real choices to explore.",
+        ranksEyebrow: "UNIVERSITIES TO GET TO KNOW",
+        ranksTitle: "A few places to begin your shortlist.",
         ranksBody:
-          "Every institution below appears in our current offer list. Use rankings alongside subject fit, entry requirements and total costs.",
-        rankSource:
-          "QS World University Rankings 2027 · checked 10 November 2026",
-        funding: "Know what your scholarship covers.",
+          "These universities feature in our current offers. Look at their world ranking alongside your subject, entry requirements and the total cost of studying.",
+        worldRank: "World rank",
+        tied: "Tied position",
+        viewOffers: "Explore programs",
+        rankSource: "QS profile",
+        allUniversities: "Explore all institutions",
+        fundingEyebrow: "LET’S TALK ABOUT THE BUDGET",
+        fundingTitle: "A scholarship you understand. A plan you can trust.",
         fundingBody:
-          "A 100% tuition scholarship waives tuition. Accommodation, meals and other expenses need separate funding unless your award explicitly includes them.",
+          "Scholarships can make a real difference. First, get clear on which fees are covered, how long the support lasts and what happens in your next year.",
         awards: [
           [
-            "Tuition scholarships",
-            "Selected degree offers provide full or partial tuition waivers. The award may cover only the first year, with later funding subject to academic performance and review.",
+            "Your tuition",
+            "Selected offers have partial or full tuition waivers. A 100% tuition scholarship covers tuition; other expenses need their own funding.",
           ],
           [
-            "Housing and stipend options",
-            "NJIT’s first-year awards and selected BNU Zhuhai awards include additional support. Amounts, payment months and renewal conditions differ by offer.",
+            "Your home and daily costs",
+            "Some awards include housing or a monthly stipend. Check the amount, payment months and duration on the individual offer.",
           ],
           [
-            "Chinese Government Scholarship",
-            "Eligible full CSC awards can cover tuition, accommodation or a subsidy, a monthly stipend and medical insurance. This is a separate scholarship route, not a benefit attached to every program listed here.",
+            "Your next year",
+            "Some awards cover the first year only. Later funding may depend on grades, attendance, annual review or a fresh application.",
           ],
         ],
-        routes: "Choose the intake that fits your next step.",
-        spring: "March 2027",
+        fundingCta: "Explore scholarship offers",
+        costCta: "Estimate your full costs",
+        fundingNote:
+          "Budget for the full fee until you receive a written award. Admission and scholarship decisions may be separate.",
+        routesEyebrow: "FIND YOUR STARTING POINT",
+        routesTitle: "When would you like to begin?",
+        routesBody:
+          "Your entry intake is when your first classes begin. A March language or foundation stage may lead to a September degree start. Keep those two dates separate.",
+        springLabel: "A spring start",
+        autumnLabel: "An autumn start",
         springBody:
-          "Explore Chinese language courses, foundation study, conditional language-to-bachelor routes and a master’s offer. These preparation routes are distinct from direct bachelor entry.",
-        autumn: "September 2027",
+          "Explore language courses, foundation pathways, selected direct degrees and postgraduate offers. Check the exams and language requirements for your next step.",
         autumnBody:
-          "Explore English- and Chinese-taught bachelor’s, master’s and doctoral offers. Check the subject list, scholarship deadlines, CSCA and language requirements.",
-        browse: "Explore this intake",
-        csca: "Check CSCA and language requirements before bachelor entry.",
+          "Explore English- and Chinese-taught bachelor’s, master’s and PhD options. Application windows and scholarship deadlines depend on your program.",
+        intakeCta: "Explore this intake",
+        pending:
+          "Still working out your timing? You can also browse rolling enrollment and offers with a start date awaiting confirmation.",
+        rolling: "Rolling enrollment",
+        unconfirmed: "Start date to be confirmed",
+        csca: "Need a hand with CSCA or language requirements?",
         cscaBody:
-          "A language or foundation place does not guarantee a bachelor place. Review the required CSCA subjects, test language, HSK and progression conditions on the individual offer.",
-        support: "Start with your results and your budget.",
-        supportBody:
-          "Tell us about your education and study preferences. After reviewing your profile, a counsellor will contact you about suitable options, scholarship conditions, documents and the next steps.",
-        faq: "Before you choose",
+          "We’ll help you check the test subjects, HSK or English evidence for your chosen program. Completing foundation study does not automatically secure a degree place.",
+        faqEyebrow: "YOU MIGHT BE WONDERING",
+        faqTitle: "A little clarity before you decide.",
         questions: [
           [
-            "Can I apply without IELTS?",
-            "Some offers accept MOI or alternative proof. Others require IELTS, TOEFL, Duolingo or HSK. Check the requirements for your selected track rather than assuming one rule applies to every university.",
+            "Where do I start if I don’t have IELTS?",
+            "Start with the course you’re interested in. Some offers accept MOI or alternative evidence; others need IELTS, TOEFL, Duolingo or HSK. We can help you check which requirement applies to you.",
           ],
           [
-            "Is a scholarship guaranteed?",
-            "No. Selection depends on eligibility, assessment, available places and the university’s decision. Admission and scholarship awards may be decided separately.",
+            "Can I count on getting a scholarship?",
+            "Awards depend on eligibility, assessment, available places and the university’s decision. Wait for a written award before treating funding as confirmed.",
           ],
           [
-            "Will I get a campus dormitory?",
-            "Some offers include housing, some list paid dormitories, and others require off-campus accommodation. Places may be limited, so confirm the booking and actual charges.",
+            "Will I have a room on campus?",
+            "Some offers include housing, some list separate dormitory charges, and others require off-campus accommodation. Confirm the room type, availability and booking deadline before you travel.",
+          ],
+          [
+            "How do I know which university is right for me?",
+            "Tell us about your results, interests, language preparation and family budget. We can start with a shortlist that fits your profile. Your profile assessment is free.",
           ],
         ],
+        supportEyebrow: "LET’S MAKE THE FIRST STEP SIMPLE",
+        supportTitle: "Tell us your story.",
+        supportBody:
+          "Your results. Your interests. What your family has in mind. We’ll help you work through the options and find a sensible place to start.",
+        photoCredits: "Photography credits",
+        photoNote: "Photographs resized for the web and cropped by the layout.",
       };
-  const icons = [GraduationCap, Landmark, Languages];
-  const facilityIcons = [Microscope, Building2, BookOpen, GraduationCap];
+  const reasonIcons = [GraduationCap, Wallet, Languages];
+  const sections = [
+    "why-china",
+    "campus-life",
+    "universities",
+    "scholarships",
+    "intakes",
+  ];
+
   return (
-    <>
-      <section className="relative overflow-hidden bg-[#0b2038] py-12 text-white sm:py-20">
-        <PageShell className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
-          <div>
-            <p className="text-xs font-bold tracking-[0.16em] text-orange-300">
-              {c.eyebrow}
-            </p>
-            <h1 className="font-heading mt-5 max-w-2xl text-4xl leading-tight font-semibold tracking-tight sm:text-6xl">
+    <div className={styles.page}>
+      <section className={styles.hero} aria-labelledby="china-title">
+        <PageShell className={styles.heroGrid}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>{c.eyebrow}</p>
+            <h1 id="china-title" className={styles.heroTitle}>
               {c.title}
+              <span>{c.accent}</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-slate-200">
-              {c.body}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href={explore}
-                className="btn-sunset focus-ring inline-flex min-h-12 items-center gap-2 rounded-full px-6 text-sm font-bold"
-              >
+            <p className={styles.heroIntro}>{c.intro}</p>
+            <div className={styles.actions}>
+              <Link href={explore} className={styles.primary}>
                 {c.explore}
-                <ArrowUpRight className="size-4" aria-hidden="true" />
               </Link>
-              <Link
-                href={href("/consultation?destination=china")}
-                className="focus-ring inline-flex min-h-12 items-center rounded-full border border-white/30 px-6 text-sm font-semibold text-white hover:bg-white/10"
-              >
+              <Link href={assessment} className={styles.textLink}>
+                <MessageCircle size={19} aria-hidden="true" />
                 {c.assessment}
               </Link>
             </div>
-            <dl className="mt-10 flex flex-wrap gap-x-9 gap-y-4 border-t border-white/20 pt-6">
-              {[
-                [String(chinaOffers.length), c.offers],
-                [String(chinaInstitutions.length), c.institutions],
-                ["2", c.intakes],
-              ].map(([value, label]) => (
-                <div key={label}>
-                  <dt className="text-xs text-slate-300">{label}</dt>
-                  <dd className="mt-1 text-3xl font-semibold tabular-nums">
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <p className={styles.reassurance}>
+              <Check size={16} aria-hidden="true" />
+              {c.reassurance}
+            </p>
           </div>
-          <figure className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/5">
-            <Image
-              src="/images/china-hust-campus.jpg"
-              alt={
-                bn
-                  ? "Wuhan-এ HUST-এর সবুজ ক্যাম্পাস"
-                  : "Green campus and academic buildings at HUST in Wuhan"
-              }
-              width={719}
-              height={479}
-              priority
-              className="aspect-[4/3] w-full object-cover"
-            />
-            <figcaption className="px-5 py-4 text-xs leading-5 text-slate-200">
-              {c.caption}
-            </figcaption>
-          </figure>
+          <div className={styles.heroVisual}>
+            <figure className={styles.heroPhoto}>
+              <Image
+                src="/images/china-hust-campus.jpg"
+                alt={
+                  bn
+                    ? "Wuhan-এর HUST ক্যাম্পাসের সবুজ পরিবেশ ও শিক্ষাভবন"
+                    : "Leafy grounds and academic buildings at HUST in Wuhan"
+                }
+                fill
+                priority
+                sizes="(max-width: 760px) 100vw, 48vw"
+              />
+              <figcaption>
+                <MapPin size={15} aria-hidden="true" />
+                HUST · Wuhan
+              </figcaption>
+            </figure>
+            <figure className={styles.cityPhoto}>
+              <Image
+                src={photographs[2].src}
+                alt={
+                  bn ? "রাতের আলোয় সাংহাইয়ের আকাশরেখা" : photographs[2].alt
+                }
+                fill
+                sizes="(max-width: 760px) 45vw, 260px"
+              />
+              <figcaption>Shanghai, China</figcaption>
+            </figure>
+            <div className={styles.heroNote}>
+              <GraduationCap size={24} aria-hidden="true" />
+              <p>
+                {bn
+                  ? "আপনার নতুন শুরুর অপেক্ষায়"
+                  : "A new chapter looks good on you."}
+              </p>
+            </div>
+          </div>
+        </PageShell>
+        <PageShell>
+          <dl className={styles.stats}>
+            {[
+              [number(chinaOffers.length), c.offers],
+              [number(chinaInstitutions.length), c.institutions],
+              [number(2027), c.year],
+            ].map(([value, label]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
         </PageShell>
       </section>
-      <section className="bg-white py-16 sm:py-20">
-        <PageShell>
-          <h2 className="font-heading max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            {c.why}
-          </h2>
-          <p className="mt-4 max-w-2xl leading-8 text-slate-600">{c.whyBody}</p>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {c.reasons.map(([title, body], i) => {
-              const Icon = icons[i] ?? GraduationCap;
+      <nav
+        className={styles.sectionNav}
+        aria-label={bn ? "চীনে পড়াশোনার গাইড" : "Explore the China guide"}
+      >
+        <PageShell className={styles.navInner}>
+          {c.nav.map((label, index) => (
+            <a key={label} href={"#" + sections[index]}>
+              {label}
+            </a>
+          ))}
+        </PageShell>
+      </nav>
+      <section id="why-china" className={styles.section}>
+        <PageShell className={styles.whyGrid}>
+          <ChinaReveal>
+            <p className={styles.eyebrow}>{c.whyEyebrow}</p>
+            <h2 className={styles.title}>{c.whyTitle}</h2>
+            <p className={styles.body}>{c.whyBody}</p>
+            <div className={styles.personalNote}>
+              <p>{c.note}</p>
+              <span>{c.noteBody}</span>
+            </div>
+          </ChinaReveal>
+          <div className={styles.reasons}>
+            {c.reasons.map(([title, body], index) => {
+              const Icon = reasonIcons[index] ?? GraduationCap;
               return (
-                <div
-                  key={title}
-                  className="rounded-2xl border border-stone-200 p-6"
-                >
-                  <Icon aria-hidden="true" className="size-6 text-orange-600" />
-                  <h3 className="mt-5 text-xl font-semibold text-slate-900">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {body}
-                  </p>
-                </div>
+                <ChinaReveal key={title} delay={index * 70}>
+                  <div className={styles.reason}>
+                    <span className={styles.icon}>
+                      <Icon size={23} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{body}</p>
+                    </div>
+                  </div>
+                </ChinaReveal>
               );
             })}
           </div>
         </PageShell>
       </section>
-      <section className="bg-slate-50 py-16 sm:py-20">
+      <section id="campus-life" className={styles.life}>
         <PageShell>
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            {c.ranks}
-          </h2>
-          <p className="mt-4 max-w-2xl leading-8 text-slate-600">
-            {c.ranksBody}
-          </p>
-          <p className="mt-4 text-xs text-slate-500">{c.rankSource}</p>
-          <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {chinaRankingExamples.map((u) => (
-              <li
-                key={u.id}
-                className="flex flex-col rounded-2xl border border-stone-200 bg-white p-5"
+          <ChinaReveal className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>{c.lifeEyebrow}</p>
+              <h2 className={styles.title}>{c.lifeTitle}</h2>
+            </div>
+            <p className={styles.body}>{c.lifeBody}</p>
+          </ChinaReveal>
+          <div className={styles.gallery}>
+            {photographs.map((photo, index) => (
+              <ChinaReveal
+                key={photo.src}
+                className={
+                  index === 0 ? styles.galleryMain : styles.gallerySmall
+                }
+                delay={index * 80}
               >
-                <p className="text-xs font-semibold text-slate-500">QS 2027</p>
-                <p className="mt-2 text-3xl font-semibold text-slate-900">
-                  #{u.rank}
-                </p>
-                <h3 className="mt-3 leading-6 font-semibold text-slate-900">
-                  {u.name}
-                </h3>
-                <Link
-                  className="focus-ring mt-4 text-sm font-bold text-orange-700"
-                  href={href(`/programs?country=china&university=${u.id}`)}
-                >
-                  {c.browse} →
-                </Link>
-                <a
-                  href={u.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="focus-ring mt-3 text-xs text-slate-500 underline"
-                >
-                  {bn ? "QS র‍্যাঙ্কিং দেখুন" : "View QS ranking"}
-                </a>
+                <figure className={styles.galleryPhoto}>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes={
+                      index === 0
+                        ? "(max-width: 760px) 100vw, 62vw"
+                        : "(max-width: 760px) 50vw, 32vw"
+                    }
+                  />
+                  <figcaption>
+                    <span>{c.lifeLabels[index]}</span>
+                    <strong>{photo.location}</strong>
+                  </figcaption>
+                </figure>
+              </ChinaReveal>
+            ))}
+          </div>
+          <ChinaReveal className={styles.practical}>
+            <h3>{c.practicalTitle}</h3>
+            <div>
+              {c.practical.map(([title, body]) => (
+                <div key={title}>
+                  <h4>{title}</h4>
+                  <p>{body}</p>
+                </div>
+              ))}
+            </div>
+            <a
+              href="https://iso.hust.edu.cn/Services_Information/Campus_Facilities/Housing___Dining.htm"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.sourceLink}
+            >
+              {bn
+                ? "HUST-এর আবাসন ও খাবারের তথ্য"
+                : "HUST housing and dining information"}
+            </a>
+          </ChinaReveal>
+        </PageShell>
+      </section>
+      <section id="universities" className={styles.section}>
+        <PageShell>
+          <ChinaReveal className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>{c.ranksEyebrow}</p>
+              <h2 className={styles.title}>{c.ranksTitle}</h2>
+            </div>
+            <p className={styles.body}>{c.ranksBody}</p>
+          </ChinaReveal>
+          <div className={styles.rankingMeta}>
+            <span>QS World University Rankings {chinaRankingEdition}</span>
+            <span>
+              {bn ? "যাচাই: " : "Checked "}
+              <time dateTime={chinaRankingsCheckedOn}>{checked}</time>
+            </span>
+          </div>
+          <ul className={styles.rankings}>
+            {chinaRankingExamples.map((university, index) => (
+              <li key={university.id}>
+                <ChinaReveal className={styles.rankCard} delay={index * 45}>
+                  <div className={styles.rankTop}>
+                    <span>{university.city}</span>
+                    <span>{c.worldRank}</span>
+                  </div>
+                  <div className={styles.rankNumber}>
+                    {number(university.rank)}
+                    {university.tied ? <span>{c.tied}</span> : null}
+                  </div>
+                  <h3>{university.name}</h3>
+                  <Link
+                    href={href(
+                      "/programs?country=china&university=" + university.id,
+                    )}
+                    className={styles.rankCta}
+                  >
+                    {c.viewOffers}
+                  </Link>
+                  <a
+                    href={university.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.sourceLink}
+                  >
+                    {c.rankSource}
+                    <span className="sr-only">: {university.name}</span>
+                  </a>
+                </ChinaReveal>
               </li>
             ))}
           </ul>
+          <Link href={explore} className={styles.secondary}>
+            {c.allUniversities}
+          </Link>
         </PageShell>
       </section>
-      <section className="bg-white py-16 sm:py-20">
-        <PageShell className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="text-xs font-bold tracking-widest text-orange-700">
-              {bn ? "ক্যাম্পাস জীবন" : "CAMPUS LIFE"}
-            </p>
-            <h2 className="font-heading mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-              {c.facilities}
-            </h2>
-            <p className="mt-4 leading-8 text-slate-600">{c.facilitiesBody}</p>
-            <a
-              href="https://iso.hust.edu.cn/Services_Information/Campus_Facilities/Housing___Dining.htm"
-              className="focus-ring mt-5 inline-flex text-xs text-slate-500 underline"
-              target="_blank"
-              rel="noreferrer"
+      <section id="scholarships" className={styles.funding}>
+        <PageShell className={styles.fundingGrid}>
+          <ChinaReveal>
+            <p className={styles.eyebrow}>{c.fundingEyebrow}</p>
+            <h2 className={styles.title}>{c.fundingTitle}</h2>
+            <p className={styles.body}>{c.fundingBody}</p>
+            <Link
+              href={href("/programs?country=china&scholarship=1")}
+              className={styles.primary}
             >
-              {bn
-                ? "HUST-এর ক্যাম্পাস সুবিধা"
-                : "Explore HUST’s campus facilities"}
-            </a>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {c.facilityCards.map(([title, body], i) => {
-              const Icon = facilityIcons[i] ?? Building2;
-              return (
-                <div key={title}>
-                  <Icon className="size-5 text-slate-700" aria-hidden="true" />
-                  <h3 className="mt-3 font-semibold text-slate-900">{title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">
-                    {body}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </PageShell>
-      </section>
-      <section className="bg-[#edf4f1] py-16 sm:py-20">
-        <PageShell>
-          <h2 className="font-heading max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            {c.funding}
-          </h2>
-          <p className="mt-4 max-w-3xl leading-8 text-slate-700">
-            {c.fundingBody}
-          </p>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+              {c.fundingCta}
+            </Link>
+            <Link
+              href={href("/cost-calculator?destination=china")}
+              className={styles.costLink}
+            >
+              {c.costCta}
+            </Link>
+          </ChinaReveal>
+          <ChinaReveal className={styles.fundingDetails}>
             {c.awards.map(([title, body]) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-emerald-900/10 bg-white p-6"
-              >
-                <h3 className="text-xl font-semibold text-emerald-950">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">{body}</p>
+              <div className={styles.award} key={title}>
+                <Check size={21} aria-hidden="true" />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </div>
               </div>
             ))}
-          </div>
-          <Link
-            href={href("/programs?country=china&scholarship=1")}
-            className="focus-ring mt-7 inline-flex min-h-11 items-center font-bold text-emerald-900"
-          >
-            {bn
-              ? "স্কলারশিপের সুযোগসহ অফার দেখুন"
-              : "Explore offers with scholarship opportunities"}{" "}
-            →
-          </Link>
-          <p className="mt-3 text-xs leading-6 text-slate-600">
-            {bn ? "CSC-এর সাধারণ তথ্য:" : "General CSC information:"}{" "}
+            <p className={styles.fundingNote}>{c.fundingNote}</p>
             <a
-              className="focus-ring underline"
+              className={styles.sourceLink}
               href="https://www.campuschina.org/"
               target="_blank"
               rel="noreferrer"
             >
-              Campus China
-            </a>{" "}
-            ·{" "}
-            <a
-              className="focus-ring underline"
-              href="https://english.shanghai.gov.cn/en-Individuals-HigherEducation-Scholarships/20260813/305c553a1e5946929d81b3715bff50e0.html"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {bn ? "স্কলারশিপের কভারেজ" : "Scholarship coverage"}
+              {bn
+                ? "Chinese Government Scholarship সম্পর্কে জানুন"
+                : "About the Chinese Government Scholarship"}
             </a>
-          </p>
+          </ChinaReveal>
         </PageShell>
       </section>
-      <section className="bg-white py-16 sm:py-20">
+      <section id="intakes" className={styles.section}>
         <PageShell>
-          <h2 className="font-heading text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-            {c.routes}
-          </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {[
-              [c.spring, c.springBody],
-              [c.autumn, c.autumnBody],
-            ].map(([title, body]) => (
-              <div
-                key={title}
-                className="rounded-3xl border border-stone-200 bg-slate-50 p-7"
+          <ChinaReveal className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>{c.routesEyebrow}</p>
+              <h2 className={styles.title}>{c.routesTitle}</h2>
+            </div>
+            <p className={styles.body}>{c.routesBody}</p>
+          </ChinaReveal>
+          <div className={styles.intakes}>
+            {(
+              [
+                ["March 2027", c.springLabel, c.springBody],
+                ["September 2027", c.autumnLabel, c.autumnBody],
+              ] as const
+            ).map(([intake, label, body], index) => (
+              <ChinaReveal
+                key={intake}
+                className={styles.intakeCard}
+                delay={index * 90}
               >
-                <h3 className="text-2xl font-semibold text-slate-900">
-                  {title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{body}</p>
+                <p className={styles.eyebrow}>{label}</p>
+                <h3>{intake}</h3>
+                <p>{body}</p>
                 <Link
+                  className={styles.primary}
                   href={href(
-                    `/programs?country=china&intake=${encodeURIComponent(title ?? "")}`,
+                    "/programs?country=china&intake=" +
+                      encodeURIComponent(intake),
                   )}
-                  className="btn-sunset focus-ring mt-6 inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold"
                 >
-                  {c.browse} →
+                  {c.intakeCta}
                 </Link>
-              </div>
+              </ChinaReveal>
             ))}
           </div>
-          <div className="mt-6 rounded-2xl border border-stone-200 p-6">
-            <h3 className="font-semibold text-slate-900">{c.csca}</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
-              {c.cscaBody}
-            </p>
-          </div>
+          <ChinaReveal className={styles.otherIntakes}>
+            <p>{c.pending}</p>
+            <div>
+              <Link
+                href={href(
+                  "/programs?country=china&intake=" +
+                    encodeURIComponent("Rolling enrollment"),
+                )}
+              >
+                {c.rolling}
+              </Link>
+              <Link
+                href={href(
+                  "/programs?country=china&intake=" +
+                    encodeURIComponent("Intake to be confirmed"),
+                )}
+              >
+                {c.unconfirmed}
+              </Link>
+            </div>
+          </ChinaReveal>
+          <ChinaReveal className={styles.csca}>
+            <BookOpen size={25} aria-hidden="true" />
+            <div>
+              <h3>{c.csca}</h3>
+              <p>{c.cscaBody}</p>
+            </div>
+            <Link href={assessment}>{c.assessment}</Link>
+          </ChinaReveal>
         </PageShell>
       </section>
-      <section className="bg-slate-50 py-16">
-        <PageShell className="max-w-4xl">
-          <h2 className="font-heading text-3xl font-semibold text-slate-900">
-            {c.faq}
-          </h2>
-          <div className="mt-6 divide-y divide-stone-200">
-            {c.questions.map(([q, a]) => (
-              <details key={q} className="py-5">
-                <summary className="focus-ring cursor-pointer text-lg font-semibold text-slate-900">
-                  {q}
+      <section className={styles.faq}>
+        <PageShell className={styles.faqGrid}>
+          <ChinaReveal>
+            <p className={styles.eyebrow}>{c.faqEyebrow}</p>
+            <h2 className={styles.title}>{c.faqTitle}</h2>
+          </ChinaReveal>
+          <div>
+            {c.questions.map(([question, answer]) => (
+              <details key={question}>
+                <summary>
+                  {question}
+                  <Plus size={22} aria-hidden="true" />
                 </summary>
-                <p className="mt-3 leading-8 text-slate-600">{a}</p>
+                <p>{answer}</p>
               </details>
             ))}
           </div>
         </PageShell>
       </section>
-      <section className="bg-[#0b2038] py-16 text-white">
-        <PageShell>
-          <h2 className="font-heading max-w-3xl text-3xl font-semibold sm:text-4xl">
-            {c.support}
-          </h2>
-          <p className="mt-5 max-w-2xl leading-8 text-slate-200">
-            {c.supportBody}
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href={href("/consultation?destination=china")}
-              className="btn-sunset focus-ring inline-flex min-h-12 items-center rounded-full px-6 text-sm font-bold"
-            >
-              {c.assessment}
-            </Link>
-            <Link
-              href={explore}
-              className="focus-ring inline-flex min-h-12 items-center rounded-full border border-white/30 px-6 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              {c.explore}
-            </Link>
-          </div>
+      <section className={styles.support}>
+        <PageShell className={styles.supportGrid}>
+          <ChinaReveal>
+            <p className={styles.eyebrow}>{c.supportEyebrow}</p>
+            <h2 className={styles.title}>{c.supportTitle}</h2>
+            <p className={styles.body}>{c.supportBody}</p>
+            <div className={styles.actions}>
+              <Link href={assessment} className={styles.primary}>
+                {c.assessment}
+              </Link>
+              <Link href={explore} className={styles.lightLink}>
+                {c.explore}
+              </Link>
+            </div>
+            <p className={styles.reassurance}>{c.reassurance}</p>
+          </ChinaReveal>
+          <figure className={styles.supportPhoto}>
+            <Image
+              src="/images/china-xiamen-campus.webp"
+              alt={photographs[0].alt}
+              fill
+              sizes="(max-width: 760px) 100vw, 40vw"
+            />
+            <figcaption>Xiamen University · Fujian</figcaption>
+          </figure>
         </PageShell>
       </section>
-    </>
+      <div className={styles.credits}>
+        <PageShell>
+          <details>
+            <summary>{c.photoCredits}</summary>
+            <p>{c.photoNote}</p>
+            <ul>
+              {photographs.map((photo) => (
+                <li key={photo.src}>
+                  <a href={photo.source} target="_blank" rel="noreferrer">
+                    {photo.location}
+                  </a>{" "}
+                  — {photo.author},{" "}
+                  <a href={photo.license} target="_blank" rel="noreferrer">
+                    {photo.licenseName}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </PageShell>
+      </div>
+    </div>
   );
 }

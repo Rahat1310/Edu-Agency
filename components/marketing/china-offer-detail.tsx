@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { PageShell } from "@/components/layout/page-shell";
-import { chinaOffers, chinaRankingExamples } from "@/lib/china-2027";
+import {
+  chinaOffers,
+  chinaRankingExamples,
+  chinaRankingEdition,
+} from "@/lib/china-2027";
 import type { ChinaOffer } from "@/lib/china-2027/types";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
@@ -96,7 +100,9 @@ export function ChinaOfferDetail({
               href={ranking.url}
               className="focus-ring mt-4 inline-flex rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700"
             >
-              QS World University Rankings 2027 · #{ranking.rank}
+              QS World University Rankings {chinaRankingEdition} ·{" "}
+              {ranking.rank}
+              {ranking.tied ? (bn ? " (যৌথ অবস্থান)" : " (tied)") : ""}
             </a>
           ) : null}
         </div>

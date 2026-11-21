@@ -125,34 +125,47 @@ export function hasChinaOnlyFilters(filters: Partial<PublicProgramFilters>) {
   );
 }
 
+export const chinaRankingEdition = 2027;
+export const chinaRankingsCheckedOn = "2026-11-21";
+
 export const chinaRankingExamples = [
   {
     name: "Tongji University",
-    rank: "146",
+    rank: 146,
+    tied: false,
+    city: "Shanghai",
     id: "tongji-university",
     url: "https://www.topuniversities.com/universities/tongji-university",
   },
   {
     name: "Xi’an Jiaotong University",
-    rank: "=296",
+    rank: 296,
+    tied: true,
+    city: "Xi’an",
     id: "xi-an-jiaotong-university",
     url: "https://www.topuniversities.com/universities/xian-jiaotong-university",
   },
   {
     name: "Xiamen University",
-    rank: "=303",
+    rank: 303,
+    tied: true,
+    city: "Xiamen",
     id: "xiamen-university",
     url: "https://www.topuniversities.com/universities/xiamen-university",
   },
   {
     name: "Huazhong University of Science and Technology",
-    rank: "307",
+    rank: 307,
+    tied: false,
+    city: "Wuhan",
     id: "huazhong-university-of-science-and-technology",
     url: "https://www.topuniversities.com/universities/huazhong-university-science-technology",
   },
   {
     name: "South China University of Technology",
-    rank: "=342",
+    rank: 342,
+    tied: true,
+    city: "Guangzhou",
     id: "south-china-university-of-technology",
     url: "https://www.topuniversities.com/universities/south-china-university-technology",
   },
