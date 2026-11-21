@@ -14,7 +14,12 @@ export const chinaInstitutions = [
     ]),
   ).values(),
 ].sort((a, b) => a.name.localeCompare(b.name));
-export const chinaIntakes = ["March 2027", "September 2027"] as const;
+export const chinaIntakes = [
+  "March 2027",
+  "September 2027",
+  "Rolling enrollment",
+  "Intake to be confirmed",
+] as const;
 const byId = new Map(chinaOffers.map((offer) => [offer.id, offer]));
 
 export function parseChinaOfferFilters(input: {
@@ -46,13 +51,28 @@ export function getChinaOffer(id: string) {
   return byId.get(id);
 }
 
+// A shared or unconfirmed route must not silently preselect September.
+export function chinaAssessmentIntake(offer: ChinaOffer) {
+  const entries = offer.entryIntakes ?? [offer.intake];
+  if (entries.length !== 1) return "";
+  return entries[0] === "March 2027"
+    ? "2027-03"
+    : entries[0] === "September 2027"
+      ? "2027-09"
+      : "";
+}
+
 export function filterChinaOffers(filters: Partial<PublicProgramFilters>) {
   if (filters.country && filters.country !== "china") return [];
   const search = filters.field?.trim().toLocaleLowerCase() ?? "";
   return chinaOffers.filter(
     (offer) =>
-      (!filters.level || offer.level === filters.level) &&
-      (!filters.intake || offer.intake === filters.intake) &&
+      (!filters.level ||
+        (offer.categories ?? [offer.level]).some(
+          (level) => level === filters.level,
+        )) &&
+      (!filters.intake ||
+        (offer.entryIntakes ?? [offer.intake]).includes(filters.intake)) &&
       (!filters.university ||
         offer.universityId === filters.university ||
         offer.university
@@ -79,8 +99,14 @@ export function chinaOfferProgram(offer: ChinaOffer): PublicProgramDetail {
       offer.tuition.amount == null ? "" : String(offer.tuition.amount),
     tuitionCurrency: "CNY",
     tuitionDisplay: offer.tuition.display,
-    intakeMonths: [offer.intake],
-    requirements: [...offer.requirements, ...offer.notes].join("\n\n"),
+    intakeMonths: offer.entryIntakes ?? [offer.intake],
+    requirements: [
+      ...offer.requirements,
+      ...offer.notes,
+      ...(offer.progressionStart
+        ? [`Degree progression: ${offer.progressionStart}`]
+        : []),
+    ].join("\n\n"),
     scholarshipInfo: [
       offer.scholarship.summary,
       ...offer.scholarship.details,

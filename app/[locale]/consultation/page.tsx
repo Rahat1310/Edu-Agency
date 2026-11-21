@@ -1,7 +1,7 @@
 import { AssessmentForm } from "@/components/consultation/assessment-form";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import { pageMetadata } from "@/lib/seo/page-metadata";
-import { getChinaOffer } from "@/lib/china-2027";
+import { chinaAssessmentIntake, getChinaOffer } from "@/lib/china-2027";
 type Props = {
   params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -32,11 +32,7 @@ export default async function Consultation({ params, searchParams }: Props) {
             china
               ? {
                   country: "China",
-                  intake: offer
-                    ? offer.intake === "March 2027"
-                      ? "2027-03"
-                      : "2027-09"
-                    : "",
+                  intake: offer ? chinaAssessmentIntake(offer) : "",
                   otherInformation: offer
                     ? `Interested in ${offer.title} at ${offer.university}, ${offer.intake}.`
                     : "",

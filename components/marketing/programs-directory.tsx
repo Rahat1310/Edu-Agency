@@ -89,8 +89,8 @@ export function ProgramsDirectory({
             <div>
               <p className="font-semibold">
                 {bn
-                  ? "March ও September 2027 · China"
-                  : "March & September 2027 · China"}
+                  ? "২০২৭ · চীনের প্রোগ্রাম ও ইনটেক"
+                  : "2027 · China programs and intakes"}
               </p>
               <p className="mt-1 text-sm text-slate-200">
                 {chinaInstitutions.length}{" "}
@@ -194,9 +194,7 @@ export function ProgramsDirectory({
                     defaultValue={filters.intake ?? ""}
                     className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800"
                   >
-                    <option value="">
-                      {bn ? "দুই ইনটেক" : "Both intakes"}
-                    </option>
+                    <option value="">{bn ? "সব ইনটেক" : "All intakes"}</option>
                     {chinaIntakes.map((intake) => (
                       <option key={intake} value={intake}>
                         {intake}

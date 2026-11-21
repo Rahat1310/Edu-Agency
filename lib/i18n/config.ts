@@ -4,7 +4,7 @@
  * - English (default) stays on unprefixed URLs: `/`, `/about`, `/contact`,
  *   `/destinations/china`, …
  * - Bengali is served at the `/bn` prefix: `/bn`, `/bn/about`, …
- * - Middleware rewrites unprefixed marketing paths to `/en/...` so both
+ * - Routing configuration rewrites unprefixed marketing paths to `/en/...` so both
  *   locales are statically generated from `app/[locale]`.
  * - `/en/...` redirects back to the unprefixed canonical URL.
  * - The header toggle is a pair of links to the same path in the other

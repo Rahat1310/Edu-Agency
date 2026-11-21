@@ -13,8 +13,19 @@ export type ChinaOffer = {
   location: string;
   level: ChinaOfferLevel;
   title: string;
-  intake: "March 2027" | "September 2027";
-  language: "English" | "Chinese" | "English / Chinese";
+  intake: string;
+  entryIntakes?: string[];
+  entryYear?: number;
+  intakeStatus?: "scheduled" | "rolling" | "unconfirmed";
+  progressionStart?: string | null;
+  categories?: ChinaOfferLevel[];
+  campus?: string | null;
+  identityKey?: string;
+  sourceRefs?: { file: string; sha256: string; pages: number[] }[];
+  reviewedOn?: string;
+  reviewRefs?: string[];
+  programTerms?: { heading: string; items: string[] }[];
+  language: "English" | "Chinese" | "English / Chinese" | "To be confirmed";
   duration: string;
   tuition: {
     amount: number | null;

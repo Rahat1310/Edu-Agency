@@ -73,11 +73,21 @@ export function ChinaOfferDetail({
             {offer.university}
           </h1>
           <p className="mt-4 text-xl text-slate-700">{offer.title}</p>
+          <Link
+            className="focus-ring mt-4 inline-block text-sm font-semibold text-orange-700 underline"
+            href={href(
+              `/programs?country=china&university=${encodeURIComponent(offer.universityId)}`,
+            )}
+          >
+            {bn
+              ? "এই প্রতিষ্ঠানের সব অফার দেখুন"
+              : "View all offers at this university"}
+          </Link>
           <p className="mt-3 text-sm text-slate-500">
             {offer.location} ·{" "}
             {bn
               ? "অফারের তথ্য ইংরেজিতে দেওয়া হয়েছে"
-              : "Offer reviewed 10 November 2026"}
+              : `Offer reviewed ${offer.reviewedOn ?? "2026-11-10"}`}
           </p>
           {ranking ? (
             <a
@@ -125,6 +135,17 @@ export function ChinaOfferDetail({
                   [bn ? "ইনটেক" : "Intake", offer.intake],
                   [bn ? "পড়ার মাধ্যম" : "Teaching language", offer.language],
                   [bn ? "মেয়াদ" : "Duration", offer.duration],
+                  ...(offer.progressionStart
+                    ? [
+                        [
+                          bn ? "ডিগ্রি শুরু" : "Degree progression",
+                          offer.progressionStart,
+                        ],
+                      ]
+                    : []),
+                  ...(offer.campus
+                    ? [[bn ? "ক্যাম্পাস" : "Campus", offer.campus]]
+                    : []),
                   [
                     bn ? "টিউশন / প্যাকেজ" : "Tuition / package",
                     offer.tuition.display,
@@ -216,6 +237,25 @@ export function ChinaOfferDetail({
                 majorList
               )}
             </section>
+            {offer.programTerms?.length ? (
+              <section className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8">
+                <h2 className="text-2xl font-semibold text-slate-900">
+                  {bn
+                    ? "কোর্স, খরচ ও ভর্তির শর্ত"
+                    : "Course, fee and admission terms"}
+                </h2>
+                <div className="mt-6 space-y-6">
+                  {offer.programTerms.map((section) => (
+                    <div key={section.heading}>
+                      <h3 className="font-semibold text-slate-900">
+                        {section.heading}
+                      </h3>
+                      <Points items={section.items} />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
             <section className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8">
               <h2 className="text-2xl font-semibold text-slate-900">
                 {bn ? "আবেদনের ডকুমেন্ট" : "Application documents"}

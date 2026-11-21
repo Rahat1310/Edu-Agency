@@ -1,5 +1,6 @@
 import { and, asc, eq, ilike, inArray, ne, or, sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
+import { createHash } from "node:crypto";
 import {
   chinaOffers,
   chinaInstitutions,
@@ -26,6 +27,11 @@ export const publicProgramLevels = programLevels;
 export const PROGRAMS_CACHE_TAG = "programs";
 export const PUBLIC_PROGRAM_PAGE_SIZE = 12;
 export const PROGRAMS_REVALIDATE_SECONDS = 3600;
+// Next's persistent data cache does not track changes to imported JSON.
+// Include the catalogue version in every result that depends on these offers.
+const CHINA_CATALOG_VERSION = createHash("sha256")
+  .update(JSON.stringify(chinaOffers))
+  .digest("hex");
 
 const countryAliases: Record<string, ProgramCountry> = {
   china: "china",
@@ -219,6 +225,7 @@ export function getPublishedProgramPage(filters: PublicProgramFilters) {
     () => queryPublishedProgramPage(filters),
     [
       "published-program-page",
+      CHINA_CATALOG_VERSION,
       filters.country,
       filters.level,
       filters.field,
@@ -256,7 +263,7 @@ async function queryPublishedProgramDetail(
 export function getPublishedProgramDetail(id: string) {
   return unstable_cache(
     () => queryPublishedProgramDetail(id),
-    ["published-program-detail", id],
+    ["published-program-detail", CHINA_CATALOG_VERSION, id],
     {
       tags: [PROGRAMS_CACHE_TAG],
       revalidate: PROGRAMS_REVALIDATE_SECONDS,
@@ -303,6 +310,7 @@ export function getPublishedProgramsByUniversity(
     () => queryPublishedProgramsByUniversity(universityName, excludeId, limit),
     [
       "published-programs-by-university",
+      CHINA_CATALOG_VERSION,
       universityName,
       excludeId ?? "",
       String(limit),
@@ -359,7 +367,7 @@ export function getPublishedProgramsByIds(ids: readonly string[]) {
 
   return unstable_cache(
     () => queryPublishedProgramsByIds(requested),
-    ["published-programs-compare", requested.join(",")],
+    ["published-programs-compare", CHINA_CATALOG_VERSION, requested.join(",")],
     {
       tags: [PROGRAMS_CACHE_TAG],
       revalidate: PROGRAMS_REVALIDATE_SECONDS,
@@ -373,16 +381,18 @@ export function listPublishedProgramIds() {
       const rows = await db
         .select({ id: programs.id })
         .from(programs)
-        .where(
-          and(eq(programs.isPublished, true), ne(programs.country, "china")),
-        );
+        .where(eq(programs.isPublished, true));
 
+      // Keep legacy detail URLs available even though China directory results
+      // use only the canonical catalogue.
       return [
-        ...rows.map((row) => row.id),
-        ...chinaOffers.map((offer) => offer.id),
+        ...new Set([
+          ...rows.map((row) => row.id),
+          ...chinaOffers.map((offer) => offer.id),
+        ]),
       ];
     },
-    ["published-program-ids"],
+    ["published-program-ids", CHINA_CATALOG_VERSION],
     {
       tags: [PROGRAMS_CACHE_TAG],
       revalidate: PROGRAMS_REVALIDATE_SECONDS,
@@ -411,11 +421,11 @@ export function listPublishedProgramsForSitemap() {
         ...rows,
         ...chinaOffers.map((offer) => ({
           id: offer.id,
-          updatedAt: new Date("2026-11-10T00:00:00Z"),
+          updatedAt: new Date(`${offer.reviewedOn ?? "2026-11-10"}T00:00:00Z`),
         })),
       ];
     },
-    ["published-program-sitemap"],
+    ["published-program-sitemap", CHINA_CATALOG_VERSION],
     {
       tags: [PROGRAMS_CACHE_TAG],
       revalidate: PROGRAMS_REVALIDATE_SECONDS,
@@ -483,7 +493,7 @@ export function listPublishedProgramsForCostCalculator(
 ) {
   return unstable_cache(
     () => queryPublishedProgramsForCostCalculator(country, level),
-    ["cost-calculator-programs", country, level],
+    ["cost-calculator-programs", CHINA_CATALOG_VERSION, country, level],
     {
       tags: [PROGRAMS_CACHE_TAG],
       revalidate: PROGRAMS_REVALIDATE_SECONDS,

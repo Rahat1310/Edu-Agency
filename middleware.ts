@@ -2,11 +2,6 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import {
-  isMarketingPath,
-  withEnPrefix,
-  withoutEnPrefix,
-} from "@/lib/i18n/paths";
 import { applySecurityHeaders } from "@/lib/security-headers";
 
 const PUBLIC_EXACT_ROUTES = new Set([
@@ -57,22 +52,6 @@ export default async function middleware(
   event: NextFetchEvent,
 ) {
   const { pathname } = request.nextUrl;
-
-  if (pathname === "/en" || pathname.startsWith("/en/")) {
-    const url = request.nextUrl.clone();
-    url.pathname = withoutEnPrefix(pathname);
-    const response = NextResponse.redirect(url);
-    applySecurityHeaders(response);
-    return response;
-  }
-
-  if (!pathname.startsWith("/bn") && isMarketingPath(pathname)) {
-    const url = request.nextUrl.clone();
-    url.pathname = withEnPrefix(pathname);
-    const response = NextResponse.rewrite(url);
-    applySecurityHeaders(response);
-    return response;
-  }
 
   let response: Response = NextResponse.next();
 

@@ -7,7 +7,9 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export const dynamicParams = false;
+// Detail pages may be added after static generation, and legacy program IDs
+// still resolve through the database. Each page validates the locale itself.
+export const dynamicParams = true;
 
 export default async function LocaleLayout({
   children,
