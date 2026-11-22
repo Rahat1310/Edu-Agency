@@ -782,16 +782,19 @@
   --country-accent: #c65742;
   --country-surface: rgba(252, 233, 229, 0.82);
 }
+
 .public-site .card-color-sky {
   --country-edge: #a8cede;
   --country-accent: #1682b5;
   --country-surface: rgba(230, 242, 250, 0.82);
 }
+
 .public-site .card-color-purple {
   --country-edge: #c6bce3;
   --country-accent: #7860bc;
   --country-surface: rgba(238, 235, 250, 0.82);
 }
+
 .public-site .card-color-amber {
   --country-edge: #e7c58d;
   --country-accent: #b77916;
@@ -901,4 +904,48 @@
 
 .public-site .consultation-form button[type="submit"] {
   min-height: 3.25rem;
+}
+
+/* Strip Clerk's nested card chrome and allow full-width expansion inside the frosted auth split card. */
+.auth-clerk-host .cl-rootBox,
+.auth-clerk-host .cl-signIn-root,
+.auth-clerk-host .cl-signUp-root,
+.auth-clerk-host .cl-cardBox {
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.auth-clerk-host .cl-card {
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.auth-clerk-host .cl-footer,
+.auth-clerk-host .cl-footer > div {
+  background: transparent;
+  background-image: none;
+}
+
+.auth-clerk-host .cl-footer {
+  border-top: 1px solid rgba(148, 163, 184, 0.28);
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+}
+
+.auth-clerk-host .cl-formButtonPrimary {
+  background-color: #c4471c;
+  color: #ffffff;
+  border: 0;
+  box-shadow: 0 8px 20px -4px rgba(196, 71, 28, 0.35);
+}
+
+.auth-clerk-host .cl-formButtonPrimary:hover {
+  background-color: #a73612;
 }

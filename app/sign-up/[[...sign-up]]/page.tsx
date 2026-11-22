@@ -1,9 +1,16 @@
 import { SignUp } from "@clerk/nextjs";
 
+import { AuthShell } from "@/components/auth/auth-shell";
+import { authCardAppearance } from "@/lib/clerk-appearance";
+
 export default function SignUpPage() {
   return (
-    <div className="flex min-h-[36rem] items-center justify-center p-6">
-      <SignUp fallbackRedirectUrl="/portal" signInUrl="/sign-in" />
-    </div>
+    <AuthShell mode="sign-up">
+      <SignUp
+        appearance={authCardAppearance}
+        fallbackRedirectUrl="/portal"
+        signInUrl="/sign-in"
+      />
+    </AuthShell>
   );
 }
