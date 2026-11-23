@@ -14,6 +14,7 @@ import {
 import { pageMetadata } from "@/lib/seo/page-metadata";
 import { programCourseJsonLd, programSeoCopy } from "@/lib/seo/program-copy";
 import { absoluteUrl } from "@/lib/site-url";
+import { getMalaysiaProgramme } from "@/lib/malaysia";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -25,7 +26,8 @@ type PageProps = {
 export async function generateStaticParams() {
   try {
     const ids = await listPublishedProgramIds();
-    return ids.map((id) => ({ id }));
+    // Malaysia details use ISR on first request; the sitemap still lists every record.
+    return ids.filter((id) => !getMalaysiaProgramme(id)).map((id) => ({ id }));
   } catch {
     return [];
   }

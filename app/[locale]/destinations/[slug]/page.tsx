@@ -52,7 +52,9 @@ export default async function Destination({ params }: PageProps) {
 
   const dict = getDictionary(locale);
   const countdown =
-    slug === "china" ? null : await loadUpcomingCountdownForSlug(slug);
+    slug === "china" || slug === "malaysia"
+      ? null
+      : await loadUpcomingCountdownForSlug(slug);
 
   return (
     <DestinationPage

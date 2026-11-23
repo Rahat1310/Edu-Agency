@@ -2,6 +2,7 @@ import type { ProgramCountry, ProgramLevel } from "@/db/schema";
 import type { Locale } from "@/lib/i18n/config";
 import type { PublicProgramDetail } from "@/lib/programs-public";
 import { getChinaOffer } from "@/lib/china-2027";
+import { getMalaysiaProgramme } from "@/lib/malaysia";
 
 const countryCode: Record<ProgramCountry, string> = {
   china: "CN",
@@ -60,6 +61,23 @@ export function programSeoCopy(
   program: PublicProgramDetail,
   locale: Locale,
 ): ProgramSeoCopy {
+  const malaysia = getMalaysiaProgramme(program.id);
+  if (malaysia) {
+    const description =
+      locale === "bn"
+        ? `${program.universityName}-এ ${malaysia.title}। প্রকাশিত ফি, মেয়াদ ও যোগ্যতার শর্ত দেখুন। বর্তমান প্রাপ্যতা নিশ্চিত করুন।`
+        : `${malaysia.title} at ${program.universityName}. Explore dated fee schedules, payment bases and conditions. Confirm current availability.`;
+    return {
+      title: `${malaysia.title} | ${program.universityName}`,
+      description,
+      ogTitle: malaysia.title,
+      ogDescription: description,
+      courseName: malaysia.title,
+      courseDescription: description,
+      countryCode: "MY",
+      educationalLevel: malaysia.level,
+    };
+  }
   const offer = getChinaOffer(program.id);
   if (offer) {
     const description =
@@ -234,7 +252,7 @@ export function programCourseJsonLd(
           "@type": "Thing",
           name: program.field,
         },
-        ...(!getChinaOffer(program.id)
+        ...(!getChinaOffer(program.id) && !getMalaysiaProgramme(program.id)
           ? {
               offers: {
                 "@type": "Offer",
@@ -246,7 +264,11 @@ export function programCourseJsonLd(
           : {}),
         hasCourseInstance: {
           "@type": "CourseInstance",
-          courseMode: "Onsite",
+          ...(getMalaysiaProgramme(program.id)
+            ? getMalaysiaProgramme(program.id)!.mode
+              ? { courseMode: getMalaysiaProgramme(program.id)!.mode }
+              : {}
+            : { courseMode: "Onsite" }),
           location: {
             "@type": "Place",
             name: program.universityName,

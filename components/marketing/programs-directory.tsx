@@ -1,26 +1,33 @@
 import Link from "next/link";
+import { GraduationCap, Info, MessageCircle, SearchX, X } from "lucide-react";
 import { chinaInstitutions, chinaIntakes, chinaOffers } from "@/lib/china-2027";
 import { PageShell } from "@/components/layout/page-shell";
 import {
   ProgramCompareBar,
-  ProgramCompareIdsField,
   ProgramCompareProvider,
 } from "@/components/marketing/program-compare";
+import { ProgramFilters } from "@/components/marketing/program-filters";
 import { ProgramCard } from "@/components/marketing/program-card";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
 import { publicProgramsHref } from "@/lib/programs-href";
 import {
-  programCountryLabels,
-  programLevelLabels,
-} from "@/lib/programs-labels";
+  programCountryText,
+  programIntakeText,
+  programLevelText,
+  removeProgramFilter,
+  type RemovableProgramFilter,
+} from "@/lib/programs-directory";
 import {
   publicProgramCountries,
   publicProgramLevels,
+  PUBLIC_PROGRAM_PAGE_SIZE,
   type PublicProgramFilters,
   type PublicProgramList,
 } from "@/lib/programs-public";
+import styles from "./programs-directory.module.css";
+
 type ProgramsDirectoryProps = {
   locale: Locale;
   dict: Dictionary;
@@ -28,6 +35,7 @@ type ProgramsDirectoryProps = {
   list: PublicProgramList;
   selectedIds: string[];
 };
+
 export function ProgramsDirectory({
   locale,
   dict,
@@ -35,318 +43,328 @@ export function ProgramsDirectory({
   list,
   selectedIds,
 }: ProgramsDirectoryProps) {
-  const hasFilters = Boolean(
-    filters.country ||
-    filters.level ||
-    filters.field ||
-    filters.intake ||
-    filters.university ||
-    filters.language ||
-    filters.scholarship,
-  );
-  const china = filters.country === "china";
   const bn = locale === "bn";
-  const formAction = localizedHref("/programs", locale);
+  const china = filters.country === "china";
+  const href = (path: string) => localizedHref(path, locale);
+  const number = (value: number) =>
+    new Intl.NumberFormat(bn ? "bn-BD" : "en-GB").format(value);
+  const chips: { key: RemovableProgramFilter; label: string }[] = [];
+  if (filters.country)
+    chips.push({
+      key: "country",
+      label: programCountryText(filters.country, locale),
+    });
+  if (filters.level)
+    chips.push({
+      key: "level",
+      label: programLevelText(filters.level, locale),
+    });
+  if (filters.field)
+    chips.push({
+      key: "field",
+      label: (bn ? "খোঁজা হচ্ছে: " : "Search: ") + filters.field,
+    });
+  if (filters.intake)
+    chips.push({
+      key: "intake",
+      label: programIntakeText(filters.intake, locale),
+    });
+  if (filters.university)
+    chips.push({
+      key: "university",
+      label:
+        chinaInstitutions.find((u) => u.id === filters.university)?.name ??
+        filters.university,
+    });
+  if (filters.language)
+    chips.push({
+      key: "language",
+      label: (bn ? "মাধ্যম: " : "Taught in ") + filters.language,
+    });
+  if (filters.scholarship)
+    chips.push({
+      key: "scholarship",
+      label: bn ? "স্কলারশিপের সুযোগ" : "Scholarship options",
+    });
+  const start = list.total ? (list.page - 1) * PUBLIC_PROGRAM_PAGE_SIZE + 1 : 0;
+  const end = list.total ? start + list.rows.length - 1 : 0;
+  const chinaLevels = publicProgramLevels.filter((level) =>
+    chinaOffers.some((o) =>
+      (o.categories ?? [o.level]).some((category) => category === level),
+    ),
+  );
+  const clearHref = publicProgramsHref(locale, { ids: selectedIds });
+
   return (
-    <section className="py-10 sm:py-16">
+    <section
+      className={[
+        styles.page,
+        selectedIds.length ? styles.withComparison : "",
+      ].join(" ")}
+    >
       <PageShell>
-        <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-blue)]">
-          <span>{dict.programs.eyebrow}</span>
-        </div>
-        <h1 className="font-heading mt-4 max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-slate-900 sm:text-5xl sm:leading-[1.15]">
-          {china
-            ? bn
-              ? "চীনের বিশ্ববিদ্যালয় ও ২০২৭-এর অফার"
-              : "China universities & 2027 offers"
-            : dict.programs.title}
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 font-normal text-slate-600">
-          {china
-            ? bn
-              ? "ইনটেক, পড়ার মাধ্যম ও বিশ্ববিদ্যালয় অনুযায়ী বেছে নিন। প্রতিটি অফারে বিষয়, ফি, স্কলারশিপ ও যোগ্যতার শর্ত দেখুন।"
-              : "Find your intake, teaching language and university. Open an offer to see its majors, fees, scholarship coverage and entry requirements."
-            : dict.programs.body}
-        </p>
-        {filters.country === "china" && (
-          <div className="mt-6 rounded-2xl border border-orange-200 bg-orange-50 p-5 text-sm leading-7 text-slate-700">
-            <p>
-              {locale === "bn"
-                ? "চীনের বিষয়ভিত্তিক তালিকা তুলনা করুন। নির্দিষ্ট ডিগ্রি, পাঠদানের ভাষা, বর্তমান ফি ও স্কলারশিপ বিশ্ববিদ্যালয়ের নির্দেশিকা দিয়ে নিশ্চিত করুন। ইনটেকের মাস আবেদনের শেষ তারিখ নয়।"
-                : "Compare China subject listings. Confirm the exact degree, teaching language, current fees and scholarships in the university’s admissions guide. Intake months are start dates, not application deadlines."}
+        <header className={styles.header}>
+          <div>
+            <p className={styles.eyebrow}>
+              {bn ? "কোর্স ও ভর্তি" : "COURSES & ADMISSIONS"}
             </p>
-            <Link
-              href={localizedHref("/destinations/china", locale)}
-              className="focus-ring mt-2 inline-flex min-h-11 items-center font-semibold text-orange-800 underline underline-offset-4"
-            >
-              {locale === "bn"
-                ? "চীনের বিশ্ববিদ্যালয় ও আবেদন গাইড"
-                : "China universities & application guide"}
-            </Link>
-          </div>
-        )}
-        {!filters.country || china ? (
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-[#0b2038] px-6 py-5 text-white">
-            <div>
-              <p className="font-semibold">
-                {bn
-                  ? "২০২৭ · চীনের প্রোগ্রাম ও ইনটেক"
-                  : "2027 · China programs and intakes"}
-              </p>
-              <p className="mt-1 text-sm text-slate-200">
-                {chinaInstitutions.length}{" "}
-                {bn ? "শিক্ষাপ্রতিষ্ঠান" : "institutions"} ·{" "}
-                {chinaOffers.length}{" "}
-                {bn
-                  ? "অফার · যোগ্যতার শর্ত প্রযোজ্য"
-                  : "offers · eligibility conditions apply"}
-              </p>
-            </div>
-            <Link
-              href={localizedHref(
-                china ? "/destinations/china" : "/programs?country=china",
-                locale,
-              )}
-              className="focus-ring inline-flex min-h-11 items-center rounded-full border border-white/30 px-5 text-sm font-semibold text-white hover:bg-white/10"
-            >
+            <h1>
               {china
                 ? bn
-                  ? "কেন চীন?"
-                  : "Why choose China?"
+                  ? "চীনে আপনার কোর্স খুঁজুন।"
+                  : "Find your course in China."
                 : bn
-                  ? "চীনের অফার দেখুন"
-                  : "Explore China offers"}{" "}
-              →
-            </Link>
+                  ? "পরের কোর্সটা খুঁজে নিন।"
+                  : "Find your next course."}
+            </h1>
+            <p className={styles.intro}>
+              {bn
+                ? "বিষয়, ফি আর ক্লাস শুরুর তারিখ মিলিয়ে দেখুন। পছন্দ হলে কয়েকটি কোর্স পাশাপাশি তুলনা করুন।"
+                : "Compare subjects, fees and start dates. Pick a few courses to look at side by side."}
+            </p>
           </div>
-        ) : null}
-
+          <aside className={styles.headerAside}>
+            {china ? (
+              <>
+                <span>
+                  {number(chinaOffers.length)} {bn ? "টি অফার" : "offers"} ·{" "}
+                  {number(chinaInstitutions.length)}{" "}
+                  {bn ? "টি প্রতিষ্ঠান" : "institutions"}
+                </span>
+                <Link href={href("/destinations/china")}>
+                  {bn ? "চীনে পড়াশোনার গাইড" : "Read the China study guide"}
+                </Link>
+              </>
+            ) : (
+              <>
+                <GraduationCap size={24} aria-hidden="true" />
+                <span>
+                  {bn ? "চীনে পড়াশোনার কথা ভাবছেন?" : "Considering China?"}
+                </span>
+                <Link href={href("/programs?country=china")}>
+                  {bn ? "২০২৭-এর কোর্স দেখুন" : "See the 2027 options"}
+                </Link>
+              </>
+            )}
+          </aside>
+        </header>
         <ProgramCompareProvider
           locale={locale}
           filters={filters}
           initialIds={selectedIds}
           copy={dict.programs.compare}
         >
-          <form
-            method="get"
-            action={formAction}
-            className="mt-8 grid gap-4 rounded-2xl border border-stone-200 bg-white p-5 shadow-2xs sm:grid-cols-2 lg:grid-cols-3"
-          >
-            <ProgramCompareIdsField />
-            {filters.university && !china && (
-              <input
-                type="hidden"
-                name="university"
-                value={filters.university}
-              />
-            )}
-            <label className="text-xs font-bold tracking-[0.06em] text-slate-500 uppercase">
-              {dict.programs.countryLabel}
-              <select
-                name="country"
-                defaultValue={filters.country}
-                className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800 normal-case focus:border-orange-500"
-              >
-                <option value="">{dict.programs.allCountries}</option>
-                {publicProgramCountries.map((country) => (
-                  <option key={country} value={country}>
-                    {programCountryLabels[country]}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="text-xs font-bold tracking-[0.06em] text-slate-500 uppercase">
-              {dict.programs.levelLabel}
-              <select
-                name="level"
-                defaultValue={filters.level}
-                className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800 normal-case focus:border-orange-500"
-              >
-                <option value="">{dict.programs.allLevels}</option>
-                {publicProgramLevels.map((level) => (
-                  <option key={level} value={level}>
-                    {programLevelLabels[level]}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="text-xs font-bold tracking-[0.06em] text-slate-500 uppercase">
-              {bn
-                ? "বিশ্ববিদ্যালয়, শহর বা বিষয় খুঁজুন"
-                : "Search university, city or subject"}
-              <input
-                type="search"
-                name="field"
-                defaultValue={filters.field}
-                placeholder={
-                  bn
-                    ? "যেমন: Computer Science, Xiamen"
-                    : "e.g. Computer Science, Xiamen"
-                }
-                className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800 normal-case focus:border-orange-500"
-              />
-            </label>
-            {china ? (
-              <>
-                <label className="text-xs font-bold text-slate-500">
-                  {bn ? "ইনটেক" : "Intake"}
-                  <select
-                    name="intake"
-                    defaultValue={filters.intake ?? ""}
-                    className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800"
-                  >
-                    <option value="">{bn ? "সব ইনটেক" : "All intakes"}</option>
-                    {chinaIntakes.map((intake) => (
-                      <option key={intake} value={intake}>
-                        {intake}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="text-xs font-bold text-slate-500">
-                  {bn
-                    ? "বিশ্ববিদ্যালয় / শিক্ষাপ্রতিষ্ঠান"
-                    : "University / institution"}
-                  <select
-                    name="university"
-                    defaultValue={filters.university ?? ""}
-                    className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800"
-                  >
-                    <option value="">
-                      {bn ? "সব প্রতিষ্ঠান" : "All institutions"}
-                    </option>
-                    {filters.university &&
-                      !chinaInstitutions.some(
-                        (u) => u.id === filters.university,
-                      ) && (
-                        <option value={filters.university}>
-                          {filters.university}
-                        </option>
-                      )}
-                    {chinaInstitutions.map((u) => (
-                      <option key={u.id} value={u.id}>
-                        {u.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="text-xs font-bold text-slate-500">
-                  {bn ? "পড়ার মাধ্যম" : "Teaching language"}
-                  <select
-                    name="language"
-                    defaultValue={filters.language ?? ""}
-                    className="focus-ring mt-1.5 min-h-11 w-full rounded-xl border border-stone-200 px-3 text-sm font-normal text-slate-800"
-                  >
-                    <option value="">
-                      {bn ? "সব মাধ্যম" : "All languages"}
-                    </option>
-                    <option value="English">English</option>
-                    <option value="Chinese">Chinese</option>
-                  </select>
-                </label>
-                <label className="flex min-h-11 items-center gap-3 text-sm text-slate-700">
-                  <input
-                    type="checkbox"
-                    name="scholarship"
-                    value="1"
-                    defaultChecked={filters.scholarship ?? false}
-                    className="focus-ring size-4 accent-orange-600"
-                  />
-                  {bn
-                    ? "স্কলারশিপের সুযোগসহ অফার"
-                    : "Offers with scholarship opportunities"}
-                </label>
-              </>
+          <ProgramFilters
+            key={JSON.stringify(filters)}
+            locale={locale}
+            filters={filters}
+            countries={publicProgramCountries}
+            levels={publicProgramLevels}
+            chinaLevels={chinaLevels}
+            intakes={chinaIntakes}
+            universities={chinaInstitutions}
+          />
+          <div id="program-results" className={styles.results}>
+            {chips.length ? (
+              <div className={styles.applied}>
+                <span className={styles.appliedLabel}>
+                  {bn ? "আপনার পছন্দ" : "Your filters"}
+                </span>
+                <div className={styles.chips}>
+                  {chips.map(({ key, label }) => (
+                    <Link
+                      key={key}
+                      href={
+                        publicProgramsHref(locale, {
+                          ...removeProgramFilter(filters, key),
+                          ids: selectedIds,
+                        }) + "#program-results"
+                      }
+                      className={styles.chip}
+                      aria-label={
+                        (bn ? "ফিল্টার সরান: " : "Remove filter: ") + label
+                      }
+                    >
+                      {label}
+                      <X size={14} aria-hidden="true" />
+                    </Link>
+                  ))}
+                  <Link href={clearHref} className={styles.clearAll}>
+                    {bn ? "সব ফিল্টার সরান" : "Clear all"}
+                  </Link>
+                </div>
+              </div>
             ) : null}
-            <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-3">
-              <button
-                type="submit"
-                className="btn-sunset focus-ring inline-flex min-h-11 flex-1 items-center justify-center rounded-full px-5 text-sm font-bold text-white shadow-md hover:scale-[1.02] active:scale-[0.98]"
-              >
-                {dict.programs.applyFilters}
-              </button>
-              {hasFilters ? (
-                <Link
-                  href={publicProgramsHref(locale, { ids: selectedIds })}
-                  className="btn-secondary-glass focus-ring inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm font-bold text-slate-800 shadow-xs hover:border-orange-300 hover:bg-white hover:text-orange-600"
-                >
-                  {dict.programs.clearFilters}
-                </Link>
-              ) : null}
-            </div>
-          </form>
-
-          <p className="mt-6 text-sm text-slate-500">
-            {list.total} {dict.programs.resultCount}
-            {filters.university && <span> · {filters.university}</span>}
-          </p>
-
-          {list.rows.length === 0 ? (
-            <div className="mt-8 rounded-2xl border border-dashed border-stone-300 bg-white px-5 py-10 text-center text-slate-500">
-              <p>{dict.programs.empty}</p>
-              <Link
-                href={localizedHref(
-                  china ? "/programs?country=china" : "/programs",
-                  locale,
-                )}
-                className="focus-ring mt-4 inline-flex min-h-11 items-center font-semibold text-orange-700"
-              >
+            <div className={styles.resultsHeading}>
+              <div>
+                <h2>
+                  {number(list.total)}{" "}
+                  {bn
+                    ? "টি কোর্সের অফার"
+                    : list.total === 1
+                      ? "course option"
+                      : "course options"}
+                </h2>
+                <p>
+                  {list.total
+                    ? bn
+                      ? number(list.total) +
+                        "টির মধ্যে " +
+                        number(start) +
+                        "–" +
+                        number(end) +
+                        "টি দেখছেন"
+                      : "Showing " +
+                        number(start) +
+                        "–" +
+                        number(end) +
+                        " of " +
+                        number(list.total)
+                    : bn
+                      ? "অন্য পছন্দ দিয়ে আবার দেখুন।"
+                      : "Try a different combination."}
+                </p>
+              </div>
+              <p className={styles.compareHint}>
                 {bn
-                  ? "ফিল্টার সরিয়ে আবার দেখুন"
-                  : "Reset filters and explore offers"}{" "}
-                →
-              </Link>
-            </div>
-          ) : (
-            <ul className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {list.rows.map((program) => (
-                <li key={program.id}>
-                  <ProgramCard program={program} locale={locale} dict={dict} />
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {list.pageCount > 1 ? (
-            <nav
-              className="mt-10 flex items-center justify-between gap-3"
-              aria-label={dict.programs.pageLabel}
-            >
-              {list.page > 1 ? (
-                <Link
-                  href={publicProgramsHref(locale, {
-                    ...filters,
-                    page: list.page - 1,
-                    ids: selectedIds,
-                  })}
-                  className="btn-secondary-glass focus-ring inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold text-slate-800 shadow-xs hover:border-orange-300 hover:bg-white hover:text-orange-600"
-                >
-                  {dict.programs.previous}
-                </Link>
-              ) : (
-                <span />
-              )}
-              <p className="text-sm text-slate-500">
-                {dict.programs.pageLabel} {list.page} / {list.pageCount}
+                  ? "সর্বোচ্চ ৩টি কোর্স পাশাপাশি তুলনা করুন।"
+                  : "Select up to 3 to compare side by side."}
               </p>
-              {list.page < list.pageCount ? (
+            </div>
+            {china ? (
+              <div className={styles.resultsNotes}>
+                <p>
+                  {bn
+                    ? "একই বিশ্ববিদ্যালয়ে একাধিক কোর্স বা ভর্তির পথ থাকতে পারে।"
+                    : "A university can have more than one course or entry route."}
+                </p>
+                <details className={styles.feeGuide}>
+                  <summary>
+                    <Info size={15} aria-hidden="true" />
+                    {bn ? "ফি কীভাবে পড়বেন" : "How to read the fees"}
+                  </summary>
+                  <p>
+                    {bn
+                      ? "CNY ও RMB চীনা মুদ্রার নাম। ‘Semester’ এক টার্মের ফি, ‘year’ এক বছরের। প্যাকেজে কী আছে তা দেখুন। স্কলারশিপের পরের ফি পেতে লিখিত অ্যাওয়ার্ড লাগবে। অনিশ্চিত ফি কোর্সের পেজে নিশ্চিত করুন।"
+                      : "CNY and RMB both mean Chinese yuan. A semester fee covers one term; a yearly fee covers one year. Check what each package includes. After-scholarship prices depend on a written award. Open the course for fees that still need confirmation."}
+                  </p>
+                </details>
+              </div>
+            ) : null}
+            {list.rows.length ? (
+              <ul className={styles.cards}>
+                {list.rows.map((program) => (
+                  <li key={program.id}>
+                    <ProgramCard
+                      program={program}
+                      locale={locale}
+                      dict={dict}
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className={styles.empty}>
+                <SearchX size={35} aria-hidden="true" />
+                <h3>
+                  {bn
+                    ? "এই পছন্দে কোনো কোর্স পাওয়া যায়নি।"
+                    : "No courses match those filters."}
+                </h3>
+                <p>
+                  {bn
+                    ? "একটি ফিল্টার সরিয়ে দেখুন, অথবা অন্য বিষয় বা শুরুর তারিখ বেছে নিন।"
+                    : "Remove a filter, try another subject or choose a different start date."}
+                </p>
                 <Link
+                  className={styles.submit}
                   href={publicProgramsHref(locale, {
-                    ...filters,
-                    page: list.page + 1,
+                    country: filters.country,
                     ids: selectedIds,
                   })}
-                  className="btn-secondary-glass focus-ring inline-flex min-h-11 items-center rounded-full px-5 text-sm font-bold text-slate-800 shadow-xs hover:border-orange-300 hover:bg-white hover:text-orange-600"
                 >
-                  {dict.programs.next}
+                  {bn
+                    ? "এই দেশের সব কোর্স দেখুন"
+                    : filters.country
+                      ? "See all courses in this country"
+                      : "See all courses"}
                 </Link>
-              ) : (
-                <span />
-              )}
-            </nav>
-          ) : null}
-
-          <ProgramCompareBar locale={locale} />
+                <Link
+                  href={href(
+                    "/consultation" + (china ? "?destination=china" : ""),
+                  )}
+                  className={styles.helpLink}
+                >
+                  {bn ? "কাউন্সেলরের সাহায্য নিন" : "Ask a counsellor for help"}
+                </Link>
+              </div>
+            )}
+            {list.pageCount > 1 ? (
+              <nav
+                className={styles.pagination}
+                aria-label={bn ? "কোর্সের পাতাগুলো" : "Program pages"}
+              >
+                {list.page > 1 ? (
+                  <Link
+                    href={
+                      publicProgramsHref(locale, {
+                        ...filters,
+                        page: list.page - 1,
+                        ids: selectedIds,
+                      }) + "#program-results"
+                    }
+                  >
+                    {bn ? "আগের পাতা" : "Previous"}
+                  </Link>
+                ) : (
+                  <span />
+                )}
+                <p>
+                  {bn ? "পাতা " : "Page "}
+                  {number(list.page)} {bn ? " / " : "of "}
+                  {number(list.pageCount)}
+                </p>
+                {list.page < list.pageCount ? (
+                  <Link
+                    href={
+                      publicProgramsHref(locale, {
+                        ...filters,
+                        page: list.page + 1,
+                        ids: selectedIds,
+                      }) + "#program-results"
+                    }
+                  >
+                    {bn ? "পরের পাতা" : "Next"}
+                  </Link>
+                ) : (
+                  <span />
+                )}
+              </nav>
+            ) : null}
+          </div>
+          {list.rows.some((program) => chinaOffers.some((offer) => offer.id === program.id && offer.universityId === "xiamen-university")) ? <Link className={styles.photoCredits} href={href("/destinations/china#china-photo-credits")}>{bn ? "ক্যাম্পাস ছবির কৃতিত্ব ও লাইসেন্স" : "Campus photography credits and license"}</Link> : null}
+        <ProgramCompareBar locale={locale} />
         </ProgramCompareProvider>
+        <aside className={styles.help}>
+          <MessageCircle size={25} aria-hidden="true" />
+          <div>
+            <h2>
+              {bn
+                ? "কোন কোর্স দিয়ে শুরু করবেন বুঝতে পারছেন না?"
+                : "Not sure which course to start with?"}
+            </h2>
+            <p>
+              {bn
+                ? "আপনার ফলাফল আর বাজেট জানান। আমরা কয়েকটি উপযুক্ত বিকল্প দিয়ে শুরু করতে সাহায্য করব। প্রোফাইল মূল্যায়ন ফ্রি।"
+                : "Tell us your results and budget. We’ll help you put together a few options. Your profile assessment is free."}
+            </p>
+          </div>
+          <Link
+            href={href("/consultation" + (china ? "?destination=china" : ""))}
+          >
+            {bn ? "কাউন্সেলরের সঙ্গে কথা বলুন" : "Talk to a counsellor"}
+          </Link>
+        </aside>
       </PageShell>
     </section>
   );

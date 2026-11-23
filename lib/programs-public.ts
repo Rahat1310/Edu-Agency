@@ -2,6 +2,14 @@ import { and, asc, eq, ilike, inArray, ne, or, sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
 import { createHash } from "node:crypto";
 import {
+  filterMalaysiaProgrammes,
+  getMalaysiaProgramme,
+  malaysiaCatalogue,
+  malaysiaProgrammeCard,
+  malaysiaProgrammes,
+  retiredMalaysiaIds,
+} from "@/lib/malaysia";
+import {
   chinaOffers,
   chinaInstitutions,
   chinaOfferProgram,
@@ -30,7 +38,7 @@ export const PROGRAMS_REVALIDATE_SECONDS = 3600;
 // Next's persistent data cache does not track changes to imported JSON.
 // Include the catalogue version in every result that depends on these offers.
 const CHINA_CATALOG_VERSION = createHash("sha256")
-  .update(JSON.stringify(chinaOffers))
+  .update(JSON.stringify([chinaOffers, malaysiaCatalogue, retiredMalaysiaIds]))
   .digest("hex");
 
 const countryAliases: Record<string, ProgramCountry> = {
@@ -62,6 +70,8 @@ export type PublicProgramCard = {
   tuitionCurrency: string;
   intakeMonths: string[] | null;
   tuitionDisplay?: string;
+  catalogueLevel?: string;
+  comparisonFeeDisplay?: string;
 };
 
 export type PublicProgramDetail = PublicProgramCard & {
@@ -128,7 +138,13 @@ function likePattern(value: string): string {
 }
 
 function publishedWhere(filters: PublicProgramFilters) {
-  const conditions = [eq(programs.isPublished, true)];
+  const conditions = [
+    eq(programs.isPublished, true),
+    sql`${programs.id} not in (${sql.join(
+      retiredMalaysiaIds.map((id) => sql`${id}::uuid`),
+      sql`, `,
+    )})`,
+  ];
 
   if (filters.country) {
     conditions.push(eq(programs.country, filters.country));
@@ -170,7 +186,10 @@ const cardColumns = {
 async function queryPublishedProgramPage(
   filters: PublicProgramFilters,
 ): Promise<PublicProgramList> {
-  const curated = filterChinaOffers(filters).map(chinaOfferProgram);
+  const curated = [
+    ...filterChinaOffers(filters).map(chinaOfferProgram),
+    ...filterMalaysiaProgrammes(filters).map(malaysiaProgrammeCard),
+  ];
   const curatedOnly =
     filters.country === "china" || hasChinaOnlyFilters(filters);
   const where = and(publishedWhere(filters), ne(programs.country, "china"));
@@ -247,6 +266,13 @@ async function queryPublishedProgramDetail(
 ): Promise<PublicProgramDetail | null> {
   const offer = getChinaOffer(id);
   if (offer) return chinaOfferProgram(offer);
+  const malaysia = getMalaysiaProgramme(id);
+  if (malaysia) return malaysiaProgrammeCard(malaysia);
+  if (retiredMalaysiaIds.includes(id)) return null;
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+  )
+    return null;
   const [row] = await db
     .select({
       ...cardColumns,
@@ -284,9 +310,23 @@ async function queryPublishedProgramsByUniversity(
     chinaOffers.some((offer) => offer.university === universityName)
   )
     return curated.slice(0, limit).map(chinaOfferProgram);
+  const malaysia = malaysiaProgrammes.filter(
+    (p) =>
+      malaysiaCatalogue.institutions.find((i) => i.id === p.institutionId)
+        ?.name === universityName,
+  );
+  if (malaysia.length)
+    return malaysia
+      .filter((p) => p.id !== excludeId)
+      .slice(0, limit)
+      .map(malaysiaProgrammeCard);
   const conditions = [
     eq(programs.universityName, universityName),
     eq(programs.isPublished, true),
+    sql`${programs.id} not in (${sql.join(
+      retiredMalaysiaIds.map((id) => sql`${id}::uuid`),
+      sql`, `,
+    )})`,
   ];
 
   if (excludeId) {
@@ -329,7 +369,12 @@ async function queryPublishedProgramsByIds(
     return [];
   }
 
-  const legacyIds = ids.filter((id) => !getChinaOffer(id));
+  const legacyIds = ids.filter(
+    (id) =>
+      !getChinaOffer(id) &&
+      !getMalaysiaProgramme(id) &&
+      !retiredMalaysiaIds.includes(id),
+  );
   const rows = legacyIds.length
     ? await db
         .select({
@@ -349,6 +394,8 @@ async function queryPublishedProgramsByIds(
   for (const id of ids) {
     const offer = getChinaOffer(id);
     if (offer) byId.set(id, chinaOfferProgram(offer));
+    const malaysia = getMalaysiaProgramme(id);
+    if (malaysia) byId.set(id, malaysiaProgrammeCard(malaysia));
   }
   const ordered: PublicProgramDetail[] = [];
 
@@ -387,8 +434,11 @@ export function listPublishedProgramIds() {
       // use only the canonical catalogue.
       return [
         ...new Set([
-          ...rows.map((row) => row.id),
+          ...rows
+            .map((row) => row.id)
+            .filter((id) => !retiredMalaysiaIds.includes(id)),
           ...chinaOffers.map((offer) => offer.id),
+          ...malaysiaProgrammes.map((p) => p.id),
         ]),
       ];
     },
@@ -418,7 +468,11 @@ export function listPublishedProgramsForSitemap() {
           and(eq(programs.isPublished, true), ne(programs.country, "china")),
         );
       return [
-        ...rows,
+        ...rows.filter((row) => !retiredMalaysiaIds.includes(row.id)),
+        ...malaysiaProgrammes.map((p) => ({
+          id: p.id,
+          updatedAt: new Date(`${malaysiaCatalogue.edition}T00:00:00Z`),
+        })),
         ...chinaOffers.map((offer) => ({
           id: offer.id,
           updatedAt: new Date(`${offer.reviewedOn ?? "2026-11-10"}T00:00:00Z`),

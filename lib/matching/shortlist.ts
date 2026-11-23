@@ -1,4 +1,5 @@
 import "server-only";
+import { retiredMalaysiaIds } from "@/lib/malaysia";
 
 import { and, asc, eq, inArray, or, sql } from "drizzle-orm";
 
@@ -57,6 +58,10 @@ export async function loadMatchingShortlist(
   const ceiling = budgetCeilingBdt(profile.budget);
   const conditions = [
     eq(programs.isPublished, true),
+    sql`${programs.id} not in (${sql.join(
+      retiredMalaysiaIds.map((id) => sql`${id}::uuid`),
+      sql`, `,
+    )})`,
     inArray(programs.country, profile.destinations),
     inArray(programs.level, [...levels]),
   ];

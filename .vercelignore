@@ -1,0 +1,4 @@
+imports/
+.git/
+node_modules/
+.next-dev/

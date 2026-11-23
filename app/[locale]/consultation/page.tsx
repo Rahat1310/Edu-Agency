@@ -2,6 +2,7 @@ import { AssessmentForm } from "@/components/consultation/assessment-form";
 import { resolveLocale } from "@/lib/i18n/resolve-locale";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 import { chinaAssessmentIntake, getChinaOffer } from "@/lib/china-2027";
+import { getMalaysiaProgramme, getMalaysiaInstitution } from "@/lib/malaysia";
 type Props = {
   params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -23,6 +24,10 @@ export default async function Consultation({ params, searchParams }: Props) {
       ? getChinaOffer(query.programId)
       : undefined;
   const china = query.destination === "china" || Boolean(offer);
+  const malaysia =
+    typeof query.programId === "string"
+      ? getMalaysiaProgramme(query.programId)
+      : undefined;
   return (
     <main className="bg-slate-50 px-4 py-12 sm:py-20">
       <div className="mx-auto max-w-4xl">
@@ -37,7 +42,15 @@ export default async function Consultation({ params, searchParams }: Props) {
                     ? `Interested in ${offer.title} at ${offer.university}, ${offer.intake}.`
                     : "",
                 }
-              : undefined
+              : query.destination === "malaysia" || malaysia
+                ? {
+                    country: "Malaysia",
+                    intake: "",
+                    otherInformation: malaysia
+                      ? `Interested in ${malaysia.title} at ${getMalaysiaInstitution(malaysia.institutionId)?.name}. Please confirm current fees and intake availability.`
+                      : "",
+                  }
+                : undefined
           }
           introduction={
             <header className="mb-10 max-w-3xl">

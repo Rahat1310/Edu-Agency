@@ -42,7 +42,9 @@ export default async function ProgramComparePage({
   const raw = await searchParams;
   const ids = parseCompareIds(first(raw.ids));
   const programs = ids.length === 0 ? [] : await getPublishedProgramsByIds(ids);
-  const rates = programs.length > 0 ? await getBdtRates() : null;
+  const rates = programs.some((p) => !p.tuitionDisplay)
+    ? await getBdtRates()
+    : null;
 
   return (
     <ProgramCompareTable

@@ -754,7 +754,7 @@ export function ChinaDestinationPage({ locale }: { locale: Locale }) {
           </figure>
         </PageShell>
       </section>
-      <div className={styles.credits}>
+      <div id="china-photo-credits" className={styles.credits}>
         <PageShell>
           <details>
             <summary>{c.photoCredits}</summary>

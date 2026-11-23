@@ -2,6 +2,8 @@ import { MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { getChinaOffer } from "@/lib/china-2027";
 import { ChinaOfferDetail } from "@/components/marketing/china-offer-detail";
+import { getMalaysiaProgramme, getMalaysiaInstitution } from "@/lib/malaysia";
+import { MalaysiaProgrammeDetail } from "./malaysia-catalogue";
 
 import { PageShell } from "@/components/layout/page-shell";
 import { costCalculatorHref } from "@/lib/costs/href";
@@ -33,6 +35,15 @@ export function ProgramDetail({
   dict,
 }: ProgramDetailProps) {
   const chinaOffer = getChinaOffer(program.id);
+  const malaysia = getMalaysiaProgramme(program.id);
+  if (malaysia)
+    return (
+      <MalaysiaProgrammeDetail
+        programme={malaysia}
+        institution={getMalaysiaInstitution(malaysia.institutionId)!}
+        locale={locale}
+      />
+    );
   if (chinaOffer)
     return <ChinaOfferDetail offer={chinaOffer} locale={locale} />;
   const intake = program.intakeMonths?.filter(Boolean) ?? [];

@@ -1,3 +1,6 @@
+import malaysiaOverview from "@/lib/malaysia/overview.json";
+const malaysiaInstitutions = malaysiaOverview.institutions;
+const malaysiaProgrammes = malaysiaOverview.programmes;
 import type { DestinationSlug } from "@/lib/destinations";
 
 export type FeaturedUniversity = {
@@ -32,116 +35,7 @@ export type FeaturedUniversity = {
   programsHrefCountry: string;
 };
 
-export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
-  // =========================================================================
-  // MALAYSIA
-  // =========================================================================
-  {
-    id: "um",
-    name: "Universiti Malaya (UM)",
-    country: "malaysia",
-    countryLabel: { en: "Malaysia", bn: "মালয়েশিয়া" },
-    city: { en: "Kuala Lumpur", bn: "কুয়ালালামপুর" },
-    rankingBadge: { en: "QS #60 Global", bn: "কিউএস #৬০ বিশ্ব র‍্যাংক" },
-    has100PercentScholarship: false,
-    scholarshipInfo: {
-      en: "MIS & University Merit Grants",
-      bn: "এমআইএস ও বিশ্ববিদ্যালয় মেধা অনুদান",
-    },
-    popularMajors: {
-      en: ["Computer Science & AI", "Software Engineering", "Business Admin"],
-      bn: ["কম্পিউটার সায়েন্স ও এআই", "সফটওয়্যার ইঞ্জিনিয়ারিং", "বিবিএ"],
-    },
-    tuitionEst: { en: "~25,000 MYR/yr", bn: "~২৫,০০০ রিঙ্গিত/বছর" },
-    programsHrefCountry: "malaysia",
-  },
-  {
-    id: "upm",
-    name: "Universiti Putra Malaysia (UPM)",
-    country: "malaysia",
-    countryLabel: { en: "Malaysia", bn: "মালয়েশিয়া" },
-    city: { en: "Serdang, Selangor", bn: "সেরদাং, সেলাঙ্গর" },
-    rankingBadge: { en: "Top 150 Global", bn: "শীর্ষ ১৫০ বিশ্ব র‍্যাংক" },
-    has100PercentScholarship: false,
-    scholarshipInfo: {
-      en: "Faculty Merit Fee Reductions",
-      bn: "অনুষদভিত্তিক মেধা টিউশন ছাড়",
-    },
-    popularMajors: {
-      en: ["Information Technology", "Agricultural Science", "MBA"],
-      bn: ["ইনফরমেশন টেকনোলজি", "এগ্রিকালচারাল সায়েন্স", "এমবিএ"],
-    },
-    tuitionEst: { en: "~22,000 MYR/yr", bn: "~২২,০০০ রিঙ্গিত/বছর" },
-    programsHrefCountry: "malaysia",
-  },
-  {
-    id: "taylors",
-    name: "Taylor's University",
-    country: "malaysia",
-    countryLabel: { en: "Malaysia", bn: "মালয়েশিয়া" },
-    city: { en: "Subang Jaya", bn: "সুবাং জয়া" },
-    rankingBadge: {
-      en: "#1 Private in SE Asia",
-      bn: "#১ প্রাইভেট (দক্ষিণ-পূর্ব এশিয়া)",
-    },
-    has100PercentScholarship: false,
-    scholarshipInfo: {
-      en: "Merit & High-Achiever Scholarships",
-      bn: "মেধা ও উচ্চ ফলাফল ভিত্তিক বৃত্তি",
-    },
-    popularMajors: {
-      en: ["Hospitality & Tourism", "Business & Finance", "Computer Science"],
-      bn: ["হসপিটালিটি ও ট্যুরিজম", "বিজনেস ও ফিন্যান্স", "কম্পিউটার সায়েন্স"],
-    },
-    tuitionEst: { en: "~38,000 MYR/yr", bn: "~৩৮,০০০ রিঙ্গিত/বছর" },
-    programsHrefCountry: "malaysia",
-  },
-  {
-    id: "apu",
-    name: "Asia Pacific University (APU)",
-    country: "malaysia",
-    countryLabel: { en: "Malaysia", bn: "মালয়েশিয়া" },
-    city: { en: "Technology Park, KL", bn: "টেকনোলজি পার্ক, কুয়ালালামপুর" },
-    rankingBadge: { en: "QS 5-Stars Plus", bn: "কিউএস ৫-স্টার প্লাস" },
-    has100PercentScholarship: false,
-    scholarshipInfo: {
-      en: "Digital Tech Excellence Awards",
-      bn: "ডিজিটাল টেক এক্সিলেন্স বৃত্তি",
-    },
-    popularMajors: {
-      en: ["Cybersecurity", "Data Analytics", "Software Engineering"],
-      bn: [
-        "সাইবার সিকিউরিটি",
-        "ডাটা অ্যানালিটিক্স",
-        "সফটওয়্যার ইঞ্জিনিয়ারিং",
-      ],
-    },
-    tuitionEst: { en: "~32,000 MYR/yr", bn: "~৩২,০০০ রিঙ্গিত/বছর" },
-    programsHrefCountry: "malaysia",
-  },
-  {
-    id: "sunway",
-    name: "Sunway University",
-    country: "malaysia",
-    countryLabel: { en: "Malaysia", bn: "মালয়েশিয়া" },
-    city: { en: "Bandar Sunway", bn: "বান্দার সানওয়ে" },
-    rankingBadge: {
-      en: "Dual Lancaster (UK) Degree",
-      bn: "ল্যাঙ্কাস্টার (যুক্তরাজ্য) দ্বৈত ডিগ্রি",
-    },
-    has100PercentScholarship: false,
-    scholarshipInfo: {
-      en: "Jeffrey Cheah Foundation Scholarships",
-      bn: "জেফরি চিয়া ফাউন্ডেশন মেধা বৃত্তি",
-    },
-    popularMajors: {
-      en: ["Accounting & Finance", "Computer Science", "Biomedicine"],
-      bn: ["অ্যাকাউন্টিং ও ফিন্যান্স", "কম্পিউটার সায়েন্স", "বায়োমেডিসিন"],
-    },
-    tuitionEst: { en: "~35,000 MYR/yr", bn: "~৩৫,০০০ রিঙ্গিত/বছর" },
-    programsHrefCountry: "malaysia",
-  },
-
+const OTHER_FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
   // =========================================================================
   // CHINA
   // =========================================================================
@@ -412,4 +306,42 @@ export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
     tuitionEst: { en: "~2.8 - 4.0 Lakh INR/yr", bn: "~২.৮ - ৪.০ লাখ রুপি/বছর" },
     programsHrefCountry: "india",
   },
+];
+
+export const FEATURED_UNIVERSITIES: FeaturedUniversity[] = [
+  ...malaysiaInstitutions
+    .filter((i) => i.kind === "university" || i.kind === "group")
+    .slice(0, 5)
+    .map((i): FeaturedUniversity => ({
+      id: i.id,
+      name: i.name,
+      country: "malaysia",
+      countryLabel: { en: "Malaysia", bn: "মালয়েশিয়া" },
+      city: { en: "See campus schedules", bn: "ক্যাম্পাসের তথ্য দেখুন" },
+      rankingBadge: {
+        en: "Published fee schedules",
+        bn: "প্রকাশিত ফি সময়সূচি",
+      },
+      has100PercentScholarship: false,
+      scholarshipInfo: {
+        en: "See schedule eligibility",
+        bn: "সময়সূচির যোগ্যতার শর্ত দেখুন",
+      },
+      popularMajors: {
+        en: malaysiaProgrammes
+          .filter((p) => p.institutionId === i.id)
+          .slice(0, 3)
+          .map((p) => p.title),
+        bn: malaysiaProgrammes
+          .filter((p) => p.institutionId === i.id)
+          .slice(0, 3)
+          .map((p) => p.title),
+      },
+      tuitionEst: {
+        en: "See fee basis and period",
+        bn: "ফি কোন ভিত্তি ও মেয়াদের দেখুন",
+      },
+      programsHrefCountry: "malaysia",
+    })),
+  ...OTHER_FEATURED_UNIVERSITIES,
 ];

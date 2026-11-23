@@ -23,6 +23,7 @@ import {
 } from "@/lib/programs-compare";
 import type { PublicProgramFilters } from "@/lib/programs-public";
 import { cn } from "@/lib/utils";
+import styles from "./programs-directory.module.css";
 
 export type ProgramCompareCopy = Dictionary["programs"]["compare"];
 
@@ -30,6 +31,7 @@ type CompareContextValue = {
   ids: string[];
   blocked: boolean;
   toggle: (id: string) => void;
+  clear: () => void;
   copy: ProgramCompareCopy;
 };
 
@@ -82,9 +84,15 @@ export function ProgramCompareProvider({
     [ids, replaceSelection],
   );
 
+  const clear = useCallback(() => {
+    setBlocked(false);
+    setIds([]);
+    replaceSelection([]);
+  }, [replaceSelection]);
+
   const value = useMemo(
-    () => ({ ids, blocked, toggle, copy }),
-    [ids, blocked, toggle, copy],
+    () => ({ ids, blocked, toggle, clear, copy }),
+    [ids, blocked, toggle, clear, copy],
   );
 
   return (
@@ -110,14 +118,11 @@ export function ProgramCompareCheckbox({
   const atCap = compare.ids.length >= COMPARE_PROGRAM_LIMIT && !checked;
 
   return (
-    <label
-      htmlFor={inputId}
-      className="inline-flex cursor-pointer items-center gap-2 text-xs font-bold text-[var(--brand-navy)]"
-    >
+    <label htmlFor={inputId} className={styles.compareCheckbox}>
       <input
         id={inputId}
         type="checkbox"
-        className="focus-ring size-4 rounded border-[var(--input)]"
+        className="focus-ring"
         checked={checked}
         aria-label={`${compare.copy.checkbox}: ${programName}`}
         aria-describedby={compare.blocked ? "program-compare-cap" : undefined}
@@ -155,32 +160,44 @@ export function ProgramCompareBar({ locale }: { locale: Locale }) {
     .replace("{max}", String(COMPARE_PROGRAM_LIMIT));
 
   return (
-    <div className="sticky bottom-4 z-30 mt-10 mr-16">
-      <div className="rounded-2xl border border-[var(--border)] bg-white px-4 py-3 shadow-[0_16px_40px_rgb(18_53_91_/_0.14)]">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm font-bold text-[var(--brand-navy)]">
-            {compare.copy.barLabel}
-            <span className="mt-0.5 block font-normal text-[var(--muted-foreground)]">
-              {selectedLabel}
-            </span>
-          </p>
-          <Link
-            href={href}
-            className="focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--brand-navy)] px-5 text-sm font-bold text-white hover:bg-[var(--brand-blue)]"
-          >
-            {compare.copy.open}
-          </Link>
+    <div className={styles.compareBar}>
+      <div className={styles.compareBarRow}>
+        <p aria-live="polite">
+          {selectedLabel}
+          <span>
+            {count < 2
+              ? locale === "bn"
+                ? "তুলনা করতে আরেকটি বেছে নিন।"
+                : "Pick one more to compare."
+              : locale === "bn"
+                ? "পাশাপাশি দেখে সিদ্ধান্ত নিন।"
+                : "Check your choices side by side."}
+          </span>
+        </p>
+        <div className={styles.compareActions}>
+          <button type="button" onClick={compare.clear}>
+            {locale === "bn" ? "পছন্দ সরান" : "Clear selection"}
+          </button>
+          {count >= 2 ? (
+            <Link href={href}>
+              {locale === "bn" ? "কোর্স তুলনা করুন" : "Compare courses"}
+            </Link>
+          ) : (
+            <button type="button" disabled>
+              {locale === "bn" ? "কোর্স তুলনা করুন" : "Compare courses"}
+            </button>
+          )}
         </div>
-        {compare.blocked ? (
-          <p
-            id="program-compare-cap"
-            role="alert"
-            className="mt-3 rounded-xl border border-[var(--destructive)]/30 bg-[var(--destructive)]/8 px-3 py-2 text-sm text-[var(--destructive)]"
-          >
-            {compare.copy.cap}
-          </p>
-        ) : null}
       </div>
+      {compare.blocked ? (
+        <p
+          id="program-compare-cap"
+          role="alert"
+          className="mt-3 rounded-xl border border-[var(--destructive)]/30 bg-[var(--destructive)]/8 px-3 py-2 text-sm text-[var(--destructive)]"
+        >
+          {compare.copy.cap}
+        </p>
+      ) : null}
     </div>
   );
 }

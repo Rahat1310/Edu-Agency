@@ -4,6 +4,7 @@ import { DESTINATION_SLUGS } from "@/lib/destinations";
 import { LOCALES, type Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import { absoluteUrl } from "@/lib/site-url";
+import { malaysiaInstitutions } from "@/lib/malaysia";
 
 export const revalidate = 3600;
 
@@ -21,6 +22,11 @@ const STATIC_PAGES = [
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
   ...DESTINATION_SLUGS.map((slug) => ({
     path: `/destinations/${slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  })),
+  ...malaysiaInstitutions.map((i) => ({
+    path: `/destinations/malaysia/universities/${i.id}`,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   })),

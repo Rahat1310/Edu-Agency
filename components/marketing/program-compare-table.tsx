@@ -18,6 +18,7 @@ import {
   programCountryLabels,
   programLevelLabels,
 } from "@/lib/programs-labels";
+import { malaysiaLevelLabel } from "@/lib/malaysia/copy";
 import type { PublicProgramDetail } from "@/lib/programs-public";
 function isTuitionCurrency(value: string): value is TuitionCurrency {
   return (tuitionCurrencies as readonly string[]).includes(value);
@@ -133,7 +134,11 @@ function CompareTable({
     {
       key: "level",
       label: dict.programs.levelLabel,
-      values: programs.map((program) => programLevelLabels[program.level]),
+      values: programs.map((program) =>
+        program.catalogueLevel
+          ? malaysiaLevelLabel(program.catalogueLevel, locale)
+          : programLevelLabels[program.level],
+      ),
     },
     {
       key: "field",
@@ -142,11 +147,15 @@ function CompareTable({
     },
     {
       key: "tuition",
-      label: dict.programs.tuitionLabel,
+      label: programs.some((p) => p.country === "malaysia")
+        ? locale === "bn"
+          ? "প্রকাশিত ফি ও ভিত্তি"
+          : "Published fees & basis"
+        : dict.programs.tuitionLabel,
       values: programs.map((program) =>
         program.tuitionDisplay ? (
           <span key={program.id} className="font-semibold">
-            {program.tuitionDisplay}
+            {program.comparisonFeeDisplay ?? program.tuitionDisplay}
           </span>
         ) : (
           <TuitionCell
@@ -193,7 +202,7 @@ function CompareTable({
           {copy.missing}
         </p>
       ) : null}
-      {!rates ? (
+      {!rates && programs.some((p) => !p.tuitionDisplay) ? (
         <MarketingErrorState
           className="mt-6"
           title={copy.ratesErrorTitle}
@@ -279,9 +288,11 @@ function CompareTable({
           </tbody>
         </table>
       </div>
-      <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
-        {copy.rateNote}
-      </p>
+      {programs.some((p) => !p.tuitionDisplay) && (
+        <p className="mt-4 text-xs leading-5 text-[var(--muted-foreground)]">
+          {copy.rateNote}
+        </p>
+      )}
     </>
   );
 }

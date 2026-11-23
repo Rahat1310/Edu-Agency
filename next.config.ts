@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
       ],
     };
   },
+  outputFileTracingExcludes: { "*": ["./imports/**/*"] },
   serverExternalPackages: [
     "@aws-sdk/client-s3",
     "@aws-sdk/s3-request-presigner",

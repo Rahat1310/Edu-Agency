@@ -1,0 +1,177 @@
+[
+  {
+    "id": "98a3f1a0-4168-48b6-8db8-d0036232108c",
+    "universityName": "Universiti Putra Malaysia (UPM)",
+    "field": "Bachelor of Mechanical Engineering",
+    "successor": null,
+    "fingerprint": "2d8fc59c45a4f4180b706389ee01d133b4793ba9757fa648b0d10c250e8401d1"
+  },
+  {
+    "id": "e8f625fb-163f-487e-99f5-c16d711d3ea7",
+    "universityName": "Universiti Malaya (UM)",
+    "field": "Bachelor of Computer Science (Data Science & AI)",
+    "successor": null,
+    "fingerprint": "ae1dacbca24769b8f58f2a124a7cd48f9a04ca5ab861b84a47dbf3bb400764c7"
+  },
+  {
+    "id": "a2cc6a3b-1034-463d-a33c-f58b708f36b8",
+    "universityName": "Universiti Malaya (UM)",
+    "field": "Bachelor of Software Engineering",
+    "successor": null,
+    "fingerprint": "9e2c7f5d9a933b776e93c0bca9df95b310a1774707f2d53b345fd0abf785058e"
+  },
+  {
+    "id": "f736a38a-29f3-4cc5-b1ed-18b05c8dbc17",
+    "universityName": "Universiti Malaya (UM)",
+    "field": "Bachelor of Electrical & Electronic Engineering (EEE)",
+    "successor": null,
+    "fingerprint": "79066d0ba981a1c972c54a258b44628a6a8002f7997a8b8471c10c5283f2d407"
+  },
+  {
+    "id": "f6b9f7ac-4581-4b62-a671-93f0f84f6a80",
+    "universityName": "Universiti Malaya (UM)",
+    "field": "Bachelor of Business Administration (BBA)",
+    "successor": null,
+    "fingerprint": "4715e1ad99ce16e6a6d6992ec817c94b7683bc9a9b9b242496955c8e2b46b90d"
+  },
+  {
+    "id": "c12938ac-65f9-4fee-ab63-88f1a6b7fbe0",
+    "universityName": "Universiti Malaya (UM)",
+    "field": "Bachelor of Economics",
+    "successor": null,
+    "fingerprint": "c1b6372caf5cce148563d1a85b15baba8ed57df59f547fd70adc5f0c957c1efa"
+  },
+  {
+    "id": "bf607935-0639-49a5-b540-35bfb80e4e4c",
+    "universityName": "Universiti Malaya (UM)",
+    "field": "Master of Business Administration (MBA)",
+    "successor": null,
+    "fingerprint": "09ea4eb7d4dbdfac16eb14d343d06e6a500ae1bc586013a6470f4bd04fd79ddb"
+  },
+  {
+    "id": "52eed6cf-c6c7-4913-9263-a6c6cf3ef710",
+    "universityName": "Universiti Putra Malaysia (UPM)",
+    "field": "Bachelor of Science in Biotechnology & Food Technology",
+    "successor": null,
+    "fingerprint": "9ded3ed584e0c4e55888df8b6269c2e1a0d0e160052f42b4b6df1ba005208a06"
+  },
+  {
+    "id": "c71de15a-295c-4941-9207-734e161da186",
+    "universityName": "Universiti Putra Malaysia (UPM)",
+    "field": "Bachelor of Computer Science (Software Engineering)",
+    "successor": null,
+    "fingerprint": "26f325e40e3103e21292dca6887c89429628d31c03a52e2b1cb6ca89a6541316"
+  },
+  {
+    "id": "5bb306ba-abc7-4255-9223-8bb1cd5eda08",
+    "universityName": "Universiti Sains Malaysia (USM)",
+    "field": "Bachelor of Pharmacy (Hons)",
+    "successor": null,
+    "fingerprint": "f795af305397909315b4cdcc85eb944e3575eb20211272944de8210635b9da74"
+  },
+  {
+    "id": "984825e5-5f05-43b0-9760-3613879a6240",
+    "universityName": "Universiti Sains Malaysia (USM)",
+    "field": "Bachelor of Computer Science",
+    "successor": null,
+    "fingerprint": "dcf6476d47311807bcfdad94f4ffae6717d86402afe5a0cc3e845bddd06161e5"
+  },
+  {
+    "id": "00c89672-5c10-4576-aeab-398c4a90b103",
+    "universityName": "Universiti Teknologi Malaysia (UTM)",
+    "field": "Bachelor of Engineering (Electrical & Electronic)",
+    "successor": null,
+    "fingerprint": "c7a7edde69c8876dcb31359a05f6ac5e0c7c4e580a13c915cdc0e679ad9ad6f5"
+  },
+  {
+    "id": "c5d54545-897f-42bf-912b-905ddd4b8af5",
+    "universityName": "Universiti Teknologi Malaysia (UTM)",
+    "field": "Bachelor of Civil Engineering",
+    "successor": null,
+    "fingerprint": "dd18bd3c07ddc004c4c938aee3eceb0fde0e3ff293368580fdd7c935d71639e5"
+  },
+  {
+    "id": "edb33ec1-2db1-47b8-b345-b69e8a9f8842",
+    "universityName": "Universiti Teknologi Malaysia (UTM)",
+    "field": "Bachelor of Computer Science (Software Engineering)",
+    "successor": null,
+    "fingerprint": "7627de2d8fd37bd9f18551c3aef0a6a28f49d6b6a6849138ea058832a81089de"
+  },
+  {
+    "id": "645e2754-b987-46b8-83d0-c7a020df2fe9",
+    "universityName": "Asia Pacific University (APU)",
+    "field": "BSc (Hons) in Computer Science (Cybersecurity)",
+    "successor": null,
+    "fingerprint": "73d6fac2b93c2d1cf44213b03870efaf5f8b4b0f8c5431b99cf2abd62e94b9ff"
+  },
+  {
+    "id": "0148f6e0-c427-47d1-ae7a-241b317e75f7",
+    "universityName": "Asia Pacific University (APU)",
+    "field": "BSc (Hons) in Artificial Intelligence",
+    "successor": null,
+    "fingerprint": "8cafab8b9721de3132c1c6acbf2600243300a5a1c2347ce39242691e4ebe9b16"
+  },
+  {
+    "id": "faf7ea43-e2c7-46c3-82ab-ee3d0c4f773e",
+    "universityName": "Asia Pacific University (APU)",
+    "field": "Bachelor of Business Management (FinTech & E-Business)",
+    "successor": null,
+    "fingerprint": "afc56c09dcbca255d95bfd0c763850ff975d899845aac56dca79f17c86ed9ae4"
+  },
+  {
+    "id": "367bb8a9-5060-4b61-ae43-7222ddfe66b8",
+    "universityName": "Asia Pacific University (APU)",
+    "field": "Diploma in Information and Communication Technology",
+    "successor": null,
+    "fingerprint": "e42fe4183d171fbed0197aef677d06154ce47aa84e5ef63fb84e724f0c7b70ba"
+  },
+  {
+    "id": "79b56d3f-88ba-434a-9834-a35089c4768b",
+    "universityName": "Taylor's University",
+    "field": "Bachelor of Computer Science (Hons)",
+    "successor": null,
+    "fingerprint": "323da431aa3fce9883d085ab69137cfab271648176336d0d94e9d6c1e5a77230"
+  },
+  {
+    "id": "150906cf-c185-4b40-87c1-23b6f1e667f2",
+    "universityName": "Taylor's University",
+    "field": "Bachelor of Business (Hons) in Accounting & Finance",
+    "successor": null,
+    "fingerprint": "8a8b14dbe80a6dbfcf4e342ca2133246d888c8a0a6a7fd2f7a118ed9ba218880"
+  },
+  {
+    "id": "6345978b-814d-479e-bdb3-66fb247daec7",
+    "universityName": "Taylor's University",
+    "field": "Bachelor of International Hospitality Management",
+    "successor": null,
+    "fingerprint": "c72c67744d54a02f71253c881fcbc9fee2d0baa6afc774970e7b40b53d9a91c2"
+  },
+  {
+    "id": "fd910dd3-fa54-4490-99d5-26a52490b446",
+    "universityName": "Taylor's University",
+    "field": "Bachelor of Laws (LL.B Hons)",
+    "successor": null,
+    "fingerprint": "0937d62423490201533870e1ee8f736d76d567bb3a93b98b346e1fcb53986764"
+  },
+  {
+    "id": "856866ae-5166-458c-b011-685f4b392c70",
+    "universityName": "Sunway University",
+    "field": "BSc (Hons) in Data Science & Analytics",
+    "successor": null,
+    "fingerprint": "c0b0c25b7c2b0d8ef89d902b202359950db46e0ac3274fc78b504d7f0d927e4c"
+  },
+  {
+    "id": "e7030640-6638-4581-8ee9-0a2eaf81e666",
+    "universityName": "Sunway University",
+    "field": "BSc (Hons) in Accounting and Finance",
+    "successor": null,
+    "fingerprint": "38a4f80cd25742d7ab83a8166b67c58fb96df28400164e71aff76c4994f4c8ae"
+  },
+  {
+    "id": "521a8970-2377-4332-9e88-f6eee4f1256c",
+    "universityName": "Sunway University",
+    "field": "Bachelor of Business Administration (BBA)",
+    "successor": null,
+    "fingerprint": "82e9f1374409618a379f53c645a428a0855f300180dc32e7dd3c10008db3079a"
+  }
+]

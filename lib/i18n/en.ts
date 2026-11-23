@@ -574,14 +574,13 @@ export const en = {
       ogTitle: "Malaysia: EMGS first. Apply from outside.",
       ogDescription:
         "Explore English-taught programmes in Malaysia, tuition costs, scholarships, and Student Pass preparation.",
-      tagline:
-        "Globally ranked English-medium degrees in a student-friendly hub.",
+      tagline: "Explore Malaysia universities, programmes and published fees.",
       overview:
-        "Malaysia is a leading global education hub offering British and Australian branch campuses, high-standard private universities, and an entirely English-taught environment. The Student Pass is governed by EMGS, requiring official pre-approval before your Single Entry Visa (eVISA) is issued.",
+        "Explore institution and campus schedules for foundation, diploma, degree, research and English programmes, alongside international-school options. The Student Pass is governed by EMGS, requiring official pre-approval before your Single Entry Visa (eVISA) is issued.",
       why: [
-        "100% English-medium instruction with internationally accredited degrees and credit-transfer pathways to the UK/Australia.",
-        "Affordable tuition and living costs easily manageable within standard Bangladesh Bank student remittance guidelines.",
-        "A transparent two-stage visa process: EMGS Approval to Study letter followed by the online eVISA.",
+        "Browse programmes by institution, campus, study level and delivery mode.",
+        "Compare published programme, annual, semester and staged payments on their stated basis.",
+        "Check dated intake and scholarship conditions with a counsellor before applying.",
       ],
       visaName: "Student Pass via EMGS + Single Entry Visa (eVISA)",
       visaExplanation:
@@ -597,19 +596,19 @@ export const en = {
       fields: [
         {
           name: "Business, accounting & finance",
-          note: "Dual-degree options with ACCA and international accreditation.",
+          note: "Explore named providers, partner pathways and their separate fee schedules.",
         },
         {
           name: "Information technology & AI",
-          note: "Modern labs, cybersecurity, and software engineering tracks.",
+          note: "Browse computing, AI, cybersecurity and software subjects in the supplied schedules.",
         },
         {
           name: "Engineering",
-          note: "Washington Accord accredited mechanical, civil, and electrical programs.",
+          note: "Check the exact programme code, campus, duration and published fees.",
         },
         {
           name: "Hospitality & tourism management",
-          note: "World-class training with paid internships in 5-star hotels.",
+          note: "Explore hospitality, tourism and culinary programmes with their stated course charges.",
         },
       ],
       preDeparture: {
@@ -699,10 +698,10 @@ export const en = {
     },
   },
   programs: {
-    metaTitle: "Programs directory",
+    metaTitle: "Find your next course",
     metaDescription:
       "Compare degree and language study options in China, India, Malaysia, and South Korea, with tuition estimates and entry requirements.",
-    ogTitle: "Find University Degrees & Programs Abroad",
+    ogTitle: "Find a course abroad",
     ogDescription:
       "Compare programs in China, India, Malaysia, and South Korea with tuition estimates and entry requirements.",
     eyebrow: "Programs",
@@ -716,7 +715,7 @@ export const en = {
     fieldPlaceholder: "e.g. Engineering",
     allCountries: "All countries",
     allLevels: "All levels",
-    applyFilters: "Apply filters",
+    applyFilters: "Show courses",
     clearFilters: "Clear filters",
     empty:
       "No programmes match your filters. Try another country, level, or subject.",
@@ -726,7 +725,7 @@ export const en = {
     next: "Next",
     tuitionLabel: "Tuition",
     intakeLabel: "Intake",
-    viewProgram: "View program",
+    viewProgram: "View course details",
     backToDirectory: "Back to programs",
     requirementsLabel: "Requirements",
     scholarshipLabel: "Scholarships",

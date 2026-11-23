@@ -8,373 +8,7 @@ import { count } from "drizzle-orm";
 type ProgramSeed = typeof programs.$inferInsert;
 
 export const SEED_PROGRAMS: ProgramSeed[] = [
-  // ==========================================
-  // MALAYSIA (Currency: MYR)
-  // ==========================================
-  // 1) Universiti Malaya (UM)
-  {
-    universityName: "Universiti Malaya (UM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Computer Science (Data Science & AI)",
-    tuitionAmount: "26000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "Malaysia's #1 flagship public university. Strong HSC / A-Level profile (minimum GPA 4.00, Mathematics required). IELTS 6.0 or TOEFL iBT 80.",
-    scholarshipInfo:
-      "Ask about UM merit awards and Malaysia International Scholarship (MIS) eligibility for high-ranking applicants.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Malaya (UM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Software Engineering",
-    tuitionAmount: "26000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "HSC Science / A-Levels with strong Mathematics and Physics (GPA 4.00+). Core modules: Cloud Architecture, Secure Coding, Full-Stack Systems.",
-    scholarshipInfo:
-      "UM Faculty of Computer Science merit grants available for top 5% admitted international cohort.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Malaya (UM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Electrical & Electronic Engineering (EEE)",
-    tuitionAmount: "28000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "Washington Accord internationally accredited degree. HSC GPA 4.25+ with Math and Physics. IELTS 6.0.",
-    scholarshipInfo:
-      "Prestigious public university engineering degree recognized by engineering boards globally.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Malaya (UM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Business Administration (BBA)",
-    tuitionAmount: "25000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "HSC with minimum GPA 3.75 in Commerce, Science, or Arts. English proficiency IELTS 6.0 or approved equivalent.",
-    scholarshipInfo:
-      "AACSB and AMBA dual-accredited business school. Exceptional career placement track record.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Malaya (UM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Economics",
-    tuitionAmount: "24000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "HSC GPA 3.75+ with strong Mathematics. Modules cover Econometrics, Monetary Policy, and International Trade.",
-    scholarshipInfo:
-      "A premier economics qualification leading to international finance, banking, and policy roles.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Malaya (UM)",
-    country: "malaysia",
-    level: "master",
-    field: "Master of Business Administration (MBA)",
-    tuitionAmount: "35000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "Recognized Bachelor's degree with minimum CGPA 3.00 / 4.00 and relevant work experience. IELTS 6.0 or MOI.",
-    scholarshipInfo:
-      "A flagship Malaysian public degree—competitively priced compared to foreign branch campuses.",
-    isPublished: true,
-  },
-
-  // 2) Universiti Putra Malaysia (UPM)
-  {
-    universityName: "Universiti Putra Malaysia (UPM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Science in Biotechnology & Food Technology",
-    tuitionAmount: "22000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "September"],
-    requirements:
-      "HSC Science with Biology and Chemistry prerequisites (minimum GPA 3.50). IELTS 5.5 - 6.0 or equivalent.",
-    scholarshipInfo:
-      "Strong research public university near Kuala Lumpur. Excellent faculty-level fee reductions available.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Putra Malaysia (UPM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Computer Science (Software Engineering)",
-    tuitionAmount: "22000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "September"],
-    requirements:
-      "HSC with minimum GPA 3.50 with Mathematics. IELTS 5.5 or English Medium Instruction certificate.",
-    scholarshipInfo:
-      "Top 150 globally ranked university. High-tech labs and research ecosystem.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Putra Malaysia (UPM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Mechanical Engineering",
-    tuitionAmount: "24000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "HSC Science with Physics and Mathematics (minimum GPA 3.75). IELTS 6.0.",
-    scholarshipInfo:
-      "A practical engineering degree near KL without private-university pricing.",
-    isPublished: true,
-  },
-
-  // 3) Universiti Sains Malaysia (USM)
-  {
-    universityName: "Universiti Sains Malaysia (USM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Pharmacy (Hons)",
-    tuitionAmount: "28000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "HSC Science with Biology, Chemistry, and Physics (minimum GPA 4.00). IELTS 6.0. Selective health-science pathway.",
-    scholarshipInfo:
-      "Study in Penang with significantly lower living costs than central KL. Inquire about research assistantships.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Sains Malaysia (USM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Computer Science",
-    tuitionAmount: "22000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["September"],
-    requirements:
-      "HSC Science / A-Levels with Mathematics (GPA 3.50+). Focus on Algorithms, Data Science, and Systems.",
-    scholarshipInfo:
-      "Apex research university status. Cost of living in Penang is 25% below Kuala Lumpur.",
-    isPublished: true,
-  },
-
-  // 4) Universiti Teknologi Malaysia (UTM)
-  {
-    universityName: "Universiti Teknologi Malaysia (UTM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Engineering (Electrical & Electronic)",
-    tuitionAmount: "24000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["February", "September"],
-    requirements:
-      "HSC Science with strong Physics and Mathematics (minimum GPA 3.75) or A-Levels with ABB. Washington Accord accredited.",
-    scholarshipInfo:
-      "Leading technical university connecting study directly with Malaysian industrial corridors.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Teknologi Malaysia (UTM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Civil Engineering",
-    tuitionAmount: "24000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["February", "September"],
-    requirements:
-      "HSC Science with Mathematics and Physics (GPA 3.75+). Comprehensive structural and geotechnical training.",
-    scholarshipInfo:
-      "Direct pathway into major ASEAN construction and infrastructure projects.",
-    isPublished: true,
-  },
-  {
-    universityName: "Universiti Teknologi Malaysia (UTM)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Computer Science (Software Engineering)",
-    tuitionAmount: "24000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["February", "September"],
-    requirements:
-      "HSC Science with Mathematics (minimum GPA 3.75). IELTS 6.0.",
-    scholarshipInfo:
-      "Industry-embedded training with internship partnerships across Johor Bahru and Singapore tech hubs.",
-    isPublished: true,
-  },
-
-  // 5) Asia Pacific University (APU)
-  {
-    universityName: "Asia Pacific University (APU)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "BSc (Hons) in Computer Science (Cybersecurity)",
-    tuitionAmount: "34000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "July", "November"],
-    requirements:
-      "HSC GPA 3.25+ with Mathematics pass. APU internal English test can replace IELTS. State-of-the-art CyberSecurity Operations Centre (SOC) on campus.",
-    scholarshipInfo:
-      "Merit fee waivers from RM 4,000 to RM 12,000 based on HSC/A-Level grades.",
-    isPublished: true,
-  },
-  {
-    universityName: "Asia Pacific University (APU)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "BSc (Hons) in Artificial Intelligence",
-    tuitionAmount: "34000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "July", "November"],
-    requirements:
-      "HSC GPA 3.25+ with Math. Specializations in Machine Learning, Computer Vision, and Natural Language Processing.",
-    scholarshipInfo:
-      "Premier Digital Tech Institution merit reductions. 100% employability record.",
-    isPublished: true,
-  },
-  {
-    universityName: "Asia Pacific University (APU)",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Business Management (FinTech & E-Business)",
-    tuitionAmount: "32000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "July", "November"],
-    requirements:
-      "HSC in any stream with minimum GPA 3.00. Modern curriculum blending management with digital finance tools.",
-    scholarshipInfo:
-      "Up to RM 10,000 entrance scholarship based on academic transcript.",
-    isPublished: true,
-  },
-  {
-    universityName: "Asia Pacific University (APU)",
-    country: "malaysia",
-    level: "diploma",
-    field: "Diploma in Information and Communication Technology",
-    tuitionAmount: "22000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "July", "November"],
-    requirements:
-      "SSC / O-Levels with minimum 3 credits including Mathematics and English. Direct credit pathway into Bachelor Year 2.",
-    scholarshipInfo:
-      "Entry waivers available for SSC GPA 4.50+. Flexible fast-track bridge into tech careers.",
-    isPublished: true,
-  },
-
-  // 6) Taylor's University
-  {
-    universityName: "Taylor's University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Computer Science (Hons)",
-    tuitionAmount: "42000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "August"],
-    requirements:
-      "HSC GPA 3.50+ (Math required) or 2 A-Level passes. Dual award options with UK and Australia partners.",
-    scholarshipInfo:
-      "Taylor's Merit & Achievement awards can reduce fees substantially for exceptional academic profiles.",
-    isPublished: true,
-  },
-  {
-    universityName: "Taylor's University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Business (Hons) in Accounting & Finance",
-    tuitionAmount: "42000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "August"],
-    requirements:
-      "HSC GPA 3.50+ or 2 A-Level passes. Maximum 9-paper exemptions for ACCA, CIMA, and CPA Australia.",
-    scholarshipInfo:
-      "Top-ranked private university in Southeast Asia. Up to 30% tuition reduction for high achievers.",
-    isPublished: true,
-  },
-  {
-    universityName: "Taylor's University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of International Hospitality Management",
-    tuitionAmount: "40000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "August"],
-    requirements:
-      "HSC / A-Level passes in any discipline. English proficiency or Taylor's intensive English pathway.",
-    scholarshipInfo:
-      "Ranked #1 in Malaysia for Hospitality. Includes paid internship placements in 5-star international luxury hotels.",
-    isPublished: true,
-  },
-  {
-    universityName: "Taylor's University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Laws (LL.B Hons)",
-    tuitionAmount: "44000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["March", "August"],
-    requirements:
-      "HSC GPA 4.00+ or 3 A-Level passes. Qualifying law degree pathway recognized by bar councils.",
-    scholarshipInfo:
-      "Comprehensive moot court facilities and international student legal clinics.",
-    isPublished: true,
-  },
-
-  // 7) Sunway University
-  {
-    universityName: "Sunway University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "BSc (Hons) in Data Science & Analytics",
-    tuitionAmount: "38000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["January", "April", "September"],
-    requirements:
-      "Dual degree award with Lancaster University (UK). HSC GPA 3.50+ with Mathematics or A-Levels with 2 passes. IELTS 6.0.",
-    scholarshipInfo:
-      "Jeffrey Cheah Foundation-linked merit scholarships cover up to 50% tuition for qualifying grades.",
-    isPublished: true,
-  },
-  {
-    universityName: "Sunway University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "BSc (Hons) in Accounting and Finance",
-    tuitionAmount: "37000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["January", "April", "September"],
-    requirements:
-      "Lancaster UK dual certification. HSC GPA 3.50+ with Mathematics. ACCA fast-track embedded.",
-    scholarshipInfo:
-      "Jeffrey Cheah Community Scholarship & merit discounts available for early applicants.",
-    isPublished: true,
-  },
-  {
-    universityName: "Sunway University",
-    country: "malaysia",
-    level: "bachelor",
-    field: "Bachelor of Business Administration (BBA)",
-    tuitionAmount: "36000.00",
-    tuitionCurrency: "MYR",
-    intakeMonths: ["January", "April", "September"],
-    requirements:
-      "HSC GPA 3.25+ in any stream. Dual award with Lancaster University (UK).",
-    scholarshipInfo:
-      "Located in Sunway City integrated campus with direct connectivity to shopping, hospitals, and transit.",
-    isPublished: true,
-  },
-
+  // Malaysia is maintained in lib/malaysia/catalogue.json. Do not reseed mock annual fees.
   // ==========================================
   // CHINA (Currency: CNY)
   // ==========================================
@@ -563,7 +197,8 @@ export const SEED_PROGRAMS: ProgramSeed[] = [
 
   // 2) KAIST
   {
-    universityName: "KAIST (Korea Advanced Institute of Science and Technology)",
+    universityName:
+      "KAIST (Korea Advanced Institute of Science and Technology)",
     country: "south_korea",
     level: "bachelor",
     field: "Bachelor of Science in Electrical Engineering & AI",
@@ -577,7 +212,8 @@ export const SEED_PROGRAMS: ProgramSeed[] = [
     isPublished: true,
   },
   {
-    universityName: "KAIST (Korea Advanced Institute of Science and Technology)",
+    universityName:
+      "KAIST (Korea Advanced Institute of Science and Technology)",
     country: "south_korea",
     level: "bachelor",
     field: "Bachelor of Science in Computer Science",
@@ -591,7 +227,8 @@ export const SEED_PROGRAMS: ProgramSeed[] = [
     isPublished: true,
   },
   {
-    universityName: "KAIST (Korea Advanced Institute of Science and Technology)",
+    universityName:
+      "KAIST (Korea Advanced Institute of Science and Technology)",
     country: "south_korea",
     level: "bachelor",
     field: "Bachelor of Science in Mechanical & Aerospace Engineering",
@@ -654,7 +291,8 @@ export const SEED_PROGRAMS: ProgramSeed[] = [
     universityName: "Yonsei University",
     country: "south_korea",
     level: "bachelor",
-    field: "Underwood International College (UIC) - Global Economics & Business",
+    field:
+      "Underwood International College (UIC) - Global Economics & Business",
     tuitionAmount: "11000000.00",
     tuitionCurrency: "KRW",
     intakeMonths: ["March", "September"],
@@ -825,8 +463,7 @@ export const SEED_PROGRAMS: ProgramSeed[] = [
     intakeMonths: ["July", "August"],
     requirements:
       "HSC in any stream with minimum 50% marks. Specializations in Digital Marketing, Business Analytics, and Logistics.",
-    scholarshipInfo:
-      "Merit waivers up to 40% based on intermediate marks.",
+    scholarshipInfo: "Merit waivers up to 40% based on intermediate marks.",
     isPublished: true,
   },
   {
@@ -854,21 +491,33 @@ async function main() {
   console.log(`Current programs count in DB: ${currentCount}`);
 
   if (Number(currentCount) > 0 && !force) {
-    console.log("Database already has programs. Re-seeding with updated seeder_info catalog...");
+    console.log(
+      "Database already has programs. Re-seeding with updated seeder_info catalog...",
+    );
     // Clear out old programs and replace with fresh seeder_info list
     await db.delete(programs);
     console.log("Cleared existing programs.");
   }
 
   console.log(
-    `Seeding ${SEED_PROGRAMS.length} verified programs from seeder_info.txt across China, India, Malaysia, and South Korea...`
+    `Seeding ${SEED_PROGRAMS.length} verified programs from seeder_info.txt across China, India, Malaysia, and South Korea...`,
   );
 
-  const { CHINA_PROGRAM_CORRECTIONS } = await import("../lib/china-program-corrections");
-  await db.insert(programs).values(SEED_PROGRAMS.map((program) => {
-    const correction = program.country === "china" ? CHINA_PROGRAM_CORRECTIONS.find((item) => item.universityName === program.universityName && item.field === program.field) : undefined;
-    return correction ? { ...program, ...correction } : program;
-  }));
+  const { CHINA_PROGRAM_CORRECTIONS } =
+    await import("../lib/china-program-corrections");
+  await db.insert(programs).values(
+    SEED_PROGRAMS.map((program) => {
+      const correction =
+        program.country === "china"
+          ? CHINA_PROGRAM_CORRECTIONS.find(
+              (item) =>
+                item.universityName === program.universityName &&
+                item.field === program.field,
+            )
+          : undefined;
+      return correction ? { ...program, ...correction } : program;
+    }),
+  );
 
   const updatedRows = await db.select({ value: count() }).from(programs);
   const newCount = updatedRows[0]?.value ?? 0;

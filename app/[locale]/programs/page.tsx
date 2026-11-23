@@ -9,6 +9,7 @@ import {
   parsePublicProgramFilters,
 } from "@/lib/programs-public";
 import { parseCompareIds } from "@/lib/programs-compare";
+import { MalaysiaCatalogue } from "@/components/marketing/malaysia-catalogue";
 
 export const revalidate = 3600;
 
@@ -41,6 +42,18 @@ export default async function Programs({ params, searchParams }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
   const raw = await searchParams;
+  if (first(raw.country) === "malaysia") {
+    return (
+      <MalaysiaCatalogue
+        locale={locale}
+        query={{
+          field: first(raw.field),
+          level: first(raw.level),
+          university: first(raw.university),
+        }}
+      />
+    );
+  }
   const filters = parsePublicProgramFilters({
     country: first(raw.country),
     level: first(raw.level),

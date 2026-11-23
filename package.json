@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "import:china-2027": "tsx scripts/import-china-2027.ts",
     "test:china-2027": "tsx --test lib/china-2027/catalog.test.ts scripts/import-china-2027.test.ts",
+    "test:programs": "tsx --env-file=.env.local --test lib/programs-directory.test.ts lib/programs-href.test.ts lib/programs-compare.test.ts",
     "validate:china-2027": "python3 scripts/validate-china-2027-pages.py",
     "test": "node -e \"console.log('Vitest is not configured yet (comes in 1.5).')\"",
     "test:e2e": "node -e \"console.log('Playwright is not configured yet (comes in 1.5).')\"",
@@ -20,7 +21,11 @@
     "reminders:run": "npx tsx scripts/run-intake-reminders.ts",
     "nurture:run": "npx tsx scripts/run-lead-nurture.ts",
     "make-admin": "npx tsx --env-file=.env.local scripts/make-admin.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "import:malaysia": "python3 scripts/malaysia/build_catalogue.py",
+    "test:malaysia": "tsx --test lib/malaysia/catalogue.test.ts scripts/reconcile-malaysia.test.ts",
+    "audit:malaysia": "python3 scripts/malaysia/audit_catalogue.py",
+    "check:malaysia-release": "python3 scripts/malaysia/audit_catalogue.py --release"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
