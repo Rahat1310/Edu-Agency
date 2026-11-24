@@ -86,8 +86,13 @@ export function ProgramsDirectory({
       key: "scholarship",
       label: bn ? "স্কলারশিপের সুযোগ" : "Scholarship options",
     });
+  const grouped = new Map<string, typeof list.rows>();
+  for (const program of list.rows) {
+    const key = `${program.country}:${program.universityName}`;
+    grouped.set(key, [...(grouped.get(key) ?? []), program]);
+  }
   const start = list.total ? (list.page - 1) * PUBLIC_PROGRAM_PAGE_SIZE + 1 : 0;
-  const end = list.total ? start + list.rows.length - 1 : 0;
+  const end = list.total ? start + grouped.size - 1 : 0;
   const chinaLevels = publicProgramLevels.filter((level) =>
     chinaOffers.some((o) =>
       (o.categories ?? [o.level]).some((category) => category === level),
@@ -106,21 +111,21 @@ export function ProgramsDirectory({
         <header className={styles.header}>
           <div>
             <p className={styles.eyebrow}>
-              {bn ? "কোর্স ও ভর্তি" : "COURSES & ADMISSIONS"}
+              {bn ? "বিশ্ববিদ্যালয় ও ভর্তি" : "UNIVERSITIES & ADMISSIONS"}
             </p>
             <h1>
               {china
                 ? bn
-                  ? "চীনে আপনার কোর্স খুঁজুন।"
-                  : "Find your course in China."
+                  ? "চীনে আপনার বিশ্ববিদ্যালয় খুঁজুন।"
+                  : "Find your university in China."
                 : bn
-                  ? "পরের কোর্সটা খুঁজে নিন।"
-                  : "Find your next course."}
+                  ? "আপনার বিশ্ববিদ্যালয় খুঁজে নিন।"
+                  : "Find your university."}
             </h1>
             <p className={styles.intro}>
               {bn
-                ? "বিষয়, ফি আর ক্লাস শুরুর তারিখ মিলিয়ে দেখুন। পছন্দ হলে কয়েকটি কোর্স পাশাপাশি তুলনা করুন।"
-                : "Compare subjects, fees and start dates. Pick a few courses to look at side by side."}
+                ? "বিশ্ববিদ্যালয় অনুযায়ী প্রোগ্রাম, আপডেট করা ফি এবং ক্লাস শুরুর তারিখ দেখুন।"
+                : "Browse universities and explore their programs, updated fees and start dates."}
             </p>
           </div>
           <aside className={styles.headerAside}>
@@ -200,10 +205,10 @@ export function ProgramsDirectory({
                 <h2>
                   {number(list.total)}{" "}
                   {bn
-                    ? "টি কোর্সের অফার"
+                    ? "টি বিশ্ববিদ্যালয়"
                     : list.total === 1
-                      ? "course option"
-                      : "course options"}
+                      ? "university"
+                      : "universities"}
                 </h2>
                 <p>
                   {list.total
@@ -253,13 +258,36 @@ export function ProgramsDirectory({
             ) : null}
             {list.rows.length ? (
               <ul className={styles.cards}>
-                {list.rows.map((program) => (
-                  <li key={program.id}>
-                    <ProgramCard
-                      program={program}
-                      locale={locale}
-                      dict={dict}
-                    />
+                {[...grouped].map(([key, programs]) => (
+                  <li key={key} className={styles.universityGroup}>
+                    <h3 className={styles.universityTitle}>
+                      {programs[0]!.universityName}
+                    </h3>
+                    <p className={styles.universitySummary}>
+                      {programCountryText(programs[0]!.country, locale)} ·{" "}
+                      {number(programs.length)}{" "}
+                      {bn
+                        ? "টি প্রোগ্রাম"
+                        : programs.length === 1
+                          ? "program"
+                          : "programs"}
+                    </p>
+                    <details className={styles.universityPrograms}>
+                      <summary>
+                        {bn ? "প্রোগ্রাম ও ফি দেখুন" : "View programs and fees"}
+                      </summary>
+                      <ul className={styles.nestedPrograms}>
+                        {programs.map((program) => (
+                          <li key={program.id}>
+                            <ProgramCard
+                              program={program}
+                              locale={locale}
+                              dict={dict}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
                   </li>
                 ))}
               </ul>
@@ -342,8 +370,23 @@ export function ProgramsDirectory({
               </nav>
             ) : null}
           </div>
-          {list.rows.some((program) => chinaOffers.some((offer) => offer.id === program.id && offer.universityId === "xiamen-university")) ? <Link className={styles.photoCredits} href={href("/destinations/china#china-photo-credits")}>{bn ? "ক্যাম্পাস ছবির কৃতিত্ব ও লাইসেন্স" : "Campus photography credits and license"}</Link> : null}
-        <ProgramCompareBar locale={locale} />
+          {list.rows.some((program) =>
+            chinaOffers.some(
+              (offer) =>
+                offer.id === program.id &&
+                offer.universityId === "xiamen-university",
+            ),
+          ) ? (
+            <Link
+              className={styles.photoCredits}
+              href={href("/destinations/china#china-photo-credits")}
+            >
+              {bn
+                ? "ক্যাম্পাস ছবির কৃতিত্ব ও লাইসেন্স"
+                : "Campus photography credits and license"}
+            </Link>
+          ) : null}
+          <ProgramCompareBar locale={locale} />
         </ProgramCompareProvider>
         <aside className={styles.help}>
           <MessageCircle size={25} aria-hidden="true" />

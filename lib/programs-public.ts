@@ -199,10 +199,7 @@ async function queryPublishedProgramPage(
         .select({ total: sql<number>`cast(count(*) as int)` })
         .from(programs)
         .where(where);
-  const total = (countRows[0]?.total ?? 0) + curated.length;
-  const pageCount = Math.max(1, Math.ceil(total / PUBLIC_PROGRAM_PAGE_SIZE));
-  const page = Math.min(filters.page, pageCount);
-  const needed = page * PUBLIC_PROGRAM_PAGE_SIZE;
+  const databaseTotal = countRows[0]?.total ?? 0;
   const rows = curatedOnly
     ? []
     : await db
@@ -214,7 +211,7 @@ async function queryPublishedProgramPage(
           sql`${programs.field} COLLATE "C"`,
           asc(programs.id),
         )
-        .limit(needed);
+        .limit(databaseTotal);
   const merged = [...rows, ...curated].sort((a, b) =>
     a.universityName < b.universityName
       ? -1
@@ -231,8 +228,23 @@ async function queryPublishedProgramPage(
                 : 0,
   );
 
+  const universities = [
+    ...new Set(merged.map((row) => `${row.country}:${row.universityName}`)),
+  ];
+  const total = universities.length;
+  const pageCount = Math.max(1, Math.ceil(total / PUBLIC_PROGRAM_PAGE_SIZE));
+  const page = Math.min(filters.page, pageCount);
+  const visible = new Set(
+    universities.slice(
+      (page - 1) * PUBLIC_PROGRAM_PAGE_SIZE,
+      page * PUBLIC_PROGRAM_PAGE_SIZE,
+    ),
+  );
+
   return {
-    rows: merged.slice((page - 1) * PUBLIC_PROGRAM_PAGE_SIZE, needed),
+    rows: merged.filter((row) =>
+      visible.has(`${row.country}:${row.universityName}`),
+    ),
     total,
     page,
     pageCount,
@@ -243,7 +255,7 @@ export function getPublishedProgramPage(filters: PublicProgramFilters) {
   return unstable_cache(
     () => queryPublishedProgramPage(filters),
     [
-      "published-program-page",
+      "published-university-page-v1",
       CHINA_CATALOG_VERSION,
       filters.country,
       filters.level,
