@@ -8,6 +8,13 @@ import {
 } from "@/components/marketing/program-compare";
 import { ProgramFilters } from "@/components/marketing/program-filters";
 import { ProgramCard } from "@/components/marketing/program-card";
+import { UniversityCard } from "@/components/marketing/university-card";
+import { getChinaOffer } from "@/lib/china-2027";
+import { malaysiaLevelLabel } from "@/lib/malaysia/copy";
+import {
+  universityDestinationVisuals,
+  universityVisuals,
+} from "@/lib/university-visuals";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedHref } from "@/lib/i18n/paths";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -25,6 +32,7 @@ import {
   PUBLIC_PROGRAM_PAGE_SIZE,
   type PublicProgramFilters,
   type PublicProgramList,
+  type PublicProgramCard,
 } from "@/lib/programs-public";
 import styles from "./programs-directory.module.css";
 
@@ -35,6 +43,66 @@ type ProgramsDirectoryProps = {
   list: PublicProgramList;
   selectedIds: string[];
 };
+
+function universityKeywords(programs: PublicProgramCard[], locale: Locale) {
+  const bn = locale === "bn";
+  const subjects = programs
+    .flatMap((program) => {
+      const offer = getChinaOffer(program.id);
+      return offer?.majors.length ? offer.majors : [program.field];
+    })
+    .join(" ");
+  const areas: [RegExp, string, string][] = [
+    [
+      /business|management|marketing|commerce|administration/i,
+      "Business",
+      "ব্যবসায় শিক্ষা",
+    ],
+    [
+      /comput|software|information technology|cyber|artificial intelligence|data science/i,
+      "Computing & IT",
+      "কম্পিউটিং ও আইটি",
+    ],
+    [/engineer|robotics|mechatronic/i, "Engineering", "ইঞ্জিনিয়ারিং"],
+    [
+      /design|animation|creative|architecture|fashion|multimedia/i,
+      "Design & creativity",
+      "ডিজাইন ও সৃজনশীলতা",
+    ],
+    [
+      /medicin|mbbs|nurs|pharma|health|clinical|dent/i,
+      "Health sciences",
+      "স্বাস্থ্যবিজ্ঞান",
+    ],
+    [/education|teaching|pedagogy/i, "Education", "শিক্ষা"],
+    [
+      /account|finance|banking|economics/i,
+      "Finance & economics",
+      "অর্থায়ন ও অর্থনীতি",
+    ],
+    [/\blaw\b|legal/i, "Law", "আইন"],
+    [/language|chinese|mandarin|linguistic/i, "Languages", "ভাষা শিক্ষা"],
+    [
+      /media|communication|journalism|film/i,
+      "Media & communication",
+      "মিডিয়া ও যোগাযোগ",
+    ],
+    [/hospitality|tourism|culinary|hotel/i, "Hospitality", "হসপিটালিটি"],
+    [/psychology|social|sociology/i, "Social sciences", "সমাজবিজ্ঞান"],
+    [/biology|chemistry|physics|mathematics|science/i, "Sciences", "বিজ্ঞান"],
+  ];
+  const matches = areas
+    .filter(([pattern]) => pattern.test(subjects))
+    .slice(0, 3)
+    .map(([, en, label]) => (bn ? label : en));
+  return matches.length
+    ? matches
+    : [
+        ...new Set(
+          programs.map((program) => programLevelText(program.level, locale)),
+        ),
+      ].slice(0, 3);
+}
 
 export function ProgramsDirectory({
   locale,
@@ -258,24 +326,36 @@ export function ProgramsDirectory({
             ) : null}
             {list.rows.length ? (
               <ul className={styles.cards}>
-                {[...grouped].map(([key, programs]) => (
-                  <li key={key} className={styles.universityGroup}>
-                    <h3 className={styles.universityTitle}>
-                      {programs[0]!.universityName}
-                    </h3>
-                    <p className={styles.universitySummary}>
-                      {programCountryText(programs[0]!.country, locale)} ·{" "}
-                      {number(programs.length)}{" "}
-                      {bn
-                        ? "টি প্রোগ্রাম"
-                        : programs.length === 1
-                          ? "program"
-                          : "programs"}
-                    </p>
-                    <details className={styles.universityPrograms}>
-                      <summary>
-                        {bn ? "প্রোগ্রাম ও ফি দেখুন" : "View programs and fees"}
-                      </summary>
+                {[...grouped].map(([key, programs], index) => {
+                  const university = programs[0]!;
+                  const campusPhoto =
+                    universityVisuals[university.universityName];
+                  const photo =
+                    campusPhoto ??
+                    universityDestinationVisuals[university.country];
+                  const levels = [
+                    ...new Set(
+                      programs.map((program) =>
+                        program.catalogueLevel
+                          ? malaysiaLevelLabel(program.catalogueLevel, locale)
+                          : programLevelText(program.level, locale),
+                      ),
+                    ),
+                  ];
+                  return (
+                    <UniversityCard
+                      key={key}
+                      name={university.universityName}
+                      country={programCountryText(university.country, locale)}
+                      countryCode={university.country}
+                      locale={locale}
+                      count={programs.length}
+                      levels={levels}
+                      keywords={universityKeywords(programs, locale)}
+                      photo={photo}
+                      campusPhoto={Boolean(campusPhoto)}
+                      index={index}
+                    >
                       <ul className={styles.nestedPrograms}>
                         {programs.map((program) => (
                           <li key={program.id}>
@@ -287,9 +367,9 @@ export function ProgramsDirectory({
                           </li>
                         ))}
                       </ul>
-                    </details>
-                  </li>
-                ))}
+                    </UniversityCard>
+                  );
+                })}
               </ul>
             ) : (
               <div className={styles.empty}>
@@ -327,6 +407,48 @@ export function ProgramsDirectory({
                 </Link>
               </div>
             )}
+            {list.rows.length ? (
+              <details className={styles.directoryCredits}>
+                <summary>{bn ? "ছবির সূত্র" : "Photography & credits"}</summary>
+                <p>
+                  {bn
+                    ? "ক্যাম্পাসের ছবি না থাকলে দেশের দৃশ্য দেখানো হয়েছে এবং তা চিহ্নিত করা আছে।"
+                    : "Cards marked ‘Destination preview’ show the study destination. Campus photographs are used where available."}
+                </p>
+                <ul>
+                  {[
+                    ...new Map(
+                      [...grouped.values()].flatMap((programs) => {
+                        const university = programs[0]!;
+                        const photo =
+                          universityVisuals[university.universityName] ??
+                          universityDestinationVisuals[university.country];
+                        return photo ? [[photo.src, photo] as const] : [];
+                      }),
+                    ).values(),
+                  ].map((photo) => (
+                    <li key={photo.src}>
+                      <a href={photo.source} target="_blank" rel="noreferrer">
+                        {photo.credit}
+                      </a>
+                      {photo.license ? (
+                        <>
+                          {" "}
+                          ·{" "}
+                          <a
+                            href={photo.license}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {bn ? "লাইসেন্স" : "License"}
+                          </a>
+                        </>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : null}
             {list.pageCount > 1 ? (
               <nav
                 className={styles.pagination}

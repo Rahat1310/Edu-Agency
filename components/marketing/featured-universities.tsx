@@ -1,8 +1,8 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useState, type Ref } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   Award,
   Sparkles,
@@ -12,6 +12,7 @@ import {
   ChevronUp,
   GraduationCap,
   CheckCircle2,
+  ArrowUpRight,
 } from "lucide-react";
 
 import { PageShell } from "@/components/layout/page-shell";
@@ -25,10 +26,33 @@ import {
   FEATURED_UNIVERSITIES,
   type FeaturedUniversity,
 } from "@/lib/universities-data";
+import {
+  universityDestinationVisuals,
+  universityVisuals,
+} from "@/lib/university-visuals";
+import { UniversityCardCover } from "./university-card-cover";
+import { UniversityPhotoCredit } from "./university-photo-credit";
+import styles from "./university-card.module.css";
 
 type FilterTab = "all" | DestinationSlug;
 
 const INITIAL_ROWS_COUNT = 6;
+
+function studyAreaLabel(major: string) {
+  const label = major
+    .replace(/\((?:honours|hons)\)/gi, "")
+    .replace(
+      /^(?:bachelor|master)(?:'s)?\s+(?:(?:of|in)\s+)?(?:(?:arts|science)\s+(?:(?:of|in)\s+)?)?/i,
+      "",
+    )
+    .replace(/^(?:diploma|foundation)\s+in\s+/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return label === label.toUpperCase()
+    ? label.toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase())
+    : label;
+}
 
 export function FeaturedUniversities({
   locale,
@@ -40,6 +64,7 @@ export function FeaturedUniversities({
   const [activeFilter, setActiveFilter] = useState<FilterTab>("all");
   const [visibleCount, setVisibleCount] = useState(INITIAL_ROWS_COUNT);
   const headingId = useId();
+  const reducedMotion = useReducedMotion();
 
   const filterTabs: { id: FilterTab; label: string; slug?: DestinationSlug }[] =
     [
@@ -139,6 +164,7 @@ export function FeaturedUniversities({
                 key={tab.id}
                 type="button"
                 onClick={() => handleTabClick(tab.id)}
+                aria-pressed={isActive}
                 className={`focus-ring relative inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all sm:text-sm ${
                   isActive
                     ? "bg-slate-900 text-white shadow-md shadow-slate-900/15"
@@ -168,16 +194,17 @@ export function FeaturedUniversities({
 
         {/* Universities Grid */}
         <motion.div
-          layout
+          layout={!reducedMotion}
           className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
-            {visibleUniversities.map((uni) => (
+            {visibleUniversities.map((uni, index) => (
               <UniversityCard
                 key={uni.id}
                 uni={uni}
                 locale={locale}
                 dict={dict}
+                index={index}
               />
             ))}
           </AnimatePresence>
@@ -262,139 +289,132 @@ function UniversityCard({
   uni,
   locale,
   dict,
+  index,
+  ref,
 }: {
   uni: FeaturedUniversity;
   locale: Locale;
   dict: Dictionary;
+  index: number;
+  ref?: Ref<HTMLElement>;
 }) {
   const isBn = locale === "bn";
+  const reducedMotion = useReducedMotion();
   const countryLabel = isBn ? uni.countryLabel.bn : uni.countryLabel.en;
-  const city = isBn ? uni.city.bn : uni.city.en;
   const ranking = isBn ? uni.rankingBadge.bn : uni.rankingBadge.en;
+  const city = isBn ? uni.city.bn : uni.city.en;
+  const descriptor =
+    uni.country === "malaysia" || ranking.includes(city)
+      ? ranking
+      : `${city} · ${ranking}`;
   const scholarship = isBn ? uni.scholarshipInfo.bn : uni.scholarshipInfo.en;
   const majors = isBn ? uni.popularMajors.bn : uni.popularMajors.en;
   const tuition = isBn ? uni.tuitionEst.bn : uni.tuitionEst.en;
+  const campusPhoto = universityVisuals[uni.name];
+  const photo = campusPhoto ?? universityDestinationVisuals[uni.country];
+  const programsHref = localizedHref(
+    `/programs?country=${uni.programsHrefCountry}&university=${encodeURIComponent(uni.name.replace(/\s*\([^)]*\)$/, ""))}`,
+    locale,
+  );
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.97 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.97 }}
-      transition={{ duration: 0.22, ease: "easeOut" }}
-      className="marketing-glass-card group relative flex flex-col justify-between rounded-2xl bg-[#f6f7f8] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+    <motion.article
+      ref={ref}
+      layout={!reducedMotion}
+      initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={reducedMotion ? undefined : { opacity: 0, scale: 0.98 }}
+      transition={{
+        duration: reducedMotion ? 0 : 0.4,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={styles.card}
+      data-country={uni.country}
+      data-university-card
     >
-      <div>
-        {/* Top Header: Flag + Country + City & Ranking Badge */}
-        <div className="flex items-center justify-between gap-2">
-          {/* Country Flag (authentic SVG) + Location */}
-          <div className="inline-flex items-center gap-2 rounded-lg bg-slate-50 px-2.5 py-1.5 text-xs font-semibold text-slate-700">
-            <CountryFlagBadge
-              slug={uni.country}
-              className="h-3 w-4.5 shadow-2xs"
-            />
-            <span>{countryLabel}</span>
-            <span className="text-slate-300">·</span>
-            <span className="line-clamp-1 text-slate-500">{city}</span>
-          </div>
-
-          {/* Ranking Badge */}
-          <div className="inline-flex items-center gap-1 rounded-full bg-stone-100 px-2.5 py-0.5 text-[0.68rem] font-bold text-slate-600">
-            <Award className="size-3 shrink-0 text-slate-600" />
-            <span>{ranking}</span>
-          </div>
-        </div>
-
-        {/* University Name */}
-        <div className="mt-4">
-          <h3 className="font-heading text-lg font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-orange-600 sm:text-xl">
-            {uni.name}
-          </h3>
-        </div>
-
-        {/* Scholarship Container */}
-        <div
-          className={`mt-4 rounded-2xl border p-3 transition-colors ${
-            uni.has100PercentScholarship
-              ? "border-transparent bg-white"
-              : "border-transparent bg-white"
-          }`}
+      <div className={styles.media}>
+        <Link
+          href={programsHref}
+          className={styles.coverButton}
+          aria-label={`${isBn ? "বিশ্ববিদ্যালয় দেখুন:" : "Discover"} ${uni.name}`}
         >
-          <div className="flex items-center gap-1.5">
-            {uni.has100PercentScholarship ? (
-              <>
-                <span className="inline-flex items-center gap-1 rounded-md bg-[#16704f] px-2 py-0.5 text-[0.68rem] font-semibold tracking-wide text-white uppercase shadow-2xs">
-                  <Sparkles className="size-2.5" />
-                  {uni.country === "china"
-                    ? isBn
-                      ? "প্রতিযোগিতামূলক পূর্ণ বৃত্তি"
-                      : "Competitive Full Scholarships"
-                    : isBn
-                      ? "১০০% সম্পূর্ণ বৃত্তি"
-                      : "100% Scholarship Available"}
-                </span>
-              </>
-            ) : (
-              <>
-                <span className="inline-flex items-center gap-1 rounded-md bg-slate-200 px-2 py-0.5 text-[0.68rem] font-bold text-slate-800 uppercase">
-                  <CheckCircle2 className="size-2.5 text-slate-600" />
-                  {uni.country === "china"
-                    ? isBn
-                      ? "বৃত্তির শর্ত যাচাই করুন"
-                      : "Check Scholarship Terms"
-                    : isBn
-                      ? "মেধা বৃত্তি সুবিধা"
-                      : "Merit Scholarship Available"}
-                </span>
-              </>
-            )}
-          </div>
-          <p
-            className={`mt-1.5 text-xs leading-relaxed font-semibold ${
-              uni.has100PercentScholarship
-                ? "font-bold text-emerald-950"
-                : "text-slate-700"
-            }`}
-          >
-            {scholarship}
-          </p>
-        </div>
-
-        {/* Popular Majors Chips */}
-        <div className="mt-4 flex flex-wrap gap-1.5">
+          <UniversityCardCover
+            name={uni.name}
+            country={countryLabel}
+            countryCode={uni.country}
+            locale={locale}
+            photo={photo}
+            campusPhoto={Boolean(campusPhoto)}
+            index={index}
+          />
+        </Link>
+        <UniversityPhotoCredit photo={photo} />
+      </div>
+      <div className={styles.body}>
+        <h3 className={styles.title}>
+          <Link href={programsHref} className={styles.titleButton}>
+            {uni.name}
+          </Link>
+        </h3>
+        <p className={styles.descriptor}>
+          <Award size={13} strokeWidth={1.5} aria-hidden="true" />
+          <span>{descriptor}</span>
+        </p>
+        <div
+          className={styles.keywords}
+          aria-label={isBn ? "পড়ার বিষয়" : "Areas of study"}
+        >
           {majors.map((major) => (
-            <span
-              key={major}
-              className="inline-flex items-center rounded-lg border border-slate-200/70 bg-white px-2.5 py-1 text-[0.72rem] font-medium text-slate-700 shadow-2xs"
-            >
-              {major}
-            </span>
+            <span key={major}>{studyAreaLabel(major)}</span>
           ))}
         </div>
-      </div>
-
-      {/* Card Footer: Estimated Tuition & Action Link */}
-      <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-        <div>
-          <span className="block text-[0.65rem] font-bold tracking-wider text-slate-400 uppercase">
-            {dict.home.universitiesEstTuitionLabel}
-          </span>
-          <span className="font-heading text-xs font-bold text-slate-800">
-            {tuition}
-          </span>
+        <details className={styles.scholarship}>
+          <summary>
+            <span className={styles.scholarshipIcon}>
+              {uni.has100PercentScholarship ? (
+                <Sparkles size={16} strokeWidth={1.5} aria-hidden="true" />
+              ) : (
+                <CheckCircle2 size={16} strokeWidth={1.5} aria-hidden="true" />
+              )}
+            </span>
+            <span className={styles.scholarshipTitle}>
+              {uni.has100PercentScholarship
+                ? uni.country === "china"
+                  ? isBn
+                    ? "প্রতিযোগিতামূলক পূর্ণ বৃত্তি"
+                    : "Competitive full scholarships"
+                  : isBn
+                    ? "১০০% বৃত্তির সুযোগ"
+                    : "100% scholarship opportunities"
+                : isBn
+                  ? "বৃত্তি ও ভর্তির তথ্য"
+                  : "Scholarships & entry details"}
+            </span>
+            <ChevronDown
+              size={14}
+              className={styles.scholarshipChevron}
+              aria-hidden="true"
+            />
+          </summary>
+          <p>{scholarship}</p>
+        </details>
+        <div className={styles.featuredFooter}>
+          <div className={styles.tuition}>
+            <span>{dict.home.universitiesEstTuitionLabel}</span>
+            <strong>{tuition}</strong>
+          </div>
+          <Link
+            href={programsHref}
+            className={styles.featuredLink}
+            aria-label={`${dict.home.universitiesExplorePrograms}: ${uni.name}`}
+          >
+            <span>{dict.home.universitiesExplorePrograms}</span>
+            <span className={styles.arrow}>
+              <ArrowUpRight size={20} strokeWidth={1.5} aria-hidden="true" />
+            </span>
+          </Link>
         </div>
-
-        <Link
-          href={localizedHref(
-            `/programs?country=${uni.programsHrefCountry}&university=${encodeURIComponent(uni.name.replace(/\s*\([^)]*\)$/, ""))}`,
-            locale,
-          )}
-          className="focus-ring inline-flex items-center gap-1 text-xs font-bold text-orange-600 transition-colors group-hover:translate-x-0.5 hover:text-orange-700"
-        >
-          <span>{dict.home.universitiesExplorePrograms}</span>
-          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
-        </Link>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }

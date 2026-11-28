@@ -1,0 +1,1159 @@
+.page {
+  --ink: #18382f;
+  --muted: #556960;
+  --orange: #b64b28;
+  --line: #dce5df;
+  --header-height: 84px;
+  position: relative;
+  background: #fffefb;
+}
+:global(html):has(.page) {
+  scroll-behavior: smooth;
+}
+.page :is(button, [role="tabpanel"]):focus-visible {
+  outline: 3px solid #c7532b;
+  outline-offset: 5px;
+}
+.page section[id] {
+  scroll-margin-top: calc(var(--header-height) + 90px);
+}
+.page :is(a, button) {
+  -webkit-tap-highlight-color: transparent;
+}
+.page :is(a, button) svg {
+  flex-shrink: 0;
+}
+.page :is(a[class*="primary"], a[class*="secondary"]) {
+  gap: 0.65rem;
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(120deg, #fffdf8 20%, #f4f6eb 65%, #e5efe8);
+  padding-top: 5rem;
+}
+.heroOrb {
+  position: absolute;
+  z-index: -1;
+  width: 33rem;
+  height: 33rem;
+  top: -10rem;
+  right: -9rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d2e2c9a3, #d2e2c900 70%);
+  animation: breathe 10s ease-in-out infinite;
+  pointer-events: none;
+}
+.heroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.heroEyebrow > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 1.6rem;
+  color: #315d47;
+  background: #e7ecda;
+  border: 1px solid #ccdac4;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+}
+.page .heroTitle {
+  font-size: clamp(3.1rem, 4.5vw, 4.45rem);
+}
+.page .heroTitle span {
+  color: #436b48;
+}
+.heroVisual {
+  height: 36rem;
+}
+.heroPhoto {
+  inset: 0 0 2rem 2rem;
+  border-radius: 8rem 1.4rem 1.4rem 1.4rem;
+  box-shadow: 0 22px 60px #173e271a;
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.45s ease-out;
+}
+.heroPhoto img {
+  object-position: 50% 28%;
+  animation: photoPan 16s ease-in-out infinite alternate;
+}
+.page .heroPhoto figcaption {
+  top: 2rem;
+  bottom: auto;
+  right: 1.5rem;
+  max-width: 70%;
+  text-align: right;
+  text-shadow: 0 1px 10px #000;
+}
+.orbit {
+  position: absolute;
+  z-index: -1;
+  inset: -1rem -1rem 3rem 1rem;
+  border: 1px dashed #a6bda2;
+  border-radius: 10rem 2rem 2rem 2rem;
+  transform: rotate(5deg);
+}
+.cityPhoto {
+  bottom: -1rem;
+  left: -1rem;
+  width: 55%;
+  height: 12rem;
+  transform: rotate(-5deg);
+  animation: postcardFloat 8s ease-in-out infinite;
+}
+.cityPhoto img {
+  object-position: 50% 40%;
+}
+.cityPhoto::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 0;
+  background: linear-gradient(transparent, #102f2d70);
+}
+.cityPhoto figcaption {
+  z-index: 1;
+}
+.heroNote {
+  top: 5rem;
+  left: -1.8rem;
+  background: #fffef8;
+  border-color: #e3e5d5;
+  animation: noteFloat 7s ease-in-out infinite;
+}
+.page .heroNote svg {
+  color: #55764f;
+}
+.boardingCard {
+  position: absolute;
+  bottom: 1.5rem;
+  right: -0.5rem;
+  width: 15rem;
+  padding: 1.2rem;
+  border: 1px solid #e6e4d5;
+  border-radius: 0.8rem;
+  background: #fffdf4;
+  box-shadow: 0 15px 40px #143d2721;
+  transform: rotate(5deg);
+  animation: boardingFloat 9s ease-in-out infinite;
+}
+.boardingCard > p {
+  font-size: 0.52rem;
+  line-height: 1.8;
+  letter-spacing: 0.11em;
+  font-weight: 700;
+  color: #6a7560;
+}
+.boardingCard > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+}
+.boardingCard > div > span {
+  font-size: 1.55rem;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.boardingCard small {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0;
+  margin-top: 0.2rem;
+}
+.flightRoute {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0.4rem;
+  position: relative;
+}
+.flightRoute i {
+  flex: 1;
+  height: 1px;
+  border-top: 1px dashed #90a58a;
+}
+.flightRoute svg {
+  color: #51724a;
+  transform: rotate(45deg);
+  animation: planeGlide 4s ease-in-out infinite;
+}
+.boardingCard .boardingFooter {
+  border-top: 1px dashed #cfd4bd;
+  padding-top: 0.7rem;
+  margin-top: 0.9rem;
+}
+.boardingCard .boardingFooter > span {
+  font-size: 0.48rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.barcode {
+  width: 3.5rem;
+  height: 0.8rem;
+  background: repeating-linear-gradient(
+    90deg,
+    #32503e 0 1px,
+    transparent 1px 3px,
+    #32503e 3px 5px,
+    transparent 5px 7px
+  );
+}
+.motionControl {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: max(1rem, calc((100vw - 1280px) / 2 + 2rem));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  border: 1px solid #d3decf;
+  color: #50664e;
+  font-size: 0.65rem;
+  background: #ffffff90;
+  cursor: pointer;
+}
+.motionControl:hover {
+  background: #fff;
+}
+.primary {
+  position: relative;
+  overflow: hidden;
+}
+.primary::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -60%;
+  width: 35%;
+  transform: skewX(-22deg);
+  background: linear-gradient(90deg, transparent, #ffffff35, transparent);
+  transition: left 0.7s;
+  pointer-events: none;
+}
+.primary:hover::before {
+  left: 140%;
+}
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.1rem;
+  font-size: 0.75rem;
+  color: #5d6d5c;
+}
+.scrollCue svg {
+  animation: arrowNudge 2.5s ease-in-out infinite;
+}
+.stats {
+  border-color: #c8d6c4;
+}
+.stats dd {
+  color: #345a3b;
+  min-width: 2.2ch;
+}
+.sectionNav {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 30;
+  background: #fffefbf2;
+  backdrop-filter: blur(16px);
+}
+.navInner {
+  gap: 0 2rem;
+}
+.navInner a {
+  white-space: nowrap;
+  position: relative;
+}
+.navInner a[aria-current="location"] {
+  color: #a24122;
+  border-bottom-color: #b64b28;
+}
+.reason {
+  transition: transform 0.3s;
+}
+.reason:hover {
+  transform: translateX(5px);
+}
+.life {
+  background: #f0f3eb;
+}
+.galleryPhoto {
+  border-radius: 1rem;
+}
+.galleryLink {
+  display: block;
+  height: 100%;
+  border-radius: 1rem;
+}
+.galleryPhoto img {
+  transition:
+    transform 0.9s cubic-bezier(0.2, 0.65, 0.3, 1),
+    filter 0.9s;
+}
+.galleryPhoto:hover img {
+  transform: scale(1.055);
+  filter: saturate(1.08);
+}
+.galleryArrow {
+  position: absolute;
+  z-index: 1;
+  top: 1.1rem;
+  right: 1.1rem;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid #ffffff80;
+  color: #fff;
+  background: #15362a24;
+  backdrop-filter: blur(5px);
+  transition: transform 0.4s;
+}
+.galleryPhoto:hover .galleryArrow {
+  transform: rotate(45deg);
+}
+.universityMeta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.universityMeta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #68835c;
+}
+.universities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  padding: 0;
+  margin: 1.6rem 0 0;
+  list-style: none;
+}
+.universities li {
+  min-width: 0;
+}
+.universityReveal {
+  height: 100%;
+}
+.universityCard {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 1.7rem;
+  border: 1px solid #dde4d9;
+  border-radius: 1rem;
+  background: #f7f8f1;
+  transition:
+    transform 0.35s,
+    box-shadow 0.35s,
+    border-color 0.35s;
+}
+.universities li:nth-child(3n + 2) .universityCard {
+  background: #f3f5f6;
+}
+.universities li:nth-child(3n) .universityCard {
+  background: #fcf4ed;
+}
+.universityCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    transparent 20%,
+    #ffffff90 45%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.8s;
+}
+.universityCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 35px #24492e10;
+  border-color: #a4b49d;
+}
+.universityCard:hover::after {
+  transform: translateX(120%);
+}
+.universityTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.universityTop > svg {
+  color: #82917b;
+  transition:
+    transform 0.3s,
+    color 0.3s;
+}
+.universityCard:hover .universityTop > svg {
+  color: #a24122;
+  transform: translate(2px, -2px);
+}
+.monogram {
+  display: grid;
+  place-items: center;
+  min-width: 3rem;
+  height: 3rem;
+  padding: 0 0.5rem;
+  border: 1px solid #ccd7c6;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: #3c5b36;
+  background: #ffffff80;
+}
+.page .universityTag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7963;
+  margin-top: 1.7rem;
+  line-height: 1.6;
+}
+.universityCard h3 {
+  font-family: var(--font-display-en), var(--font-display-bn), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+  margin-top: 0.65rem;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+.page .universityCount {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.universityCount strong {
+  font-variant-numeric: tabular-nums;
+  color: #314c32;
+  font-weight: 650;
+}
+.universityCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.1rem;
+  margin-top: 1.1rem;
+  border-top: 1px solid #dbe2d5;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #aa4424;
+}
+.pathways {
+  background: #f7f4eb;
+}
+.pathwayExplorer {
+  display: grid;
+  grid-template-columns: 0.7fr 1.8fr;
+  border: 1px solid #d7ddce;
+  border-radius: 1rem;
+  background: #fffef9;
+  overflow: hidden;
+}
+.pathwayTabs {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #d7ddce;
+  background: #f0f1e5;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+.pathwayTabs button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #58674e;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    box-shadow 0.25s,
+    color 0.25s;
+}
+.pathwayTabs button span {
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+.pathwayTabs button[aria-selected="true"] {
+  color: #20442c;
+  background: #fffef9;
+  box-shadow: 0 3px 12px #31412208;
+  border-color: #dce1d0;
+  font-weight: 650;
+}
+.pathwayTabs button:hover {
+  color: #a24122;
+}
+.pathwayPanel {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.5rem;
+  min-height: 21rem;
+  animation: panelArrive 0.45s ease-out both;
+}
+.pathwayPanel[hidden] {
+  display: none;
+}
+.page .pathwayEyebrow {
+  color: #a24122;
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  line-height: 1.8;
+}
+.pathwayPanel h3 {
+  font-family: var(--font-display-en), var(--font-display-bn), sans-serif;
+  font-size: 2rem;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 0.7rem;
+}
+.pathwayPanel h3 + p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.9;
+  margin-top: 1rem;
+}
+.pathwayOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.pathwayOptions a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 3.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dce1d2;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #f7f8ee;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.pathwayOptions a:hover {
+  transform: translateX(3px);
+  background: #edf0e1;
+}
+.page .pathwayNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.9;
+  margin-top: 1.5rem;
+}
+.pathwayNote svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  color: #607756;
+}
+.funding {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #193e33;
+}
+.funding > div:not(.fundingOrb) {
+  position: relative;
+  z-index: 1;
+}
+.fundingOrb {
+  position: absolute;
+  right: -8rem;
+  top: -9rem;
+  width: 38rem;
+  height: 38rem;
+  border-radius: 50%;
+  border: 1px solid #ffffff0e;
+  box-shadow:
+    0 0 0 5rem #ffffff03,
+    0 0 0 10rem #ffffff02;
+  animation: breathe 12s ease-in-out infinite;
+}
+.funding h2 {
+  color: #fff;
+}
+.funding div[class*="fundingDetails"] {
+  background: #244b3f;
+}
+.budgetPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.8rem;
+}
+.budgetPills span {
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid #ffffff28;
+  color: #d8e8d5;
+  font-size: 0.72rem;
+}
+.visaSection {
+  background: #fffefb;
+}
+.journey {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.7rem;
+  margin: 3.5rem 0 0;
+  padding: 0;
+}
+.journey li {
+  position: relative;
+  min-width: 0;
+}
+.journey li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 1.5rem;
+  left: 3.5rem;
+  right: -1.2rem;
+  border-top: 1px dashed #a8b99d;
+}
+.journeyStep {
+  position: relative;
+  z-index: 1;
+}
+.stepNumber {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: #edf1e3;
+  border: 1px solid #ccd6bd;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #426339;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
+}
+.journey li:hover .stepNumber {
+  background: #426339;
+  color: #fff;
+  box-shadow: 0 0 0 6px #edf1e3;
+}
+.stepLabel {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #a14b2a;
+}
+.journey h3 {
+  margin-top: 0.7rem;
+  font-size: 1.17rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+.journey p {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.visaLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  margin-top: 2.7rem;
+}
+.visaLinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #92502e;
+}
+.faq {
+  background: #f1f3eb;
+}
+.faq details[open] > p {
+  animation: panelArrive 0.35s ease-out;
+}
+.faqIllustration {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #65815b;
+  margin-top: 2.5rem;
+  transform: rotate(-4deg);
+}
+.faqIllustration span {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+.support {
+  background: #fffefb;
+}
+.supportVisual {
+  position: relative;
+  padding: 1rem 1rem 1rem 0;
+}
+.supportVisual figure {
+  min-height: 26rem;
+  transform: rotate(3deg);
+}
+.postcardStamp {
+  position: absolute;
+  bottom: -0.5rem;
+  left: -1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #f3edda;
+  border: 1px dashed #79906a;
+  padding: 1.2rem;
+  border-radius: 50%;
+  width: 9rem;
+  height: 9rem;
+  transform: rotate(-12deg);
+  box-shadow: 0 0 0 5px #f3edda;
+}
+.postcardStamp span {
+  font-size: 0.6rem;
+  line-height: 1.7;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  color: #3d5c31;
+}
+.postcardStamp svg {
+  color: #6c7e52;
+}
+.otherDestinations {
+  padding-block: 1.8rem;
+  border-block: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.otherDestinations p {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.otherDestinations > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+.otherDestinations a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.otherDestinations a:hover {
+  color: #a24122;
+}
+.page[data-motion="paused"] *,
+.page[data-motion="paused"] *::before,
+.page[data-motion="paused"] *::after {
+  animation-play-state: paused !important;
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(1.08) translate(-1rem, 1rem);
+    opacity: 0.65;
+  }
+}
+@keyframes photoPan {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.045);
+  }
+}
+@keyframes postcardFloat {
+  50% {
+    transform: translateY(-9px) rotate(-3deg);
+  }
+}
+@keyframes noteFloat {
+  50% {
+    transform: translateY(-7px) rotate(-1deg);
+  }
+}
+@keyframes boardingFloat {
+  50% {
+    transform: translateY(6px) rotate(3deg);
+  }
+}
+@keyframes planeGlide {
+  0%,
+  100% {
+    transform: translateX(-4px) rotate(45deg);
+  }
+  50% {
+    transform: translateX(4px) rotate(45deg);
+  }
+}
+@keyframes arrowNudge {
+  50% {
+    transform: translateY(4px);
+  }
+}
+@keyframes panelArrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .page .heroTitle {
+    font-size: 3.5rem;
+  }
+  .heroVisual {
+    height: 32rem;
+  }
+  .heroNote {
+    width: 10rem;
+    left: -0.7rem;
+  }
+  .boardingCard {
+    width: 13rem;
+    right: -0.7rem;
+    bottom: 0;
+    padding: 1rem;
+  }
+  .cityPhoto {
+    bottom: 0;
+    height: 10rem;
+  }
+  .navInner {
+    gap: 0 1.3rem;
+  }
+  .universities {
+    gap: 1rem;
+  }
+  .universityCard {
+    padding: 1.3rem;
+  }
+  .universityCard h3 {
+    font-size: 1.3rem;
+  }
+  .pathwayPanel {
+    padding: 2rem;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  .pathwayOptions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .pathwayOptions a {
+    flex: 1;
+  }
+  .pathwayTabs {
+    justify-content: center;
+  }
+  .journey {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .journey li:nth-child(2)::after {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 3.6rem;
+  }
+  .page .heroTitle {
+    font-size: clamp(2.8rem, 8.8vw, 4.3rem);
+  }
+  .heroEyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.09em;
+  }
+  .heroEyebrow > span {
+    width: 2rem;
+    height: 1.4rem;
+  }
+  .heroVisual {
+    height: 30rem;
+    margin: 0.8rem 0.5rem 3.5rem;
+  }
+  .heroPhoto {
+    inset: 0 0 2rem 0.8rem;
+    border-top-left-radius: 6rem;
+  }
+  .page .heroPhoto figcaption {
+    top: 1.5rem;
+    right: 1rem;
+    font-size: 0.7rem;
+  }
+  .heroNote {
+    top: 4rem;
+    left: -0.5rem;
+    width: 10rem;
+  }
+  .heroNote p {
+    font-size: 0.85rem;
+  }
+  .cityPhoto {
+    left: -0.6rem;
+    bottom: -0.8rem;
+    height: 11rem;
+    width: 51%;
+  }
+  .boardingCard {
+    width: 13rem;
+    bottom: 1rem;
+    right: -0.5rem;
+  }
+  .boardingCard > p {
+    font-size: 0.46rem;
+  }
+  .boardingCard > div > span {
+    font-size: 1.35rem;
+  }
+  .scrollCue {
+    margin-top: 1.5rem;
+  }
+  .stats dd {
+    font-size: 1.85rem;
+  }
+  .sectionNav {
+    backdrop-filter: none;
+    background: #fffefb;
+  }
+  .navInner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 1.4rem;
+    scrollbar-width: thin;
+    scrollbar-color: #c7d0bf transparent;
+  }
+  .navInner a {
+    padding-block: 1rem;
+  }
+  .universities {
+    grid-template-columns: 1fr 1fr;
+  }
+  .universityCard h3 {
+    font-size: 1.3rem;
+  }
+  .universityTag {
+    font-size: 0.55rem;
+  }
+  .universityTop > svg {
+    width: 18px;
+  }
+  .universityCta {
+    font-size: 0.73rem;
+    gap: 0.4rem;
+  }
+  .universityCount {
+    font-size: 0.75rem;
+  }
+  .pathwayExplorer {
+    grid-template-columns: 1fr;
+  }
+  .pathwayTabs {
+    flex-direction: row;
+    border-right: 0;
+    border-bottom: 1px solid #d7ddce;
+    padding: 0.6rem;
+    gap: 0.4rem;
+  }
+  .pathwayTabs button {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 0.8rem 0.65rem;
+    font-size: 0.8rem;
+  }
+  .pathwayPanel {
+    padding: 1.8rem;
+    min-height: 25rem;
+  }
+  .pathwayPanel h3 {
+    font-size: 1.8rem;
+  }
+  .pathwayOptions {
+    flex-direction: column;
+  }
+  .pathwayOptions a {
+    min-height: 3rem;
+  }
+  .journey {
+    gap: 2rem 1.4rem;
+    margin-top: 2.5rem;
+  }
+  .journey h3 {
+    font-size: 1.05rem;
+  }
+  .journey p {
+    font-size: 0.85rem;
+  }
+  .supportVisual {
+    margin-top: 0.5rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+  .supportVisual figure {
+    min-height: 23rem;
+  }
+  .postcardStamp {
+    left: 0;
+    width: 7.5rem;
+    height: 7.5rem;
+    padding: 0.8rem;
+  }
+  .faqIllustration {
+    margin-top: 1.5rem;
+  }
+}
+@media (max-width: 420px) {
+  .heroVisual {
+    height: 27rem;
+  }
+  .boardingCard {
+    width: 11.5rem;
+    padding: 0.85rem;
+    bottom: 0.6rem;
+  }
+  .boardingCard .boardingFooter > span {
+    font-size: 0.4rem;
+  }
+  .cityPhoto {
+    height: 9rem;
+    bottom: -0.7rem;
+  }
+  .heroNote {
+    top: 3.5rem;
+    width: 9rem;
+    padding: 0.9rem;
+  }
+  .universities {
+    grid-template-columns: 1fr;
+  }
+  .universityCard {
+    padding: 1.6rem;
+  }
+  .universityCard h3 {
+    font-size: 1.6rem;
+  }
+  .pathwayPanel {
+    padding: 1.4rem;
+  }
+  .journey {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .journey li::after {
+    display: none;
+  }
+  .journeyStep {
+    padding-left: 4.2rem;
+    min-height: 3rem;
+  }
+  .stepNumber {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .stepLabel {
+    margin-top: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(html):has(.page) {
+    scroll-behavior: auto;
+  }
+  .page *,
+  .page *::before,
+  .page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .motionControl {
+    display: none;
+  }
+  .page
+    :is(
+      .heroPhoto,
+      .reason,
+      .universityCard,
+      .galleryPhoto img,
+      .galleryArrow,
+      .pathwayOptions a
+    ):hover {
+    transform: none;
+  }
+}

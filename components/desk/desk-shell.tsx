@@ -8,6 +8,7 @@ import {
   BookOpen,
   CalendarClock,
   ClipboardList,
+  Globe,
   Inbox,
   Kanban,
   Link2Off,
@@ -49,6 +50,7 @@ const NAV_ITEMS = [
     icon: ClipboardList,
   },
   { href: "/admin/ai-usage", label: "AI usage", icon: Activity },
+  { href: "/", label: "View website", icon: Globe },
 ] as const;
 
 type DeskShellProps = {

@@ -191,7 +191,7 @@ npm run make-admin -- person@example.com
 
 The account must already exist in the database. For counselor access, use `npm run db:studio`, locate the user, and set `role` to `counselor`. Staff enter at `/admin`; students use `/portal`.
 
-An optional `ADMIN_EMAILS` allowlist is also supported by [lib/auth-helpers.ts](lib/auth-helpers.ts). See [internal notes](docs/internal-notes.md) for role and public-photo guidance.
+The owner account, `studyabroadconsultancy01@gmail.com`, is automatically promoted to admin when signed in. An optional `ADMIN_EMAILS` allowlist supports additional admins through [lib/auth-helpers.ts](lib/auth-helpers.ts). Active staff see an **Admin panel** link in the website header and mobile menu that opens `/admin`. See [internal notes](docs/internal-notes.md) for role and public-photo guidance.
 
 ## Routes and API
 

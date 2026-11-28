@@ -1,0 +1,606 @@
+{
+  "Zhejiang University (ZJU)": {
+    "src": "/images/universities/zhejiang-university-zju.webp",
+    "alt": "Zhejiang University (ZJU) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:20231123_Zijingang_Campus_of_Zhejiang_University_03.jpg",
+    "credit": "Windmemories · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Nanjing Medical University": {
+    "src": "/images/universities/nanjing-medical-university.webp",
+    "alt": "Nanjing Medical University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:NMU_gate.jpg",
+    "credit": "Flsxx · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Harbin Institute of Technology (HIT)": {
+    "src": "/images/universities/harbin-institute-of-technology-hit.webp",
+    "alt": "Harbin Institute of Technology (HIT) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Main_Building_HIT.jpg",
+    "credit": "Mike hangzhou · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Wuhan University of Technology": {
+    "src": "/images/universities/wuhan-university-of-technology.webp",
+    "alt": "Wuhan University of Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:East_Campus_IMG_20140927_075416.jpg",
+    "credit": "Geographyinitiative · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Northeast Normal University (NENU)": {
+    "src": "/images/universities/northeast-normal-university-nenu.webp",
+    "alt": "Northeast Normal University (NENU) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Northeast_normal_university_new_campus_garden_2011_07_27.jpg",
+    "credit": "Rolfmueller · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Seoul National University": {
+    "src": "/images/universities/seoul-national-university.webp",
+    "alt": "Seoul National University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:SNU_Maingate.jpg",
+    "credit": "วิทวัส มงคลนวเสถียร · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "KAIST": {
+    "src": "/images/universities/kaist.webp",
+    "alt": "KAIST campus",
+    "source": "https://commons.wikimedia.org/wiki/File:KAIST_fountains_view.jpg",
+    "credit": "AhmadElq · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Yonsei University": {
+    "src": "/images/universities/yonsei-university.webp",
+    "alt": "Yonsei University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Main_Library_at_Yonsei_University.jpg",
+    "credit": "Thinkinglex · CC BY 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by/4.0",
+    "licenseLabel": "CC BY 4.0"
+  },
+  "Vellore Institute of Technology (VIT)": {
+    "src": "/images/universities/vellore-institute-of-technology-vit.webp",
+    "alt": "Vellore Institute of Technology (VIT) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Technology_Tower(VIT).jpg",
+    "credit": "Wikindinator · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Manipal Academy of Higher Education (MAHE)": {
+    "src": "/images/universities/manipal-academy-of-higher-education-mahe.webp",
+    "alt": "Manipal Academy of Higher Education (MAHE) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:MIT_Student_Plaza_.jpg",
+    "credit": "KshitizBathwal / Skyscape Photography · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Limkokwing University": {
+    "src": "/images/universities/limkokwing-university.webp",
+    "alt": "Limkokwing University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Limkokwing_2115370038_04337c1d65.jpg",
+    "credit": "CLF · CC BY 2.0 · resized",
+    "license": "https://creativecommons.org/licenses/by/2.0",
+    "licenseLabel": "CC BY 2.0"
+  },
+  "Monash University Malaysia": {
+    "src": "/images/universities/monash-university-malaysia.webp",
+    "alt": "Monash University Malaysia campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Cmglee_Sunway_Monash_University.jpg",
+    "credit": "Cmglee · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Lincoln University College": {
+    "src": "/images/universities/lincoln-university-college.webp",
+    "alt": "Lincoln University College campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Kelana_Jaya_campus.jpg",
+    "credit": "Urmisha Das · CC0 · resized",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "licenseLabel": "CC0"
+  },
+  "Management & Science University (MSU)": {
+    "src": "/images/universities/management-science-university-msu.webp",
+    "alt": "Management & Science University (MSU) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:MSU_Main_Campus.jpg",
+    "credit": "Drcool 25 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "INTI": {
+    "src": "/images/universities/inti.webp",
+    "alt": "INTI campus",
+    "source": "https://commons.wikimedia.org/wiki/File:INTI_Nilai_bridge.png",
+    "credit": "Anthony5429 · Public domain · resized"
+  },
+  "University of Cyberjaya (UoC)": {
+    "src": "/images/universities/university-of-cyberjaya-uoc.webp",
+    "alt": "University of Cyberjaya (UoC) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Campus6.png",
+    "credit": "Yougotnojams613 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "HELP University / HELP Academy": {
+    "src": "/images/universities/help-university-help-academy.webp",
+    "alt": "HELP University / HELP Academy campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Persiaran_Cakerawala_2.jpg",
+    "credit": "Wiki Farazi · CC0 · resized",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "licenseLabel": "CC0"
+  },
+  "Universiti Tun Abdul Razak (UNIRAZAK)": {
+    "src": "/images/universities/universiti-tun-abdul-razak-unirazak.webp",
+    "alt": "Universiti Tun Abdul Razak (UNIRAZAK) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Unirazak_City_Campus.jpg",
+    "credit": "P.Putrajaya · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Universiti Kuala Lumpur (UniKL)": {
+    "src": "/images/universities/universiti-kuala-lumpur-unikl.webp",
+    "alt": "Universiti Kuala Lumpur (UniKL) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:UniKL_City_Campus.jpg",
+    "credit": "UniKL Resources sdn bhd · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Universiti Selangor (UNISEL)": {
+    "src": "/images/universities/universiti-selangor-unisel.webp",
+    "alt": "Universiti Selangor (UNISEL) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:UNISEL_-_Universiti_Selangor_-_panoramio.jpg",
+    "credit": "Tony Ng · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Taylor’s University / Taylor’s College": {
+    "src": "/images/universities/taylor-s-university-taylor-s-college.webp",
+    "alt": "Taylor’s University / Taylor’s College campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Taylors_Lakeside_Campus.jpg",
+    "credit": "Yewvie · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Multimedia University (MMU)": {
+    "src": "/images/universities/multimedia-university-mmu.webp",
+    "alt": "Multimedia University (MMU) campus",
+    "source": "https://commons.wikimedia.org/wiki/File:MMU_Chancellery_Building.jpg",
+    "credit": "Abdul Lazi · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Beijing Normal University, Zhuhai Campus": {
+    "src": "/images/universities/beijing-normal-university-zhuhai-campus.webp",
+    "alt": "Beijing Normal University, Zhuhai Campus campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Lize_building_BNUZ.jpg",
+    "credit": "User:Shiouloo · CC BY-SA 1.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/1.0",
+    "licenseLabel": "CC BY-SA 1.0"
+  },
+  "China University of Mining and Technology": {
+    "src": "/images/universities/china-university-of-mining-and-technology.webp",
+    "alt": "China University of Mining and Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Light_of_CUMT%EF%BC%88Nanhu_Main_Campus%EF%BC%89_Library_at_night.jpg",
+    "credit": "Lerfu · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Chongqing Medical University": {
+    "src": "/images/universities/chongqing-medical-university.webp",
+    "alt": "Chongqing Medical University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E9%87%8D%E6%85%B6%E9%86%AB%E7%A7%91%E5%A4%A7%E5%AD%B8.JPG",
+    "credit": "Urga · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Civil Aviation University of China": {
+    "src": "/images/universities/civil-aviation-university-of-china.webp",
+    "alt": "Civil Aviation University of China campus",
+    "source": "https://commons.wikimedia.org/wiki/File:The_View_of_Campus.JPG",
+    "credit": "Ms.Fu · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Foshan University": {
+    "src": "/images/universities/foshan-university.webp",
+    "alt": "Foshan University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E4%BD%9B%E5%B1%B1%E5%A4%A7%E5%AD%B8%E4%BB%99%E6%BA%AA%E6%A0%A1%E5%8D%80%E4%B8%BB%E5%85%A5%E5%8F%A3.jpg",
+    "credit": "PÑēüḾôňïę1357 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Fujian Medical University": {
+    "src": "/images/universities/fujian-medical-university.webp",
+    "alt": "Fujian Medical University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E7%A6%8F%E5%BB%BA%E5%8C%BB%E7%A7%91%E5%A4%A7%E5%AD%A6%E5%9B%BE%E4%B9%A6%E9%A6%86.jpg",
+    "credit": "黄林锦 · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Hangzhou Normal University": {
+    "src": "/images/universities/hangzhou-normal-university.webp",
+    "alt": "Hangzhou Normal University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Hangzhou_Normal_University.jpg",
+    "credit": "Hello1276 · CC0 · resized",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "licenseLabel": "CC0"
+  },
+  "Harbin Engineering University": {
+    "src": "/images/universities/harbin-engineering-university.webp",
+    "alt": "Harbin Engineering University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Library_of_Harbin_Engineering_University.JPG",
+    "credit": "Narjuko · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Henan University of Technology": {
+    "src": "/images/universities/henan-university-of-technology.webp",
+    "alt": "Henan University of Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Henan_University_of_Technology.jpg",
+    "credit": "ASHillocks · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Jiangsu Normal University": {
+    "src": "/images/universities/jiangsu-normal-university.webp",
+    "alt": "Jiangsu Normal University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Jiangsu_Normal_University.jpg",
+    "credit": "Zhou Guanhuai · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Nanjing University of Aeronautics and Astronautics": {
+    "src": "/images/universities/nanjing-university-of-aeronautics-and-astronautics.webp",
+    "alt": "Nanjing University of Aeronautics and Astronautics campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Main_Entrance_of_Ming_Palace_Campus_of_Nanjing_University_of_Aeronautics_and_Astronautics.jpg",
+    "credit": "Zhou Guanhuai · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Nantong University": {
+    "src": "/images/universities/nantong-university.webp",
+    "alt": "Nantong University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Nantong_University.jpg",
+    "credit": "Zhou Guanhuai · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Shandong Normal University": {
+    "src": "/images/universities/shandong-normal-university.webp",
+    "alt": "Shandong Normal University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Shandong_Normal_University_Changqing.JPG",
+    "credit": "Cartonfox · Public domain · resized"
+  },
+  "Shandong University of Technology": {
+    "src": "/images/universities/shandong-university-of-technology.webp",
+    "alt": "Shandong University of Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%B1%E4%B8%9C%E7%90%86%E5%B7%A5%E5%A4%A7%E5%AD%A6%E8%A5%BF%E6%A0%A1%E5%8C%BA%E5%8C%97%E9%97%A8.jpg",
+    "credit": "Suginami · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Shenzhen University": {
+    "src": "/images/universities/shenzhen-university.webp",
+    "alt": "Shenzhen University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Building_of_Humanities_Yuehai_Campus,_Shenzhen_University.jpg",
+    "credit": "NAN LIU · CC BY-SA 2.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/2.0",
+    "licenseLabel": "CC BY-SA 2.0"
+  },
+  "South China Agricultural University": {
+    "src": "/images/universities/south-china-agricultural-university.webp",
+    "alt": "South China Agricultural University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:South_China_Agricultural_University.jpg",
+    "credit": "Zhou Guanhuai · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "South China University of Technology": {
+    "src": "/images/universities/south-china-university-of-technology.webp",
+    "alt": "South China University of Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:South_China_University_of_Technology_South_Gate.jpg",
+    "credit": "LPS.1 · CC0 · resized",
+    "license": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "licenseLabel": "CC0"
+  },
+  "Southern Medical University": {
+    "src": "/images/universities/southern-medical-university.webp",
+    "alt": "Southern Medical University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Smu_library.jpg",
+    "credit": "Sjsaquib14 · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Tianjin Foreign Studies University": {
+    "src": "/images/universities/tianjin-foreign-studies-university.webp",
+    "alt": "Tianjin Foreign Studies University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:TFLU4.jpg",
+    "credit": "Fanghong ( talk · contribs ) · CC BY-SA 3.0 · resized",
+    "license": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Tsinghua University": {
+    "src": "/images/universities/tsinghua-university.webp",
+    "alt": "Tsinghua University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:TsinghuaUniversitypic2.jpg",
+    "credit": "denn · CC BY-SA 2.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/2.0",
+    "licenseLabel": "CC BY-SA 2.0"
+  },
+  "Wuhan University": {
+    "src": "/images/universities/wuhan-university.webp",
+    "alt": "Wuhan University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Wuhan_University_Sakura_Castle.jpg",
+    "credit": "Howchou · CC BY 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by/4.0",
+    "licenseLabel": "CC BY 4.0"
+  },
+  "Xi’an Jiaotong University": {
+    "src": "/images/universities/xi-an-jiaotong-university.webp",
+    "alt": "Xi’an Jiaotong University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Xi%27an_Jiaotong_University_12.jpg",
+    "credit": "Peter Potrowl · CC BY 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by/3.0",
+    "licenseLabel": "CC BY 3.0"
+  },
+  "Zhejiang A&F University": {
+    "src": "/images/universities/zhejiang-a-f-university.webp",
+    "alt": "Zhejiang A&F University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhejiang_Agriculture_and_Forestry_University_Library_perspective_Photograph.jpg",
+    "credit": "沈燕 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Zhengzhou University": {
+    "src": "/images/universities/zhengzhou-university.webp",
+    "alt": "Zhengzhou University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhengzhou_University.jpg",
+    "credit": "雨宮千夏 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Guangdong University of Foreign Studies": {
+    "src": "/images/universities/guangdong-university-of-foreign-studies.webp",
+    "alt": "Guangdong University of Foreign Studies campus",
+    "source": "https://www.gdufs.edu.cn/",
+    "credit": "Guangdong University of Foreign Studies · resized"
+  },
+  "Wuchang University of Technology": {
+    "src": "/images/universities/wuchang-university-of-technology.webp",
+    "alt": "Wuchang University of Technology campus",
+    "source": "https://www.wut.edu.cn/",
+    "credit": "Wuchang University of Technology · resized"
+  },
+  "KPJ Healthcare University": {
+    "src": "/images/universities/kpj-healthcare-university.webp",
+    "alt": "KPJ Healthcare University campus",
+    "source": "https://studymalaysia.com/where/photos.php?code=kpj",
+    "credit": "KPJ Healthcare University / StudyMalaysia · resized"
+  },
+  "Gannan Medical University": {
+    "src": "/images/universities/gannan-medical-university.webp",
+    "alt": "Gannan Medical University campus",
+    "source": "https://www.gmu.cn/",
+    "credit": "Gannan Medical University · resized"
+  },
+  "Hechi University": {
+    "src": "/images/universities/hechi-university.webp",
+    "alt": "Hechi University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:He%60chi_Institute.jpg",
+    "credit": "Gmbsfd · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Hunan College of Foreign Studies": {
+    "src": "/images/universities/hunan-college-of-foreign-studies.webp",
+    "alt": "Hunan College of Foreign Studies campus",
+    "source": "https://www.huwai.edu.cn/ieac/about/xxjj.htm",
+    "credit": "Hunan College of Foreign Studies · resized"
+  },
+  "Xingtai University": {
+    "src": "/images/universities/xingtai-university.webp",
+    "alt": "Xingtai University campus",
+    "source": "https://www.xttc.edu.cn/",
+    "credit": "Xingtai University · resized"
+  },
+  "Shanghai University": {
+    "src": "/images/universities/shanghai-university.webp",
+    "alt": "Shanghai University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:SHU_main_gate.jpg",
+    "credit": "Yulin Peng · CC BY-SA 3.0 · resized",
+    "license": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Hangzhou Dianzi University": {
+    "src": "/images/universities/hangzhou-dianzi-university.webp",
+    "alt": "Hangzhou Dianzi University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Main(South)_Gate_of_Hangzhou_Dianzi_University_Xiasha_Campus.jpg",
+    "credit": "User:CatOnMars · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Chang’an University": {
+    "src": "/images/universities/chang-an-university.webp",
+    "alt": "Chang’an University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Chang%27an_University_Gate.jpg",
+    "credit": "Jucember · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Changchun University of Science and Technology": {
+    "src": "/images/universities/changchun-university-of-science-and-technology.webp",
+    "alt": "Changchun University of Science and Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Changchun_University_of_Science_and_Technology.jpg",
+    "credit": "Air7538 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Tongji University": {
+    "src": "/images/universities/tongji-university.webp",
+    "alt": "Tongji University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Tongji_University_Multi-functional_Building_and_its_reflection.jpg",
+    "credit": "之乎 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Zhejiang University of Technology": {
+    "src": "/images/universities/zhejiang-university-of-technology.webp",
+    "alt": "Zhejiang University of Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E6%B5%99%E6%B1%9F%E5%B7%A5%E4%B8%9A%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD_-_panoramio.jpg",
+    "credit": "江上清风1961 · CC BY 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by/3.0",
+    "licenseLabel": "CC BY 3.0"
+  },
+  "Chengdu Normal University": {
+    "src": "/images/universities/chengdu-normal-university.webp",
+    "alt": "Chengdu Normal University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E6%88%90%E9%83%BD%E5%B8%88%E8%8C%83%E5%AD%A6%E9%99%A2%E9%80%B8%E5%A4%AB%E5%9B%BE%E4%B9%A6%E9%A6%86.jpg",
+    "credit": "QZ19931221 · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Wenzhou Medical University": {
+    "src": "/images/universities/wenzhou-medical-university.webp",
+    "alt": "Wenzhou Medical University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:WMC_University_Town.JPG",
+    "credit": " · CC BY-SA 3.0 · resized",
+    "license": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Nanjing Institute of Technology": {
+    "src": "/images/universities/nanjing-institute-of-technology.webp",
+    "alt": "Nanjing Institute of Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E4%BA%AC%E5%B7%A5%E7%A8%8B%E5%AD%A6%E9%99%A2%E9%80%B8%E5%A4%AB%E5%9B%BE%E4%B9%A6%E9%A6%86.jpg",
+    "credit": "Him392 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Changchun Sci-Tech University": {
+    "src": "/images/universities/changchun-sci-tech-university.webp",
+    "alt": "Changchun Sci-Tech University campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Northern_gate_of_CSTU(Changchun).jpg",
+    "credit": "KLEk2005 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "MAHSA University": {
+    "src": "/images/universities/mahsa-university.webp",
+    "alt": "MAHSA University campus",
+    "source": "https://studymalaysia.com/where/photos.php?code=mahsa",
+    "credit": "MAHSA University / StudyMalaysia · resized"
+  },
+  "Binary University": {
+    "src": "/images/universities/binary-university.webp",
+    "alt": "Binary University campus",
+    "source": "https://studymalaysia.com/edu/binary/",
+    "credit": "Binary University / StudyMalaysia · resized"
+  },
+  "SEGi": {
+    "src": "/images/universities/segi.webp",
+    "alt": "SEGi campus",
+    "source": "https://studymalaysia.com/edu/segi/",
+    "credit": "SEGi / StudyMalaysia · resized"
+  },
+  "City University Malaysia": {
+    "src": "/images/universities/city-university-malaysia.webp",
+    "alt": "City University Malaysia campus",
+    "source": "https://studymalaysia.com/where/photos.php?code=city",
+    "credit": "City University Malaysia / StudyMalaysia · resized"
+  },
+  "Kings University College": {
+    "src": "/images/universities/kings-university-college.webp",
+    "alt": "Kings University College campus building in Kuala Lumpur",
+    "source": "https://kingsuniversitycollege.edu.my/wp-content/uploads/2023/09/KUC-Prospectus-V5.pdf",
+    "credit": "Kings University College · resized"
+  },
+  "UNITAR International University": {
+    "src": "/images/universities/unitar-international-university.webp",
+    "alt": "UNITAR International University campus",
+    "source": "https://www.unitar.my/about-us/our-locations/",
+    "credit": "UNITAR International University · Source photograph · resized"
+  },
+  "BAC Education Group": {
+    "src": "/images/universities/bac-education-group.webp",
+    "alt": "BAC Education Group campus",
+    "source": "https://www.bac.edu.my/student-residences/",
+    "credit": "BAC Education Group · Source photograph · resized"
+  },
+  "University of Wollongong Malaysia (UOW Malaysia)": {
+    "src": "/images/universities/university-of-wollongong-malaysia-uow-malaysia.webp",
+    "alt": "University of Wollongong Malaysia (UOW Malaysia) campus",
+    "source": "https://www.uow.edu.my/campuses/about-the-campus/university-of-wollongong-malaysia/",
+    "credit": "University of Wollongong Malaysia (UOW Malaysia) · Source photograph · resized"
+  },
+  "Wuhan Vocational College of Commerce and Trade": {
+    "src": "/images/universities/wuhan-vocational-college-of-commerce-and-trade.webp",
+    "alt": "Wuhan Vocational College of Commerce and Trade campus",
+    "source": "https://www.whicu.com/xxgk/xyfg.htm",
+    "credit": "Wuhan Vocational College of Commerce and Trade · Source photograph · resized"
+  },
+  "Goon Institution": {
+    "src": "/images/universities/goon-institution.webp",
+    "alt": "Bangunan Cahaya Suria, home to Goon International College in Kuala Lumpur",
+    "source": "https://commons.wikimedia.org/wiki/File:Bangunan_cahaya_suria.jpg",
+    "credit": "Gooninternationalcollege · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Spectrum International University College": {
+    "src": "/images/universities/spectrum-international-university-college.webp",
+    "alt": "Main Place Mall in Subang Jaya, home to Spectrum's USJ21 campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Main_Place.JPG",
+    "credit": "Chongkian · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  },
+  "Global Modern International School (GMIS)": {
+    "src": "/images/universities/global-modern-international-school-gmis.webp",
+    "alt": "Global Modern International School (GMIS) campus",
+    "source": "https://www.gmis-edu.com/",
+    "credit": "Global Modern International School (GMIS) · Source photograph · resized"
+  },
+  "MILA University": {
+    "src": "/images/universities/mila-university.webp",
+    "alt": "MILA University campus",
+    "source": "https://mila.edu.my/",
+    "credit": "MILA University · Source photograph · resized"
+  },
+  "Zhejiang University of Science and Technology": {
+    "src": "/images/universities/zhejiang-university-of-science-and-technology.webp",
+    "alt": "Zhejiang University of Science and Technology campus",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhejiang_University_of_Science_and_Technology_1_-_panoramio.jpg",
+    "credit": "ddr9334 · CC BY-SA 3.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenseLabel": "CC BY-SA 3.0"
+  },
+  "Guizhou Vocational and Technical College of Water Resources and Hydropower": {
+    "src": "/images/universities/guizhou-water-resources-hydropower.webp",
+    "alt": "Guizhou Vocational and Technical College of Water Resources and Hydropower campus entrance and landscaped grounds",
+    "source": "https://szb.eyesnews.cn/pc/cont/202602/03/content_172759.html",
+    "credit": "Source: Guizhou Daily / EyesNews · resized"
+  },
+  "Nanchang Institute of Technology": {
+    "src": "/images/universities/nanchang-institute-of-technology.webp",
+    "alt": "Nanchang Institute of Technology campus entrance and buildings",
+    "source": "https://www.nut.edu.cn/cms/item-view-id-3330.shtml",
+    "credit": "Nanchang Institute of Technology · resized"
+  },
+  "Harbin Far East Institute of Technology": {
+    "src": "/images/universities/harbin-far-east-institute-of-technology.webp",
+    "alt": "Harbin Far East Institute of Technology campus entrance and buildings",
+    "source": "https://studyinchina.net/cn/hoc-vien-cong-nghe-vien-dong-cap-nhi-tan/album",
+    "credit": "Harbin Far East Institute of Technology / StudyInChina · resized"
+  },
+  "Universiti Geomatika Malaysia": {
+    "src": "/images/universities/geomatika-campus.webp",
+    "alt": "Universiti Geomatika Malaysia campus building in Kuala Lumpur",
+    "source": "https://commons.wikimedia.org/wiki/File:Universiti_Geomatika_Malaysia_(20230103_115026).jpg",
+    "credit": "Zh9567 · CC BY-SA 4.0 · resized",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0",
+    "licenseLabel": "CC BY-SA 4.0"
+  }
+}

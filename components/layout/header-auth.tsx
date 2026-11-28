@@ -1,8 +1,9 @@
 "use client";
 
-import { Show, UserButton } from "@clerk/nextjs";
-import { User } from "lucide-react";
+import { Show, UserButton, useUser } from "@clerk/nextjs";
+import { LayoutDashboard, User } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export function HeaderAuth({
   mobile = false,
@@ -11,6 +12,40 @@ export function HeaderAuth({
   mobile?: boolean;
   signInLabel: string;
 }) {
+  const { user } = useUser();
+  const userId = user?.id;
+  const [adminUserId, setAdminUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const controller = new AbortController();
+
+    async function loadAccess(accountId: string) {
+      try {
+        const response = await fetch("/api/account/access", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!response.ok) return;
+
+        const access = await response.json();
+        if (!controller.signal.aborted) {
+          setAdminUserId(access.canAccessAdminPanel === true ? accountId : null);
+        }
+      } catch {
+        // Keep the student link if the access check is unavailable.
+      }
+    }
+
+    void loadAccess(userId);
+    return () => controller.abort();
+  }, [userId]);
+
+  const canAccessAdminPanel = Boolean(userId && adminUserId === userId);
+  const accountHref = canAccessAdminPanel ? "/admin" : "/portal/application";
+  const accountLabel = canAccessAdminPanel ? "Admin panel" : "Student portal";
+
   if (mobile) {
     return (
       <div className="w-full">
@@ -26,10 +61,13 @@ export function HeaderAuth({
         <Show when="signed-in">
           <div className="flex min-h-11 items-center justify-between rounded-xl border border-stone-200 bg-stone-50 px-4">
             <Link
-              href="/portal/application"
-              className="focus-ring text-sm font-semibold text-slate-700"
+              href={accountHref}
+              className="focus-ring inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-700"
             >
-              Student portal
+              {canAccessAdminPanel && (
+                <LayoutDashboard className="size-4" aria-hidden="true" />
+              )}
+              {accountLabel}
             </Link>
             <UserButton />
           </div>
@@ -52,10 +90,19 @@ export function HeaderAuth({
       <Show when="signed-in">
         <div className="flex items-center pl-1">
           <Link
-            href="/portal/application"
-            className="focus-ring mr-3 hidden text-xs font-semibold text-slate-700 sm:inline-flex"
+            href={accountHref}
+            className={`focus-ring mr-3 min-h-9 items-center gap-1.5 rounded-full text-xs font-semibold text-slate-700 ${canAccessAdminPanel ? "inline-flex" : "hidden sm:inline-flex"}`}
           >
-            Student portal
+            {canAccessAdminPanel && (
+              <LayoutDashboard className="size-4" aria-hidden="true" />
+            )}
+            <span
+              className={
+                canAccessAdminPanel ? "sr-only sm:not-sr-only" : undefined
+              }
+            >
+              {accountLabel}
+            </span>
           </Link>
           <UserButton />
         </div>

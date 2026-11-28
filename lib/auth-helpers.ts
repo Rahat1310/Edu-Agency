@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/db";
 import { users, type UserRole } from "@/db/schema";
+import { isConfiguredAdmin } from "@/lib/admin-emails";
 import { dashboardRoles, decideRoleAccess } from "@/lib/authz";
 import { loadStudentApplicationByUserId } from "@/lib/leads/link-student";
 import type {
@@ -39,14 +40,6 @@ export type StudentApplication = {
   lead: StudentLead;
 };
 
-function isConfiguredAdmin(email: string): boolean {
-  const configured = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((item) => item.trim().toLowerCase())
-    .filter(Boolean);
-  return configured.includes(email.toLowerCase());
-}
-
 const loadSessionUser = cache(async () => {
   const { userId } = await auth();
 
@@ -76,7 +69,12 @@ const loadSessionUser = cache(async () => {
             .trim() || null;
 
         if (email) {
-          const role: UserRole = isConfiguredAdmin(email) ? "admin" : "student";
+          const role: UserRole = isConfiguredAdmin(
+            email,
+            process.env.ADMIN_EMAILS,
+          )
+            ? "admin"
+            : "student";
           const [inserted] = await db
             .insert(users)
             .values({
@@ -102,8 +100,11 @@ const loadSessionUser = cache(async () => {
     } catch (err) {
       console.error("[auth] Failed to auto-provision user from Clerk:", err);
     }
-  } else if (isConfiguredAdmin(user.email) && user.role !== "admin") {
-    // Elevate user to admin if their email is in ADMIN_EMAILS
+  } else if (
+    isConfiguredAdmin(user.email, process.env.ADMIN_EMAILS) &&
+    user.role !== "admin"
+  ) {
+    // Elevate the owner and accounts configured in ADMIN_EMAILS.
     try {
       const [updated] = await db
         .update(users)

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChinaDestinationPage } from "@/components/marketing/china-destination-page";
-import { malaysiaCopy } from "@/lib/malaysia/copy";
+import { MalaysiaDestinationPage } from "@/components/marketing/malaysia-destination-page";
 
 import { DestinationCard } from "@/components/marketing/destination-card";
 import { DestinationIntakeBlock } from "@/components/marketing/destination-intake-block";
@@ -30,6 +30,8 @@ export function DestinationPage({
   countdown,
 }: DestinationPageProps) {
   if (slug === "china") return <ChinaDestinationPage locale={locale} />;
+  if (slug === "malaysia")
+    return <MalaysiaDestinationPage locale={locale} dict={dict} />;
   const destination = DESTINATIONS[slug];
   const copy = dict.destinations[slug];
   const programsHref = localizedHref(`/programs?country=${slug}`, locale);
@@ -59,26 +61,12 @@ export function DestinationPage({
             {copy.tagline}
           </h1>
 
-          {slug === "malaysia" ? (
-            <div className="mt-8">
-              <Link
-                href={programsHref}
-                className="btn-sunset focus-ring inline-flex min-h-12 items-center justify-center rounded-full px-7 text-sm font-bold"
-              >
-                {malaysiaCopy(locale).explore}
-              </Link>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                {malaysiaCopy(locale).dated}
-              </p>
-            </div>
-          ) : (
-            <DestinationIntakeBlock
-              className="mt-8"
-              countdown={countdown}
-              destinationName={copy.name}
-              dict={dict}
-            />
-          )}
+          <DestinationIntakeBlock
+            className="mt-8"
+            countdown={countdown}
+            destinationName={copy.name}
+            dict={dict}
+          />
         </PageShell>
       </section>
 
